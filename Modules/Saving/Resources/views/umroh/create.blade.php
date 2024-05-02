@@ -96,6 +96,28 @@
                                 </div>
                             </div>
 
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="customer_bank">Bank Name <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="customer_bank" id="customer_bank" required>
+                                                <option value="BSI">BSI</option>
+                                                <option value="BRI">BRI</option>
+                                                <option value="Mandiri">Mandiri</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="bank_account">Account Number <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="bank_account" required value="{{ old('bank_account') }}">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="note">Note (If Needed)</label>
                                 <textarea name="note" id="note" rows="5" class="form-control"></textarea>

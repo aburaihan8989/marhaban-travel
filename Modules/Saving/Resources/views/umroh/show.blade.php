@@ -74,51 +74,60 @@
                         <div class="table-responsive-sm mb-5">
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th class="align-middle">Reference</th>
-                                    <th class="align-middle">Register Date</th>
-                                    <th class="align-middle">Customer Name</th>
-                                    <th class="align-middle">Phone Number</th>
-                                    <th class="align-middle">Status</th>
-                                    <th class="align-middle">Saving Balance</th>
-                                </tr>
+                                    <tr>
+                                        <th class="align-middle">Reference</th>
+                                        <th class="align-middle">Register Date</th>
+                                        <th class="align-middle">Customer Name</th>
+                                        <th class="align-middle">Phone Number</th>
+                                        <th class="align-middle">Bank Name</th>
+                                        <th class="align-middle">Account Number</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                {{-- @foreach($purchase->purchaseDetails as $item) --}}
                                     <tr>
                                         <td class="align-middle">
                                             {{ $umroh_saving->reference }}
-                                            {{-- <span class="badge badge-success">
-                                                {{ $item->product_code }}
-                                            </span> --}}
                                         </td>
-
                                         <td class="align-middle">
                                             {{ date('d-m-Y', strtotime($umroh_saving->register_date)) }}
                                         </td>
-
                                         <td class="align-middle">
                                             {{ $umroh_saving->customer_name }}
                                         </td>
-
                                         <td class="align-middle">
                                             {{ $umroh_saving->customer_phone }}
                                         </td>
+                                        <td class="align-middle">
+                                            {{ $umroh_saving->customer_bank }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ $umroh_saving->bank_account }}
+                                        </td>
+                                    </tr>
+                                </tbody>
 
+                                <thead>
+                                    <tr>
+                                        <th class="align-middle">Status</th>
+                                        <th class="align-middle">Saving Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
                                         <td class="align-middle">
                                             <span class="badge badge-success" style="font-size: 13px;">
                                                 {{ $umroh_saving->status }}
                                             </span>
                                         </td>
-
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                             {{ format_currency($umroh_saving->total_saving) }}
                                         </td>
                                     </tr>
-                                {{-- @endforeach --}}
                                 </tbody>
+
                             </table>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-4 col-sm-5 ml-md-auto">
                                 <table class="table">

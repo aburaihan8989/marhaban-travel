@@ -98,6 +98,26 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
+                                        <label for="customer_bank">Bank Name <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="customer_bank" id="customer_bank" required>
+                                            <option {{ $umroh_saving->customer_bank == 'BSI' ? 'selected' : '' }} value="BSI">BSI</option>
+                                            <option {{ $umroh_saving->customer_bank == 'BRI' ? 'selected' : '' }} value="BRI">BRI</option>
+                                            <option {{ $umroh_saving->customer_bank == 'Mandiri' ? 'selected' : '' }} value="Mandiri">Mandiri</option>
+                                            <option {{ $umroh_saving->customer_bank == 'Other' ? 'selected' : '' }} value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="bank_account">Account Number <span class="text-danger">*</span></label>
+                                        <input id="bank_account" type="text" class="form-control" name="bank_account" required value="{{ $umroh_saving->bank_account }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
                                         <label for="total_saving">Savings Balance <span class="text-danger">*</span></label>
                                         <input id="total_saving" type="text" class="form-control" style="font-weight:bold; font-size:20px;" name="total_saving" required value="{{ format_currency($umroh_saving->total_saving) }}" readonly>
                                     </div>
