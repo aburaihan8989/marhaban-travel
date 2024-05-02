@@ -127,18 +127,18 @@ class CustomersController extends Controller
         if ($request->has('document')) {
             if (count($customer->getMedia('photos')) > 0) {
                 foreach ($customer->getMedia('photos') as $media) {
-                    // if (!in_array($media->file_name, $request->input('document', []))) {
+                    if (!in_array($media->file_name, $request->input('document', []))) {
                         $media->delete();
-                    // }
+                    }
                 }
             }
 
-            // $media = $customer->getMedia('photos')->pluck('file_name')->toArray();
+            $media = $customer->getMedia('photos')->pluck('file_name')->toArray();
 
-            foreach ($request->input('document') as $file) {
-                // if (count($media) === 0) {
+            foreach ($request->input('document', []) as $file) {
+                if (count($media) === 0 || !in_array($file, $media)) {
                     $customer->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('photos');
-                // }
+                }
             }
         }
 
