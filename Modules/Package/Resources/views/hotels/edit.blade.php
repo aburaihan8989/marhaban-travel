@@ -47,6 +47,21 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="contact">Contact <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="contact" required value="{{ $hotel->contact }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email">Email <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="email" required value="{{ $hotel->email }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label for="package_type">Package Type <span class="text-danger">*</span></label>
                                         <select class="form-control" name="package_type" id="package_type" required>
                                             <option value="" selected>None</option>

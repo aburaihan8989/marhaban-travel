@@ -33,7 +33,7 @@
                                 </tr>
                                 <tr>
                                     <th>Flight Duration</th>
-                                    <td>{{ $airline->flight_duration . 'Hours' }}</td>
+                                    <td>{{ $airline->flight_duration . ' Hours' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Ticket Price</th>

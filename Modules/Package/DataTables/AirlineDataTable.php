@@ -20,6 +20,9 @@ class AirlineDataTable extends DataTable
             ->addColumn('action', function ($data) {
                 return view('package::airlines.partials.actions', compact('data'));
             })
+            ->editColumn('flight_duration', function($model){
+                $formatDay = $model->flight_duration . ' Hours';
+                return $formatDay; })
             ->addColumn('airline_image', function ($data) {
                 $url = $data->getFirstMediaUrl('airlines', 'thumb');
                 return '<img src="'.$url.'" border="0" width="50" class="img-thumbnail" align="center"/>';

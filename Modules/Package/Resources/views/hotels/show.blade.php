@@ -32,6 +32,14 @@
                                     <td>{{ $hotel->hotel_location }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Contact</th>
+                                    <td>{{ $hotel->contact }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{ $hotel->email }}</td>
+                                </tr>
+                                <tr>
                                     <th>Package Type</th>
                                     <td>{{ $hotel->package_type }}</td>
                                 </tr>

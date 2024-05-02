@@ -78,7 +78,13 @@ class HotelDataTable extends DataTable
             Column::make('hotel_location')
                 ->className('text-center align-middle'),
 
-            Column::make('hotel_type')
+            Column::make('contact')
+                ->className('text-center align-middle'),
+
+            Column::make('email')
+                ->className('text-center align-middle'),
+
+            Column::make('package_type')
                 ->className('text-center align-middle'),
 
             Column::computed('hotel_price')

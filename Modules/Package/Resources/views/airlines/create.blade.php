@@ -46,7 +46,7 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="flight_duration">Flight Duration <span class="text-danger">*</span></label>
+                                        <label for="flight_duration">Flight Duration (Hr) <span class="text-danger">*</span></label>
                                         <input id="flight_duration" type="text" class="form-control" name="flight_duration" required value="{{ old('flight_duration') }}">
                                     </div>
                                 </div>

@@ -17,6 +17,8 @@ class CreateHotelsTable extends Migration
             $table->id();
             $table->string('hotel_name');
             $table->string('hotel_location');
+            $table->string('contact');
+            $table->string('email');
             $table->string('package_type');
             $table->double('hotel_price');
             $table->timestamps();

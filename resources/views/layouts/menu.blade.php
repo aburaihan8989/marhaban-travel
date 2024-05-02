@@ -61,14 +61,14 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('airlines.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-airplane" style="line-height: 1;"></i> Data Airlines
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="#">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('airlines.*') ? 'c-active' : '' }}" href="{{ route('airlines.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-airplane-fill" style="line-height: 1;"></i> Airlines
                 </a>
             </li>
@@ -76,14 +76,14 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('hotels.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-building" style="line-height: 1;"></i> Data Hotels
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="#">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('hotels.*') ? 'c-active' : '' }}" href="{{ route('hotels.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-building-fill" style="line-height: 1;"></i> Hotels
                 </a>
             </li>
