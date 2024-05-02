@@ -30,11 +30,11 @@
                 <div class="card border-0">
                     <div class="card-body p-0 d-flex align-items-center shadow-sm">
                         <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
-                            <i class="bi bi-arrow-return-left font-2xl"></i>
+                            <i class="bi bi-cart-check font-2xl"></i>
                         </div>
                         <div>
                             <div class="text-value text-warning">{{ format_currency($sale_returns) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Sales Return</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">Expenses</div>
                         </div>
                     </div>
                 </div>
@@ -44,11 +44,11 @@
                 <div class="card border-0">
                     <div class="card-body p-0 d-flex align-items-center shadow-sm">
                         <div class="bg-gradient-success p-4 mfe-3 rounded-left">
-                            <i class="bi bi-arrow-return-right font-2xl"></i>
+                            <i class="bi bi-wallet2 font-2xl"></i>
                         </div>
                         <div>
                             <div class="text-value text-success">{{ format_currency($purchase_returns) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Purchases Return</div>
+                            <div class="text-muted text-uppercase font-weight-bold small">Savings</div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
             <div class="col-lg-7">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-header">
-                        Sales & Purchases of Last 7 Days
+                        Revenue & Expenses of Last 7 Days
                     </div>
                     <div class="card-body">
                         <canvas id="salesPurchasesChart"></canvas>
@@ -106,7 +106,7 @@
             <div class="col-lg-12">
                 <div class="card border-0 shadow-sm">
                     <div class="card-header">
-                        Monthly Cash Flow (Payment Sent & Received)
+                        Monthly Cash Flow (Cash Sent & Received)
                     </div>
                     <div class="card-body">
                         <canvas id="paymentChart"></canvas>

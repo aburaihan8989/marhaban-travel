@@ -13,6 +13,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('umroh-packages', 'UmrohPackageController');
     //Hajj
     Route::resource('hajj-packages', 'HajjPackageController');
+    //Airline
+    Route::resource('airlines', 'AirlineController');
+    //Hotel
+    Route::resource('hotels', 'HotelController');
     // //Product Category
     // Route::resource('product-categories', 'CategoriesController')->except('create', 'show');
 });

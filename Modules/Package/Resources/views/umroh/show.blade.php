@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Hajj Package Details')
+@section('title', 'Umroh Package Details')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">

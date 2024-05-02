@@ -31,15 +31,30 @@
     </li>
 @endcan
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('agents.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Agents
+        <i class="c-sidebar-nav-icon bi bi-person-badge" style="line-height: 1;"></i> Data Agents
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Agents
+                <a class="c-sidebar-nav-link {{ request()->routeIs('agents.*') ? 'c-active' : '' }}" href="{{ route('agents.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-person-badge-fill" style="line-height: 1;"></i> Agents
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('teams.*') ? 'c-show' : '' }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-person-vcard" style="line-height: 1;"></i> Data Teams
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('teams.*') ? 'c-active' : '' }}" href="{{ route('teams.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-person-vcard-fill" style="line-height: 1;"></i> Teams
                 </a>
             </li>
         {{-- @endcan --}}
@@ -48,13 +63,13 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Teams
+        <i class="c-sidebar-nav-icon bi bi-airplane" style="line-height: 1;"></i> Data Airlines
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Teams
+                    <i class="c-sidebar-nav-icon bi bi-airplane-fill" style="line-height: 1;"></i> Airlines
                 </a>
             </li>
         {{-- @endcan --}}
@@ -63,28 +78,13 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Data Airlines
+        <i class="c-sidebar-nav-icon bi bi-building" style="line-height: 1;"></i> Data Hotels
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Airlines
-                </a>
-            </li>
-        {{-- @endcan --}}
-    </ul>
-</li>
-
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Data Hotels
-    </a>
-    <ul class="c-sidebar-nav-dropdown-items">
-        {{-- @can('access_customers') --}}
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Hotels
+                    <i class="c-sidebar-nav-icon bi bi-building-fill" style="line-height: 1;"></i> Hotels
                 </a>
             </li>
         {{-- @endcan --}}
@@ -115,7 +115,7 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-journal-bookmark" style="line-height: 1; color:grey;"></i> Manifest Management
+        <i class="c-sidebar-nav-icon bi bi-journal-check" style="line-height: 1; color:grey;"></i> Manifest Management
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}

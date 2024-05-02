@@ -2,14 +2,14 @@
 
 namespace Modules\Package\DataTables;
 
-use Modules\Package\Entities\HajjPackage;
+use Modules\Package\Entities\Airline;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class HajjPackageDataTable extends DataTable
+class AirlineDataTable extends DataTable
 {
 
     public function dataTable($query)
@@ -17,41 +17,28 @@ class HajjPackageDataTable extends DataTable
         return datatables()
             // ->eloquent($query)->with('category')
             ->eloquent($query)
-            ->editColumn('package_date', function($model){
-                $formatDate = date('d-m-Y',strtotime($model->package_date));
-                return $formatDate; })
-            ->editColumn('package_capacity', function($model){
-                $formatData = $model->package_capacity . ' Pax';
-                return $formatData; })
-            ->editColumn('package_days', function($model){
-                $formatDay = $model->package_days . ' Days';
-                return $formatDay; })
             ->addColumn('action', function ($data) {
-                return view('package::hajj.partials.actions', compact('data'));
+                return view('package::airlines.partials.actions', compact('data'));
             })
-            ->addColumn('package_image', function ($data) {
-                $url = $data->getFirstMediaUrl('brosurs', 'thumb');
+            ->addColumn('airline_image', function ($data) {
+                $url = $data->getFirstMediaUrl('airlines', 'thumb');
                 return '<img src="'.$url.'" border="0" width="50" class="img-thumbnail" align="center"/>';
             })
-            ->addColumn('package_cost', function ($data) {
-                return format_currency($data->package_cost);
+            ->addColumn('ticket_price', function ($data) {
+                return format_currency($data->ticket_price);
             })
-            ->addColumn('package_price', function ($data) {
-                return format_currency($data->package_price);
-            })
-            ->rawColumns(['package_image']);
+            ->rawColumns(['airline_image']);
     }
 
-    public function query(HajjPackage $model)
+    public function query(Airline $model)
     {
-        // return $model->newQuery()->with('category');
         return $model->newQuery();
     }
 
     public function html()
     {
         return $this->builder()
-                    ->setTableId('hajj-packages-table')
+                    ->setTableId('airlines-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
@@ -73,40 +60,29 @@ class HajjPackageDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('package_image')
-                ->title('Package Brosur')
+            Column::make('row_number')
+                ->title('No')
+                ->render('meta.row + meta.settings._iDisplayStart + 1;')
+                ->width(50)
+                ->orderable(false)
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
-            Column::make('package_code')
-                ->title('Package Code')
+            Column::computed('airline_image')
+                ->title('Airline Image')
                 ->className('text-center align-middle'),
 
-            Column::make('package_name')
-                ->title('Package Name')
-                ->className('text-center align-middle'),
-
-            Column::computed('package_date')
-                ->title('Departure Date')
-                ->className('text-center align-middle'),
-
-            Column::make('package_departure')
-                ->title('Departure')
-                ->className('text-center align-middle'),
-
-            Column::computed('package_days')
-                ->title('Days')
+            Column::make('airline_name')
                 ->className('text-center align-middle'),
 
             Column::make('flight_route')
-                ->title('Flight Rute')
                 ->className('text-center align-middle'),
 
-            Column::computed('package_price')
-                ->title('Package Price')
+            Column::make('flight_duration')
                 ->className('text-center align-middle'),
 
-            Column::make('package_type')
-                ->title('Package Type')
+            Column::computed('ticket_price')
+                ->title('Ticket Price')
                 ->className('text-center align-middle'),
 
             Column::computed('action')
@@ -126,6 +102,6 @@ class HajjPackageDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'HajjPackage_' . date('YmdHis');
+        return 'Airline_' . date('YmdHis');
     }
 }
