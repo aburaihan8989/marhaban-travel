@@ -76,7 +76,7 @@
                                             <option {{ $customer->customer_status == "Reguler" ? 'selected' : '' }} value="Reguler">Reguler</option>
                                             <option {{ $customer->customer_status == "Bronze" ? 'selected' : '' }} value="Bronze">Bronze</option>
                                             <option {{ $customer->customer_status == "Silver" ? 'selected' : '' }} value="Silver">Silver</option>
-                                            <option {{ $customer->customer_status == "Gold" ? 'selected' : '' }} value="I">Gold</option>
+                                            <option {{ $customer->customer_status == "Gold" ? 'selected' : '' }} value="Gold">Gold</option>
                                         </select>
                                     </div>
                                 </div>
