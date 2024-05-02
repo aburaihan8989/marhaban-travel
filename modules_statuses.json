@@ -9,6 +9,8 @@
     "Setting": true,
     "Sale": true,
     "Purchase": true,
+    "Saving": true,
+    "Package": true,
     "SaleReturn": true,
     "SalesReturn": true,
     "PurchasesReturn": true,

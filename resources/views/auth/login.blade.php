@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row mb-5">
         <div class="col-12 d-flex justify-content-center">
-            <img width="250" src="{{ asset('images/logo-dark.png') }}" alt="Logo">
+            <img width="340" src="{{ asset('images/logo-dark.png') }}" alt="Logo">
         </div>
     </div>
     <div class="row justify-content-center">
@@ -82,11 +82,11 @@
                 </div>
             </div>
 
-            <p class="text-center font-weight-bold mt-5 lead">
-                <i>Inventory System © {{ date('Y') }}</i>
+            <p class="text-center font-weight-bold mt-5 lead" style="font-size: 15px;color:#3f3f3f">
+                <i>Travel Management System ® {{ date('Y') }}</i>
             </p>
             <p class="text-center mt-2 lead">
-                <a href="#" class="font-weight-bold text-primary"><i>Marhaban Makkah Madinah - Inventory System</i></a>
+                <a href="#" class="font-weight-bold text-primary"><i>Marhaban Makkah Madinah © Hajj & Umroh Service</i></a>
             </p>
         </div>
     </div>

@@ -48,6 +48,14 @@ class CustomersDataTable extends DataTable
 
     protected function getColumns() {
         return [
+            Column::make('row_number')
+                ->title('No')
+                ->render('meta.row + meta.settings._iDisplayStart + 1;')
+                ->width(50)
+                ->orderable(false)
+                ->searchable(false)
+                ->className('text-center align-middle'),
+
             Column::make('nik_number')
                 ->title('NIK Customer')
                 ->className('text-center align-middle'),
@@ -56,12 +64,17 @@ class CustomersDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('customer_phone')
+                ->title('Phone Number')
                 ->className('text-center align-middle'),
 
             Column::make('paspor_number')
                 ->className('text-center align-middle'),
 
             Column::make('customer_email')
+                ->className('text-center align-middle'),
+
+            Column::make('customer_status')
+                ->title('Status Member')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

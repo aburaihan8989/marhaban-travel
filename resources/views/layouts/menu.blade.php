@@ -1,8 +1,182 @@
+<div class="sidebar-heading ml-3" style="font-size: 15px">
+    <strong><i>Menu Dashboard</i></strong>
+</div>
+
 <li class="c-sidebar-nav-item {{ request()->routeIs('home') ? 'c-active' : '' }}">
     <a class="c-sidebar-nav-link" href="{{ route('home') }}">
         <i class="c-sidebar-nav-icon bi bi-house" style="line-height: 1;"></i> Home
     </a>
 </li>
+
+<hr class="sidebar-divider" style="color:white">
+
+<div class="sidebar-heading ml-3" style="font-size: 15px">
+    <strong><i>Menu Travel</i></strong>
+</div>
+
+@can('access_customers')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers.*') ? 'c-show' : '' }}">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+            <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Customers
+        </a>
+        <ul class="c-sidebar-nav-dropdown-items">
+            @can('access_customers')
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('customers.*') ? 'c-active' : '' }}" href="{{ route('customers.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Customers
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </li>
+@endcan
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Agents
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Agents
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Teams
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Teams
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Data Airlines
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Airlines
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Data Hotels
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Hotels
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-packages.*') ? 'c-show' : '' }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-journal-bookmark" style="line-height: 1;"></i> Package Management
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" {{ request()->routeIs('umroh-packages.*') ? 'c-active' : '' }} href="{{ route('umroh-packages.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Umroh Package
+                </a>
+            </li>
+        {{-- @endcan
+        @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" {{ request()->routeIs('hajj-packages.*') ? 'c-active' : '' }} href="{{ route('hajj-packages.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Hajj Package
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
+        <i class="c-sidebar-nav-icon bi bi-journal-bookmark" style="line-height: 1; color:grey;"></i> Manifest Management
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" style="color:grey;" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1; color:grey;"></i> Umroh Manifest
+                </a>
+            </li>
+        {{-- @endcan
+        @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" style="color:grey;" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1; color:grey;"></i> Hajj Manifest
+                </a>
+            </li>
+         {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-savings.*') ? 'c-show' : '' }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Savings Management
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('umroh-savings.*') ? 'c-active' : '' }}" href="{{ route('umroh-savings.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Umroh Savings
+                </a>
+            </li>
+        {{-- @endcan
+        @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('hajj-savings.*') ? 'c-active' : '' }}" href="{{ route('hajj-savings.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Hajj Savings
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
+        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Expenses Management
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" style="color:grey;">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Expenses
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<hr class="sidebar-divider" style="color:white">
+
+<div class="sidebar-heading ml-3" style="font-size: 15px">
+    <strong><i>Menu Inventory</i></strong>
+</div>
 
 @can('access_products')
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('products.*') || request()->routeIs('product-categories.*') ? 'c-show' : '' }}">
@@ -183,7 +357,7 @@
 @can('access_expenses')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('expenses.*') || request()->routeIs('expense-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Expenses
+            <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Expenses Inventory
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
             @can('access_expense_categories')
@@ -209,19 +383,12 @@
     </li>
 @endcan
 
-@can('access_customers|access_suppliers')
-    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers.*') || request()->routeIs('suppliers.*') ? 'c-show' : '' }}">
+@can('access_suppliers')
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('suppliers.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> People
+            <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Data Suppliers
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
-            @can('access_customers')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link {{ request()->routeIs('customers.*') ? 'c-active' : '' }}" href="{{ route('customers.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Customers
-                    </a>
-                </li>
-            @endcan
             @can('access_suppliers')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('suppliers.*') ? 'c-active' : '' }}" href="{{ route('suppliers.index') }}">
@@ -276,7 +443,7 @@
 @can('access_user_management')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('roles*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> User Management
+            <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> Access System
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">
