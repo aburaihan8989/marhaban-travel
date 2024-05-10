@@ -11,6 +11,7 @@
     "Purchase": true,
     "Saving": true,
     "Package": true,
+    "Manifest": true,
     "SaleReturn": true,
     "SalesReturn": true,
     "PurchasesReturn": true,

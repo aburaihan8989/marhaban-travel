@@ -1,0 +1,13 @@
+{
+    "name": "Manifest",
+    "alias": "manifest",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Manifest\\Providers\\ManifestServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

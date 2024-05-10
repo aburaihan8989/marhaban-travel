@@ -62,10 +62,6 @@
                                     <th>Package Capacity</th>
                                     <td>{{ $umroh_package->package_capacity . ' Pax' }}</td>
                                 </tr>
-                                {{-- <tr>
-                                    <th>Hotel Makkah</th>
-                                    <td>{{ $umroh_package->hotel_makkah ?? 'N/A' }}</td>
-                                </tr> --}}
                                 <tr>
                                     <th>Hotel Makkah</th>
                                     <td>{{ $umroh_package->hotel_makkah }}</td>

@@ -113,22 +113,22 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-journal-check" style="line-height: 1; color:grey;"></i> Manifest Management
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-manifests.*') ? 'c-show' : '' }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-journal-check"></i> Manifest Management
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" style="color:grey;" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1; color:grey;"></i> Umroh Manifest
+                <a class="c-sidebar-nav-link" {{ request()->routeIs('umroh-manifests.*') ? 'c-active' : '' }} href="{{ route('umroh-manifests.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-clipboard-check"></i> Umroh Manifest
                 </a>
             </li>
         {{-- @endcan
         @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" style="color:grey;" href="#">
-                    <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1; color:grey;"></i> Hajj Manifest
+                <a class="c-sidebar-nav-link" href="#">
+                    <i class="c-sidebar-nav-icon bi bi-clipboard-check"></i> Hajj Manifest
                 </a>
             </li>
          {{-- @endcan --}}
@@ -159,15 +159,36 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Expenses Management
+        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Finance Reporting
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" style="color:grey;">
-                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Expenses
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Create Expenses
                 </a>
             </li>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" style="color:grey;">
+                <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Umroh Package
+            </a>
+        </li>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" style="color:grey;">
+                <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Hajj Package
+            </a>
+        </li>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" style="color:grey;">
+                <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Yearly Report
+            </a>
+        </li>
         {{-- @endcan --}}
     </ul>
 </li>

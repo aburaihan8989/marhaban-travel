@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Umroh Payment')
+@section('title', 'Create Umroh Savings Payment')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Amount <span class="text-danger">*</span></label>
+                                        <label for="amount">Payment Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') }}">
                                             {{-- <div class="input-group-append">

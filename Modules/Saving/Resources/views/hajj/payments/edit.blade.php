@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Hajj Payment')
+@section('title', 'Edit Hajj Savings Payment')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">

@@ -4,7 +4,7 @@ namespace Modules\Package\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Product\Notifications\NotifyQuantityAlert;
+// use Modules\Product\Notifications\NotifyQuantityAlert;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -18,9 +18,9 @@ class UmrohPackage extends Model implements HasMedia
 
     protected $with = ['media'];
 
-    // public function category() {
-    //     return $this->belongsTo(Category::class, 'category_id', 'id');
-    // }
+    public function umrohManifest() {
+        return $this->belongsTo(UmrohManifest::class, 'package_id', 'id');
+    }
 
     public function registerMediaCollections(): void {
         $this->addMediaCollection('brosurs')

@@ -28,7 +28,7 @@ class Agent extends Model implements HasMedia
 
         static::creating(function ($model) {
             $number = Agent::max('id') + 1;
-            $model->agent_code = make_reference_id('AG', $number);
+            $model->agent_code = make_reference_id('AS', $number);
         });
     }
 

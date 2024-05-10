@@ -25,12 +25,21 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="agent_code">Agent Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="agent_code" required readonly value="AS">
+                                    </div>
+                                </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="nik_number">NIK Agent <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="nik_number" required>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="agent_name">Agent Name <span class="text-danger">*</span></label>
@@ -41,6 +50,16 @@
                                     <div class="form-group">
                                         <label for="date_birth">Date of Birth <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="date_birth" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="gender">Gender <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="gender" id="gender">
+                                            <option value="" selected >Select Gender</option>
+                                            <option value="L">Male</option>
+                                            <option value="P">Female</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -60,11 +79,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="gender">Gender <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="gender" id="gender">
-                                            <option value="" selected >Select Gender</option>
-                                            <option value="L">Male</option>
-                                            <option value="P">Female</option>
+                                        <label for="agent_status">Agent Status <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="agent_status" id="agent_status" required>
+                                            <option value="" selected disabled>Select Status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Closed">Closed</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,16 +100,6 @@
                                     <div class="form-group">
                                         <label for="country">Country <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="country" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="agent_status">Agent Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="agent_status" id="agent_status" required>
-                                            <option value="" selected disabled>Select Status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Closed">Closed</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>

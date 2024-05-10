@@ -19,6 +19,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
+                                    <th>Agent Code</th>
+                                    <td>{{ $agent->agent_code }}</td>
+                                </tr>
+                                <tr>
                                     <th>NIK Agent</th>
                                     <td>{{ $agent->nik_number }}</td>
                                 </tr>
