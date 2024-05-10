@@ -20,10 +20,10 @@
                         <div>
                             Register ID : <strong>{{ $umrohManifestPayment->reference }}</strong>
                         </div>
-                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifests.pdf', $umrohManifestPayment->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $umrohManifestPayment->id) }}">
                             <i class="bi bi-printer"></i> Print
                         </a>
-                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('umroh-manifests.pdf', $umrohManifestPayment->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $umrohManifestPayment->id) }}">
                             <i class="bi bi-save"></i> Save
                         </a>
                     </div>
@@ -176,14 +176,13 @@
                                 <div class="card-body">
                                     <label for="payments">Payment Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
                                     @forelse($umrohManifestPayment->getMedia('payments') as $media)
-                                        <img src="{{ $media->getUrl() }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2">
+                                        <img src="{{ $media->getUrl() }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2" style="width:300px;height:350px;">
                                     @empty
-                                        <img src="{{ $umrohManifestPayment->getFirstMediaUrl('payments') }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2">
+                                        <img src="{{ $umrohManifestPayment->getFirstMediaUrl('payments') }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2" style="width:300px;height:350px;">
                                     @endforelse
                                 </div>
                             </div>
                         </div>
-
 
                     </div>
                 </div>

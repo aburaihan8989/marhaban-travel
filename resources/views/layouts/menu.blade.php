@@ -159,7 +159,7 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Finance Reporting
+        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Finance Report
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}

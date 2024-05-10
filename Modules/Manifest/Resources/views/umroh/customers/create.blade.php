@@ -82,6 +82,74 @@
                                 </div>
                             </div>
 
+                            <div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0">Ticket Status</legend>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="ticket" name="ticket" value="1">
+                                      <label class="form-check-label" for="ticket">Completed</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0">Visa Status</legend>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="visa" name="visa" value="1">
+                                      <label class="form-check-label" for="visa">Completed</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0">Perlengkapan</legend>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="big_suitcase" name="big_suitcase" value="1">
+                                      <label class="form-check-label" for="big_suitcase">Big Suitcase</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="small_suitcase" name="small_suitcase" value="1">
+                                      <label class="form-check-label" for="small_suitcase">Small Suitcase</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="small_bag" name="small_bag" value="1">
+                                      <label class="form-check-label" for="small_bag">Small Bag</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="clothes" name="clothes" value="1">
+                                      <label class="form-check-label" for="clothes">Ihram / Clothes</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0"></legend>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="small_pillow" name="small_pillow" value="1">
+                                      <label class="form-check-label" for="small_pillow">Small Pillow</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="scarf" name="scarf" value="1">
+                                      <label class="form-check-label" for="scarf">Scarf</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <br>
+
                             <div class="form-group">
                                 <label for="note">Note (If Needed)</label>
                                 <textarea name="note" id="note" rows="5" class="form-control"></textarea>

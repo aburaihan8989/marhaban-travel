@@ -19,10 +19,10 @@
                         <div>
                             Register ID : <strong>{{ $umroh_manifest_customer_id->reference }}</strong>
                         </div>
-                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifests.pdf', $umroh_manifest_customer_id->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-customers.pdf', $umroh_manifest_customer_id->id) }}">
                             <i class="bi bi-printer"></i> Print
                         </a>
-                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('umroh-manifests.pdf', $umroh_manifest_customer_id->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('umroh-manifest-customers.pdf', $umroh_manifest_customer_id->id) }}">
                             <i class="bi bi-save"></i> Save
                         </a>
                     </div>
@@ -168,7 +168,121 @@
                                 </table>
                             </div>
                         </div>
+                        <br>
+                        <br>
+                        <hr>
+
+
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Ticket Status</legend>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->ticket == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Completed</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Not Yet</label>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Visa Status</legend>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->visa == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Completed</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Not Yet</label>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Perlengkapan</legend>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->big_suitcase == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Big Suitcase</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Big Suitcase</label>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->small_suitcase == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Suitcase</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Suitcase</label>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->small_bag == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Bag</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Bag</label>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->clothes == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Clothes</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Clothes</label>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0"></legend>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->small_pillow == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Pillow</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Small Pillow</label>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-check">
+                                    @if ($umroh_manifest_customer_id->scarf == '1')
+                                        <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Scarf</label>
+                                    @else
+                                        <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
+                                        <label class="form-check-label ml-3" for="ticket">Scarf</label>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+
                     </div>
+
                 </div>
             </div>
         </div>

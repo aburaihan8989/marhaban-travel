@@ -16,21 +16,46 @@ Route::group(['middleware' => 'auth'], function () {
     //Generate PDF
 
     //PDF Umroh Manifest
-    Route::get('/umroh-manifests/pdf/{id}', function ($id) {
+    Route::get('/umroh-manifest-view/pdf/{id}', function ($id) {
         $umroh_manifest = \Modules\Manifest\Entities\UmrohManifest::findOrFail($id);
+        $umroh_package = \Modules\Package\Entities\UmrohPackage::findOrFail($umroh_manifest->package_id);
         $customer = \Modules\People\Entities\Customer::findOrFail($umroh_manifest->customer_id);
 
         $pdf = \PDF::loadView('manifest::umroh.print', [
             'umroh_manifest' => $umroh_manifest,
+            'umroh_package' => $umroh_package,
             'customer' => $customer,
         ])->setPaper('a4');
 
-        return $pdf->stream('umroh_manifest-'. $umroh_manifest->reference .'.pdf');
-    })->name('umroh-manifests.pdf');
+        return $pdf->stream('umroh_manifest-view-'. $umroh_manifest->reference .'.pdf');
+    })->name('umroh-manifest-view.pdf');
 
     //PDF Umroh Manifest Customer
+    Route::get('/umroh-manifest-customers/pdf/{id}', function ($id) {
+        $umroh_manifest_customer = \Modules\Manifest\Entities\UmrohManifestCustomer::findOrFail($id);
+        $customer = \Modules\People\Entities\Customer::findOrFail($umroh_manifest_customer->customer_id);
+
+        $pdf = \PDF::loadView('manifest::umroh.customers.print', [
+            'umroh_manifest_customer' => $umroh_manifest_customer,
+            'customer' => $customer,
+        ])->setPaper('a4');
+
+        return $pdf->stream('umroh_manifest-customers-'. $umroh_manifest_customer->reference .'.pdf');
+    })->name('umroh-manifest-customers.pdf');
 
     //PDF Umroh Manifest Customer Payment
+    Route::get('/umroh-manifest-payments/pdf/{id}', function ($id) {
+        $umroh_manifest_payment = \Modules\Manifest\Entities\UmrohManifestPayment::findOrFail($id);
+        $umroh_manifest_customer = \Modules\Manifest\Entities\UmrohManifestCustomer::findOrFail($umroh_manifest_payment->umroh_manifest_customer_id);
+        $customer = \Modules\People\Entities\Customer::findOrFail($umroh_manifest_customer->customer_id);
+
+        $pdf = \PDF::loadView('manifest::umroh.payments.print', [
+            'umroh_manifest_payment' => $umroh_manifest_payment,
+            'customer' => $customer,
+        ])->setPaper('a4');
+
+        return $pdf->stream('umroh_manifest-payments-'. $umroh_manifest_payment->reference .'.pdf');
+    })->name('umroh-manifest-payments.pdf');
 
 
     //Umroh Manifest

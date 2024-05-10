@@ -64,7 +64,7 @@ class UmrohManifestPaymentsController extends Controller
                 'date' => $request->date,
                 'reference' => $request->reference,
                 'amount' => $request->amount,
-                'status' => "Approval",
+                'status' => 'Approval',
                 'note' => $request->note,
                 'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
                 'payment_method' => $request->payment_method
@@ -116,7 +116,7 @@ class UmrohManifestPaymentsController extends Controller
 
     public function update(Request $request, UmrohManifestPayment $umrohManifestPayment) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-
+    // @dd($request);
         // $request->validate([
         //     'date' => 'required|date',
         //     'reference' => 'required|string|max:255',

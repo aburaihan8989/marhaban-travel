@@ -65,6 +65,14 @@ class UmrohManifestCustomerController extends Controller
                 'last_date' => now()->format('Y-m-d'),
                 'last_amount' => $request->last_amount,
                 'payment_method' => $request->payment_method,
+                'ticket' => $request->ticket,
+                'visa' => $request->visa,
+                'big_suitcase' => $request->big_suitcase,
+                'small_suitcase' => $request->small_suitcase,
+                'small_bag' => $request->small_bag,
+                'clothes' => $request->clothes,
+                'small_pillow' => $request->small_pillow,
+                'scraf' => $request->scraf,
                 'note' => $request->note
             ]);
 
@@ -80,6 +88,7 @@ class UmrohManifestCustomerController extends Controller
                     'date' => now()->format('Y-m-d'),
                     'reference' => 'INV/'.$umroh_manifest_customer->reference,
                     'amount' => $request->last_amount,
+                    'status' => 'Approval',
                     'umroh_manifest_customer_id' => $umroh_manifest_customer->id,
                     'payment_method' => $request->payment_method
                 ]);
@@ -109,7 +118,7 @@ class UmrohManifestCustomerController extends Controller
 
 
     public function update(Request $request, UmrohManifestCustomer $umroh_manifest_customer_id) {
-
+    // @dd($umroh_manifest_customer_id);
         $request->validate([
             // 'total_price' => 'required|numeric',
             // 'total_payment' => 'required|numeric',
@@ -118,8 +127,8 @@ class UmrohManifestCustomerController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_customer_id) {
-            // $total_payment = $request->total_payment + $request->last_amount;
-            $remaining_payment = $request->total_price - $request->total_payment;
+            // $total_payment = $umroh_manifest_customer_id->total_payment + $request->last_amount;
+            $remaining_payment = $request->total_price - $umroh_manifest_customer_id->total_payment;
 
             if ($request->total_payment >= $request->total_price) {
                 $status = 'Completed';
@@ -135,8 +144,16 @@ class UmrohManifestCustomerController extends Controller
                 // 'paspor_number' => Customer::findOrFail($request->customer_id)->paspor_number,
                 'status' => $status,
                 'total_price' => $request->total_price,
-                'total_payment' => $request->total_payment,
+                'total_payment' => $umroh_manifest_customer_id->total_payment,
                 'remaining_payment' => $remaining_payment,
+                'ticket' => $request->ticket,
+                'visa' => $request->visa,
+                'big_suitcase' => $request->big_suitcase,
+                'small_suitcase' => $request->small_suitcase,
+                'small_bag' => $request->small_bag,
+                'clothes' => $request->clothes,
+                'small_pillow' => $request->small_pillow,
+                'scraf' => $request->scraf,
                 'note' => $request->note
             ]);
 
