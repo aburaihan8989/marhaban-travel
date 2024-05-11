@@ -5,11 +5,11 @@ namespace Modules\Manifest\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Upload\Entities\Upload;
 use Illuminate\Support\Facades\Gate;
-use Modules\People\Entities\Customer;
+use Modules\Upload\Entities\Upload;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\People\Entities\Customer;
 use Modules\Manifest\Entities\UmrohManifest;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
@@ -45,7 +45,7 @@ class UmrohManifestPaymentsController extends Controller
         //     'reference' => 'required|string|max:255',
         //     'amount' => 'required|numeric',
         //     'note' => 'nullable|string|max:1000',
-        //     // 'umroh_manifest_id' => 'required',
+        //     'umroh_manifest_id' => 'required',
         //     'payment_method' => 'required|string|max:255'
         // ]);
 

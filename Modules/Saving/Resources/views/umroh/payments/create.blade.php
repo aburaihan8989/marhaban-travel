@@ -7,7 +7,7 @@
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.show', $umroh_saving) }}">{{ $umroh_saving->reference }}</a></li>
-        <li class="breadcrumb-item active">Add Umroh Payment</li>
+        <li class="breadcrumb-item active">Create Umroh Savings Payment</li>
     </ol>
 @endsection
 
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="date">Date <span class="text-danger">*</span></label>
+                                        <label for="date">Savings Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="date" required value="{{ now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
@@ -84,12 +84,81 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                <div class="dropzone d-flex flex-wrap align-items-center justify-content-center" id="document-dropzone">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="bi bi-cloud-arrow-up"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </form>
     </div>
 @endsection
 
+@section('third_party_scripts')
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+@endsection
+
 @push('page_scripts')
+    <script>
+        var uploadedDocumentMap = {}
+        Dropzone.options.documentDropzone = {
+            url: '{{ route('dropzone.upload') }}',
+            maxFilesize: 1,
+            acceptedFiles: '.jpg, .jpeg, .png',
+            maxFiles: 1,
+            addRemoveLinks: true,
+            dictRemoveFile: "<i class='bi bi-x-circle text-danger'></i> remove",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            success: function (file, response) {
+                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">');
+                uploadedDocumentMap[file.name] = response.name;
+            },
+            removedfile: function (file) {
+                file.previewElement.remove();
+                var name = '';
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name;
+                } else {
+                    name = uploadedDocumentMap[file.name];
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('dropzone.delete') }}",
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                        'file_name': `${name}`
+                    },
+                });
+                $('form').find('input[name="document[]"][value="' + name + '"]').remove();
+            },
+            init: function () {
+                @if(isset($savingPayment) && $savingPayment->getMedia('savings'))
+                var files = {!! json_encode($savingPayment->getMedia('savings')) !!};
+                for (var i in files) {
+                    var file = files[i];
+                    this.options.addedfile.call(this, file);
+                    this.options.thumbnail.call(this, file, file.original_url);
+                    file.previewElement.classList.add('dz-complete');
+                    $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">');
+                }
+                @endif
+            }
+        }
+    </script>
+
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
         $(document).ready(function () {

@@ -5,15 +5,31 @@ namespace Modules\Saving\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class SavingPayment extends Model
+class SavingPayment extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $guarded = [];
 
+    protected $with = ['media'];
+
     public function savings() {
         return $this->belongsTo(Saving::class, 'saving_id', 'id');
+    }
+
+    public function registerMediaCollections(): void {
+        $this->addMediaCollection('savings')
+            ->useFallbackUrl('/images/fallback_product_image.png');
+    }
+
+    public function registerMediaConversions(Media $media = null): void {
+        $this->addMediaConversion('thumb')
+            ->width(50)
+            ->height(50);
     }
 
     public function setAmountAttribute($value) {

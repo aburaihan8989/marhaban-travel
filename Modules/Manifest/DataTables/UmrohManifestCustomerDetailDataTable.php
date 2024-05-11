@@ -49,6 +49,8 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
             ->addColumn('status', function ($data) {
                 return view('manifest::umroh.partials.status-customer', compact('data'));
             });
+            // ->editColumn('ticket', '<i class="form-check-input bi bi-check-circle-fill"></i>')->rawColumns(['ticket'])->make(true);
+
             // ->addColumn('action', function ($data) {
             //     return view('manifest::umroh.partials.actions-customer', compact('data'));
             // });
@@ -137,12 +139,17 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('remaining_payment')
-                ->className('text-center align-middle')
+                ->className('text-center align-middle'),
+
+            Column::computed('ticket')
+                ->visible(false)
+
+
 
             // Column::computed('action')
             //     ->exportable(false)
             //     ->printable(false)
-            //     ->className('text-center align-middle'),
+            //     ->className('text-center align-middle')
 
             // Column::make('created_at')
             //     ->visible(false)

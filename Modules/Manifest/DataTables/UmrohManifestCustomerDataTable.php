@@ -142,10 +142,10 @@ class UmrohManifestCustomerDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->className('text-center align-middle'),
+                ->className('text-center align-middle')
 
-            Column::make('created_at')
-                ->visible(false)
+            // Column::make('created_at')
+            //     ->visible(false)
         ];
     }
 

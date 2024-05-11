@@ -7,7 +7,7 @@
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.show', $umroh_saving) }}">{{ $umroh_saving->reference }}</a></li>
-        <li class="breadcrumb-item active">Edit Umroh Payment</li>
+        <li class="breadcrumb-item active">Edit Umroh Savings Payment</li>
     </ol>
 @endsection
 
@@ -20,7 +20,7 @@
                 <div class="col-lg-12">
                     @include('utils.alerts')
                     <div class="form-group">
-                        <button class="btn btn-primary">Update Payment <i class="bi bi-check"></i></button>
+                        <button class="btn btn-primary">Update Savings Payment <i class="bi bi-check"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Amount <span class="text-danger">*</span></label>
+                                        <label for="amount">Saving Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') ?? $savingPayment->amount }}">
                                             {{-- <div class="input-group-append">
@@ -76,6 +76,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="status">Payment Status <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="status" id="status" required>
+                                            <option value="" selected>None</option>
+                                            <option {{ $savingPayment->status == 'Approval' ? 'selected' : '' }} value="Approval">Approval</option>
+                                            <option {{ $savingPayment->status == 'Verified' ? 'selected' : '' }} value="Verified">Verified</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="note">Note</label>
                                 <textarea class="form-control" rows="4" name="note">{{ old('note') ?? $savingPayment->note }}</textarea>
@@ -85,13 +99,74 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                <div class="dropzone d-flex flex-wrap align-items-center justify-content-center" id="document-dropzone">
+                                    <div class="dz-message" data-dz-message>
+                                        <i class="bi bi-cloud-arrow-up"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </form>
     </div>
 @endsection
 
+@section('third_party_scripts')
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+@endsection
+
 @push('page_scripts')
+    <script>
+        var uploadedDocumentMap = {}
+        Dropzone.options.documentDropzone = {
+            url: '{{ route('dropzone.upload') }}',
+            maxFilesize: 1,
+            acceptedFiles: '.jpg, .jpeg, .png',
+            maxFiles: 1,
+            addRemoveLinks: true,
+            dictRemoveFile: "<i class='bi bi-x-circle text-danger'></i> remove",
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function (file, response) {
+                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">');
+                uploadedDocumentMap[file.name] = response.name;
+            },
+            removedfile: function (file) {
+                file.previewElement.remove();
+                var name = '';
+                if (typeof file.file_name !== 'undefined') {
+                    name = file.file_name;
+                } else {
+                    name = uploadedDocumentMap[file.name];
+                }
+                $('form').find('input[name="document[]"][value="' + name + '"]').remove();
+            },
+            init: function () {
+                @if(isset($savingPayment) && $savingPayment->getMedia('savings'))
+                var files = {!! json_encode($savingPayment->getMedia('savings')) !!};
+                for (var i in files) {
+                    var file = files[i];
+                    this.options.addedfile.call(this, file);
+                    this.options.thumbnail.call(this, file, file.original_url);
+                    file.previewElement.classList.add('dz-complete');
+                    $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">');
+                }
+                @endif
+            }
+        }
+    </script>
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             $('#amount').maskMoney({

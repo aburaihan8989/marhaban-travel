@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Umroh Manifest Manages')
+@section('title', 'Manage Umroh Manifest')
 
 @section('third_party_stylesheets')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
@@ -10,7 +10,7 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Umroh Manifest Manages</li>
+        <li class="breadcrumb-item active">Manage Umroh Manifest</li>
     </ol>
 @endsection
 
@@ -83,16 +83,24 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Hotel Makkah</th>
-                                    <td>{{ $umroh_manifest->UmrohPackages->hotel_makkah }}</td>
+                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type }})</i></strong></th>
+                                    <td>
+                                        Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah }} <br>
+                                        Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} <br>
+                                        Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price) }}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>Hotel Madinah</th>
-                                    <td>{{ $umroh_manifest->UmrohPackages->hotel_madinah }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Package Price</th>
-                                    <td>{{ format_currency($umroh_manifest->UmrohPackages->package_price) }}</td>
+                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type_2 }})</i></strong></th>
+                                    <td>
+                                        Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah_2 }} <br>
+                                        Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah_2 }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} <br>
+                                        Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price_2) }}
+                                    </td>
                                 </tr>
                             </table>
                         </div>

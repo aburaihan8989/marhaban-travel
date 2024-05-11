@@ -28,6 +28,20 @@ Route::group(['middleware' => 'auth'], function () {
         return $pdf->stream('umroh_saving-'. $umroh_saving->reference .'.pdf');
     })->name('umroh-savings.pdf');
 
+    Route::get('/umroh-saving-payments/pdf/{id}', function ($id) {
+        $umroh_saving_payment = \Modules\Saving\Entities\SavingPayment::findOrFail($id);
+        $umroh_saving = \Modules\Saving\Entities\Saving::findOrFail($umroh_saving_payment->saving_id);
+        $customer = \Modules\People\Entities\Customer::findOrFail($umroh_saving->customer_id);
+
+        $pdf = \PDF::loadView('saving::umroh.payments.print', [
+            'umroh_saving_payment' => $umroh_saving_payment,
+            'customer' => $customer,
+        ])->setPaper('a4');
+
+        return $pdf->stream('umroh_saving-payments-'. $umroh_saving_payment->reference .'.pdf');
+    })->name('umroh-saving-payments.pdf');
+
+
     //Hajj
     Route::get('/hajj-savings/pdf/{id}', function ($id) {
         $hajj_saving = \Modules\Saving\Entities\HajjSaving::findOrFail($id);
@@ -58,6 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/umroh-saving-payments/{saving_id}/edit/{savingPayment}', 'SavingPaymentsController@edit')->name('umroh-saving-payments.edit');
     Route::patch('/umroh-saving-payments/update/{savingPayment}', 'SavingPaymentsController@update')->name('umroh-saving-payments.update');
     Route::delete('/umroh-saving-payments/destroy/{savingPayment}', 'SavingPaymentsController@destroy')->name('umroh-saving-payments.destroy');
+    Route::get('/umroh-saving-payments/{saving_id}/view/{savingPayment}', 'SavingPaymentsController@view')->name('umroh-saving-payments.view');
 
     //Hajj
     Route::get('/hajj-saving-payments/{saving_id}', 'HajjSavingPaymentsController@index')->name('hajj-saving-payments.index');

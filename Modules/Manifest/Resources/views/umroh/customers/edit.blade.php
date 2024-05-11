@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Umroh Manifest Customer')
+@section('title', 'Edit Manifest Customer Umroh')
 {{-- @dd($umroh_manifest_customer_id) --}}
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest_customer_id->manifest_id) }}">Umroh Manifest Manages</a></li>
-        <li class="breadcrumb-item active">Edit Manifest Customer</li>
+        <li class="breadcrumb-item active">Edit Manifest Customer Umroh</li>
     </ol>
 @endsection
 

@@ -6,7 +6,7 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-packages.index') }}">Umroh Packages</a></li>
-        <li class="breadcrumb-item active">Details</li>
+        <li class="breadcrumb-item active">Umroh Package Details</li>
     </ol>
 @endsection
 
@@ -48,56 +48,43 @@
                                     <td>{{ $umroh_package->flight_route }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Package Type</th>
-                                    <td>{{ $umroh_package->package_type }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Stock Worth</th>
-                                    <td>
-                                        COST:: {{ format_currency($product->product_cost * $product->product_quantity) }} /
-                                        PRICE:: {{ format_currency($product->product_price * $product->product_quantity) }}
-                                    </td>
-                                </tr> --}}
-                                <tr>
                                     <th>Package Capacity</th>
                                     <td>{{ $umroh_package->package_capacity . ' Pax' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Hotel Makkah</th>
-                                    <td>{{ $umroh_package->hotel_makkah }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Hotel Madinah</th>
-                                    <td>{{ $umroh_package->hotel_madinah }}</td>
-                                </tr>
-                                <tr>
                                     <th>Package Status</th>
-                                    <td>{{ $umroh_package->package_status }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Package Cost</th>
-                                    <td>{{ format_currency($umroh_package->package_cost) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Package Price</th>
-                                    <td>{{ format_currency($umroh_package->package_price) }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Tax Type</th>
                                     <td>
-                                        @if($product->product_tax_type == 1)
-                                            Exclusive
-                                        @elseif($product->product_tax_type == 2)
-                                            Inclusive
+                                        @if($umroh_package->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 13px;">
+                                                {{ $umroh_package->package_status }}
+                                            </span>
                                         @else
-                                            N/A
+                                            <span class="badge badge-secondary" style="font-size: 13px;">
+                                                {{ $umroh_package->package_status }}
+                                            </span>
                                         @endif
                                     </td>
-                                </tr> --}}
-                                {{-- <tr>
-                                    <th>Note</th>
-                                    <td>{{ $product->product_note ?? 'N/A' }}</td>
-                                </tr> --}}
+                                </tr>
+                                <tr>
+                                    <th>Package <strong class="text-primary"><i>({{ $umroh_package->package_type }})</i></strong></th>
+                                    <td>
+                                        Hotel Makkah :: {{ $umroh_package->hotel_makkah }} <br>
+                                        Hotel Madinah :: {{ $umroh_package->hotel_madinah }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($umroh_package->package_cost) }} <br>
+                                        Package Price :: {{ format_currency($umroh_package->package_price) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Package <strong class="text-primary"><i>({{ $umroh_package->package_type_2 }})</i></strong></th>
+                                    <td>
+                                        Hotel Makkah :: {{ $umroh_package->hotel_makkah_2 }} <br>
+                                        Hotel Madinah :: {{ $umroh_package->hotel_madinah_2 }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($umroh_package->package_cost_2) }} <br>
+                                        Package Price :: {{ format_currency($umroh_package->package_price_2) }}
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -171,6 +158,25 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-lg-9">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <tr>
+                                    <th width="300px">Note (If Needed)</th>
+                                    <td>
+                                        <textarea rows="4" class="form-control" readonly>{{ $umroh_package->note }}</textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
 

@@ -18,9 +18,9 @@ class Customer extends Model implements HasMedia
 
     protected $with = ['media'];
 
-    // public function umrohManifestCustomers() {
-    //     return $this->hasMany(UmrohManifestCustomer::class, 'id', 'customer_id');
-    // }
+    public function umrohManifestCustomers() {
+        return $this->hasMany(UmrohManifestCustomer::class, 'id', 'customer_id');
+    }
 
     public function registerMediaCollections(): void {
         $this->addMediaCollection('photos')

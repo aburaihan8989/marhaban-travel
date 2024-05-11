@@ -2,13 +2,17 @@
 
 namespace Modules\Saving\Http\Controllers;
 
-use Modules\Saving\DataTables\SavingPaymentsDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Modules\Saving\Entities\Saving;
+use Modules\Upload\Entities\Upload;
+use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Customer;
+use Illuminate\Support\Facades\Storage;
 use Modules\Saving\Entities\SavingPayment;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Saving\DataTables\SavingPaymentsDataTable;
 
 class SavingPaymentsController extends Controller
 {
@@ -34,25 +38,41 @@ class SavingPaymentsController extends Controller
     public function store(Request $request) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        $request->validate([
-            'date' => 'required|date',
-            'reference' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'note' => 'nullable|string|max:1000',
-            'saving_id' => 'required',
-            'payment_method' => 'required|string|max:255'
-        ]);
+        // $request->validate([
+        //     'date' => 'required|date',
+        //     'reference' => 'required|string|max:255',
+        //     'amount' => 'required|numeric',
+        //     'note' => 'nullable|string|max:1000',
+        //     'saving_id' => 'required',
+        //     'payment_method' => 'required|string|max:255'
+        // ]);
 
         DB::transaction(function () use ($request) {
 
-            SavingPayment::create([
+            // SavingPayment::create([
+            //     'date' => $request->date,
+            //     'reference' => $request->reference,
+            //     'amount' => $request->amount,
+            //     'note' => $request->note,
+            //     'saving_id' => $request->saving_id,
+            //     'payment_method' => $request->payment_method
+            // ]);
+
+            $savingPayment = SavingPayment::create([
                 'date' => $request->date,
                 'reference' => $request->reference,
                 'amount' => $request->amount,
+                'status' => 'Approval',
                 'note' => $request->note,
                 'saving_id' => $request->saving_id,
                 'payment_method' => $request->payment_method
             ]);
+
+            if ($request->has('document')) {
+                foreach ($request->input('document', []) as $file) {
+                    $savingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                }
+            }
 
             $umroh_saving = Saving::findOrFail($request->saving_id);
 
@@ -126,14 +146,43 @@ class SavingPaymentsController extends Controller
                 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
+                'status' => $request->status,
                 'saving_id' => $request->saving_id,
                 'payment_method' => $request->payment_method
             ]);
+
+            if ($request->has('document')) {
+                if (count($savingPayment->getMedia('savings')) > 0) {
+                    foreach ($savingPayment->getMedia('savings') as $media) {
+                        if (!in_array($media->file_name, $request->input('document', []))) {
+                            $media->delete();
+                        }
+                    }
+                }
+
+                $media = $savingPayment->getMedia('savings')->pluck('file_name')->toArray();
+
+                foreach ($request->input('document', []) as $file) {
+                    if (count($media) === 0 || !in_array($file, $media)) {
+                        $savingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
+                }
+            }
+
         });
 
         toast('Umroh Saving Payment Updated!', 'info');
 
-        return redirect()->route('umroh-savings.index');
+        return redirect()->route('umroh-saving-payments.index', $savingPayment->saving_id);
+    }
+
+
+    public function view($saving_id, SavingPayment $savingPayment) {
+        // abort_if(Gate::denies('show_products'), 403);
+        $umroh_saving = Saving::findOrFail($saving_id);
+        $customer = Customer::findOrFail($umroh_saving->customer_id);
+
+        return view('saving::umroh.payments.view', compact('savingPayment', 'umroh_saving', 'customer'));
     }
 
 

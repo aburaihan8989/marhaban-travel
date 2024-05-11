@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Details Customer Umroh Manifest')
+@section('title', 'Customer Manifest Umroh Details')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest_customer_id->manifest_id) }}">Umroh Manifest Manages</a></li>
-        <li class="breadcrumb-item active">Details Customer Umroh Manifest</li>
+        <li class="breadcrumb-item active">Customer Manifest Umroh Details</li>
     </ol>
 @endsection
 
@@ -169,9 +169,7 @@
                             </div>
                         </div>
                         <br>
-                        <br>
                         <hr>
-
 
                         <div class="row">
                             <legend class="col-form-label col-sm-2 pt-0">Ticket Status</legend>
@@ -274,6 +272,98 @@
                                         <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
                                         <label class="form-check-label ml-3" for="ticket">Scarf</label>
                                     @endif
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <label for="photo">Photo Customer <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                        @forelse($umroh_manifest_customer_id->umrohCustomers->getMedia('photos') as $media)
+                                            <img src="{{ $media->getUrl() }}" alt="Photo Customer" class="img-fluid img-thumbnail mb-2">
+                                        @empty
+                                            <img src="{{ $umroh_manifest_customer_id->umrohCustomers->getFirstMediaUrl('photos') }}" alt="Photo Customer" class="img-fluid img-thumbnail mb-2">
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped mb-0">
+                                                <tr>
+                                                    <th>NIK Customer</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->nik_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Customer Name</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->customer_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Date of Birth</th>
+                                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest_customer_id->umrohCustomers->date_birth)) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Gender</th>
+                                                    <td>
+                                                        @if($umroh_manifest_customer_id->umrohCustomers->gender == 'L')
+                                                            Male
+                                                        @else
+                                                            Female
+                                                        @endif
+                                                        {{-- {{ $umroh_manifest_customer_id->umrohCustomers->gender }} --}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Age Group</th>
+                                                    <td>
+                                                        @if($umroh_manifest_customer_id->umrohCustomers->age_group == 'A')
+                                                            Adult
+                                                        @elseif($umroh_manifest_customer_id->umrohCustomers->age_group == 'K')
+                                                            Kids
+                                                        @else
+                                                            Infant
+                                                        @endif
+                                                        {{-- {{ $umroh_manifest_customer_id->umrohCustomers->age_group }} --}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Paspor Number</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->paspor_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Paspor Active</th>
+                                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest_customer_id->umrohCustomers->paspor_date)) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Phone Number</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->customer_phone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->customer_email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Status Member</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->customer_status }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>City</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->city }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Address</th>
+                                                    <td>{{ $umroh_manifest_customer_id->umrohCustomers->address }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

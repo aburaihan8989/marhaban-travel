@@ -6,7 +6,7 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Add Manifest</li>
+        <li class="breadcrumb-item active">Create Umroh Manifest</li>
     </ol>
 @endsection
 

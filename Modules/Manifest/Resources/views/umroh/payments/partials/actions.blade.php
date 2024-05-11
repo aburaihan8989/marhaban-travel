@@ -13,7 +13,6 @@
             <i class="bi bi-eye"></i>
         </a>
     @endif
-
 {{-- @endcan
 @can('access_sale_payments') --}}
     <button id="delete" class="btn btn-danger btn-sm" onclick="

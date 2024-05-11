@@ -6,7 +6,7 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-packages.index') }}">Umroh Packages</a></li>
-        <li class="breadcrumb-item active">Edit</li>
+        <li class="breadcrumb-item active">Edit Umroh Package</li>
     </ol>
 @endsection
 
@@ -80,11 +80,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_type">Package Type <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type" id="package_type" required>
+                                        <label for="package_status">Package Status <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="package_status" id="package_status" required>
                                             <option value="" selected>None</option>
-                                            <option {{ $umroh_package->package_type == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
-                                            <option {{ $umroh_package->package_type == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>
+                                            <option {{ $umroh_package->package_status == 'Active' ? 'selected' : '' }} value="Active">Active</option>
+                                            <option {{ $umroh_package->package_status == 'Closed' ? 'selected' : '' }} value="Closed">Closed</option>
                                         </select>
                                     </div>
                                 </div>
@@ -95,27 +95,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
 
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="hotel_makkah">Hotel Makkah <span class="text-danger">*</span></label>
-                                        <input id="hotel_makkah" type="text" class="form-control" name="hotel_makkah" required value="{{ $umroh_package->hotel_makkah }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="hotel_madinah">Hotel Madinah <span class="text-danger">*</span></label>
-                                        <input id="hotel_madinah" type="text" class="form-control" name="hotel_madinah" required value="{{ $umroh_package->hotel_madinah }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="package_status">Package Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_status" id="package_status" required>
+                                        <label for="package_type">Package Category <strong class="text-primary"><i>(Marhaban)</i></strong><span class="text-danger">*</span></label>
+                                        <select class="form-control" name="package_type" id="package_type" required>
                                             <option value="" selected>None</option>
-                                            <option {{ $umroh_package->package_status == 'Active' ? 'selected' : '' }} value="Active">Active</option>
-                                            <option {{ $umroh_package->package_status == 'Closed' ? 'selected' : '' }} value="Closed">Closed</option>
+                                            <option {{ $umroh_package->package_type == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
+                                            <option {{ $umroh_package->package_type == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>
                                         </select>
                                     </div>
                                 </div>
@@ -124,17 +113,75 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_cost">Package Cost <span class="text-danger">*</span></label>
+                                        <label for="hotel_makkah">Hotel Makkah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                        <input id="hotel_makkah" type="text" class="form-control" name="hotel_makkah" required value="{{ $umroh_package->hotel_makkah }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hotel_madinah">Hotel Madinah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                        <input id="hotel_madinah" type="text" class="form-control" name="hotel_madinah" required value="{{ $umroh_package->hotel_madinah }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="package_cost">Package Cost <i>(Marhaban)</i><span class="text-danger">*</span></label>
                                         <input id="package_cost" type="text" class="form-control" name="package_cost" required value="{{ format_currency($umroh_package->package_cost) }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_price">Package Price <span class="text-danger">*</span></label>
+                                        <label for="package_price">Package Price <i>(Marhaban)</i><span class="text-danger">*</span></label>
                                         <input id="package_price" type="text" class="form-control" name="package_price" required value="{{ format_currency($umroh_package->package_price) }}">
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="package_type_2">Package Category <strong class="text-primary"><i>(Muzdalifah)</i></strong><span class="text-danger">*</span></label>
+                                        <select class="form-control" name="package_type_2" id="package_type_2" required>
+                                            <option value="" selected>None</option>
+                                            <option {{ $umroh_package->package_type_2 == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
+                                            <option {{ $umroh_package->package_type_2 == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hotel_makkah_2">Hotel Makkah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <input id="hotel_makkah_2" type="text" class="form-control" name="hotel_makkah_2" required value="{{ $umroh_package->hotel_makkah_2 }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="hotel_madinah_2">Hotel Madinah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <input id="hotel_madinah_2" type="text" class="form-control" name="hotel_madinah_2" required value="{{ $umroh_package->hotel_madinah_2 }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="package_cost_2">Package Cost <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <input id="package_cost_2" type="text" class="form-control" name="package_cost_2" required value="{{ format_currency($umroh_package->package_cost_2) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="package_price_2">Package Price <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <input id="package_price_2" type="text" class="form-control" name="package_price_2" required value="{{ format_currency($umroh_package->package_price_2) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
 
                             <div class="form-group">
                                 <label for="package_include">Package Include </label>
@@ -148,6 +195,11 @@
                                 <label for="package_term">Package Term & Condition </label>
                                 <textarea name="package_term" id="package_term" rows="4" class="form-control">{{ $umroh_package->package_term }}</textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="note">Note (If Needed)</label>
+                                <textarea name="note" id="note" rows="5" class="form-control">{{ $umroh_package->note }}</textarea>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -230,15 +282,31 @@
                 thousands:'{{ settings()->currency->thousand_separator }}',
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
+            $('#package_cost_2').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
+            $('#package_price_2').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
 
             $('#package_cost').maskMoney('mask');
             $('#package_price').maskMoney('mask');
+            $('#package_cost_2').maskMoney('mask');
+            $('#package_price_2').maskMoney('mask');
 
             $('#umroh-package-form').submit(function () {
                 var package_cost = $('#package_cost').maskMoney('unmasked')[0];
                 var package_price = $('#package_price').maskMoney('unmasked')[0];
+                var package_cost_2 = $('#package_cost_2').maskMoney('unmasked')[0];
+                var package_price_2 = $('#package_price_2').maskMoney('unmasked')[0];
                 $('#package_cost').val(package_cost);
                 $('#package_price').val(package_price);
+                $('#package_cost_2').val(package_cost_2);
+                $('#package_price_2').val(package_price_2);
             });
         });
     </script>

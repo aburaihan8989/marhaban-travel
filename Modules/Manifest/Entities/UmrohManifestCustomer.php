@@ -16,9 +16,9 @@ class UmrohManifestCustomer extends Model
         return $this->hasMany(UmrohManifestPayment::class, 'id', 'umroh_manifest_customer_id');
     }
 
-    // public function umrohCustomers() {
-    //     return $this->belongsTo(Customer::class, 'customer_id', 'id');
-    // }
+    public function umrohCustomers() {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 
     public static function boot() {
         parent::boot();

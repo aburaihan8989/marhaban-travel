@@ -18,7 +18,7 @@
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
                     <span>Register ID :</span> <strong>{{ $umroh_manifest_customer->reference }}</strong></br></br>
-                    <span>Category :</span> <strong>Customer Manifest Umroh</strong>
+                    <span>Category :</span> <strong>Customer Manifest Umroh Details</strong>
                 </h4>
             </div>
             <div class="card">
