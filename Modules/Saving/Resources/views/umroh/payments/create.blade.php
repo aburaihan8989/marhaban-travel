@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     @include('utils.alerts')
                     <div class="form-group">
-                        <button class="btn btn-primary">Create Umroh Payment <i class="bi bi-check"></i></button>
+                        <button class="btn btn-primary">Create Savings Payment <i class="bi bi-check"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Payment Amount <span class="text-danger">*</span></label>
+                                        <label for="amount">Savings Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') }}">
                                             {{-- <div class="input-group-append">
@@ -84,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">

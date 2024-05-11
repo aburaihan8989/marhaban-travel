@@ -7,7 +7,7 @@
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-saving-payments.index', $savingPayment->saving_id) }}">{{ $savingPayment->reference }}</a></li>
-        <li class="breadcrumb-item active">Details Customer Savings</li>
+        <li class="breadcrumb-item active">Umroh Savings Details</li>
     </ol>
 @endsection
 

@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="date">Date <span class="text-danger">*</span></label>
+                                        <label for="date">Savings Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="date" required value="{{ $savingPayment->getAttributes()['date'] }}">
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Saving Amount <span class="text-danger">*</span></label>
+                                        <label for="amount">Savings Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') ?? $savingPayment->amount }}">
                                             {{-- <div class="input-group-append">
@@ -88,7 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="note">Note</label>
@@ -165,8 +164,8 @@
             }
         }
     </script>
-    <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
 
+    <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#amount').maskMoney({

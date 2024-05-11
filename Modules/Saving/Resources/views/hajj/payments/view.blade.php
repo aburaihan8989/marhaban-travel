@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Hajj Savings Details')
+@section('title', 'Customer Hajj Savings Details')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('hajj-savings.index') }}">Hajj Savings</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-saving-payments.index', $hajjsavingPayment->saving_id) }}">{{ $hajjsavingPayment->reference }}</a></li>
         <li class="breadcrumb-item active">Hajj Savings Details</li>
     </ol>
 @endsection
@@ -17,18 +18,18 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Register ID : <strong>{{ $hajj_saving->reference }}</strong>
+                            Register ID : <strong>{{ $hajjsavingPayment->reference }}</strong>
                         </div>
-                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-savings.pdf', $hajj_saving->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-saving-payments.pdf', $hajjsavingPayment->id) }}">
                             <i class="bi bi-printer"></i> Print
                         </a>
-                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('hajj-savings.pdf', $hajj_saving->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('hajj-saving-payments.pdf', $hajjsavingPayment->id) }}">
                             <i class="bi bi-save"></i> Save
-                        </a><br>
+                        </a>
                     </div>
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Category : <strong>Hajj Savings</strong>
+                            Category : <strong>Customer Savings Receipt</strong>
                         </div>
                     </div>
                     <div class="card-body">
@@ -74,22 +75,22 @@
                         <div class="table-responsive-sm mb-5">
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th class="align-middle">Reference</th>
-                                    <th class="align-middle">Register Date</th>
-                                    <th class="align-middle">Customer Name</th>
-                                    <th class="align-middle">Phone Number</th>
-                                    <th class="align-middle">Bank Name</th>
-                                    <th class="align-middle">Account Number</th>
-                            </tr>
+                                    <tr>
+                                        <th class="align-middle">Reference</th>
+                                        <th class="align-middle">Saving Date</th>
+                                        <th class="align-middle">Customer Name</th>
+                                        <th class="align-middle">Phone Number</th>
+                                        <th class="align-middle">Saving Amount</th>
+                                        <th class="align-middle">Status</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td class="align-middle">
-                                            {{ $hajj_saving->reference }}
+                                            {{ $hajjsavingPayment->reference }}
                                         </td>
                                         <td class="align-middle">
-                                            {{ date('d-m-Y', strtotime($hajj_saving->register_date)) }}
+                                            {{ date('d-m-Y', strtotime($hajjsavingPayment->date)) }}
                                         </td>
                                         <td class="align-middle">
                                             {{ $hajj_saving->customer_name }}
@@ -98,26 +99,29 @@
                                             {{ $hajj_saving->customer_phone }}
                                         </td>
                                         <td class="align-middle">
-                                            {{ $hajj_saving->customer_bank }}
+                                            {{ format_currency($hajjsavingPayment->amount) }}
                                         </td>
                                         <td class="align-middle">
-                                            {{ $hajj_saving->bank_account }}
+                                            @if ($hajjsavingPayment->status == 'Verified')
+                                                <span class="badge badge-success" style="font-size: 13px;">
+                                                    {{ $hajjsavingPayment->status }}
+                                                </span>
+                                            @else
+                                                <span class="badge badge-danger" style="font-size: 13px;">
+                                                    {{ $hajjsavingPayment->status }}
+                                                </span>
+                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
+
                                 <thead>
                                     <tr>
-                                        <th class="align-middle">Status</th>
                                         <th class="align-middle">Saving Balance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="align-middle">
-                                            <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $hajj_saving->status }}
-                                            </span>
-                                        </td>
                                         <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                             {{ format_currency($hajj_saving->total_saving) }}
                                         </td>
@@ -125,6 +129,7 @@
                                 </tbody>
                             </table>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-4 col-sm-5 ml-md-auto">
                                 <table class="table">
@@ -157,6 +162,20 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div class="col-lg-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                    @forelse($hajjsavingPayment->getMedia('savings') as $media)
+                                        <img src="{{ $media->getUrl() }}" alt="Savings Receipt" class="img-fluid img-thumbnail mb-2" style="width:300px;height:350px;">
+                                    @empty
+                                        <img src="{{ $hajjsavingPayment->getFirstMediaUrl('savings') }}" alt="Savings Receipt" class="img-fluid img-thumbnail mb-2" style="width:300px;height:350px;">
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

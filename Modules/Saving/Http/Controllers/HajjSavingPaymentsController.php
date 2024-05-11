@@ -2,13 +2,17 @@
 
 namespace Modules\Saving\Http\Controllers;
 
-use Modules\Saving\DataTables\HajjSavingPaymentsDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Modules\Upload\Entities\Upload;
+use Illuminate\Support\Facades\Storage;
+use Modules\People\Entities\Customer;
 use Modules\Saving\Entities\HajjSaving;
 use Modules\Saving\Entities\HajjSavingPayment;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Saving\DataTables\HajjSavingPaymentsDataTable;
 
 class HajjSavingPaymentsController extends Controller
 {
@@ -34,25 +38,41 @@ class HajjSavingPaymentsController extends Controller
     public function store(Request $request) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        $request->validate([
-            'date' => 'required|date',
-            'reference' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'note' => 'nullable|string|max:1000',
-            'saving_id' => 'required',
-            'payment_method' => 'required|string|max:255'
-        ]);
+        // $request->validate([
+        //     'date' => 'required|date',
+        //     'reference' => 'required|string|max:255',
+        //     'amount' => 'required|numeric',
+        //     'note' => 'nullable|string|max:1000',
+        //     'saving_id' => 'required',
+        //     'payment_method' => 'required|string|max:255'
+        // ]);
 
         DB::transaction(function () use ($request) {
 
-            HajjSavingPayment::create([
+            // HajjSavingPayment::create([
+            //     'date' => $request->date,
+            //     'reference' => $request->reference,
+            //     'amount' => $request->amount,
+            //     'note' => $request->note,
+            //     'saving_id' => $request->saving_id,
+            //     'payment_method' => $request->payment_method
+            // ]);
+
+            $HajjSavingPayment = HajjSavingPayment::create([
                 'date' => $request->date,
                 'reference' => $request->reference,
                 'amount' => $request->amount,
+                'status' => 'Approval',
                 'note' => $request->note,
                 'saving_id' => $request->saving_id,
                 'payment_method' => $request->payment_method
             ]);
+
+            if ($request->has('document')) {
+                foreach ($request->input('document', []) as $file) {
+                    $HajjSavingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                }
+            }
 
             $hajj_saving = HajjSaving::findOrFail($request->saving_id);
 
@@ -126,14 +146,43 @@ class HajjSavingPaymentsController extends Controller
                 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
+                'status' => $request->status,
                 'saving_id' => $request->saving_id,
                 'payment_method' => $request->payment_method
             ]);
+
+            if ($request->has('document')) {
+                if (count($hajjsavingPayment->getMedia('savings')) > 0) {
+                    foreach ($hajjsavingPayment->getMedia('savings') as $media) {
+                        if (!in_array($media->file_name, $request->input('document', []))) {
+                            $media->delete();
+                        }
+                    }
+                }
+
+                $media = $hajjsavingPayment->getMedia('savings')->pluck('file_name')->toArray();
+
+                foreach ($request->input('document', []) as $file) {
+                    if (count($media) === 0 || !in_array($file, $media)) {
+                        $hajjsavingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
+                }
+            }
+
         });
 
         toast('Hajj Saving Payment Updated!', 'info');
 
-        return redirect()->route('hajj-savings.index');
+        return redirect()->route('hajj-saving-payments.index', $hajjsavingPayment->saving_id);
+    }
+
+
+    public function view($saving_id, HajjSavingPayment $hajjsavingPayment) {
+        // abort_if(Gate::denies('show_products'), 403);
+        $hajj_saving = HajjSaving::findOrFail($saving_id);
+        $customer = Customer::findOrFail($hajj_saving->customer_id);
+
+        return view('saving::hajj.payments.view', compact('hajjsavingPayment', 'hajj_saving', 'customer'));
     }
 
 

@@ -55,6 +55,20 @@ Route::group(['middleware' => 'auth'], function () {
         return $pdf->stream('hajj_saving-'. $hajj_saving->reference .'.pdf');
     })->name('hajj-savings.pdf');
 
+    Route::get('/hajj-saving-payments/pdf/{id}', function ($id) {
+        $hajj_saving_payment = \Modules\Saving\Entities\HajjSavingPayment::findOrFail($id);
+        $hajj_saving = \Modules\Saving\Entities\HajjSaving::findOrFail($hajj_saving_payment->saving_id);
+        $customer = \Modules\People\Entities\Customer::findOrFail($hajj_saving->customer_id);
+
+        $pdf = \PDF::loadView('saving::hajj.payments.print', [
+            'hajj_saving_payment' => $hajj_saving_payment,
+            'customer' => $customer,
+        ])->setPaper('a4');
+
+        return $pdf->stream('umroh_hajj-payments-'. $hajj_saving_payment->reference .'.pdf');
+    })->name('hajj-saving-payments.pdf');
+
+
     //Saving
 
     //Umroh
@@ -62,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Hajj
     Route::resource('hajj-savings', 'HajjSavingController');
+
 
     //Payments
 
@@ -81,5 +96,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/hajj-saving-payments/{saving_id}/edit/{hajjsavingPayment}', 'HajjSavingPaymentsController@edit')->name('hajj-saving-payments.edit');
     Route::patch('/hajj-saving-payments/update/{hajjsavingPayment}', 'HajjSavingPaymentsController@update')->name('hajj-saving-payments.update');
     Route::delete('/hajj-saving-payments/destroy/{hajjsavingPayment}', 'HajjSavingPaymentsController@destroy')->name('hajj-saving-payments.destroy');
+    Route::get('/hajj-saving-payments/{saving_id}/view/{hajjsavingPayment}', 'HajjSavingPaymentsController@view')->name('hajj-saving-payments.view');
 
 });

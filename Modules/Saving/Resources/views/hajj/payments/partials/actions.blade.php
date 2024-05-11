@@ -3,6 +3,17 @@
         <i class="bi bi-pencil"></i>
     </a>
 {{-- @endcan
+{{-- @can('access_sale_payments') --}}
+@if ($data->status == 'Verified')
+    <a href="{{ route('hajj-saving-payments.view', [$data->hajjsavings->id, $data->id]) }}" class="btn btn-primary btn-sm">
+        <i class="bi bi-eye"></i>
+    </a>
+@else
+    <a href="#" class="btn btn-secondary btn-sm">
+        <i class="bi bi-eye"></i>
+    </a>
+@endif
+{{-- @endcan
 @can('access_sale_payments') --}}
     <button id="delete" class="btn btn-danger btn-sm" onclick="
         event.preventDefault();
