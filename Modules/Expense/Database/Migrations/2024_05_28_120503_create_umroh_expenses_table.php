@@ -20,7 +20,7 @@ class CreateUmrohExpensesTable extends Migration
             $table->date('date');
             $table->string('reference');
             $table->text('details')->nullable();
-            $table->integer('amount');
+            $table->double('amount');
             $table->foreign('category_id')->references('id')->on('travel_expense_categories')->restrictOnDelete();
             $table->foreign('package_id')->references('id')->on('umroh_packages')->nullOnDelete();
             $table->timestamps();
