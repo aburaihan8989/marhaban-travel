@@ -111,19 +111,32 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="hotel_makkah">Hotel Makkah <i>(Marhaban)</i><span class="text-danger">*</span></label>
-                                        <input id="hotel_makkah" type="text" class="form-control" name="hotel_makkah" required value="{{ $umroh_package->hotel_makkah }}">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="hotel_makkah">Hotel Makkah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="hotel_makkah" id="hotel_makkah" required>
+                                                @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
+                                                    <option {{ $umroh_package->hotel_makkah == $hotel->hotel_name ? 'selected' : '' }} value="{{ $hotel->hotel_name }}">{{ $hotel->hotel_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="hotel_madinah">Hotel Madinah <i>(Marhaban)</i><span class="text-danger">*</span></label>
-                                        <input id="hotel_madinah" type="text" class="form-control" name="hotel_madinah" required value="{{ $umroh_package->hotel_madinah }}">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="hotel_madinah">Hotel Madinah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="hotel_madinah" id="hotel_madinah" required>
+                                                @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
+                                                    <option {{ $umroh_package->hotel_madinah == $hotel->hotel_name ? 'selected' : '' }} value="{{ $hotel->hotel_name }}">{{ $hotel->hotel_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -154,19 +167,32 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="hotel_makkah_2">Hotel Makkah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
-                                        <input id="hotel_makkah_2" type="text" class="form-control" name="hotel_makkah_2" required value="{{ $umroh_package->hotel_makkah_2 }}">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="hotel_makkah_2">Hotel Makkah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="hotel_makkah_2" id="hotel_makkah_2" required>
+                                                @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
+                                                    <option {{ $umroh_package->hotel_makkah_2 == $hotel->hotel_name ? 'selected' : '' }} value="{{ $hotel->hotel_name }}">{{ $hotel->hotel_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="hotel_madinah_2">Hotel Madinah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
-                                        <input id="hotel_madinah_2" type="text" class="form-control" name="hotel_madinah_2" required value="{{ $umroh_package->hotel_madinah_2 }}">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="hotel_madinah_2">Hotel Madinah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                            <select class="form-control" name="hotel_madinah_2" id="hotel_madinah_2" required>
+                                                @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
+                                                    <option {{ $umroh_package->hotel_madinah_2 == $hotel->hotel_name ? 'selected' : '' }} value="{{ $hotel->hotel_name }}">{{ $hotel->hotel_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
