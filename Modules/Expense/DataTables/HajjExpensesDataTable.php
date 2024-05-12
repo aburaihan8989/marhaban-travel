@@ -26,7 +26,7 @@ class HajjExpensesDataTable extends DataTable
                 return HajjPackage::findOrFail($data->package_id)->package_name;
             })
             ->addColumn('action', function ($data) {
-                return view('expense::umroh.partials.actions', compact('data'));
+                return view('expense::hajj.partials.actions', compact('data'));
             });
     }
 
@@ -44,7 +44,7 @@ class HajjExpensesDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(4)
+            ->orderBy(3)
             ->buttons(
                 Button::make('excel')
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
