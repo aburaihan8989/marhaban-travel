@@ -60,7 +60,7 @@ class UmrohManifestCustomerDataTable extends DataTable
 
     public function html() {
         return $this->builder()
-            ->setTableId('umroh-manifests-table')
+            ->setTableId('umroh-manifest-customers-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .

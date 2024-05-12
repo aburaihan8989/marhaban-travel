@@ -2,7 +2,7 @@
 
 namespace Modules\Manifest\DataTables;
 
-use Modules\Manifest\Entities\UmrohManifestCustomer;
+use Modules\Manifest\Entities\HajjManifestCustomer;
 use Modules\People\Entities\Customer;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UmrohManifestCustomerDetailDataTable extends DataTable
+class HajjManifestCustomerDataTable extends DataTable
 {
 
     public function dataTable($query) {
@@ -47,22 +47,20 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
                 return Customer::findOrFail($data->customer_id)->city;
             })
             ->addColumn('status', function ($data) {
-                return view('manifest::umroh.partials.status-customer', compact('data'));
+                return view('manifest::hajj.partials.status-customer', compact('data'));
+            })
+            ->addColumn('action', function ($data) {
+                return view('manifest::hajj.partials.actions-customer', compact('data'));
             });
-            // ->editColumn('ticket', '<i class="form-check-input bi bi-check-circle-fill"></i>')->rawColumns(['ticket'])->make(true);
-
-            // ->addColumn('action', function ($data) {
-            //     return view('manifest::umroh.partials.actions-customer', compact('data'));
-            // });
     }
 
-    public function query(UmrohManifestCustomer $model) {
+    public function query(HajjManifestCustomer $model) {
         return $model->newQuery();
     }
 
     public function html() {
         return $this->builder()
-            ->setTableId('umroh-manifest-customers-table')
+            ->setTableId('hajj-manifest-customers-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
@@ -97,7 +95,7 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
             Column::computed('register_date')
                 ->className('text-center align-middle'),
 
-            Column::make('customer_name')
+                Column::make('customer_name')
                 ->className('text-center align-middle'),
 
             Column::computed('date_birth')
@@ -141,15 +139,10 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
             Column::computed('remaining_payment')
                 ->className('text-center align-middle'),
 
-            Column::computed('ticket')
-                ->visible(false)
-
-
-
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->className('text-center align-middle')
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->className('text-center align-middle')
 
             // Column::make('created_at')
             //     ->visible(false)
@@ -157,6 +150,6 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
     }
 
     protected function filename(): string {
-        return 'UmrohManifestCustomer_' . date('YmdHis');
+        return 'HajjManifestCustomer_' . date('YmdHis');
     }
 }
