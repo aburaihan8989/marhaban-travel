@@ -20,10 +20,10 @@
                         <div>
                             Register ID : <strong>{{ $hajjManifestPayment->reference }}</strong>
                         </div>
-                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $hajjManifestPayment->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-manifest-payments.pdf', $hajjManifestPayment->id) }}">
                             <i class="bi bi-printer"></i> Print
                         </a>
-                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $hajjManifestPayment->id) }}">
+                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none" href="{{ route('hajj-manifest-payments.pdf', $hajjManifestPayment->id) }}">
                             <i class="bi bi-save"></i> Save
                         </a>
                     </div>

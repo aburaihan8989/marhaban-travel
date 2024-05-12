@@ -89,7 +89,7 @@
                                         Hotel Madinah :: {{ $hajj_manifest->hajjPackages->hotel_madinah }}
                                         <hr>
                                         Package Cost :: {{ format_currency($hajj_manifest->hajjPackages->package_cost) }} <br>
-                                        Package Price :: {{ format_currency($hajj_manifest->umrohPackages->package_price) }}
+                                        Package Price :: {{ format_currency($hajj_manifest->hajjPackages->package_price) }}
                                     </td>
                                 </tr>
                                 <tr>

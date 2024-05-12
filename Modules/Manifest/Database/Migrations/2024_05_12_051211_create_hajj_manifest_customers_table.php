@@ -39,8 +39,8 @@ class CreateHajjManifestCustomersTable extends Migration
             $table->tinyInteger('scraf');
             $table->text('note')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
-            $table->foreign('manifest_id')->references('id')->on('umroh_manifests')->nullOnDelete();
-            $table->foreign('package_id')->references('id')->on('umroh_packages')->nullOnDelete();
+            $table->foreign('manifest_id')->references('id')->on('hajj_manifests')->nullOnDelete();
+            $table->foreign('package_id')->references('id')->on('hajj_packages')->nullOnDelete();
             $table->timestamps();
         });
     }

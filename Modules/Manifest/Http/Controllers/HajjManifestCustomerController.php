@@ -89,7 +89,7 @@ class HajjManifestCustomerController extends Controller
                     'reference' => 'INV/'.$hajj_manifest_customer->reference,
                     'amount' => $request->last_amount,
                     'status' => 'Approval',
-                    'umroh_manifest_customer_id' => $hajj_manifest_customer->id,
+                    'hajj_manifest_customer_id' => $hajj_manifest_customer->id,
                     'payment_method' => $request->payment_method
                 ]);
             }

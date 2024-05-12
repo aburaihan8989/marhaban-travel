@@ -76,7 +76,17 @@
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
-                                    <td>{{ $hajj_package->package_status }}</td>
+                                    <td>
+                                        @if($hajj_package->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 13px;">
+                                                {{ $hajj_package->package_status }}
+                                            </span>
+                                        @else
+                                            <span class="badge badge-secondary" style="font-size: 13px;">
+                                                {{ $hajj_package->package_status }}
+                                            </span>
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Package Cost</th>
