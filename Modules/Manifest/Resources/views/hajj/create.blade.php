@@ -41,7 +41,7 @@
                                         <div class="form-group">
                                             <label for="package_id">Package Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="package_id" id="package_id" required>
-                                                @foreach(\Modules\Package\Entities\UmrohPackage::all() as $umroh_package)
+                                                @foreach(\Modules\Package\Entities\HajjPackage::all() as $umroh_package)
                                                     <option value="{{ $umroh_package->id }}">{{ $umroh_package->package_name }}</option>
                                                 @endforeach
                                             </select>
