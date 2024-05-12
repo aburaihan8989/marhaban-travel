@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Expense')
+@section('title', 'Edit Hajj Expense')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('expenses.index') }}">Expenses</a></li>
-        <li class="breadcrumb-item active">Edit</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-expenses.index') }}">Expenses</a></li>
+        <li class="breadcrumb-item active">Edit Hajj Expense</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <form id="expense-form" action="{{ route('expenses.update', $expense) }}" method="POST">
+        <form id="hajj-expense-form" action="{{ route('hajj-expenses.update', $hajj_expense) }}" method="POST">
             @csrf
             @method('patch')
             <div class="row">
@@ -26,42 +26,55 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required value="{{ $expense->reference }}" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="date">Date <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="date" required value="{{ $expense->getAttributes()['date'] }}">
+                                        <input type="text" class="form-control" name="reference" required value="{{ $hajj_expense->reference }}" readonly>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="category_id">Category <span class="text-danger">*</span></label>
-                                        <select name="category_id" id="category_id" class="form-control" required>
-                                            @foreach(\Modules\Expense\Entities\ExpenseCategory::all() as $category)
-                                                <option {{ $category->id == $expense->category_id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        <label for="package_id">Package Name <span class="text-danger">*</span></label>
+                                        <select name="package_id" id="package_id" class="form-control" required>
+                                            @foreach(\Modules\Package\Entities\HajjPackage::all() as $hajj_package)
+                                                <option {{ $hajj_package->id == $hajj_expense->package_id ? 'selected' : '' }} value="{{ $hajj_package->id }}">{{ $hajj_package->package_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Amount <span class="text-danger">*</span></label>
-                                        <input id="amount" type="text" class="form-control" name="amount" required value="{{ $expense->amount }}">
+                                        <label for="date">Payment Date <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date" required value="{{ $hajj_expense->getAttributes()['date'] }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="category_id">Category <span class="text-danger">*</span></label>
+                                        <select name="category_id" id="category_id" class="form-control" required>
+                                            @foreach(\Modules\Expense\Entities\TravelExpenseCategory::all() as $category)
+                                                <option {{ $category->id == $hajj_expense->category_id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="amount">Payment Amount <span class="text-danger">*</span></label>
+                                        <input id="amount" type="text" class="form-control" name="amount" required value="{{ $hajj_expense->amount }}">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="details">Details</label>
-                                <textarea class="form-control" rows="6" name="details">{{ $expense->details }}</textarea>
+                                <textarea class="form-control" rows="6" name="details">{{ $hajj_expense->details }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -83,7 +96,7 @@
 
             $('#amount').maskMoney('mask');
 
-            $('#expense-form').submit(function () {
+            $('#hajj-expense-form').submit(function () {
                 var amount = $('#amount').maskMoney('unmasked')[0];
                 $('#amount').val(amount);
             });

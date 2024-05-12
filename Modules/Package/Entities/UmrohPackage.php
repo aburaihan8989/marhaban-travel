@@ -22,6 +22,10 @@ class UmrohPackage extends Model implements HasMedia
         return $this->belongsTo(UmrohManifest::class, 'package_id', 'id');
     }
 
+    public function umrohExpense() {
+        return $this->belongsTo(UmrohExpense::class, 'package_id', 'id');
+    }
+
     public function registerMediaCollections(): void {
         $this->addMediaCollection('brosurs')
             ->useFallbackUrl('/images/fallback_product_image.png');

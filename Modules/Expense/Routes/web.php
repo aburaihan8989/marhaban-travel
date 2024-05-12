@@ -18,4 +18,11 @@ Route::group(['middleware' => 'auth'], function () {
     //Expense
     Route::resource('expenses', 'ExpenseController')->except('show');
 
+    //Umroh Expense Category
+    Route::resource('travel-expense-categories', 'TravelExpenseCategoriesController')->except('show', 'create');
+    //Umroh Expense
+    Route::resource('umroh-expenses', 'UmrohExpenseController')->except('show');
+    //Hajj Expense
+    Route::resource('hajj-expenses', 'HajjExpenseController')->except('show');
+
 });

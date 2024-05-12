@@ -157,18 +157,40 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Finance Report
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-expenses.*') ? 'c-show' : '' }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1; color:grey;"></i> Expenses Travel
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" style="color:grey;">
-                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Create Expenses
-                </a>
-            </li>
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" {{ request()->routeIs('travel-expense-categories.*') ? 'c-active' : '' }}" href="{{ route('travel-expense-categories.index') }}">
+                <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Categories
+            </a>
+        </li>
         {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" {{ request()->routeIs('umroh-expenses.*') ? 'c-active' : '' }}" href="{{ route('umroh-expenses.index') }}">
+                <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Umroh Expenses
+            </a>
+        </li>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" {{ request()->routeIs('hajj-expenses.*') ? 'c-active' : '' }}" href="{{ route('hajj-expenses.index') }}">
+                <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Hajj Expenses
+            </a>
+        </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
+        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Finance Report
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" style="color:grey;">
