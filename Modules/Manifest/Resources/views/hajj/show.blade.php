@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Umroh Manifest Details')
+@section('title', 'Hajj Manifest Details')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Umroh Manifest Details</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manifests.index') }}">Hajj Manifest</a></li>
+        <li class="breadcrumb-item active">Hajj Manifest Details</li>
     </ol>
 @endsection
 
@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Register ID : <strong>{{ $umroh_manifest->reference }}</strong>
+                            Register ID : <strong>{{ $hajj_manifest->reference }}</strong>
                         </div>
                         {{-- <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-view.pdf', $umroh_manifest->id) }}" disabled> --}}
                         <a class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="#" disabled>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Category : <strong>Umroh Manifest Details</strong>
+                            Category : <strong>Hajj Manifest Details</strong>
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,10 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <label for="brosurs">Package Manifest <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 3, Max File Size: 1MB, Image Size: 400x400"></i></label>
-                        @forelse($umroh_manifest->UmrohPackages->getMedia('brosurs') as $media)
+                        @forelse($hajj_manifest->HajjPackages->getMedia('brosurs') as $media)
                             <img src="{{ $media->getUrl() }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
                         @empty
-                            <img src="{{ $umroh_manifest->UmrohPackages->getFirstMediaUrl('brosurs') }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
+                            <img src="{{ $hajj_manifest->HajjPackages->getFirstMediaUrl('brosurs') }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
                         @endforelse
                     </div>
                 </div>
@@ -57,64 +57,64 @@
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
                                     <th>Reference</th>
-                                    <td>{{ $umroh_manifest->reference }}</td>
+                                    <td>{{ $hajj_manifest->reference }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Code</th>
-                                    <td>{{ $umroh_manifest->package_code }}</td>
+                                    <td>{{ $hajj_manifest->package_code }}</td>
                                 </tr>
                                 <tr>
                                     <th>Departure Date</th>
-                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest->package_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($hajj_manifest->package_date)) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Name</th>
-                                    <td>{{ $umroh_manifest->package_name }}</td>
+                                    <td>{{ $hajj_manifest->package_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Departure</th>
-                                    <td>{{ $umroh_manifest->package_departure }}</td>
+                                    <td>{{ $hajj_manifest->package_departure }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Route</th>
-                                    <td>{{ $umroh_manifest->flight_route }}</td>
+                                    <td>{{ $hajj_manifest->flight_route }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Days</th>
-                                    <td>{{ $umroh_manifest->package_days . ' Days' }}</td>
+                                    <td>{{ $hajj_manifest->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Status</th>
                                     <td>
-                                        @if($umroh_manifest->status == 'Active')
+                                        @if($hajj_manifest->status == 'Active')
                                             <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                                {{ $hajj_manifest->status }}
                                             </span>
                                         @else
                                             <span class="badge badge-secondary" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                                {{ $hajj_manifest->status }}
                                             </span>
                                         @endif
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type }})</i></strong></th>
+                                    <th>Package <strong class="text-primary"><i>({{ $hajj_manifest->HajjPackages->package_type }})</i></strong></th>
                                     <td>
-                                        Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah }} <br>
-                                        Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah }}
+                                        Hotel Makkah :: {{ $hajj_manifest->HajjPackages->hotel_makkah }} <br>
+                                        Hotel Madinah :: {{ $hajj_manifest->HajjPackages->hotel_madinah }}
                                         <hr>
-                                        Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} <br>
-                                        Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price) }}
+                                        Package Cost :: {{ format_currency($hajj_manifest->HajjPackages->package_cost) }} <br>
+                                        Package Price :: {{ format_currency($hajj_manifest->HajjPackages->package_price) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type_2 }})</i></strong></th>
+                                    <th>Package <strong class="text-primary"><i>({{ $hajj_manifest->HajjPackages->package_type_2 }})</i></strong></th>
                                     <td>
-                                        Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah_2 }} <br>
-                                        Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah_2 }}
+                                        Hotel Makkah :: {{ $hajj_manifest->HajjPackages->hotel_makkah_2 }} <br>
+                                        Hotel Madinah :: {{ $hajj_manifest->HajjPackages->hotel_madinah_2 }}
                                         <hr>
-                                        Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} <br>
-                                        Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price_2) }}
+                                        Package Cost :: {{ format_currency($hajj_manifest->HajjPackages->package_cost_2) }} <br>
+                                        Package Price :: {{ format_currency($hajj_manifest->HajjPackages->package_price_2) }}
                                     </td>
                                 </tr>
                             </table>

@@ -26,11 +26,11 @@
                         <div class="col-lg-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <label for="brosurs">Package Manifest <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
-                                    @forelse($umroh_package->getMedia('brosurs') as $media)
+                                    <label for="brosurs">Package Manifest <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 3, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                    @forelse($umroh_manifest->UmrohPackages->getMedia('brosurs') as $media)
                                         <img src="{{ $media->getUrl() }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
                                     @empty
-                                        <img src="{{ $umroh_package->getFirstMediaUrl('brosurs') }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
+                                        <img src="{{ $umroh_manifest->UmrohPackages->getFirstMediaUrl('brosurs') }}" alt="Package Manifest" class="img-fluid img-thumbnail mb-2">
                                     @endforelse
                                 </div>
                             </div>
@@ -46,53 +46,61 @@
                                             </tr>
                                             <tr>
                                                 <th>Package Code</th>
-                                                <td>{{ $umroh_package->package_code }}</td>
+                                                <td>{{ $umroh_manifest->package_code }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Departure Date</th>
-                                                <td>{{ date('d-m-Y', strtotime($umroh_package->package_date)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($umroh_manifest->package_date)) }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Package Name</th>
-                                                <td>{{ $umroh_package->package_name }}</td>
+                                                <td>{{ $umroh_manifest->package_name }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Departure</th>
-                                                <td>{{ $umroh_package->package_departure }}</td>
+                                                <td>{{ $umroh_manifest->package_departure }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Package Route</th>
-                                                <td>{{ $umroh_package->flight_route }}</td>
+                                                <td>{{ $umroh_manifest->flight_route }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Package Days</th>
-                                                <td>{{ $umroh_package->package_days . ' Days' }}</td>
+                                                <td>{{ $umroh_manifest->package_days . ' Days' }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Status</th>
                                                 <td>
-                                                    @if($umroh_package->status == 'Active')
+                                                    @if($umroh_manifest->status == 'Active')
                                                         <span class="badge badge-success" style="font-size: 13px;">
-                                                            {{ $umroh_package->status }}
+                                                            {{ $umroh_manifest->status }}
                                                         </span>
                                                     @else
                                                         <span class="badge badge-secondary" style="font-size: 13px;">
-                                                            {{ $umroh_package->status }}
+                                                            {{ $umroh_manifest->status }}
                                                         </span>
                                                     @endif
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Hotel Makkah</th>
-                                                <td>{{ $umroh_package->hotel_makkah }}</td>
+                                                <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type }})</i></strong></th>
+                                                <td>
+                                                    Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah }} <br>
+                                                    Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah }}
+                                                    <hr>
+                                                    Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} <br>
+                                                    Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price) }}
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <th>Hotel Madinah</th>
-                                                <td>{{ $umroh_package->hotel_madinah }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Package Price</th>
-                                                <td>{{ format_currency($umroh_package->package_price) }}</td>
+                                                <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type_2 }})</i></strong></th>
+                                                <td>
+                                                    Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah_2 }} <br>
+                                                    Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah_2 }}
+                                                    <hr>
+                                                    Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} <br>
+                                                    Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price_2) }}
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -135,7 +143,7 @@
                     </div>
                     <div class="row" style="margin-top: 25px;">
                         <div class="col-xs-12">
-                            <p style="font-style: italic;text-align: center">{{ settings()->company_name }} &copy; {{ date('Y') }}.</p>
+                            <div style="font-style: italic;text-align: center">Travel Management System ® {{ date('Y') }} || <strong><a target="_blank" href="#"><i>Marhaban Makkah Madinah © Hajj & Umroh Service</i></a></strong></div>
                         </div>
                     </div>
                 </div>

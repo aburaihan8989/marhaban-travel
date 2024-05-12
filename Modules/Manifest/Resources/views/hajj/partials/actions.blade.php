@@ -16,17 +16,17 @@
             {{-- @endif --}}
         {{-- @endcan
         @can('edit_purchases') --}}
-            <a href="{{ route('umroh-manifests.edit', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manifests.edit', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-pencil mr-2 text-primary" style="line-height: 1;"></i> Edit
             </a>
         {{-- @endcan
         @can('edit_purchases') --}}
-            <a href="{{ route('umroh-manage-manifests.manage', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manage-manifests.manage', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-pencil-square mr-2 text-warning" style="line-height: 1;"></i> Manage
             </a>
         {{-- @endcan
         @can('show_purchases') --}}
-            <a href="{{ route('umroh-manifests.show', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manifests.show', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-eye mr-2 text-info" style="line-height: 1;"></i> Details
             </a>
         {{-- @endcan
@@ -37,7 +37,7 @@
                 document.getElementById('destroy{{ $data->id }}').submit()
                 }">
                 <i class="bi bi-trash mr-2 text-danger" style="line-height: 1;"></i> Delete
-                <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('umroh-manifests.destroy', $data->id) }}" method="POST">
+                <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('hajj-manifests.destroy', $data->id) }}" method="POST">
                     @csrf
                     @method('delete')
                 </form>

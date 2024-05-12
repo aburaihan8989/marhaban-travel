@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Create Umroh Manifest Customer Payment')
+@section('title', 'Create Hajj Manifest Customer Payment')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Umroh Manifest Manages</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manage-manifests.manage', $hajj_manifest->manifest_id) }}">Hajj Manifest Manages</a></li>
         {{-- <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-customers.show', $umroh_manifest) }}">{{ $umroh_manifest->reference }}</a></li> --}}
-        <li class="breadcrumb-item active">Add Customer Payment</li>
+        <li class="breadcrumb-item active">Create Customer Payment</li>
     </ol>
 @endsection
 {{-- @dd($umroh_manifest); --}}
 
 @section('content')
     <div class="container-fluid">
-        <form id="umroh-payment-form" action="{{ route('umroh-manifest-payments.store', $umroh_manifest) }}" method="POST">
+        <form id="hajj-payment-form" action="{{ route('hajj-manifest-payments.store', $hajj_manifest) }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-lg-12">
@@ -30,7 +30,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="INV/{{ $umroh_manifest->reference }}">
+                                        <input type="text" class="form-control" name="reference" required readonly value="INV/{{ $hajj_manifest->reference }}">
                                     </div>
                                 </div>
                             </div>
@@ -39,19 +39,19 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="total_price">Total Price <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="total_price" required value="{{ format_currency($umroh_manifest->total_price) }}" readonly>
+                                        <input type="text" class="form-control" name="total_price" required value="{{ format_currency($hajj_manifest->total_price) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="total_payment">Total Payment <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="total_payment" required value="{{ format_currency($umroh_manifest->total_payment) }}" readonly>
+                                        <input type="text" class="form-control" name="total_payment" required value="{{ format_currency($hajj_manifest->total_payment) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="remaining_payment">Remaining Payment <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="remaining_payment" required value="{{ format_currency($umroh_manifest->remaining_payment) }}" readonly>
+                                        <input type="text" class="form-control" name="remaining_payment" required value="{{ format_currency($hajj_manifest->remaining_payment) }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                 <textarea class="form-control" rows="4" name="note">{{ old('note') }}</textarea>
                             </div>
 
-                            <input type="hidden" value="{{ $umroh_manifest->id }}" name="umroh_manifest_customer_id">
+                            <input type="hidden" value="{{ $hajj_manifest->id }}" name="hajj_manifest_customer_id">
                         </div>
                     </div>
                 </div>
@@ -161,8 +161,8 @@
                 $('form').find('input[name="document[]"][value="' + name + '"]').remove();
             },
             init: function () {
-                @if(isset($umrohManifestPayment) && $umrohManifestPayment->getMedia('payments'))
-                var files = {!! json_encode($umrohManifestPayment->getMedia('payments')) !!};
+                @if(isset($hajjManifestPayment) && $hajjManifestPayment->getMedia('payments'))
+                var files = {!! json_encode($hajjManifestPayment->getMedia('payments')) !!};
                 for (var i in files) {
                     var file = files[i];
                     this.options.addedfile.call(this, file);
@@ -183,7 +183,7 @@
                 thousands:'{{ settings()->currency->thousand_separator }}',
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
-            $('#umroh-payment-form').submit(function () {
+            $('#hajj-payment-form').submit(function () {
                 var amount = $('#amount').maskMoney('unmasked')[0];
                 $('#amount').val(amount);
             });

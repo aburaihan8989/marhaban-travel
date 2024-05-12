@@ -4,24 +4,24 @@
     </button>
     <div class="dropdown-menu">
         {{-- @can('access_purchase_payments') --}}
-            <a href="{{ route('umroh-manifest-payments.index', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manifest-payments.index', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-cash-coin mr-2 text-warning" style="line-height: 1;"></i> Show Payments
             </a>
         {{-- @endcan --}}
         {{-- @can('access_purchase_payments') --}}
             {{-- @if($data->due_amount > 0) --}}
-                <a href="{{ route('umroh-manifest-payments.create', $data->id) }}" class="dropdown-item">
+                <a href="{{ route('hajj-manifest-payments.create', $data->id) }}" class="dropdown-item">
                     <i class="bi bi-plus-circle-dotted mr-2 text-success" style="line-height: 1;"></i> Add Payment
                 </a>
             {{-- @endif --}}
         {{-- @endcan
         @can('edit_purchases') --}}
-            <a href="{{ route('umroh-manifest-customers.edit', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manifest-customers.edit', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-pencil mr-2 text-primary" style="line-height: 1;"></i> Edit
             </a>
         {{-- @endcan
         @can('show_purchases') --}}
-            <a href="{{ route('umroh-manifest-customers.show', $data->id) }}" class="dropdown-item">
+            <a href="{{ route('hajj-manifest-customers.show', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-eye mr-2 text-info" style="line-height: 1;"></i> Details
             </a>
         {{-- @endcan
@@ -32,7 +32,7 @@
                 document.getElementById('destroy{{ $data->id }}').submit()
                 }">
                 <i class="bi bi-trash mr-2 text-danger" style="line-height: 1;"></i> Delete
-                <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('umroh-manifest-customers.destroy', $data->id) }}" method="POST">
+                <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('hajj-manifest-customers.destroy', $data->id) }}" method="POST">
                     @csrf
                     @method('delete')
                 </form>

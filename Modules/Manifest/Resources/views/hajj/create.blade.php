@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Create Umroh Manifest')
+@section('title', 'Create Hajj Manifest')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Create Umroh Manifest</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manifests.index') }}">Hajj Manifest</a></li>
+        <li class="breadcrumb-item active">Create Hajj Manifest</li>
     </ol>
 @endsection
 
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-body">
                         @include('utils.alerts')
-                        <form id="umroh-manifest-form" action="{{ route('umroh-manifests.store') }}" method="POST">
+                        <form id="hajj-manifest-form" action="{{ route('hajj-manifests.store') }}" method="POST">
                             @csrf
 
                             <div class="form-row">
@@ -69,7 +69,7 @@
 
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Umroh Manifest <i class="bi bi-check"></i>
+                                    Create Hajj Manifest <i class="bi bi-check"></i>
                                 </button>
                             </div>
                         </form>

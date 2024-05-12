@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Customer Manifest Umroh Details</title>
+    <title>Customer Manifest Hajj Details</title>
     <link rel="stylesheet" href="{{ public_path('b3/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 
@@ -17,8 +17,8 @@
             <div style="text-align: center;margin-bottom: 25px;">
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
-                    <span>Register ID :</span> <strong>{{ $umroh_manifest_customer->reference }}</strong></br></br>
-                    <span>Category :</span> <strong>Customer Manifest Umroh Details</strong>
+                    <span>Register ID :</span> <strong>{{ $hajj_manifest_customer->reference }}</strong></br></br>
+                    <span>Category :</span> <strong>Customer Manifest Hajj Details</strong>
                 </h4>
             </div>
             <div class="card">
@@ -65,10 +65,10 @@
                             <tbody>
                                 <tr>
                                     <td class="align-middle">
-                                        {{ $umroh_manifest_customer->reference }}
+                                        {{ $hajj_manifest_customer->reference }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ date('d-m-Y', strtotime($umroh_manifest_customer->register_date)) }}
+                                        {{ date('d-m-Y', strtotime($hajj_manifest_customer->register_date)) }}
                                     </td>
                                     <td class="align-middle">
                                         {{ $customer->customer_name }}
@@ -77,10 +77,10 @@
                                         {{ $customer->customer_phone }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ format_currency($umroh_manifest_customer->total_price) }}
+                                        {{ format_currency($hajj_manifest_customer->total_price) }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ format_currency($umroh_manifest_customer->total_payment) }}
+                                        {{ format_currency($hajj_manifest_customer->total_payment) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -97,18 +97,18 @@
                                         {{-- <span class="badge badge-success" style="font-size: 13px;">
                                             {{ $umroh_manifest->status }}
                                         </span> --}}
-                                        @if ($umroh_manifest_customer->status == 'Completed')
+                                        @if ($hajj_manifest_customer->status == 'Completed')
                                             <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest_customer->status }}
+                                                {{ $hajj_manifest_customer->status }}
                                             </span>
                                         @else
                                             <span class="badge badge-warning" style="font-size: 13px;">
-                                                {{ $umroh_manifest_customer->status }}
+                                                {{ $hajj_manifest_customer->status }}
                                             </span>
                                         @endif
                                     </td>
                                     <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                        {{ format_currency($umroh_manifest_customer->remaining_payment) }}
+                                        {{ format_currency($hajj_manifest_customer->remaining_payment) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -153,7 +153,7 @@
                         <legend class="col-form-label col-sm-2 pt-0" style="font-size:18px">Ticket Status</legend>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->ticket == '1')
+                                @if ($hajj_manifest_customer->ticket == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:absolute;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="ticket">Completed</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:absolute;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="ticket">Not Yet</label></i>
@@ -168,7 +168,7 @@
                         <legend class="col-form-label col-sm-2 pt-0" style="font-size:18px">Visa Status</legend>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->visa == '1')
+                                @if ($hajj_manifest_customer->visa == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:absolute;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="visa">Completed</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:absolute;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="visa">Not Yet</label></i>
@@ -183,7 +183,7 @@
                         <legend class="col-form-label col-sm-2 pt-0" style="font-size:18px">Perlengkapan</legend>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->big_suitcase == '1')
+                                @if ($hajj_manifest_customer->big_suitcase == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="big_suitcase">Big Suitcase</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="big_suitcase">Big Suitcase</label></i>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->small_suitcase == '1')
+                                @if ($hajj_manifest_customer->small_suitcase == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_suitcase">Small Suitcase</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_suitcase">Small Suitcase</label></i>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->small_bag == '1')
+                                @if ($hajj_manifest_customer->small_bag == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_bag">Small Bag</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_bag">Small Bag</label></i>
@@ -210,7 +210,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->clothes == '1')
+                                @if ($hajj_manifest_customer->clothes == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="clothes">Clothes</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="clothes">Clothes</label></i>
@@ -219,7 +219,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->small_pillow == '1')
+                                @if ($hajj_manifest_customer->small_pillow == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_pillow">Small Pillow</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="small_pillow">Small Pillow</label></i>
@@ -228,7 +228,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-check">
-                                @if ($umroh_manifest_customer->scarf == '1')
+                                @if ($hajj_manifest_customer->scarf == '1')
                                     <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:20px;color:green;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="scarf">Scraf</label></i>
                                 @else
                                     <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:20px;color:red;position:relative;top:-5px;"><label class="form-check-label ml-3" style="font-size:18px;position:relative;left:13px;" for="scarf">Scraf</label></i>

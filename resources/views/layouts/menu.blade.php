@@ -127,7 +127,7 @@
         {{-- @endcan
         @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="#">
+                <a class="c-sidebar-nav-link" {{ request()->routeIs('hajj-manifests.*') ? 'c-active' : '' }} href="{{ route('hajj-manifests.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-clipboard-check"></i> Hajj Manifest
                 </a>
             </li>

@@ -15,7 +15,7 @@
             <div style="text-align: center;margin-bottom: 25px;">
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
-                    <span>Register ID :</span> <strong>{{ $umroh_manifest_payment->reference }}</strong></br></br>
+                    <span>Register ID :</span> <strong>{{ $hajj_manifest_payment->reference }}</strong></br></br>
                     <span>Category :</span> <strong>Customer Payment Receipt</strong>
                 </h4>
             </div>
@@ -63,10 +63,10 @@
                             <tbody>
                                 <tr>
                                     <td class="align-middle">
-                                        {{ $umroh_manifest_payment->reference }}
+                                        {{ $hajj_manifest_payment->reference }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ date('d-m-Y', strtotime($umroh_manifest_payment->date)) }}
+                                        {{ date('d-m-Y', strtotime($hajj_manifest_payment->date)) }}
                                     </td>
                                     <td class="align-middle">
                                         {{ $customer->customer_name }}
@@ -75,16 +75,16 @@
                                         {{ $customer->customer_phone }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ format_currency($umroh_manifest_payment->amount) }}
+                                        {{ format_currency($hajj_manifest_payment->amount) }}
                                     </td>
                                     <td class="align-middle">
-                                        @if ($umroh_manifest_payment->status == 'Verified')
+                                        @if ($hajj_manifest_payment->status == 'Verified')
                                             <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest_payment->status }}
+                                                {{ $hajj_manifest_payment->status }}
                                             </span>
                                         @else
                                             <span class="badge badge-danger" style="font-size: 13px;">
-                                                {{ $umroh_manifest_payment->status }}
+                                                {{ $hajj_manifest_payment->status }}
                                             </span>
                                         @endif
                                     </td>
@@ -101,13 +101,13 @@
                             <tbody>
                                 <tr>
                                     <td class="align-middle">
-                                        {{ format_currency($umroh_manifest_payment->umrohManifestCustomers->total_price) }}
+                                        {{ format_currency($hajj_manifest_payment->hajjManifestCustomers->total_price) }}
                                     </td>
                                     <td class="align-middle">
-                                        {{ format_currency($umroh_manifest_payment->umrohManifestCustomers->total_payment) }}
+                                        {{ format_currency($hajj_manifest_payment->hajjManifestCustomers->total_payment) }}
                                     </td>
                                     <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                        {{ format_currency($umroh_manifest_payment->umrohManifestCustomers->remaining_payment) }}
+                                        {{ format_currency($hajj_manifest_payment->hajjManifestCustomers->remaining_payment) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -151,10 +151,10 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <label for="payments">Payment Receipt<i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label><br>
-                                @forelse($umroh_manifest_payment->getMedia('payments') as $media)
+                                @forelse($hajj_manifest_payment->getMedia('payments') as $media)
                                     <img src="{{ $media->getUrl() }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2" style="width:200px;height:250px;">
                                 @empty
-                                    <img src="{{ $umroh_manifest_payment->getFirstMediaUrl('payments') }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2" style="width:200px;height:250px;">
+                                    <img src="{{ $hajj_manifest_payment->getFirstMediaUrl('payments') }}" alt="Payment Receipt" class="img-fluid img-thumbnail mb-2" style="width:200px;height:250px;">
                                 @endforelse
                             </div>
                         </div>

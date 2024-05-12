@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Create Manifest Customer Umroh')
+@section('title', 'Create Manifest Customer Hajj')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest Customers</a></li>
-        <li class="breadcrumb-item active">Add Manifest Customer Umroh</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manifests.index') }}">Hajj Manifest Customers</a></li>
+        <li class="breadcrumb-item active">Create Manifest Customer Hajj</li>
     </ol>
 @endsection
 
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-body">
                         @include('utils.alerts')
-                        <form id="umroh-manifest-customer-form" action="{{ route('umroh-manifest-customers.store', $umroh_manifest) }}" method="POST">
+                        <form id="hajj-manifest-customer-form" action="{{ route('hajj-manifest-customers.store', $hajj_manifest) }}" method="POST">
                             @csrf
 
                             <div class="form-row">
@@ -157,7 +157,7 @@
 
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Umroh Manifest <i class="bi bi-check"></i>
+                                    Create Hajj Manifest <i class="bi bi-check"></i>
                                 </button>
                             </div>
                         </form>
@@ -186,7 +186,7 @@
                 allowZero: true,
             });
 
-            $('#umroh-manifest-customer-form').submit(function () {
+            $('#hajj-manifest-customer-form').submit(function () {
                 var last_amount = $('#last_amount').maskMoney('unmasked')[0];
                 var total_price = $('#total_price').maskMoney('unmasked')[0];
                 $('#last_amount').val(last_amount);

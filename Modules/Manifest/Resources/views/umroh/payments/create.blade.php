@@ -7,7 +7,7 @@
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Umroh Manifest Manages</a></li>
         {{-- <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-customers.show', $umroh_manifest) }}">{{ $umroh_manifest->reference }}</a></li> --}}
-        <li class="breadcrumb-item active">Add Customer Payment</li>
+        <li class="breadcrumb-item active">Create Customer Payment</li>
     </ol>
 @endsection
 {{-- @dd($umroh_manifest); --}}

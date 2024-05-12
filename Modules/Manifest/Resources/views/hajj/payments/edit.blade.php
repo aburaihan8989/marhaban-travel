@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Umroh Manifest Customer Payment')
+@section('title', 'Edit Hajj Manifest Customer Payment')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Umroh Manifest Manages</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-payments.index', $umrohManifestPayment->umroh_manifest_customer_id) }}">{{ $umrohManifestPayment->reference }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manage-manifests.manage', $hajj_manifest->manifest_id) }}">Hajj Manifest Manages</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manifest-payments.index', $hajjManifestPayment->hajj_manifest_customer_id) }}">{{ $hajjManifestPayment->reference }}</a></li>
         <li class="breadcrumb-item active">Edit Customer Payment</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <form id="umroh-payment-form" action="{{ route('umroh-manifest-payments.update', $umrohManifestPayment) }}" method="POST">
+        <form id="hajj-payment-form" action="{{ route('hajj-manifest-payments.update', $hajjManifestPayment) }}" method="POST">
             @csrf
             @method('patch')
             <div class="row">
@@ -30,7 +30,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="{{ $umrohManifestPayment->reference }}">
+                                        <input type="text" class="form-control" name="reference" required readonly value="{{ $hajjManifestPayment->reference }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -38,8 +38,8 @@
                                         <label for="status">Payment Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
                                             <option value="" selected>None</option>
-                                            <option {{ $umrohManifestPayment->status == 'Approval' ? 'selected' : '' }} value="Approval">Approval</option>
-                                            <option {{ $umrohManifestPayment->status == 'Verified' ? 'selected' : '' }} value="Verified">Verified</option>
+                                            <option {{ $hajjManifestPayment->status == 'Approval' ? 'selected' : '' }} value="Approval">Approval</option>
+                                            <option {{ $hajjManifestPayment->status == 'Verified' ? 'selected' : '' }} value="Verified">Verified</option>
                                         </select>
                                     </div>
                                 </div>
@@ -49,19 +49,19 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="total_price">Total Price <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="total_price" required value="{{ format_currency($umroh_manifest->total_price) }}" readonly>
+                                        <input type="text" class="form-control" name="total_price" required value="{{ format_currency($hajj_manifest->total_price) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="total_payment">Total Payment <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="total_payment" required value="{{ format_currency($umroh_manifest->total_payment) }}" readonly>
+                                        <input type="text" class="form-control" name="total_payment" required value="{{ format_currency($hajj_manifest->total_payment) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="remaining_payment">Remaining Payment <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="remaining_payment" required value="{{ format_currency($umroh_manifest->remaining_payment) }}" readonly>
+                                        <input type="text" class="form-control" name="remaining_payment" required value="{{ format_currency($hajj_manifest->remaining_payment) }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                     <div class="form-group">
                                         <label for="amount">Payment Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') ?? $umrohManifestPayment->amount }}">
+                                            <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') ?? $hajjManifestPayment->amount }}">
                                             {{-- <div class="input-group-append">
                                                 <button id="getTotalAmount" class="btn btn-primary" type="button">
                                                     <i class="bi bi-check-square"></i>
@@ -85,10 +85,10 @@
                                         <div class="form-group">
                                             <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
                                             <select class="form-control" name="payment_method" id="payment_method" required>
-                                                <option {{ $umrohManifestPayment->payment_method == 'Cash' ? 'selected' : '' }} value="Cash">Cash</option>
-                                                <option {{ $umrohManifestPayment->payment_method == 'Transfer' ? 'selected' : '' }} value="Transfer">Transfer</option>
-                                                <option {{ $umrohManifestPayment->payment_method == 'QRIS' ? 'selected' : '' }} value="QRIS">QRIS</option>
-                                                <option {{ $umrohManifestPayment->payment_method == 'Other' ? 'selected' : '' }} value="Other">Other</option>
+                                                <option {{ $hajjManifestPayment->payment_method == 'Cash' ? 'selected' : '' }} value="Cash">Cash</option>
+                                                <option {{ $hajjManifestPayment->payment_method == 'Transfer' ? 'selected' : '' }} value="Transfer">Transfer</option>
+                                                <option {{ $hajjManifestPayment->payment_method == 'QRIS' ? 'selected' : '' }} value="QRIS">QRIS</option>
+                                                <option {{ $hajjManifestPayment->payment_method == 'Other' ? 'selected' : '' }} value="Other">Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -96,17 +96,17 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="date">Date <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="date" required value="{{ $umrohManifestPayment->getAttributes()['date'] }}">
+                                        <input type="date" class="form-control" name="date" required value="{{ $hajjManifestPayment->getAttributes()['date'] }}">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="note">Note</label>
-                                <textarea class="form-control" rows="4" name="note">{{ old('note') ?? $umrohManifestPayment->note }}</textarea>
+                                <textarea class="form-control" rows="4" name="note">{{ old('note') ?? $hajjManifestPayment->note }}</textarea>
                             </div>
 
-                            <input type="hidden" value="{{ $umroh_manifest->id }}" name="umroh_manifest_customer_id">
+                            <input type="hidden" value="{{ $hajj_manifest->id }}" name="hajj_manifest_customer_id">
                         </div>
                     </div>
                 </div>
@@ -161,8 +161,8 @@
                 $('form').find('input[name="document[]"][value="' + name + '"]').remove();
             },
             init: function () {
-                @if(isset($umrohManifestPayment) && $umrohManifestPayment->getMedia('payments'))
-                var files = {!! json_encode($umrohManifestPayment->getMedia('payments')) !!};
+                @if(isset($hajjManifestPayment) && $hajjManifestPayment->getMedia('payments'))
+                var files = {!! json_encode($hajjManifestPayment->getMedia('payments')) !!};
                 for (var i in files) {
                     var file = files[i];
                     this.options.addedfile.call(this, file);
@@ -186,7 +186,7 @@
 
             $('#amount').maskMoney('mask');
 
-            $('#umroh-payment-form').submit(function () {
+            $('#hajj-payment-form').submit(function () {
                 var amount = $('#amount').maskMoney('unmasked')[0];
                 $('#amount').val(amount);
             });
