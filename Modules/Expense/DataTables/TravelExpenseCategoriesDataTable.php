@@ -62,6 +62,7 @@ class TravelExpenseCategoriesDataTable extends DataTable
                 ->addClass('text-center'),
 
             Column::make('umrohexpenses_count')
+                ->title('Reference Count')
                 ->addClass('text-center'),
 
             Column::computed('action')

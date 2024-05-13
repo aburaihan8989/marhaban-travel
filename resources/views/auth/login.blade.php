@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row mb-5">
         <div class="col-12 d-flex justify-content-center">
-            <img width="340" src="{{ asset('images/logo-dark.png') }}" alt="Logo">
+            <img width="320" src="{{ asset('images/logo-dark.png') }}" alt="Logo">
         </div>
     </div>
     <div class="row justify-content-center">
