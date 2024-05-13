@@ -1,6 +1,8 @@
-<div class="sidebar-heading ml-3" style="font-size: 15px">
-    <strong><i>Menu Dashboard</i></strong>
+<div class="mb-2 ml-3" style="font-size:15px;">
+    <a class="c-sidebar-brand-full" style="font-size:15px;"><strong><i>Menu Dashboard</i></strong></a>
+    <a class="c-sidebar-brand-minimized" style="font-size:15px;"><strong><i></i></strong></a>
 </div>
+
 
 <li class="c-sidebar-nav-item {{ request()->routeIs('home') ? 'c-active' : '' }}">
     <a class="c-sidebar-nav-link" href="{{ route('home') }}">
@@ -10,8 +12,9 @@
 
 <hr class="sidebar-divider" style="color:white">
 
-<div class="sidebar-heading ml-3" style="font-size: 15px">
-    <strong><i>Menu Travel</i></strong>
+<div class="mb-2 ml-3" style="font-size:15px;">
+    <a class="c-sidebar-brand-full" style="font-size:15px;"><strong><i>Menu Travel</i></strong></a>
+    <a class="c-sidebar-brand-minimized" style="font-size:15px;"><strong><i></i></strong></a>
 </div>
 
 @can('access_customers')
@@ -217,8 +220,9 @@
 
 <hr class="sidebar-divider" style="color:white">
 
-<div class="sidebar-heading ml-3" style="font-size: 15px">
-    <strong><i>Menu Inventory</i></strong>
+<div class="mb-2 ml-3" style="font-size:15px;">
+    <a class="c-sidebar-brand-full" style="font-size:15px;"><strong><i>Menu Inventory</i></strong></a>
+    <a class="c-sidebar-brand-minimized" style="font-size:15px;"><strong><i></i></strong></a>
 </div>
 
 @can('access_products')
