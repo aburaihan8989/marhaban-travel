@@ -27,7 +27,7 @@ use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 class HomeController extends Controller
 {
 
-    public function index(UmrohPackageDataTable $dataTable_umroh, HajjPackageDataTable $dataTable_hajj) {
+    public function index(UmrohPackageDataTable $dataTable) {
         $customers = Customer::count();
         $umroh_savings = Saving::count();
         $hajj_savings = HajjSaving::count();
@@ -56,8 +56,8 @@ class HomeController extends Controller
         $revenue = ($sales - $sale_returns) / 100;
         $profit = $revenue - $product_costs;
 
-        return $dataTable_hajj->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
-        // return $dataTable_umroh->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+        // return $dataTable->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+        return $dataTable->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
 
         // return view('home', [
         //     'customers'        => $customers,

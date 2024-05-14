@@ -113,13 +113,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {{-- <a href="{{ route('hajj-packages.create') }}" class="btn btn-primary">
-                                Add Hajj Package <i class="bi bi-plus"></i>
-                            </a> --}}
-
-                            <hr>
-
-                            <div class="table-responsive">
+                           <div class="table-responsive">
                                 {!! $dataTable->table() !!}
                             </div>
                         </div>
@@ -133,12 +127,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {{-- <a href="{{ route('hajj-packages.create') }}" class="btn btn-primary">
-                                Add Hajj Package <i class="bi bi-plus"></i>
-                            </a> --}}
-
-                            <hr>
-
                             <div class="table-responsive">
                                 {!! $dataTable->table() !!}
                             </div>
