@@ -3,21 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Modules\Expense\Entities\Expense;
-use Modules\Purchase\Entities\Purchase;
-use Modules\Purchase\Entities\PurchasePayment;
-use Modules\PurchasesReturn\Entities\PurchaseReturn;
-use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 use Modules\Sale\Entities\Sale;
+use Illuminate\Support\Facades\DB;
+use Modules\People\Entities\Agent;
+use Modules\Saving\Entities\Saving;
+use Modules\Expense\Entities\Expense;
+use Modules\People\Entities\Customer;
 use Modules\Sale\Entities\SalePayment;
+use Modules\Purchase\Entities\Purchase;
+use Modules\Saving\Entities\HajjSaving;
+use Modules\Saving\Entities\SavingPayment;
 use Modules\SalesReturn\Entities\SaleReturn;
+use Modules\Purchase\Entities\PurchasePayment;
+use Modules\Saving\Entities\HajjSavingPayment;
+use Modules\Manifest\Entities\HajjManifestPayment;
+use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
+use Modules\PurchasesReturn\Entities\PurchaseReturn;
+use Modules\Package\DataTables\UmrohPackageDataTable;
+use Modules\Package\DataTables\HajjPackageDataTable;
+use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 
 class HomeController extends Controller
 {
 
-    public function index() {
+    public function index(UmrohPackageDataTable $dataTable_umroh, HajjPackageDataTable $dataTable_hajj) {
+        $customers = Customer::count();
+        $umroh_savings = Saving::count();
+        $hajj_savings = HajjSaving::count();
+        $agents = Agent::count();
+        $payment_umroh_savings = SavingPayment::where('status','Approval')->count();
+        $payment_hajj_savings = HajjSavingPayment::where('status','Approval')->count();
+        $payment_savings = $payment_umroh_savings + $payment_hajj_savings;
+        $payment_umroh_packages = UmrohManifestPayment::where('status','Approval')->count();
+        $payment_hajj_packages = HajjManifestPayment::where('status','Approval')->count();
+        $payment_packages = $payment_umroh_packages + $payment_hajj_packages;
+
+
         $sales = Sale::completed()->sum('total_amount');
         $sale_returns = SaleReturn::completed()->sum('total_amount');
         $purchase_returns = PurchaseReturn::completed()->sum('total_amount');
@@ -34,12 +56,23 @@ class HomeController extends Controller
         $revenue = ($sales - $sale_returns) / 100;
         $profit = $revenue - $product_costs;
 
-        return view('home', [
-            'revenue'          => $revenue,
-            'sale_returns'     => $sale_returns / 100,
-            'purchase_returns' => $purchase_returns / 100,
-            'profit'           => $profit
-        ]);
+        return $dataTable_hajj->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+        // return $dataTable_umroh->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+
+        // return view('home', [
+        //     'customers'        => $customers,
+        //     'umroh_savings'    => $umroh_savings,
+        //     'hajj_savings'     => $hajj_savings,
+        //     'agents'           => $agents,
+        //     'payment_savings'  => $payment_savings,
+        //     'payment_packages'  => $payment_packages,
+
+
+        //     // 'revenue'          => $revenue,
+        //     // 'sale_returns'     => $sale_returns / 100,
+        //     // 'purchase_returns' => $purchase_returns / 100,
+        //     'profit'           => $profit
+        // ]);
     }
 
 

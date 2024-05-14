@@ -11,63 +11,143 @@
 @section('content')
     <div class="container-fluid">
         @can('show_total_stats')
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                        <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
-                            <i class="bi bi-bar-chart font-2xl"></i>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                                <i class="bi bi-people font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Registered Customers</div>
+                                <div class="text-value text-primary">{{ $customers . ' Customers' }}</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-value text-primary">{{ format_currency($revenue) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Revenue</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                                <i class="bi bi-people font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Umroh Savings Customers</div>
+                                <div class="text-value text-primary">{{ $umroh_savings . ' Customers' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                                <i class="bi bi-people font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Hajj Savings Customers</div>
+                                <div class="text-value text-primary">{{ $hajj_savings . ' Customers' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            {{-- <div class="bg-gradient-info p-4 mfe-3 rounded-left">
+                                <i class="bi bi-trophy font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-info">{{ format_currency($profit) }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Profit</div>
+                            </div> --}}
+                            <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                                <i class="bi bi-people font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Registered Agents</div>
+                                <div class="text-value text-primary">{{ $agents . ' Agents' }}</div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                        <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
-                            <i class="bi bi-cart-check font-2xl"></i>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
+                                <i class="bi bi-journal-check font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Approval Savings</div>
+                                <div class="text-value text-primary">{{ $payment_savings . ' Transactions' }}</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-value text-warning">{{ format_currency($sale_returns) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Expenses</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0">
+                        <div class="card-body p-0 d-flex align-items-center shadow-sm">
+                            <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
+                                <i class="bi bi-journal-check font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Approval Payments</div>
+                                <div class="text-value text-primary">{{ $payment_packages . ' Transactions' }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                        <div class="bg-gradient-success p-4 mfe-3 rounded-left">
-                            <i class="bi bi-wallet2 font-2xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-value text-success">{{ format_currency($purchase_returns) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Savings</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row">
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                        <div class="bg-gradient-info p-4 mfe-3 rounded-left">
-                            <i class="bi bi-trophy font-2xl"></i>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header d-flex flex-wrap align-items-center">
+                            <div>
+                                Umroh Package : <strong>List Active Umroh Package</strong>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-value text-info">{{ format_currency($profit) }}</div>
-                            <div class="text-muted text-uppercase font-weight-bold small">Profit</div>
+                        <div class="card-body">
+                            {{-- <a href="{{ route('hajj-packages.create') }}" class="btn btn-primary">
+                                Add Hajj Package <i class="bi bi-plus"></i>
+                            </a> --}}
+
+                            <hr>
+
+                            <div class="table-responsive">
+                                {!! $dataTable->table() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header d-flex flex-wrap align-items-center">
+                            <div>
+                                Hajj Package : <strong>List Active Hajj Package</strong>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{-- <a href="{{ route('hajj-packages.create') }}" class="btn btn-primary">
+                                Add Hajj Package <i class="bi bi-plus"></i>
+                            </a> --}}
+
+                            <hr>
+
+                            <div class="table-responsive">
+                                {!! $dataTable->table() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-        </div>
         @endcan
 
         @can('show_weekly_sales_purchases|show_month_overview')
