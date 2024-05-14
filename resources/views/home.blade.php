@@ -105,7 +105,7 @@
 
             <div class="row">
 
-                <div class="col-6">
+                <div class="col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
@@ -133,7 +133,6 @@
                         </div>
                     </div>
                 </div>
-
 
             </div>
         @endcan
