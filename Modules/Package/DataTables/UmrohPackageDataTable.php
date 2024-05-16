@@ -73,6 +73,14 @@ class UmrohPackageDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('row_number')
+                ->title('No')
+                ->render('meta.row + meta.settings._iDisplayStart + 1;')
+                ->width(50)
+                ->orderable(false)
+                ->searchable(false)
+                ->className('text-center align-middle'),
+
             Column::computed('package_image')
                 ->title('Package Brosur')
                 ->className('text-center align-middle'),
@@ -106,7 +114,7 @@ class UmrohPackageDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('package_capacity')
-                ->title('Capacity')
+                ->title('Seat')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

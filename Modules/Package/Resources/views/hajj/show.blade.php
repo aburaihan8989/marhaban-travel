@@ -48,31 +48,8 @@
                                     <td>{{ $hajj_package->flight_route }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Package Type</th>
-                                    <td>{{ $hajj_package->package_type }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Stock Worth</th>
-                                    <td>
-                                        COST:: {{ format_currency($product->product_cost * $product->product_quantity) }} /
-                                        PRICE:: {{ format_currency($product->product_price * $product->product_quantity) }}
-                                    </td>
-                                </tr> --}}
-                                <tr>
-                                    <th>Package Capacity</th>
+                                    <th>Available Seat</th>
                                     <td>{{ $hajj_package->package_capacity . ' Pax' }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Hotel Makkah</th>
-                                    <td>{{ $umroh_package->hotel_makkah ?? 'N/A' }}</td>
-                                </tr> --}}
-                                <tr>
-                                    <th>Hotel Makkah</th>
-                                    <td>{{ $hajj_package->hotel_makkah }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Hotel Madinah</th>
-                                    <td>{{ $hajj_package->hotel_madinah }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
@@ -89,29 +66,40 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package Cost</th>
-                                    <td>{{ format_currency($hajj_package->package_cost) }}</td>
+                                    <th>Package Type</th>
+                                    <td>{{ $hajj_package->package_type }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Package Price</th>
-                                    <td>{{ format_currency($hajj_package->package_price) }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Tax Type</th>
+                                    <th>Package Category <strong class="text-primary"><i>({{ $hajj_package->category }})</i></strong></th>
                                     <td>
-                                        @if($product->product_tax_type == 1)
-                                            Exclusive
-                                        @elseif($product->product_tax_type == 2)
-                                            Inclusive
-                                        @else
-                                            N/A
-                                        @endif
+                                        Hotel Makkah :: {{ $hajj_package->hotel_makkah }} <br>
+                                        Hotel Madinah :: {{ $hajj_package->hotel_madinah }}
+                                        <hr>
+                                        Hotel Transit :: {{ $hajj_package->hotel_transit }} <br>
+                                        Tenda Arafah :: {{ $hajj_package->hotel_arafah }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($hajj_package->package_cost) }} <br>
+                                        Package Price :: {{ format_currency($hajj_package->package_price) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($hajj_package->add_triple) }}  ||  Double (+) :: {{ format_currency($hajj_package->add_double) }}
                                     </td>
-                                </tr> --}}
-                                {{-- <tr>
-                                    <th>Note</th>
-                                    <td>{{ $product->product_note ?? 'N/A' }}</td>
-                                </tr> --}}
+                                </tr>
+                                <tr>
+                                    <th>Package Category <strong class="text-primary"><i>({{ $hajj_package->category_2 }})</i></strong></th>
+                                    <td>
+                                        Hotel Makkah :: {{ $hajj_package->hotel_makkah_2 }} <br>
+                                        Hotel Madinah :: {{ $hajj_package->hotel_madinah_2 }}
+                                        <hr>
+                                        Hotel Transit :: {{ $hajj_package->hotel_transit_2 }} <br>
+                                        Tenda Arafah :: {{ $hajj_package->hotel_arafah_2 }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($hajj_package->package_cost_2) }} <br>
+                                        Package Price :: {{ format_currency($hajj_package->package_price_2) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($hajj_package->add_triple_2) }}  ||  Double (+) :: {{ format_currency($hajj_package->add_double_2) }}
+                                    </td>
+                                </tr>
+
                             </table>
                         </div>
                     </div>
@@ -185,6 +173,25 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-lg-9">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <tr>
+                                    <th width="300px">Note (If Needed)</th>
+                                    <td>
+                                        <textarea rows="4" class="form-control" readonly>{{ $hajj_package->note }}</textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
 

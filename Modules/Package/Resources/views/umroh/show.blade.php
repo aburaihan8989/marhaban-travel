@@ -48,7 +48,7 @@
                                     <td>{{ $umroh_package->flight_route }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Package Capacity</th>
+                                    <th>Available Seat</th>
                                     <td>{{ $umroh_package->package_capacity . ' Pax' }}</td>
                                 </tr>
                                 <tr>
@@ -73,6 +73,8 @@
                                         <hr>
                                         Package Cost :: {{ format_currency($umroh_package->package_cost) }} <br>
                                         Package Price :: {{ format_currency($umroh_package->package_price) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($umroh_package->add_triple) }}  ||  Double (+) :: {{ format_currency($umroh_package->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,6 +85,8 @@
                                         <hr>
                                         Package Cost :: {{ format_currency($umroh_package->package_cost_2) }} <br>
                                         Package Price :: {{ format_currency($umroh_package->package_price_2) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($umroh_package->add_triple_2) }}  ||  Double (+) :: {{ format_currency($umroh_package->add_double_2) }}
                                     </td>
                                 </tr>
                             </table>

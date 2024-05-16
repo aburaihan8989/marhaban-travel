@@ -63,7 +63,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_type">Package Type <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type" id="package_type" required>
+                                        <select class="form-control" name="package_type" id="package_type">
                                             <option value="" selected>None</option>
                                             <option {{ $hotel->package_type == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
                                             <option {{ $hotel->package_type == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>

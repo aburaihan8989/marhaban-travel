@@ -62,7 +62,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_type">Package Type <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type" id="package_type" required>
+                                        <select class="form-control" name="package_type" id="package_type">
                                             <option value="" selected disabled>Select Package Type</option>
                                             <option value="Marhaban">Marhaban</option>
                                             <option value="Muzdalifah">Muzdalifah</option>

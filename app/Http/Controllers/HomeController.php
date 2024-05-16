@@ -20,14 +20,14 @@ use Modules\Manifest\Entities\HajjManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
 use Modules\PurchasesReturn\Entities\PurchaseReturn;
-use Modules\Package\DataTables\UmrohPackageDataTable;
+use Modules\Package\DataTables\HomeUmrohPackageDataTable;
 use Modules\Package\DataTables\HajjPackageDataTable;
 use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 
 class HomeController extends Controller
 {
 
-    public function index(UmrohPackageDataTable $dataTable) {
+    public function index(HomeUmrohPackageDataTable $dataTable) {
         $customers = Customer::count();
         $umroh_savings = Saving::count();
         $hajj_savings = HajjSaving::count();

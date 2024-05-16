@@ -79,18 +79,18 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="package_capacity">Available Seat <span class="text-danger">*</span></label>
+                                        <input id="package_capacity" type="text" class="form-control" name="package_capacity" value="{{ old('package_capacity') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label for="package_status">Package Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="package_status" id="package_status" required>
                                             <option value="" selected disabled>Select Status</option>
                                             <option value="Active">Active</option>
                                             <option value="Closed">Closed</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="package_capacity">Package Capacity <span class="text-danger">*</span></label>
-                                        <input id="package_capacity" type="text" class="form-control" name="package_capacity" required value="{{ old('package_capacity') }}">
                                     </div>
                                 </div>
                             </div>
@@ -142,13 +142,28 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_cost">Package Cost <i>(Marhaban)</i><span class="text-danger">*</span></label>
-                                        <input id="package_cost" type="text" class="form-control" name="package_cost" required value="{{ old('package_cost') }}">
+                                        <input id="package_cost" type="text" class="form-control" name="package_cost" value="{{ old('package_cost') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_price">Package Price <i>(Marhaban)</i><span class="text-danger">*</span></label>
                                         <input id="package_price" type="text" class="form-control" name="package_price" required value="{{ old('package_price') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="add_triple">(+) Room Triple <span class="text-danger">*</span></label>
+                                        <input id="add_triple" type="text" class="form-control" name="add_triple" value="{{ old('add_triple') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="add_double">(+) Room Double <span class="text-danger">*</span></label>
+                                        <input id="add_double" type="text" class="form-control" name="add_double" value="{{ old('add_double') }}">
                                     </div>
                                 </div>
                             </div>
@@ -200,13 +215,28 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_cost_2">Package Cost <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
-                                        <input id="package_cost_2" type="text" class="form-control" name="package_cost_2" required value="{{ old('package_cost_2') }}">
+                                        <input id="package_cost_2" type="text" class="form-control" name="package_cost_2" value="{{ old('package_cost_2') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_price_2">Package Price <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
                                         <input id="package_price_2" type="text" class="form-control" name="package_price_2" required value="{{ old('package_price_2') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="add_triple_2">(+) Room Triple <span class="text-danger">*</span></label>
+                                        <input id="add_triple_2" type="text" class="form-control" name="add_triple_2" value="{{ old('add_triple_2') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="add_double_2">(+) Room Double <span class="text-danger">*</span></label>
+                                        <input id="add_double_2" type="text" class="form-control" name="add_double_2" value="{{ old('add_double_2') }}">
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +256,6 @@
                                 <label for="package_term">Package Term & Condition </label>
                                 <textarea name="package_term" id="package_term" rows="4 " class="form-control"></textarea>
                             </div>
-
                             <div class="form-group">
                                 <label for="note">Note (If Needed)</label>
                                 <textarea name="note" id="note" rows="5" class="form-control"></textarea>
@@ -333,16 +362,45 @@
                 thousands:'{{ settings()->currency->thousand_separator }}',
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
+            $('#add_triple').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
+            $('#add_double').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
+            $('#add_triple_2').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
+            $('#add_double_2').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
 
             $('#umroh-package-form').submit(function () {
                 var package_cost = $('#package_cost').maskMoney('unmasked')[0];
                 var package_price = $('#package_price').maskMoney('unmasked')[0];
                 var package_cost_2 = $('#package_cost_2').maskMoney('unmasked')[0];
                 var package_price_2 = $('#package_price_2').maskMoney('unmasked')[0];
+                var add_triple = $('#add_triple').maskMoney('unmasked')[0];
+                var add_double = $('#add_double').maskMoney('unmasked')[0];
+                var add_triple_2 = $('#add_triple_2').maskMoney('unmasked')[0];
+                var add_double_2 = $('#add_double_2').maskMoney('unmasked')[0];
+
                 $('#package_cost').val(package_cost);
                 $('#package_price').val(package_price);
                 $('#package_cost_2').val(package_cost_2);
                 $('#package_price_2').val(package_price_2);
+                $('#add_triple').val(add_triple);
+                $('#add_double').val(add_double);
+                $('#add_triple_2').val(add_triple_2);
+                $('#add_double_2').val(add_double_2);
             });
         });
     </script>

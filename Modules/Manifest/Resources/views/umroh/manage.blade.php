@@ -90,6 +90,8 @@
                                         <hr>
                                         Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} <br>
                                         Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_triple) }}  ||  Double (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -100,6 +102,8 @@
                                         <hr>
                                         Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} <br>
                                         Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price_2) }}
+                                        <hr>
+                                        Triple (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_triple_2) }}  ||  Double (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_double_2) }}
                                     </td>
                                 </tr>
                             </table>

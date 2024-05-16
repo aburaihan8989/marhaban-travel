@@ -2,15 +2,16 @@
 
 namespace Modules\Package\DataTables;
 
-use Modules\Package\Entities\HajjPackage;
+use Modules\Package\Entities\UmrohPackage;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class HajjPackageDataTable extends DataTable
+class HomeUmrohPackageDataTable extends DataTable
 {
+
 
     public function dataTable($query)
     {
@@ -27,22 +28,11 @@ class HajjPackageDataTable extends DataTable
                 $formatDay = $model->package_days . ' Days';
                 return $formatDay; })
             ->addColumn('action', function ($data) {
-                return view('package::hajj.partials.actions', compact('data'));
-            })
-            ->addColumn('package_image', function ($data) {
-                $url = $data->getFirstMediaUrl('brosurs', 'thumb');
-                return '<img src="'.$url.'" border="0" width="50" class="img-thumbnail" align="center"/>';
-            })
-            ->addColumn('package_cost', function ($data) {
-                return format_currency($data->package_cost);
-            })
-            ->addColumn('package_price', function ($data) {
-                return format_currency($data->package_price);
-            })
-            ->rawColumns(['package_image']);
+                return view('package::umroh.partials.actions', compact('data'));
+            });
     }
 
-    public function query(HajjPackage $model)
+    public function query(UmrohPackage $model)
     {
         // return $model->newQuery()->with('category');
         return $model->newQuery();
@@ -51,7 +41,7 @@ class HajjPackageDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('hajj-packages-table')
+                    ->setTableId('umroh-packages-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
@@ -81,20 +71,12 @@ class HajjPackageDataTable extends DataTable
                 ->searchable(false)
                 ->className('text-center align-middle'),
 
-            Column::computed('package_image')
-                ->title('Package Brosur')
-                ->className('text-center align-middle'),
-
             Column::make('package_code')
-                ->title('Package Code')
+                ->title('Code')
                 ->className('text-center align-middle'),
 
             Column::make('package_name')
                 ->title('Package Name')
-                ->className('text-center align-middle'),
-
-            Column::computed('package_date')
-                ->title('Departure Date')
                 ->className('text-center align-middle'),
 
             Column::make('package_departure')
@@ -105,25 +87,17 @@ class HajjPackageDataTable extends DataTable
                 ->title('Days')
                 ->className('text-center align-middle'),
 
-            Column::make('flight_route')
-                ->title('Flight Rute')
+                Column::computed('package_capacity')
+                ->title('Seat')
                 ->className('text-center align-middle'),
 
-            Column::computed('package_price')
-                ->title('Package Price')
+            Column::computed('package_capacity')
+                ->title('Booked')
                 ->className('text-center align-middle'),
 
-            Column::make('package_type')
-                ->title('Package Type')
-                ->className('text-center align-middle'),
-
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->className('text-center align-middle'),
-
-            Column::make('created_at')
-                ->visible(false)
+            Column::computed('package_capacity')
+                ->title('Available')
+                ->className('text-center align-middle')
         ];
     }
 
@@ -134,6 +108,6 @@ class HajjPackageDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'HajjPackage_' . date('YmdHis');
+        return 'UmrohPackage_' . date('YmdHis');
     }
 }

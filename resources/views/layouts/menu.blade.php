@@ -197,22 +197,7 @@
         {{-- @can('access_customers') --}}
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" style="color:grey;">
-                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Finance Dashboard
-            </a>
-        </li>
-        {{-- @endcan --}}
-
-        {{-- @can('access_customers') --}}
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" style="color:grey;">
-                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Umroh Package Report
-            </a>
-        </li>
-        {{-- @endcan --}}
-        {{-- @can('access_customers') --}}
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" style="color:grey;">
-                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Hajj Package Report
+                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Dashboard
             </a>
         </li>
         {{-- @endcan --}}
@@ -220,6 +205,13 @@
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" style="color:grey;">
                 <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Savings Report
+            </a>
+        </li>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" style="color:grey;">
+                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Package Report
             </a>
         </li>
         {{-- @endcan --}}
