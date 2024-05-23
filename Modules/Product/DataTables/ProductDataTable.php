@@ -65,6 +65,14 @@ class ProductDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('row_number')
+                ->title('No')
+                ->render('meta.row + meta.settings._iDisplayStart + 1;')
+                ->width(50)
+                ->orderable(false)
+                ->searchable(false)
+                ->className('text-center align-middle'),
+
             Column::computed('product_image')
                 ->title('Image')
                 ->className('text-center align-middle'),

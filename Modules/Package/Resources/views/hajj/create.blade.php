@@ -71,7 +71,7 @@
                                     <div class="form-group">
                                         <label for="flight_route">Package Route <span class="text-danger">*</span></label>
                                         <select class="form-control" name="flight_route" id="flight_route" required>
-                                            <option value="" selected disabled>Select Ruote</option>
+                                            <option value="" selected disabled>Select Route</option>
                                             <option value="Direct">Direct</option>
                                             <option value="Transit">Transit</option>
                                         </select>
@@ -94,15 +94,31 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="airline_name">Airline Name<span class="text-danger">*</span></label>
+                                            <select class="form-control" name="airline_name" id="airline_name" required>
+                                                <option value="" selected disabled>Select Airline</option>
+                                                @foreach(\Modules\Package\Entities\Airline::all() as $airline)
+                                                    <option value="{{ $airline->airline_name }}">{{ $airline->airline_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_type">Package Type <span class="text-danger">*</span></label>
+                                        <label for="package_type">Package Category <span class="text-danger">*</span></label>
                                         <select class="form-control" name="package_type" id="package_type" required>
-                                            <option value="" selected disabled>Select Type</option>
-                                            <option value="Domestik">Domestik</option>
+                                            <option value="" selected disabled>Select Category</option>
+                                            <option value="Haji Khusus">Haji Khusus</option>
                                             <option value="ONH Plus">ONH Plus</option>
                                             <option value="Furoda">Furoda</option>
                                         </select>
@@ -199,13 +215,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_triple">(+) Room Triple <span class="text-danger">*</span></label>
+                                        <label for="add_triple">(+) Triple <span class="text-danger">*</span></label>
                                         <input id="add_triple" type="text" class="form-control" name="add_triple" value="{{ old('add_triple') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_double">(+) Room Double <span class="text-danger">*</span></label>
+                                        <label for="add_double">(+) Double <span class="text-danger">*</span></label>
                                         <input id="add_double" type="text" class="form-control" name="add_double" value="{{ old('add_double') }}">
                                     </div>
                                 </div>
@@ -300,13 +316,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_triple_2">(+) Room Triple <span class="text-danger">*</span></label>
+                                        <label for="add_triple_2">(+) Triple <span class="text-danger">*</span></label>
                                         <input id="add_triple_2" type="text" class="form-control" name="add_triple_2" value="{{ old('add_triple_2') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_double_2">(+) Room Double <span class="text-danger">*</span></label>
+                                        <label for="add_double_2">(+) Double <span class="text-danger">*</span></label>
                                         <input id="add_double_2" type="text" class="form-control" name="add_double_2" value="{{ old('add_double_2') }}">
                                     </div>
                                 </div>

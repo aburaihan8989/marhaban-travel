@@ -95,15 +95,31 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="airline_name">Airline Name<span class="text-danger">*</span></label>
+                                            <select class="form-control" name="airline_name" id="airline_name" required>
+                                                <option value="" selected>None</option>
+                                                @foreach(\Modules\Package\Entities\Airline::all() as $airline)
+                                                    <option {{ $hajj_package->airline_name == $airline->airline_name ? 'selected' : '' }} value="{{ $airline->airline_name }}">{{ $airline->airline_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_type">Package Type <span class="text-danger">*</span></label>
+                                        <label for="package_type">Package Category <span class="text-danger">*</span></label>
                                         <select class="form-control" name="package_type" id="package_type" required>
                                             <option value="" selected>None</option>
-                                            <option {{ $hajj_package->package_type == 'Domestik' ? 'selected' : '' }} value="Domestik">Domestik</option>
+                                            <option {{ $hajj_package->package_type == 'Haji Khusus' ? 'selected' : '' }} value="Haji Khusus">Haji Khusus</option>
                                             <option {{ $hajj_package->package_type == 'ONH Plus' ? 'selected' : '' }} value="ONH Plus">ONH Plus</option>
                                             <option {{ $hajj_package->package_type == 'Furoda' ? 'selected' : '' }} value="Furoda">Furoda</option>
                                         </select>

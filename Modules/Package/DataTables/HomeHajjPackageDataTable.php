@@ -2,20 +2,20 @@
 
 namespace Modules\Package\DataTables;
 
-use Modules\Package\Entities\UmrohPackage;
+use Modules\Package\Entities\HajjPackage;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class HomeUmrohPackageDataTable extends DataTable
+class HomeHajjPackageDataTable extends DataTable
 {
 
 
     public function dataTable($query)
     {
-        return dataTables()
+        return datatables()
             // ->eloquent($query)->with('category')
             ->eloquent($query)
             ->editColumn('package_date', function($model){
@@ -23,12 +23,6 @@ class HomeUmrohPackageDataTable extends DataTable
                 return $formatDate; })
             ->editColumn('package_capacity', function($model){
                 $formatData = $model->package_capacity . ' Pax';
-                return $formatData; })
-            ->editColumn('package_booked', function($model){
-                $formatData = '0 Pax';
-                return $formatData; })
-            ->editColumn('package_available', function($model){
-                $formatData = '0 Pax';
                 return $formatData; })
             ->editColumn('package_days', function($model){
                 $formatDay = $model->package_days . ' Days';
@@ -38,7 +32,7 @@ class HomeUmrohPackageDataTable extends DataTable
             // });
     }
 
-    public function query(UmrohPackage $model)
+    public function query(HajjPackage $model)
     {
         // return $model->newQuery()->with('category');
         return $model->newQuery();
@@ -47,7 +41,7 @@ class HomeUmrohPackageDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('umroh-packages-table')
+                    ->setTableId('hajj-packages-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
@@ -97,11 +91,11 @@ class HomeUmrohPackageDataTable extends DataTable
                 ->title('Seat')
                 ->className('text-center align-middle'),
 
-            Column::computed('package_booked')
+            Column::computed('package_capacity')
                 ->title('Booked')
                 ->className('text-center align-middle'),
 
-            Column::computed('package_available')
+            Column::computed('package_capacity')
                 ->title('Available')
                 ->className('text-center align-middle')
         ];
@@ -114,6 +108,6 @@ class HomeUmrohPackageDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'UmrohPackage_' . date('YmdHis');
+        return 'HajjPackage_' . date('YmdHis');
     }
 }

@@ -19,15 +19,16 @@ use Modules\Saving\Entities\HajjSavingPayment;
 use Modules\Manifest\Entities\HajjManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
-use Modules\PurchasesReturn\Entities\PurchaseReturn;
-use Modules\Package\DataTables\HomeUmrohPackageDataTable;
 use Modules\Package\DataTables\HajjPackageDataTable;
+use Modules\PurchasesReturn\Entities\PurchaseReturn;
+use Modules\Package\DataTables\HomeHajjPackageDataTable;
+use Modules\Package\DataTables\HomeUmrohPackageDataTable;
 use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 
 class HomeController extends Controller
 {
 
-    public function index(HomeUmrohPackageDataTable $dataTable) {
+    public function index(HomeUmrohPackageDataTable $dataTable, HomeHajjPackageDataTable $hajjdataTable) {
         $customers = Customer::count();
         $umroh_savings = Saving::count();
         $hajj_savings = HajjSaving::count();
@@ -39,39 +40,28 @@ class HomeController extends Controller
         $payment_hajj_packages = HajjManifestPayment::where('status','Approval')->count();
         $payment_packages = $payment_umroh_packages + $payment_hajj_packages;
 
-
-        $sales = Sale::completed()->sum('total_amount');
-        $sale_returns = SaleReturn::completed()->sum('total_amount');
-        $purchase_returns = PurchaseReturn::completed()->sum('total_amount');
-        $product_costs = 0;
-
-        foreach (Sale::completed()->with('saleDetails')->get() as $sale) {
-            foreach ($sale->saleDetails as $saleDetail) {
-                if (!is_null($saleDetail->product)) {
-                    $product_costs += $saleDetail->product->product_cost * $saleDetail->quantity;
-                }
-            }
-        }
-
-        $revenue = ($sales - $sale_returns) / 100;
-        $profit = $revenue - $product_costs;
-
-        // return $dataTable->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
         return $dataTable->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+        // return view('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
 
-        // return view('home', [
-        //     'customers'        => $customers,
-        //     'umroh_savings'    => $umroh_savings,
-        //     'hajj_savings'     => $hajj_savings,
-        //     'agents'           => $agents,
-        //     'payment_savings'  => $payment_savings,
-        //     'payment_packages'  => $payment_packages,
+        // $sales = Sale::completed()->sum('total_amount');
+        // $sale_returns = SaleReturn::completed()->sum('total_amount');
+        // $purchase_returns = PurchaseReturn::completed()->sum('total_amount');
+        // $product_costs = 0;
 
+        // foreach (Sale::completed()->with('saleDetails')->get() as $sale) {
+        //     foreach ($sale->saleDetails as $saleDetail) {
+        //         if (!is_null($saleDetail->product)) {
+        //             $product_costs += $saleDetail->product->product_cost * $saleDetail->quantity;
+        //         }
+        //     }
+        // }
 
-        //     // 'revenue'          => $revenue,
-        //     // 'sale_returns'     => $sale_returns / 100,
-        //     // 'purchase_returns' => $purchase_returns / 100,
-        //     'profit'           => $profit
+        // $revenue = ($sales - $sale_returns) / 100;
+        // $profit = $revenue - $product_costs;
+        // 'revenue'          => $revenue,
+        // 'sale_returns'     => $sale_returns / 100,
+        // 'purchase_returns' => $purchase_returns / 100,
+        // 'profit'           => $profit
         // ]);
     }
 

@@ -48,6 +48,10 @@
                                     <td>{{ $umroh_package->flight_route }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Airline Name</th>
+                                    <td>{{ $umroh_package->airline_name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Available Seat</th>
                                     <td>{{ $umroh_package->package_capacity . ' Pax' }}</td>
                                 </tr>
@@ -66,7 +70,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_package->package_type }})</i></strong></th>
+                                    <th>Package Category <strong class="text-primary"><i>({{ $umroh_package->package_type }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_package->hotel_makkah }} <br>
                                         Hotel Madinah :: {{ $umroh_package->hotel_madinah }}
@@ -74,11 +78,11 @@
                                         Package Cost :: {{ format_currency($umroh_package->package_cost) }} <br>
                                         Package Price :: {{ format_currency($umroh_package->package_price) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($umroh_package->add_triple) }}  ||  Double (+) :: {{ format_currency($umroh_package->add_double) }}
+                                        (+) Triple :: {{ format_currency($umroh_package->add_triple) }}  ||  (+) Double :: {{ format_currency($umroh_package->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_package->package_type_2 }})</i></strong></th>
+                                    <th>Package Category <strong class="text-primary"><i>({{ $umroh_package->package_type_2 }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_package->hotel_makkah_2 }} <br>
                                         Hotel Madinah :: {{ $umroh_package->hotel_madinah_2 }}
@@ -86,7 +90,7 @@
                                         Package Cost :: {{ format_currency($umroh_package->package_cost_2) }} <br>
                                         Package Price :: {{ format_currency($umroh_package->package_price_2) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($umroh_package->add_triple_2) }}  ||  Double (+) :: {{ format_currency($umroh_package->add_double_2) }}
+                                        (+) Triple :: {{ format_currency($umroh_package->add_triple_2) }}  ||  (+) Double :: {{ format_currency($umroh_package->add_double_2) }}
                                     </td>
                                 </tr>
                             </table>

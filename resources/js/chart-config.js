@@ -65,7 +65,7 @@ $(document).ready(function () {
     let paymentChart = document.getElementById('paymentChart');
     $.get('/payment-flow/chart-data', function (response) {
         let cashflowChart = new Chart(paymentChart, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: response.months,
                 datasets: [

@@ -48,6 +48,10 @@
                                     <td>{{ $hajj_package->flight_route }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Airline Name</th>
+                                    <td>{{ $hajj_package->airline_name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Available Seat</th>
                                     <td>{{ $hajj_package->package_capacity . ' Pax' }}</td>
                                 </tr>

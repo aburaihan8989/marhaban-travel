@@ -7,7 +7,7 @@
         <li class="breadcrumb-item active">Home</li>
     </ol>
 @endsection
-
+{{-- @dd($dataTable); --}}
 @section('content')
     <div class="container-fluid">
         @can('show_total_stats')
@@ -193,4 +193,5 @@
 
 @push('page_scripts')
     @vite('resources/js/chart-config.js')
+    {!! $dataTable->scripts() !!}
 @endpush

@@ -95,13 +95,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="airline_name">Airline Name<span class="text-danger">*</span></label>
+                                            <select class="form-control" name="airline_name" id="airline_name" required>
+                                                <option value="" selected>None</option>
+                                                @foreach(\Modules\Package\Entities\Airline::all() as $airline)
+                                                    <option {{ $umroh_package->airline_name == $airline->airline_name ? 'selected' : '' }} value="{{ $airline->airline_name }}">{{ $airline->airline_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_type">Package Category <strong class="text-primary"><i>(Marhaban)</i></strong><span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type" id="package_type" required>
+                                        <select class="form-control" name="package_type" id="package_type" required readonly disabled>
                                             <option value="" selected>None</option>
                                             <option {{ $umroh_package->package_type == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
                                             <option {{ $umroh_package->package_type == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>
@@ -172,7 +188,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="package_type_2">Package Category <strong class="text-primary"><i>(Muzdalifah)</i></strong><span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type_2" id="package_type_2" required>
+                                        <select class="form-control" name="package_type_2" id="package_type_2" required readonly disabled>
                                             <option value="" selected>None</option>
                                             <option {{ $umroh_package->package_type_2 == 'Marhaban' ? 'selected' : '' }} value="Marhaban">Marhaban</option>
                                             <option {{ $umroh_package->package_type_2 == 'Muzdalifah' ? 'selected' : '' }} value="Muzdalifah">Muzdalifah</option>
@@ -373,6 +389,10 @@
             $('#package_price').maskMoney('mask');
             $('#package_cost_2').maskMoney('mask');
             $('#package_price_2').maskMoney('mask');
+            $('#add_triple').maskMoney('mask');
+            $('#add_double').maskMoney('mask');
+            $('#add_triple_2').maskMoney('mask');
+            $('#add_double_2').maskMoney('mask');
 
             $('#umroh-package-form').submit(function () {
                 var package_cost = $('#package_cost').maskMoney('unmasked')[0];

@@ -85,6 +85,10 @@ class SavingDataTable extends DataTable
                 ->title('Savings Balance')
                 ->className('text-center align-middle'),
 
+            Column::computed('customer_bank')
+                ->title('Savings Account')
+                ->className('text-center align-middle'),
+
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
