@@ -26,7 +26,7 @@
             @can('access_customers')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('customers.*') ? 'c-active' : '' }}" href="{{ route('customers.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Customers
+                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> All Customers
                     </a>
                 </li>
             @endcan
@@ -42,7 +42,7 @@
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('agents.*') ? 'c-active' : '' }}" href="{{ route('agents.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-person-badge-fill" style="line-height: 1;"></i> Agents
+                    <i class="c-sidebar-nav-icon bi bi-person-badge-fill" style="line-height: 1;"></i> All Agents
                 </a>
             </li>
         {{-- @endcan --}}
@@ -57,7 +57,7 @@
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('teams.*') ? 'c-active' : '' }}" href="{{ route('teams.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-person-vcard-fill" style="line-height: 1;"></i> Teams
+                    <i class="c-sidebar-nav-icon bi bi-person-vcard-fill" style="line-height: 1;"></i> All Teams
                 </a>
             </li>
         {{-- @endcan --}}
