@@ -439,7 +439,7 @@
             @can('access_suppliers')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('suppliers.*') ? 'c-active' : '' }}" href="{{ route('suppliers.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Suppliers
+                        <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> All Suppliers
                     </a>
                 </li>
             @endcan

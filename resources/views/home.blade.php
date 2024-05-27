@@ -11,6 +11,126 @@
 @section('content')
     <div class="container-fluid">
         @can('show_total_stats')
+            <li class="breadcrumb-item active">Dashboard</li>
+            <hr>
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-cash-stack font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($umroh_payment) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Umroh Transactions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-wallet2 font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($umroh_expense) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Umroh Expenses</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-trophy font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($umroh_profit) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Umroh Profit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-cash-stack font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($hajj_payment) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Hajj Transactions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-wallet2 font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($hajj_expense) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Hajj Expenses</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-trophy font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($hajj_profit) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Hajj Profit</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-cash-stack font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($umroh_savings) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Umroh Savings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="bg-primary p-3 mfe-3 rounded">
+                                <i class="bi bi-cash-stack font-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="text-value text-primary">{{ format_currency($hajj_savings) }}</div>
+                                <div class="text-uppercase font-weight-bold small">Hajj Savings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <li class="breadcrumb-item active">Administration</li>
+            <hr>
+
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
@@ -54,13 +174,6 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                            {{-- <div class="bg-gradient-info p-4 mfe-3 rounded-left">
-                                <i class="bi bi-trophy font-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="text-value text-info">{{ format_currency($profit) }}</div>
-                                <div class="text-muted text-uppercase font-weight-bold small">Profit</div>
-                            </div> --}}
                             <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
                                 <i class="bi bi-people font-2xl"></i>
                             </div>
@@ -68,7 +181,6 @@
                                 <div class="text-muted text-uppercase font-weight-bold small">Registered Agents</div>
                                 <div class="text-value text-primary">{{ $agents . ' Agents' }}</div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -102,9 +214,12 @@
                     </div>
                 </div>
             </div>
+            <br>
+
+            <li class="breadcrumb-item active">Management</li>
+            <hr>
 
             <div class="row">
-
                 <div class="col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
@@ -133,7 +248,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @endcan
 

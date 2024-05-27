@@ -12,6 +12,8 @@ use Modules\People\Entities\Customer;
 use Modules\Sale\Entities\SalePayment;
 use Modules\Purchase\Entities\Purchase;
 use Modules\Saving\Entities\HajjSaving;
+use Modules\Expense\Entities\HajjExpense;
+use Modules\Expense\Entities\UmrohExpense;
 use Modules\Saving\Entities\SavingPayment;
 use Modules\SalesReturn\Entities\SaleReturn;
 use Modules\Purchase\Entities\PurchasePayment;
@@ -40,7 +42,33 @@ class HomeController extends Controller
         $payment_hajj_packages = HajjManifestPayment::where('status','Approval')->count();
         $payment_packages = $payment_umroh_packages + $payment_hajj_packages;
 
-        return $dataTable->render('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
+        $umroh_payment = UmrohManifestPayment::where('status','Approval')->sum('amount');
+        $umroh_expense = UmrohExpense::sum('amount');
+        $umroh_profit = $umroh_payment - $umroh_expense;
+
+        $hajj_payment = HajjManifestPayment::where('status','Approval')->sum('amount');
+        $hajj_expense = HajjExpense::sum('amount');
+        $hajj_profit = $hajj_payment - $hajj_expense;
+
+        $umroh_savings = SavingPayment::where('status','Approval')->sum('amount');
+        $hajj_savings = HajjSavingPayment::where('status','Approval')->sum('amount');
+
+
+        return $dataTable->render('home', compact(
+            'customers',
+            'umroh_savings',
+            'hajj_savings',
+            'payment_savings',
+            'payment_packages',
+            'umroh_payment',
+            'umroh_expense',
+            'umroh_profit',
+            'hajj_payment',
+            'hajj_expense',
+            'hajj_profit',
+            'umroh_savings',
+            'hajj_savings',
+            'agents'));
         // return view('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));
 
         // $sales = Sale::completed()->sum('total_amount');
