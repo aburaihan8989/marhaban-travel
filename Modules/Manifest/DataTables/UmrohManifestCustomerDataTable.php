@@ -122,6 +122,19 @@ class UmrohManifestCustomerDataTable extends DataTable
                 ->title('Paspor Active')
                 ->className('text-center align-middle'),
 
+
+            Column::computed('room_group')
+                ->title('Room')
+                ->className('text-center align-middle'),
+
+            Column::computed('family_group')
+                ->title('Family Group')
+                ->className('text-center align-middle'),
+
+            Column::computed('baggage')
+                ->title('Baggage')
+                ->className('text-center align-middle'),
+
             Column::computed('city')
                 ->title('City')
                 ->className('text-center align-middle'),
@@ -130,11 +143,11 @@ class UmrohManifestCustomerDataTable extends DataTable
                 ->title('Payment Status')
                 ->className('text-center align-middle'),
 
-            Column::computed('total_price')
-                ->className('text-center align-middle'),
+            // Column::computed('total_price')
+            //     ->className('text-center align-middle'),
 
-            Column::computed('total_payment')
-                ->className('text-center align-middle'),
+            // Column::computed('total_payment')
+            //     ->className('text-center align-middle'),
 
             Column::computed('remaining_payment')
                 ->className('text-center align-middle'),

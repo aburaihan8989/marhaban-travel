@@ -80,11 +80,15 @@
                                     <td>{{ $umroh_manifest->flight_route }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Airline Name</th>
+                                    <td>{{ $umroh_manifest->umrohPackages->airline_name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Package Days</th>
                                     <td>{{ $umroh_manifest->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Status</th>
+                                    <th>Package Status</th>
                                     <td>
                                         @if($umroh_manifest->status == 'Active')
                                             <span class="badge badge-success" style="font-size: 13px;">
@@ -98,7 +102,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type }})</i></strong></th>
+                                    <th>Package Variant*1 <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->category }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah }} <br>
                                         Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah }}
@@ -106,11 +110,11 @@
                                         Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} <br>
                                         Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_triple) }}  ||  Double (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_double) }}
+                                        (+) Triple :: {{ format_currency($umroh_manifest->umrohPackages->add_triple) }} || (+) Double :: {{ format_currency($umroh_manifest->umrohPackages->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->package_type_2 }})</i></strong></th>
+                                    <th>Package Variant*2 <strong class="text-primary"><i>({{ $umroh_manifest->umrohPackages->category_2 }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_manifest->umrohPackages->hotel_makkah_2 }} <br>
                                         Hotel Madinah :: {{ $umroh_manifest->umrohPackages->hotel_madinah_2 }}
@@ -118,7 +122,7 @@
                                         Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} <br>
                                         Package Price :: {{ format_currency($umroh_manifest->umrohPackages->package_price_2) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_triple_2) }}  ||  Double (+) :: {{ format_currency($umroh_manifest->umrohPackages->add_double_2) }}
+                                        (+) Triple :: {{ format_currency($umroh_manifest->umrohPackages->add_triple_2) }} || (+) Double :: {{ format_currency($umroh_manifest->umrohPackages->add_double_2) }}
                                     </td>
                                 </tr>
                             </table>

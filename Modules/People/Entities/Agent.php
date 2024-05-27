@@ -18,6 +18,10 @@ class Agent extends Model implements HasMedia
 
     protected $with = ['media'];
 
+    public function umrohManifestCustomers() {
+        return $this->hasMany(UmrohManifestCustomer::class, 'id', 'agent_id');
+    }
+
     public function registerMediaCollections(): void {
         $this->addMediaCollection('agents')
             ->useFallbackUrl('/images/fallback_profile_image.png');

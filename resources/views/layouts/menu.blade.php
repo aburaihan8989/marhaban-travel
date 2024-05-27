@@ -191,7 +191,7 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1; color:grey;"></i> Finance Report
+        <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1; color:grey;"></i> Finance Report
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
@@ -450,7 +450,7 @@
 @can('access_reports')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('*-report.index') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1;"></i> Reports
+            <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1;"></i> Reports Inventory
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">

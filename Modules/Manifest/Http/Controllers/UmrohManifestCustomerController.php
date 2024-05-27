@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 // use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Modules\People\Entities\Agent;
 use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
-use Modules\Manifest\Entities\UmrohManifest;
 // use Modules\Product\Entities\Product;
-use Modules\Manifest\Entities\UmrohManifestPayment;
+use Modules\Manifest\Entities\UmrohManifest;
 // use Modules\Purchase\Entities\PurchaseDetail;
+use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
 use Modules\Manifest\DataTables\UmrohManifestCustomerDataTable;
 // use Modules\Saving\Http\Requests\StoreSavingRequest;
@@ -54,7 +55,7 @@ class UmrohManifestCustomerController extends Controller
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
-                // 'paspor_number' => Customer::findOrFail($request->customer_id)->paspor_number,
+                'agent_id' => $request->agent_id,
                 'status' => $status,
                 'manifest_id' => $umroh_manifest_id->id,
                 'package_id' => $umroh_manifest_id->package_id,
@@ -73,6 +74,9 @@ class UmrohManifestCustomerController extends Controller
                 'clothes' => $request->clothes,
                 'small_pillow' => $request->small_pillow,
                 'scraf' => $request->scraf,
+                'room_group' => $request->room_group,
+                'family_group' => $request->family_group,
+                'baggage' => $request->baggage,
                 'note' => $request->note
             ]);
 
@@ -103,10 +107,10 @@ class UmrohManifestCustomerController extends Controller
 
     public function show(UmrohManifestCustomer $umroh_manifest_customer_id) {
         // abort_if(Gate::denies('show_purchases'), 403);
-
         $customer = Customer::findOrFail($umroh_manifest_customer_id->customer_id);
+        $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
 
-        return view('manifest::umroh.customers.show', compact('umroh_manifest_customer_id', 'customer'));
+        return view('manifest::umroh.customers.show', compact('umroh_manifest_customer_id', 'customer', 'agent'));
     }
 
 
@@ -141,7 +145,7 @@ class UmrohManifestCustomerController extends Controller
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
-                // 'paspor_number' => Customer::findOrFail($request->customer_id)->paspor_number,
+                'agent_id' => $request->agent_id,
                 'status' => $status,
                 'total_price' => $request->total_price,
                 'total_payment' => $umroh_manifest_customer_id->total_payment,
@@ -154,6 +158,9 @@ class UmrohManifestCustomerController extends Controller
                 'clothes' => $request->clothes,
                 'small_pillow' => $request->small_pillow,
                 'scraf' => $request->scraf,
+                'room_group' => $request->room_group,
+                'family_group' => $request->family_group,
+                'baggage' => $request->baggage,
                 'note' => $request->note
             ]);
 

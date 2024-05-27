@@ -2,8 +2,10 @@
 
 namespace Modules\Manifest\Entities;
 
+use Modules\People\Entities\Agent;
 use Modules\People\Entities\Customer;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Package\Entities\UmrohPackage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UmrohManifestCustomer extends Model
@@ -18,6 +20,14 @@ class UmrohManifestCustomer extends Model
 
     public function umrohCustomers() {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function umrohAgents() {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
+    }
+
+    public function umrohPackages() {
+        return $this->hasOne(UmrohPackage::class, 'id', 'package_id');
     }
 
     public static function boot() {

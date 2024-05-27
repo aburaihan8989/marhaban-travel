@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Manifest Customer Umroh')
-{{-- @dd($umroh_manifest_customer_id) --}}
+@section('title', 'Edit Customer Manifest Umroh')
+
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest_customer_id->manifest_id) }}">Umroh Manifest Manages</a></li>
-        <li class="breadcrumb-item active">Edit Manifest Customer Umroh</li>
+        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest_customer_id->manifest_id) }}">Manage Umroh Manifest</a></li>
+        <li class="breadcrumb-item active">Edit Customer Manifest Umroh</li>
     </ol>
 @endsection
 
@@ -41,6 +41,7 @@
                                         <div class="form-group">
                                             <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
+                                                <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option {{ $umroh_manifest_customer_id->customer_id == $customer->id ? 'selected' : '' }} value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                                 @endforeach
@@ -51,14 +52,66 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
+                                            <label for="customer_phone">Customer Phone Number <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="customer_phone" required value="{{ $umroh_manifest_customer_id->customer_phone }}" readonly>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {{-- <livewire:product-cart :cartInstance="'purchase'" :data="$purchase"/> --}}
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                                <option value="" selected disabled>Select Agent / Sponsor</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent)
+                                                    <option {{ $umroh_manifest_customer_id->agent_id == $agent->id ? 'selected' : '' }} value="{{ $agent->id }}">{{ $agent->agent_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="agent_phone">Agent Phone Number <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="agent_phone" required value="{{ $umroh_manifest_customer_id->umrohAgents->agent_phone }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="room_group">Room Group <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="room_group" id="room_group">
+                                            <option value="" selected>None</option>
+                                            <option {{ $umroh_manifest_customer_id->room_group == "Quad" ? 'selected' : '' }} value="Quad">Quad</option>
+                                            <option {{ $umroh_manifest_customer_id->room_group == "Triple" ? 'selected' : '' }} value="Triple">Triple</option>
+                                            <option {{ $umroh_manifest_customer_id->room_group == "Double" ? 'selected' : '' }} value="Double">Double</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="family_group">Family Group <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="family_group" value="{{ $umroh_manifest_customer_id->family_group }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="baggage">Baggage <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="baggage" value="{{ $umroh_manifest_customer_id->baggage }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row">
                                 <div class="col-lg-4">
@@ -70,26 +123,51 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <label for="total_payment">Total Payment <span class="text-danger">*</span></label>
-                                        <input id="total_payment" type="text" class="form-control" name="total_payment" required value="{{ format_currency($umroh_manifest_customer_id->total_payment) }}" readonly>
+                                        <input id="total_payment" type="text" class="form-control" style="font-weight:bold;" name="total_payment" required value="{{ format_currency($umroh_manifest_customer_id->total_payment) }}" readonly>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-row">
-                                {{-- <div class="col-lg-4">
-                                    <div class="from-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <input id="status" type="text" class="form-control" name="status" required value="{{ $umroh_manifest_customer_id->status }}">
-                                    </div>
-                                </div> --}}
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="remaining_payment">Remaining Payment <span class="text-danger">*</span></label>
-                                        <input id="remaining_payment" type="text" class="form-control" style="font-weight:bold; font-size:20px;" name="remaining_payment" required value="{{ format_currency($umroh_manifest_customer_id->remaining_payment) }}" readonly>
+                                        <input id="remaining_payment" type="text" class="form-control" style="font-weight:bold;" name="remaining_payment" required value="{{ format_currency($umroh_manifest_customer_id->remaining_payment) }}" readonly>
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <br>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <i>
+                                                <u><strong>Package Variant*1 </strong><strong class="text-primary"><i>({{ $umroh_manifest_customer_id->umrohPackages->category }})</i></strong></u>
+                                                <br>
+                                                <br>
+                                                {{-- Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost) }} --}}
+                                                Package Price :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->package_price) }}
+                                                <hr>
+                                                (+) Triple :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->add_triple) }} || (+) Double :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->add_double) }}
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <i>
+                                                <u><strong>Package Variant*2 </strong><strong class="text-primary"><i>({{ $umroh_manifest_customer_id->umrohPackages->category_2 }})</i></strong></u>
+                                                <br>
+                                                <br>
+                                                {{-- Package Cost :: {{ format_currency($umroh_manifest->umrohPackages->package_cost_2) }} --}}
+                                                Package Price :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->package_price_2) }}
+                                                <hr>
+                                                (+) Triple :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->add_triple_2) }} || (+) Double :: {{ format_currency($umroh_manifest_customer_id->umrohPackages->add_double_2) }}
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-row">
@@ -97,7 +175,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="ticket" name="ticket" value="1" {{ $umroh_manifest_customer_id->ticket == '1' ? 'checked' : '' }}>
-                                      <label class="form-check-label" for="ticket">Completed</label>
+                                      <label class="form-check-label" for="ticket">Issued</label>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +186,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="visa" name="visa" value="1" {{ $umroh_manifest_customer_id->visa == '1' ? 'checked' : '' }}>
-                                      <label class="form-check-label" for="visa">Completed</label>
+                                      <label class="form-check-label" for="visa">Issued</label>
                                     </div>
                                 </div>
                             </div>
