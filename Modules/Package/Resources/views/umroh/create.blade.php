@@ -115,21 +115,14 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_type">Package Category <strong class="text-primary"><i>(Marhaban)</i></strong><span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type" id="package_type" required readonly disabled>
-                                            {{-- <option value="" selected disabled>Select Type</option> --}}
-                                            <option value="Marhaban" selected>Marhaban</option>
-                                            {{-- <option value="Muzdalifah">Muzdalifah</option> --}}
-                                        </select>
+                                        <label for="category">Package Category <strong class="text-danger"><i>(Marhaban)</i></strong></label>
+                                        <input type="text" class="form-control" name="category" value="Marhaban" readonly>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="hotel_makkah">Hotel Makkah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                            <label for="hotel_makkah">Hotel Makkah <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                             <select class="form-control" name="hotel_makkah" id="hotel_makkah" required>
                                                 <option value="" selected disabled>Select Hotel</option>
                                                 @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
@@ -142,7 +135,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="hotel_madinah">Hotel Madinah <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                            <label for="hotel_madinah">Hotel Madinah <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                             <select class="form-control" name="hotel_madinah" id="hotel_madinah" required>
                                                 <option value="" selected disabled>Select Hotel</option>
                                                 @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
@@ -156,14 +149,16 @@
 
                             <div class="form-row">
                                 <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_cost">Package Cost <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                        <label for="package_cost">Package Cost <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                         <input id="package_cost" type="text" class="form-control" name="package_cost" value="{{ old('package_cost') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_price">Package Price <i>(Marhaban)</i><span class="text-danger">*</span></label>
+                                        <label for="package_price">Package Price <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                         <input id="package_price" type="text" class="form-control" name="package_price" required value="{{ old('package_price') }}">
                                     </div>
                                 </div>
@@ -171,14 +166,16 @@
 
                             <div class="form-row">
                                 <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_triple">(+) Triple <span class="text-danger">*</span></label>
+                                        <label for="add_triple">(+) Triple <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                         <input id="add_triple" type="text" class="form-control" name="add_triple" value="{{ old('add_triple') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_double">(+) Double <span class="text-danger">*</span></label>
+                                        <label for="add_double">(+) Double <strong class="text-danger"><i>(Marhaban)</i></strong></label>
                                         <input id="add_double" type="text" class="form-control" name="add_double" value="{{ old('add_double') }}">
                                     </div>
                                 </div>
@@ -188,21 +185,14 @@
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_type_2">Package Category <strong class="text-primary"><i>(Muzdalifah)</i></strong><span class="text-danger">*</span></label>
-                                        <select class="form-control" name="package_type_2" id="package_type_2" required readonly disabled>
-                                            {{-- <option value="" selected disabled>Select Type</option> --}}
-                                            {{-- <option value="Marhaban">Marhaban</option> --}}
-                                            <option value="Muzdalifah" selected>Muzdalifah</option>
-                                        </select>
+                                        <label for="category_2">Package Category <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
+                                        <input type="text" class="form-control" name="category_2" value="Muzdalifah" readonly>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="hotel_makkah_2">Hotel Makkah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                            <label for="hotel_makkah_2">Hotel Makkah <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                             <select class="form-control" name="hotel_makkah_2" id="hotel_makkah_2" required>
                                                 <option value="" selected disabled>Select Hotel</option>
                                                 @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
@@ -215,7 +205,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="hotel_madinah_2">Hotel Madinah <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                            <label for="hotel_madinah_2">Hotel Madinah <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                             <select class="form-control" name="hotel_madinah_2" id="hotel_madinah_2" required>
                                                 <option value="" selected disabled>Select Hotel</option>
                                                 @foreach(\Modules\Package\Entities\Hotel::all() as $hotel)
@@ -229,14 +219,16 @@
 
                             <div class="form-row">
                                 <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_cost_2">Package Cost <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <label for="package_cost_2">Package Cost <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                         <input id="package_cost_2" type="text" class="form-control" name="package_cost_2" value="{{ old('package_cost_2') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="package_price_2">Package Price <i>(Muzdalifah)</i><span class="text-danger">*</span></label>
+                                        <label for="package_price_2">Package Price <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                         <input id="package_price_2" type="text" class="form-control" name="package_price_2" required value="{{ old('package_price_2') }}">
                                     </div>
                                 </div>
@@ -244,14 +236,16 @@
 
                             <div class="form-row">
                                 <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_triple_2">(+) Triple <span class="text-danger">*</span></label>
+                                        <label for="add_triple_2">(+) Triple <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                         <input id="add_triple_2" type="text" class="form-control" name="add_triple_2" value="{{ old('add_triple_2') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="add_double_2">(+) Double <span class="text-danger">*</span></label>
+                                        <label for="add_double_2">(+) Double <strong class="text-primary"><i>(Muzdalifah)</i></strong></label>
                                         <input id="add_double_2" type="text" class="form-control" name="add_double_2" value="{{ old('add_double_2') }}">
                                     </div>
                                 </div>

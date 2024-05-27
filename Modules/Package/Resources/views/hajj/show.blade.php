@@ -74,7 +74,7 @@
                                     <td>{{ $hajj_package->package_type }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Package Category <strong class="text-primary"><i>({{ $hajj_package->category }})</i></strong></th>
+                                    <th>Package Variant*1 <strong class="text-primary"><i>({{ $hajj_package->category }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $hajj_package->hotel_makkah }} <br>
                                         Hotel Madinah :: {{ $hajj_package->hotel_madinah }}
@@ -85,11 +85,11 @@
                                         Package Cost :: {{ format_currency($hajj_package->package_cost) }} <br>
                                         Package Price :: {{ format_currency($hajj_package->package_price) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($hajj_package->add_triple) }}  ||  Double (+) :: {{ format_currency($hajj_package->add_double) }}
+                                        (+) Triple :: {{ format_currency($hajj_package->add_triple) }} || (+) Double :: {{ format_currency($hajj_package->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package Category <strong class="text-primary"><i>({{ $hajj_package->category_2 }})</i></strong></th>
+                                    <th>Package Variant*2 <strong class="text-primary"><i>({{ $hajj_package->category_2 }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $hajj_package->hotel_makkah_2 }} <br>
                                         Hotel Madinah :: {{ $hajj_package->hotel_madinah_2 }}
@@ -100,7 +100,7 @@
                                         Package Cost :: {{ format_currency($hajj_package->package_cost_2) }} <br>
                                         Package Price :: {{ format_currency($hajj_package->package_price_2) }}
                                         <hr>
-                                        Triple (+) :: {{ format_currency($hajj_package->add_triple_2) }}  ||  Double (+) :: {{ format_currency($hajj_package->add_double_2) }}
+                                        (+) Triple :: {{ format_currency($hajj_package->add_triple_2) }} || (+) Double :: {{ format_currency($hajj_package->add_double_2) }}
                                     </td>
                                 </tr>
 

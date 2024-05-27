@@ -70,7 +70,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package Category <strong class="text-primary"><i>({{ $umroh_package->package_type }})</i></strong></th>
+                                    <th>Package Variant*1 <strong class="text-primary"><i>({{ $umroh_package->category }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_package->hotel_makkah }} <br>
                                         Hotel Madinah :: {{ $umroh_package->hotel_madinah }}
@@ -82,7 +82,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package Category <strong class="text-primary"><i>({{ $umroh_package->package_type_2 }})</i></strong></th>
+                                    <th>Package Variant*2 <strong class="text-primary"><i>({{ $umroh_package->category_2 }})</i></strong></th>
                                     <td>
                                         Hotel Makkah :: {{ $umroh_package->hotel_makkah_2 }} <br>
                                         Hotel Madinah :: {{ $umroh_package->hotel_madinah_2 }}
