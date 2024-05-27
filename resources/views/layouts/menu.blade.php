@@ -94,7 +94,7 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-packages.*') ? 'c-show' : '' }}">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-packages.*') || request()->routeIs('hajj-packages.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-journal-bookmark" style="line-height: 1;"></i> Package Management
     </a>
@@ -116,21 +116,21 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-manifests.*') ? 'c-show' : '' }}">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-manifests.*') || request()->routeIs('umroh-manage-manifests.*') || request()->routeIs('umroh-manifest-customers.*') || request()->routeIs('hajj-manifests.*') || request()->routeIs('hajj-manage-manifests.*') || request()->routeIs('hajj-manifest-customers.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-journal-check"></i> Manifest Management
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('umroh-manifests.*') ? 'c-active' : '' }}" href="{{ route('umroh-manifests.index') }}">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('umroh-manifests.*') || request()->routeIs('umroh-manage-manifests.*') || request()->routeIs('umroh-manifest-customers.*') ? 'c-active' : '' }}" href="{{ route('umroh-manifests.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-clipboard-check"></i> Umroh Manifest
                 </a>
             </li>
         {{-- @endcan
         @can('access_customers') --}}
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('hajj-manifests.*') ? 'c-active' : '' }}" href="{{ route('hajj-manifests.index') }}">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('hajj-manifests.*') || request()->routeIs('hajj-manage-manifests.*') || request()->routeIs('hajj-manifest-customers.*') ? 'c-active' : '' }}" href="{{ route('hajj-manifests.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-clipboard-check"></i> Hajj Manifest
                 </a>
             </li>
@@ -138,7 +138,7 @@
     </ul>
 </li>
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-savings.*') ? 'c-show' : '' }}">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('umroh-savings.*') || request()->routeIs('hajj-savings.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Savings Management
     </a>

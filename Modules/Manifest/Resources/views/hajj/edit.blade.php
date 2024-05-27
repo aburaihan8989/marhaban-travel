@@ -41,6 +41,7 @@
                                         <div class="form-group">
                                             <label for="package_id">Package Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="package_id" id="package_id" required>
+                                                <option value="" selected disabled>Select Package</option>
                                                 @foreach(\Modules\Package\Entities\HajjPackage::all() as $hajj_package)
                                                     <option {{ $hajj_manifest->package_id == $hajj_package->id ? 'selected' : '' }} value="{{ $hajj_package->id }}">{{ $hajj_package->package_name }}</option>
                                                 @endforeach
@@ -52,9 +53,10 @@
                                     <div class="form-group">
                                         <label for="status">Manifest Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
-                                            <option value="" selected>None</option>
+                                            <option value="" selected>Select Status</option>
                                             <option {{ $hajj_manifest->status == 'Active' ? 'selected' : '' }} value="Active">Active</option>
-                                            <option {{ $hajj_manifest->status == 'Closed' ? 'selected' : '' }} value="Closed">Closed</option>
+                                            <option {{ $hajj_manifest->status == 'Flight' ? 'selected' : '' }} value="Flight">Flight</option>
+                                            <option {{ $hajj_manifest->status == 'Completed' ? 'selected' : '' }} value="Completed">Completed</option>
                                         </select>
                                     </div>
                                 </div>

@@ -41,6 +41,7 @@
                                         <div class="form-group">
                                             <label for="package_id">Package Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="package_id" id="package_id" required>
+                                                <option value="" selected disabled>Select Package</option>
                                                 @foreach(\Modules\Package\Entities\UmrohPackage::all() as $umroh_package)
                                                     <option value="{{ $umroh_package->id }}">{{ $umroh_package->package_name }}</option>
                                                 @endforeach
@@ -54,7 +55,8 @@
                                         <select class="form-control" name="status" id="status" required>
                                             <option value="" selected disabled>Select Status</option>
                                             <option value="Active">Active</option>
-                                            <option value="Closed">Closed</option>
+                                            <option value="Flight">Flight</option>
+                                            <option value="Completed">Completed</option>
                                         </select>
                                     </div>
                                 </div>
