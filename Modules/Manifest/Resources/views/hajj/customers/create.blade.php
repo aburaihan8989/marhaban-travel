@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Create Manifest Customer Hajj')
+@section('title', 'Add Customer Manifest Hajj')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('hajj-manifests.index') }}">Hajj Manifest Customers</a></li>
-        <li class="breadcrumb-item active">Create Manifest Customer Hajj</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manage-manifests.manage', $hajj_manifest->id) }}">Manage Hajj Manifest</a></li>
+        <li class="breadcrumb-item active">Add Customer Manifest Hajj</li>
     </ol>
 @endsection
 
@@ -34,11 +34,15 @@
                                         <input type="text" class="form-control" name="reference" required readonly value="CM">
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="customer_id">Customer <span class="text-danger">*</span></label>
+                                            <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
+                                                <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                                 @endforeach
@@ -46,9 +50,51 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                                <option value="" selected disabled>Select Agent / Sponsor</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent)
+                                                    <option value="{{ $agent->id }}">{{ $agent->agent_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            {{-- <livewire:product-cart :cartInstance="'purchase'"/> --}}
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="room_group">Room Group <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="room_group" id="room_group">
+                                                <option value="Quad">Quad</option>
+                                                <option value="Triple">Triple</option>
+                                                <option value="Double">Double</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="family_group">Family Group <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input id="family_group" type="text" class="form-control" name="{{ old('family_group') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="baggage">Baggage <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <input id="baggage" type="text" class="form-control" name="{{ old('baggage') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-row">
                                 <div class="col-lg-4">
@@ -81,13 +127,49 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <br>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <i>
+                                                <u><strong>Package Variant*1 </strong><strong class="text-primary"><i>({{ $hajj_manifest->hajjPackages->category }})</i></strong></u>
+                                                <br>
+                                                <br>
+                                                {{-- Package Cost :: {{ format_currency($hajj_manifest->hajjPackages->package_cost) }} --}}
+                                                Package Price :: {{ format_currency($hajj_manifest->hajjPackages->package_price) }}
+                                                <hr>
+                                                (+) Triple :: {{ format_currency($hajj_manifest->hajjPackages->add_triple) }} || (+) Double :: {{ format_currency($hajj_manifest->hajjPackages->add_double) }}
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <i>
+                                                <u><strong>Package Variant*2 </strong><strong class="text-primary"><i>({{ $hajj_manifest->hajjPackages->category_2 }})</i></strong></u>
+                                                <br>
+                                                <br>
+                                                {{-- Package Cost :: {{ format_currency($hajj_manifest->hajjPackages->package_cost_2) }} --}}
+                                                Package Price :: {{ format_currency($hajj_manifest->hajjPackages->package_price_2) }}
+                                                <hr>
+                                                (+) Triple :: {{ format_currency($hajj_manifest->hajjPackages->add_triple_2) }} || (+) Double :: {{ format_currency($hajj_manifest->hajjPackages->add_double_2) }}
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
 
                             <div class="form-row">
                                 <legend class="col-form-label col-sm-2 pt-0">Ticket Status</legend>
                                 <div class="col-lg-2">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="ticket" name="ticket" value="1">
-                                      <label class="form-check-label" for="ticket">Completed</label>
+                                      <label class="form-check-label" for="ticket">Issued</label>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +180,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="visa" name="visa" value="1">
-                                      <label class="form-check-label" for="visa">Completed</label>
+                                      <label class="form-check-label" for="visa">Issued</label>
                                     </div>
                                 </div>
                             </div>

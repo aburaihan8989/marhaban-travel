@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Customer Manifest Hajj Details')
+@section('title', 'Details Customer Manifest Hajj')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('hajj-manage-manifests.manage', $hajj_manifest_customer_id->manifest_id) }}">Hajj Manifest Manages</a></li>
-        <li class="breadcrumb-item active">Customer Manifest Hajj Details</li>
+        <li class="breadcrumb-item"><a href="{{ route('hajj-manage-manifests.manage', $hajj_manifest_customer_id->manifest_id) }}">Manage Hajj Manifest</a></li>
+        <li class="breadcrumb-item active">Details Customer Manifest Hajj</li>
     </ol>
 @endsection
 
@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Category : <strong>Hajj Manifest Customer Details</strong>
+                            Category : <strong>Details Customer Manifest Hajj</strong>
                         </div>
                     </div>
                     <div class="card-body">
@@ -50,11 +50,11 @@
                             </div>
 
                             <div class="col-sm-4 mb-3 mb-md-0">
-                                <h5 class="mb-2 border-bottom pb-2">Agent Info:</h5>
-                                {{-- <div><strong>{{ $customer->customer_name }}</strong></div>
-                                <div>{{ $customer->address }}</div>
-                                <div>Phone: {{ $customer->customer_phone }}</div>
-                                <div>Email: {{ $customer->customer_email }}</div> --}}
+                                <h5 class="mb-2 border-bottom pb-2">Agent / Sponsor Info:</h5>
+                                <div><strong>{{ $agent->agent_name }}</strong></div>
+                                <div>{{ $agent->address }}</div>
+                                <div>Phone: {{ $agent->agent_phone }}</div>
+                                <div>Email: {{ $agent->agent_email }}</div>
                             </div>
 
                             {{-- <div class="col-sm-4 mb-3 mb-md-0">
@@ -71,69 +71,123 @@
 
                         </div>
 
-                        <div class="table-responsive-sm mb-5">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="align-middle">Reference</th>
-                                        <th class="align-middle">Register Date</th>
-                                        <th class="align-middle">Customer Name</th>
-                                        <th class="align-middle">Phone Number</th>
-                                        <th class="align-middle">Package Price</th>
-                                        <th class="align-middle">Total Payment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="align-middle">
-                                            {{ $hajj_manifest_customer_id->reference }}
-                                        </td>
-                                        <td class="align-middle">
-                                            {{ date('d-m-Y', strtotime($hajj_manifest_customer_id->register_date)) }}
-                                        </td>
-                                        <td class="align-middle">
-                                            {{ $hajj_manifest_customer_id->customer_name }}
-                                        </td>
-                                        <td class="align-middle">
-                                            {{ $hajj_manifest_customer_id->customer_phone }}
-                                        </td>
-                                        <td class="align-middle">
-                                            {{ format_currency($hajj_manifest_customer_id->total_price) }}
-                                        </td>
-                                        <td class="align-middle">
-                                            {{ format_currency($hajj_manifest_customer_id->total_payment) }}
-                                        </td>
-                                    </tr>
-                                </tbody>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="table-responsive-sm">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="align-middle">Register ID</th>
+                                                <th class="align-middle">Register Date</th>
+                                                <th class="align-middle">Customer Name</th>
+                                                <th class="align-middle">Phone Number</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->reference }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ date('d-m-Y', strtotime($hajj_manifest_customer_id->register_date)) }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->customer_name }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->customer_phone }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-                                <thead>
-                                    <tr>
-                                        <th class="align-middle">Status</th>
-                                        <th class="align-middle">Remaining Payment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="align-middle">
-                                            {{-- <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
-                                            </span> --}}
-                                            @if ($hajj_manifest_customer_id->status == 'Completed')
-                                                <span class="badge badge-success" style="font-size: 13px;">
-                                                    {{ $hajj_manifest_customer_id->status }}
-                                                </span>
-                                            @else
-                                                <span class="badge badge-warning" style="font-size: 13px;">
-                                                    {{ $hajj_manifest_customer_id->status }}
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                            {{ format_currency($hajj_manifest_customer_id->remaining_payment) }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive-sm mb-4">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="align-middle">Package Code</th>
+                                                <th class="align-middle">Package Name</th>
+                                                <th class="align-middle">Package Date</th>
+                                                <th class="align-middle">Departure</th>
+                                                <th class="align-middle">Package Days</th>
+                                                <th class="align-middle">Room Group</th>
+                                                <th class="align-middle">Package Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->hajjPackages->package_code }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->hajjPackages->package_name }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ date('d-m-Y', strtotime($hajj_manifest_customer_id->hajjPackages->package_date)) }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->hajjPackages->package_departure }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->hajjPackages->package_days }} Days
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->room_group }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ format_currency($hajj_manifest_customer_id->total_price) }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="table-responsive-sm mb-5">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="align-middle">Total Price</th>
+                                                <th class="align-middle">Total Payment</th>
+                                                <th class="align-middle">Remaining Payment</th>
+                                                <th class="align-middle">Payment Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                    {{ format_currency($hajj_manifest_customer_id->total_price) }}
+                                                </td>
+                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                    {{ format_currency($hajj_manifest_customer_id->total_payment) }}
+                                                </td>
+                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                    {{ format_currency($hajj_manifest_customer_id->remaining_payment) }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    @if ($hajj_manifest_customer_id->status == 'Completed')
+                                                        <span class="badge badge-success" style="font-size: 14px;">
+                                                            {{ $hajj_manifest_customer_id->status }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-danger" style="font-size: 14px;">
+                                                            {{ $hajj_manifest_customer_id->status }}
+                                                        </span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -172,15 +226,46 @@
                         <hr>
 
                         <div class="row">
+                            <div class="col-lg-6">
+                                <div class="table-responsive-sm">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="align-middle">Room Group</th>
+                                                <th class="align-middle">Family Group</th>
+                                                <th class="align-middle">Baggage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->room_group }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->family_group }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $hajj_manifest_customer_id->baggage }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+
+                        <div class="row">
                             <legend class="col-form-label col-sm-2 pt-0">Ticket Status</legend>
                             <div class="col-lg-2">
                                 <div class="form-check">
                                     @if ($hajj_manifest_customer_id->ticket == '1')
                                         <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
-                                        <label class="form-check-label ml-3" for="ticket">Completed</label>
+                                        <label class="form-check-label ml-3" for="ticket">Issued</label>
                                     @else
                                         <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
-                                        <label class="form-check-label ml-3" for="ticket">Not Yet</label>
+                                        <label class="form-check-label ml-3" for="ticket">Process</label>
                                     @endif
                                 </div>
                             </div>
@@ -193,10 +278,10 @@
                                 <div class="form-check">
                                     @if ($hajj_manifest_customer_id->visa == '1')
                                         <i class="form-check-input bi bi-check-circle-fill" style="line-height:1;font-size:25px;color:green;position:absolute;top:-5px;"></i>
-                                        <label class="form-check-label ml-3" for="ticket">Completed</label>
+                                        <label class="form-check-label ml-3" for="ticket">Issued</label>
                                     @else
                                         <i class="form-check-input bi bi-x-circle-fill" style="line-height:1;font-size:25px;color:red;position:absolute;top:-5px;"></i>
-                                        <label class="form-check-label ml-3" for="ticket">Not Yet</label>
+                                        <label class="form-check-label ml-3" for="ticket">Process</label>
                                     @endif
                                 </div>
                             </div>
@@ -250,6 +335,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <legend class="col-form-label col-sm-2 pt-0"></legend>
                             <div class="col-lg-2">
@@ -317,7 +403,7 @@
                                                         @else
                                                             Female
                                                         @endif
-                                                        {{-- {{ $umroh_manifest_customer_id->umrohCustomers->gender }} --}}
+                                                        {{-- {{ $hajj_manifest_customer_id->umrohCustomers->gender }} --}}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -330,7 +416,7 @@
                                                         @else
                                                             Infant
                                                         @endif
-                                                        {{-- {{ $umroh_manifest_customer_id->umrohCustomers->age_group }} --}}
+                                                        {{-- {{ $hajj_manifest_customer_id->umrohCustomers->age_group }} --}}
                                                     </td>
                                                 </tr>
                                                 <tr>

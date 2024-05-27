@@ -80,11 +80,15 @@
                                     <td>{{ $hajj_manifest->flight_route }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Airline Name</th>
+                                    <td>{{ $hajj_manifest->hajjPackages->airline_name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Package Days</th>
                                     <td>{{ $hajj_manifest->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Status</th>
+                                    <th>Package Status</th>
                                     <td>
                                         @if($hajj_manifest->status == 'Active')
                                             <span class="badge badge-success" style="font-size: 13px;">
@@ -98,23 +102,37 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $hajj_manifest->HajjPackages->package_type }})</i></strong></th>
+                                    <th>Package Category</th>
+                                    <td>{{ $hajj_manifest->hajjPackages->package_type }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Package Variant*1 <strong class="text-primary"><i>({{ $hajj_manifest->hajjPackages->category }})</i></strong></th>
                                     <td>
-                                        Hotel Makkah :: {{ $hajj_manifest->HajjPackages->hotel_makkah }} <br>
-                                        Hotel Madinah :: {{ $hajj_manifest->HajjPackages->hotel_madinah }}
+                                        Hotel Makkah :: {{ $hajj_manifest->hajjPackages->hotel_makkah }} <br>
+                                        Hotel Madinah :: {{ $hajj_manifest->hajjPackages->hotel_madinah }}
                                         <hr>
-                                        Package Cost :: {{ format_currency($hajj_manifest->HajjPackages->package_cost) }} <br>
-                                        Package Price :: {{ format_currency($hajj_manifest->HajjPackages->package_price) }}
+                                        Hotel Transit :: {{ $hajj_manifest->hajjPackages->hotel_transit }} <br>
+                                        Tenda Arafah :: {{ $hajj_manifest->hajjPackages->hotel_arafah }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($hajj_manifest->hajjPackages->package_cost) }} <br>
+                                        Package Price :: {{ format_currency($hajj_manifest->hajjPackages->package_price) }}
+                                        <hr>
+                                        (+) Triple :: {{ format_currency($hajj_manifest->hajjPackages->add_triple) }} || (+) Double :: {{ format_currency($hajj_manifest->hajjPackages->add_double) }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package <strong class="text-primary"><i>({{ $hajj_manifest->HajjPackages->package_type_2 }})</i></strong></th>
+                                    <th>Package Variant*2 <strong class="text-primary"><i>({{ $hajj_manifest->hajjPackages->category_2 }})</i></strong></th>
                                     <td>
-                                        Hotel Makkah :: {{ $hajj_manifest->HajjPackages->hotel_makkah_2 }} <br>
-                                        Hotel Madinah :: {{ $hajj_manifest->HajjPackages->hotel_madinah_2 }}
+                                        Hotel Makkah :: {{ $hajj_manifest->hajjPackages->hotel_makkah_2 }} <br>
+                                        Hotel Madinah :: {{ $hajj_manifest->hajjPackages->hotel_madinah_2 }}
                                         <hr>
-                                        Package Cost :: {{ format_currency($hajj_manifest->HajjPackages->package_cost_2) }} <br>
-                                        Package Price :: {{ format_currency($hajj_manifest->HajjPackages->package_price_2) }}
+                                        Hotel Transit :: {{ $hajj_manifest->hajjPackages->hotel_transit_2 }} <br>
+                                        Tenda Arafah :: {{ $hajj_manifest->hajjPackages->hotel_arafah_2 }}
+                                        <hr>
+                                        Package Cost :: {{ format_currency($hajj_manifest->hajjPackages->package_cost_2) }} <br>
+                                        Package Price :: {{ format_currency($hajj_manifest->hajjPackages->package_price_2) }}
+                                        <hr>
+                                        (+) Triple :: {{ format_currency($hajj_manifest->hajjPackages->add_triple_2) }} || (+) Double :: {{ format_currency($hajj_manifest->hajjPackages->add_double_2) }}
                                     </td>
                                 </tr>
                             </table>

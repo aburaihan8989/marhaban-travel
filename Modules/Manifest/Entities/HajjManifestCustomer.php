@@ -2,8 +2,10 @@
 
 namespace Modules\Manifest\Entities;
 
+use Modules\People\Entities\Agent;
 use Modules\People\Entities\Customer;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Package\Entities\HajjPackage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HajjManifestCustomer extends Model
@@ -18,6 +20,14 @@ class HajjManifestCustomer extends Model
 
     public function hajjCustomers() {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function umrohAgents() {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
+    }
+
+    public function hajjPackages() {
+        return $this->hasOne(HajjPackage::class, 'id', 'package_id');
     }
 
     public static function boot() {
