@@ -73,6 +73,7 @@ class SavingController extends Controller
                     'date' => $request->register_date,
                     'reference' => 'CR/'.$umroh_saving->reference,
                     'amount' => $request->last_amount,
+                    'status' => 'Approval',
                     'saving_id' => $umroh_saving->id,
                     'payment_method' => $request->payment_method
                 ]);

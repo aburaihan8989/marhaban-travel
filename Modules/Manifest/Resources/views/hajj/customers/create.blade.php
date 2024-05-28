@@ -54,7 +54,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                            <select class="form-control" name="agent_id" id="agent_id">
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
                                                     <option value="{{ $agent->id }}">{{ $agent->agent_name }}</option>

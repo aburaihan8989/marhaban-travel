@@ -113,7 +113,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="bank_account">Account Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="bank_account" required value="{{ old('bank_account') }}">
+                                        <input type="text" class="form-control" name="bank_account" value="{{ old('bank_account') }}">
                                     </div>
                                 </div>
                             </div>
