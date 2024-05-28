@@ -31,7 +31,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
-                            <div class="bg-primary p-3 mfe-3 rounded">
+                            <div class="bg-warning p-3 mfe-3 rounded">
                                 <i class="bi bi-wallet2 font-2xl"></i>
                             </div>
                             <div>
@@ -44,7 +44,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
-                            <div class="bg-primary p-3 mfe-3 rounded">
+                            <div class="bg-success p-3 mfe-3 rounded">
                                 <i class="bi bi-trophy font-2xl"></i>
                             </div>
                             <div>
@@ -73,7 +73,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
-                            <div class="bg-primary p-3 mfe-3 rounded">
+                            <div class="bg-warning p-3 mfe-3 rounded">
                                 <i class="bi bi-wallet2 font-2xl"></i>
                             </div>
                             <div>
@@ -86,7 +86,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
-                            <div class="bg-primary p-3 mfe-3 rounded">
+                            <div class="bg-success p-3 mfe-3 rounded">
                                 <i class="bi bi-trophy font-2xl"></i>
                             </div>
                             <div>
@@ -153,7 +153,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Umroh Savings Customers</div>
-                                <div class="text-value text-primary">{{ $umroh_savings . ' Customers' }}</div>
+                                <div class="text-value text-primary">{{ $customers_umroh_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Hajj Savings Customers</div>
-                                <div class="text-value text-primary">{{ $hajj_savings . ' Customers' }}</div>
+                                <div class="text-value text-primary">{{ $customers_hajj_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
