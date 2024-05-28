@@ -32,9 +32,10 @@ class HomeController extends Controller
 
     public function index(HomeUmrohPackageDataTable $dataTable, HomeHajjPackageDataTable $hajjdataTable) {
         $customers = Customer::count();
-        $umroh_savings = Saving::count();
-        $hajj_savings = HajjSaving::count();
         $agents = Agent::count();
+        $customers_umroh_savings = Saving::count();
+        $customers_hajj_savings = HajjSaving::count();
+
         $payment_umroh_savings = SavingPayment::where('status','Approval')->count();
         $payment_hajj_savings = HajjSavingPayment::where('status','Approval')->count();
         $payment_savings = $payment_umroh_savings + $payment_hajj_savings;
@@ -42,22 +43,22 @@ class HomeController extends Controller
         $payment_hajj_packages = HajjManifestPayment::where('status','Approval')->count();
         $payment_packages = $payment_umroh_packages + $payment_hajj_packages;
 
-        $umroh_payment = UmrohManifestPayment::where('status','Approval')->sum('amount');
+        $umroh_payment = UmrohManifestPayment::where('status','Verified')->sum('amount');
         $umroh_expense = UmrohExpense::sum('amount');
         $umroh_profit = $umroh_payment - $umroh_expense;
 
-        $hajj_payment = HajjManifestPayment::where('status','Approval')->sum('amount');
+        $hajj_payment = HajjManifestPayment::where('status','Verified')->sum('amount');
         $hajj_expense = HajjExpense::sum('amount');
         $hajj_profit = $hajj_payment - $hajj_expense;
 
-        $umroh_savings = SavingPayment::where('status','Approval')->sum('amount');
-        $hajj_savings = HajjSavingPayment::where('status','Approval')->sum('amount');
+        $umroh_savings = SavingPayment::where('status','Verified')->sum('amount');
+        $hajj_savings = HajjSavingPayment::where('status','Verified')->sum('amount');
 
 
         return $dataTable->render('home', compact(
             'customers',
-            'umroh_savings',
-            'hajj_savings',
+            'customers_umroh_savings',
+            'customers_hajj_savings',
             'payment_savings',
             'payment_packages',
             'umroh_payment',

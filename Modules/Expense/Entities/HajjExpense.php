@@ -34,10 +34,10 @@ class HajjExpense extends Model
     }
 
     public function setAmountAttribute($value) {
-        $this->attributes['amount'] = ($value * 100);
+        $this->attributes['amount'] = $value;
     }
 
     public function getAmountAttribute($value) {
-        return ($value / 100);
+        return $value;
     }
 }
