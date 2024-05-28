@@ -197,7 +197,7 @@
         {{-- @can('access_customers') --}}
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" style="color:grey;">
-                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> Dashboard
+                <i class="c-sidebar-nav-icon bi bi-file-earmark-bar-graph" style="line-height: 1; color:grey;"></i> General Report
             </a>
         </li>
         {{-- @endcan --}}
