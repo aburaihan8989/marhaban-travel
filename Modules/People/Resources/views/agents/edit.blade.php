@@ -6,7 +6,7 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('agents.index') }}">Agents</a></li>
-        <li class="breadcrumb-item active">Edit</li>
+        <li class="breadcrumb-item active">Edit Agent</li>
     </ol>
 @endsection
 
@@ -72,20 +72,48 @@
                                         <input type="text" class="form-control" name="agent_phone" required value="{{ $agent->agent_phone }}">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="agent_email">Email <span class="text-danger"></span></label>
-                                        <input type="text" class="form-control" name="agent_email" value="{{ $agent->agent_email }}">
+                                        <label for="level_agent">Level Agent <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="level_agent" id="level_agent" required>
+                                            <option value="" selected>Select Level Agent</option>
+                                            <option {{ $agent->level_agent == "Bronze" ? 'selected' : '' }} value="Bronze">Bronze</option>
+                                            <option {{ $agent->level_agent == "Silver" ? 'selected' : '' }} value="Silver">Silver</option>
+                                            <option {{ $agent->level_agent == "Gold" ? 'selected' : '' }} value="Gold">Gold</option>
+                                            <option {{ $agent->level_agent == "Platinum" ? 'selected' : '' }} value="Platinum">Platinum</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="agent_status">Agent Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="agent_status" id="agent_status">
-                                            <option value="" selected>None</option>
+                                        <select class="form-control" name="agent_status" id="agent_status" required>
+                                            <option value="" selected>Select Status Agent</option>
                                             <option {{ $agent->agent_status == "Active" ? 'selected' : '' }} value="Active">Active</option>
                                             <option {{ $agent->agent_status == "Closed" ? 'selected' : '' }} value="Closed">Closed</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="referal_id">Referal Name <span class="text-danger"></span></label>
+                                            <select class="form-control" name="referal_id" id="referal_id">
+                                                <option value="" selected disabled>Select Referal Name</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $referal)
+                                                    <option {{ $agent->referal_id == $referal->id ? 'selected' : '' }} value="{{ $referal->id }}">{{ $referal->agent_code . ' | ' . $referal->agent_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="referal_level">Referal Level <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="referal_level" readonly value="{{ $referal_agent->level_agent }}">
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +129,12 @@
                                     <div class="form-group">
                                         <label for="country">Country <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="country" value="{{ $agent->country }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="agent_email">Email <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="agent_email" value="{{ $agent->agent_email }}">
                                     </div>
                                 </div>
                             </div>

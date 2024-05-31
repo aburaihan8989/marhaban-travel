@@ -5,8 +5,8 @@
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('agents.index') }}">Agent</a></li>
-        <li class="breadcrumb-item active">Add</li>
+        <li class="breadcrumb-item"><a href="{{ route('agents.index') }}">Agents</a></li>
+        <li class="breadcrumb-item active">Create Agent</li>
     </ol>
 @endsection
 
@@ -71,20 +71,42 @@
                                         <input type="text" class="form-control" name="agent_phone" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="agent_email">Email <span class="text-danger"></span></label>
-                                        <input type="text" class="form-control" name="agent_email">
+                                        <label for="level_agent">Level Agent <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="level_agent" id="level_agent" required>
+                                            <option value="" selected disabled>Select Level Agent</option>
+                                            <option value="Bronze">Bronze</option>
+                                            <option value="Silver">Silver</option>
+                                            <option value="Gold">Gold</option>
+                                            <option value="Platinum">Platinum</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="agent_status">Agent Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="agent_status" id="agent_status" required>
-                                            <option value="" selected disabled>Select Status</option>
+                                            <option value="" selected disabled>Select Status Agent</option>
                                             <option value="Active">Active</option>
                                             <option value="Closed">Closed</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="referal_id">Referal Name <span class="text-danger"></span></label>
+                                            <select class="form-control" name="referal_id" id="referal_id">
+                                                <option value="" selected disabled>Select Referal Name </option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent)
+                                                    <option value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -100,6 +122,12 @@
                                     <div class="form-group">
                                         <label for="country">Country <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="country">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="agent_email">Email <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="agent_email">
                                     </div>
                                 </div>
                             </div>

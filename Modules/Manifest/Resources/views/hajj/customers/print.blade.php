@@ -43,7 +43,7 @@
 
                         <div class="col-xs-4 mb-3 mb-md-0">
                             <h4 class="mb-2" style="border-bottom: 1px solid #dddddd;padding-bottom: 10px;">Agent / Sponsor Info:</h5>
-                            <div><strong>{{ $agent->agent_name }}</strong></div>
+                            <div><strong>{{ $agent->agent_code . ' | ' . $agent->agent_name }}</strong></div>
                             <div>{{ $agent->address }}</div>
                             <div>Phone: {{ $agent->agent_phone }}</div>
                             <div>Email: {{ $agent->agent_email }}</div>

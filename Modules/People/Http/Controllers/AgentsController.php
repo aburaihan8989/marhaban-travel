@@ -50,6 +50,8 @@ class AgentsController extends Controller
             'agent_phone'    => $request->agent_phone,
             'agent_email'    => $request->agent_email,
             'gender'         => $request->gender,
+            'referal_id'     => $request->referal_id,
+            'level_agent'    => $request->level_agent,
             'agent_status'   => $request->agent_status,
             'city'           => $request->city,
             'country'        => $request->country,
@@ -70,15 +72,17 @@ class AgentsController extends Controller
 
     public function show(Agent $agent) {
         // abort_if(Gate::denies('show_customers'), 403);
+        $referal_agent = Agent::findOrFail($agent->referal_id);
 
-        return view('people::agents.show', compact('agent'));
+        return view('people::agents.show', compact('agent', 'referal_agent'));
     }
 
 
     public function edit(Agent $agent) {
         // abort_if(Gate::denies('edit_customers'), 403);
+        $referal_agent = Agent::findOrFail($agent->referal_id);
 
-        return view('people::agents.edit', compact('agent'));
+        return view('people::agents.edit', compact('agent', 'referal_agent'));
     }
 
 
@@ -104,6 +108,8 @@ class AgentsController extends Controller
             'agent_phone'    => $request->agent_phone,
             'agent_email'    => $request->agent_email,
             'gender'         => $request->gender,
+            'level_agent'    => $request->level_agent,
+            'referal_id'     => $request->referal_id,
             'agent_status'   => $request->agent_status,
             'city'           => $request->city,
             'country'        => $request->country,

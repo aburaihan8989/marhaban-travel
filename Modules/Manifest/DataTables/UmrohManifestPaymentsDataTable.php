@@ -2,12 +2,13 @@
 
 namespace Modules\Manifest\DataTables;
 
-use Modules\Manifest\Entities\UmrohManifestPayment;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Manifest\Entities\UmrohManifestPayment;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
 class UmrohManifestPaymentsDataTable extends DataTable
 {
@@ -19,6 +20,14 @@ class UmrohManifestPaymentsDataTable extends DataTable
             })
             ->addColumn('status', function ($data) {
                 return view('manifest::umroh.payments.partials.status', compact('data'));
+            })
+            ->editColumn('customer_name', function($model){
+                $getData = UmrohManifestCustomer::findOrFail($model->umroh_manifest_customer_id)->customer_name;
+                return $getData;
+            })
+            ->editColumn('customer_phone', function($model){
+                $getData = UmrohManifestCustomer::findOrFail($model->umroh_manifest_customer_id)->customer_phone;
+                return $getData;
             })
             ->addColumn('action', function ($data) {
                 return view('manifest::umroh.payments.partials.actions', compact('data'));
@@ -65,6 +74,14 @@ class UmrohManifestPaymentsDataTable extends DataTable
                 ->className('align-middle text-center'),
 
             Column::make('reference')
+                ->className('align-middle text-center'),
+
+            Column::make('customer_name')
+                ->title('Customer Name')
+                ->className('align-middle text-center'),
+
+            Column::make('customer_phone')
+                ->title('Phone Number')
                 ->className('align-middle text-center'),
 
             Column::computed('amount')

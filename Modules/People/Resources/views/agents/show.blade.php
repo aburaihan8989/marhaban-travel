@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Agent Details')
+@section('title', 'Details Agent')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('agents.index') }}">Agents</a></li>
-        <li class="breadcrumb-item active">Details</li>
+        <li class="breadcrumb-item active">Details Agent</li>
     </ol>
 @endsection
 
@@ -53,6 +53,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Level Agent</th>
+                                    <td>{{ $agent->level_agent }}</td>
+                                </tr>
+                                <tr>
                                     <th>Agent Status</th>
                                     <td>{{ $agent->agent_status }}</td>
                                 </tr>
@@ -67,6 +71,14 @@
                                 <tr>
                                     <th>Address</th>
                                     <td>{{ $agent->address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Referal Name</th>
+                                    <td>{{ $referal_agent->agent_code . ' | ' . $referal_agent->agent_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Referal Level</th>
+                                    <td>{{ $referal_agent->level_agent }}</td>
                                 </tr>
                             </table>
                         </div>

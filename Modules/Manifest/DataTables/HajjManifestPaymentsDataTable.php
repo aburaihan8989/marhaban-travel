@@ -2,12 +2,13 @@
 
 namespace Modules\Manifest\DataTables;
 
-use Modules\Manifest\Entities\HajjManifestPayment;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Manifest\Entities\HajjManifestPayment;
+use Modules\Manifest\Entities\HajjManifestCustomer;
 
 class HajjManifestPaymentsDataTable extends DataTable
 {
@@ -19,6 +20,14 @@ class HajjManifestPaymentsDataTable extends DataTable
             })
             ->addColumn('status', function ($data) {
                 return view('manifest::hajj.payments.partials.status', compact('data'));
+            })
+            ->editColumn('customer_name', function($model){
+                $getData = HajjManifestCustomer::findOrFail($model->hajj_manifest_customer_id)->customer_name;
+                return $getData;
+            })
+            ->editColumn('customer_phone', function($model){
+                $getData = HajjManifestCustomer::findOrFail($model->hajj_manifest_customer_id)->customer_phone;
+                return $getData;
             })
             ->addColumn('action', function ($data) {
                 return view('manifest::hajj.payments.partials.actions', compact('data'));
@@ -65,6 +74,14 @@ class HajjManifestPaymentsDataTable extends DataTable
                 ->className('align-middle text-center'),
 
             Column::make('reference')
+                ->className('align-middle text-center'),
+
+            Column::make('customer_name')
+                ->title('Customer Name')
+                ->className('align-middle text-center'),
+
+            Column::make('customer_phone')
+                ->title('Phone Number')
                 ->className('align-middle text-center'),
 
             Column::computed('amount')

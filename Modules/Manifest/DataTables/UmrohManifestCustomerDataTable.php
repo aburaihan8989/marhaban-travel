@@ -146,8 +146,8 @@ class UmrohManifestCustomerDataTable extends DataTable
             // Column::computed('total_price')
             //     ->className('text-center align-middle'),
 
-            // Column::computed('total_payment')
-            //     ->className('text-center align-middle'),
+            Column::computed('total_payment')
+                ->className('text-center align-middle'),
 
             Column::computed('remaining_payment')
                 ->className('text-center align-middle'),

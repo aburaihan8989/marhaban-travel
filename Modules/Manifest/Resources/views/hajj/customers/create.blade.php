@@ -57,7 +57,7 @@
                                             <select class="form-control" name="agent_id" id="agent_id">
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
-                                                    <option value="{{ $agent->id }}">{{ $agent->agent_name }}</option>
+                                                    <option value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

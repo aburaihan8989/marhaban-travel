@@ -74,6 +74,10 @@ class AgentsDataTable extends DataTable
                 ->title('Phone Number')
                 ->className('text-center align-middle'),
 
+            Column::computed('level_agent')
+                ->title('Level Agent')
+                ->className('text-center align-middle'),
+
             Column::make('city')
                 ->className('text-center align-middle'),
 
