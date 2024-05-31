@@ -83,17 +83,17 @@ class HajjManifestPaymentsController extends Controller
             // $due_amount = $purchase->due_amount - $request->amount;
             $total_payment = $hajj_manifest->total_payment + $request->amount;
             $remaining_payment = $hajj_manifest->total_price - $total_payment;
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
+
+            if ($total_payment >= $hajj_manifest->total_price) {
+                $status = 'Completed';
+            } else {
+                $status = 'Waiting';
+            }
 
             $hajj_manifest->update([
                 'last_amount' => $request->amount,
                 'total_payment' => $total_payment,
+                'status' => $status,
                 'remaining_payment' => $remaining_payment,
                 'payment_method' => $request->payment_method
             ]);
@@ -132,18 +132,20 @@ class HajjManifestPaymentsController extends Controller
             // $due_amount = ($purchase->due_amount + $purchasePayment->amount) - $request->amount;
             // $total_saving = ($saving->total_saving - $savingPayment->amount) + $request->amount;
 
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
+            $total_payment = ($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount;
+            $remaining_payment = $hajj_manifest->total_price - $total_payment;
+
+            if ($total_payment >= $umroh_manifest->total_price) {
+                $status = 'Completed';
+            } else {
+                $status = 'Waiting';
+            }
 
             $hajj_manifest->update([
-                'total_payment' => ($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount,
-                'remaining_payment' => $hajj_manifest->total_price - (($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount),
+                'total_payment' => $total_payment,
+                'remaining_payment' => $hajj_manifest->total_price - $total_payment,
                 'last_amount' => $request->amount,
+                'status' => $status,
                 'payment_method' => $request->payment_method
             ]);
 
