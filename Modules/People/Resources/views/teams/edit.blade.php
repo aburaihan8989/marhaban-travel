@@ -55,8 +55,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="team_email">Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="team_email" required value="{{ $team->team_email }}">
+                                        <label for="team_email">Email <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="team_email" value="{{ $team->team_email }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -99,8 +99,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="country">Country <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="country" required value="{{ $team->country }}">
+                                        <label for="country">Country <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="country" value="{{ $team->country }}">
                                     </div>
                                 </div>
                             </div>

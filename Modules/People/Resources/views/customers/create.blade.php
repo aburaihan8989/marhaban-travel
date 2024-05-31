@@ -55,13 +55,13 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_number">Paspor Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="paspor_number" required>
+                                        <input type="text" class="form-control" name="paspor_number">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_date">Paspor Active <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="paspor_date" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                        <input type="date" class="form-control" name="paspor_date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
                             </div>
@@ -111,13 +111,13 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="country">Country <span class="text-danger">*</span></label>
+                                        <label for="country">Country <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="country" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="customer_email">Email <span class="text-danger">*</span></label>
+                                        <label for="customer_email">Email <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="customer_email">
                                     </div>
                                 </div>

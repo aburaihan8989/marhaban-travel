@@ -74,8 +74,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="agent_email">Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="agent_email" required value="{{ $agent->agent_email }}">
+                                        <label for="agent_email">Email <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="agent_email" value="{{ $agent->agent_email }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -99,8 +99,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="country">Country <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="country" required value="{{ $agent->country }}">
+                                        <label for="country">Country <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="country" value="{{ $agent->country }}">
                                     </div>
                                 </div>
                             </div>

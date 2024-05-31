@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="agent_email">Email <span class="text-danger">*</span></label>
+                                        <label for="agent_email">Email <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="agent_email">
                                     </div>
                                 </div>
@@ -98,8 +98,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="country">Country <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="country" required>
+                                        <label for="country">Country <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="country">
                                     </div>
                                 </div>
                             </div>

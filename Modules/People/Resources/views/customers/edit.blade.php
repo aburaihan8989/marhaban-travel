@@ -56,13 +56,13 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_number">Paspor Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="paspor_number" required value="{{ $customer->paspor_number }}">
+                                        <input type="text" class="form-control" name="paspor_number" value="{{ $customer->paspor_number }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_date">Paspor Active <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="paspor_date" required value="{{ $customer->paspor_date }}">
+                                        <input type="date" class="form-control" name="paspor_date" value="{{ $customer->paspor_date }}">
                                     </div>
                                 </div>
                             </div>
@@ -112,14 +112,14 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="country">Country <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="country" required value="{{ $customer->country }}">
+                                        <label for="country">Country <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="country" value="{{ $customer->country }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="customer_email">Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="customer_email" required value="{{ $customer->customer_email }}">
+                                        <label for="customer_email">Email <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="customer_email" value="{{ $customer->customer_email }}">
                                     </div>
                                 </div>
                             </div>
