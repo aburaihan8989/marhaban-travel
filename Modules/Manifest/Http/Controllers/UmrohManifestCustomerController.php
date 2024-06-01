@@ -179,6 +179,6 @@ class UmrohManifestCustomerController extends Controller
 
         toast('Umroh Manifest Customer Deleted!', 'warning');
 
-        return redirect()->route('umroh-manage-manifests.manage', 8);
+        return redirect()->route('umroh-manage-manifests.manage', $umroh_manifest_customer_id->manifest_id);
     }
 }

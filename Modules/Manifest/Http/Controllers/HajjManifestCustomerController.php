@@ -180,6 +180,6 @@ class HajjManifestCustomerController extends Controller
 
         toast('Hajj Manifest Customer Deleted!', 'warning');
 
-        return redirect()->route('hajj-manage-manifests.manage', 8);
+        return redirect()->route('hajj-manage-manifests.manage', $hajj_manifest_customer_id->manifest_id);
     }
 }
