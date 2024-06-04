@@ -152,8 +152,8 @@
                                 <i class="bi bi-people font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-muted text-uppercase font-weight-bold small">Umroh Savings Customers</div>
-                                <div class="text-value text-primary">{{ $customers_umroh_savings . ' Customers' }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Registered Agents</div>
+                                <div class="text-value text-primary">{{ $agents . ' Agents' }}</div>
                             </div>
                         </div>
                     </div>
@@ -165,8 +165,8 @@
                                 <i class="bi bi-people font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-muted text-uppercase font-weight-bold small">Hajj Savings Customers</div>
-                                <div class="text-value text-primary">{{ $customers_hajj_savings . ' Customers' }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Umroh Savings Customers</div>
+                                <div class="text-value text-primary">{{ $customers_umroh_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
@@ -181,8 +181,8 @@
                                 <i class="bi bi-people font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-muted text-uppercase font-weight-bold small">Registered Agents</div>
-                                <div class="text-value text-primary">{{ $agents . ' Agents' }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Hajj Savings Customers</div>
+                                <div class="text-value text-primary">{{ $customers_hajj_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
