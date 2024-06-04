@@ -34,6 +34,14 @@ class SavingPaymentsController extends Controller
         return view('saving::umroh.payments.create', compact('umroh_saving'));
     }
 
+    public function refund($saving_id) {
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+
+        $umroh_saving = Saving::findOrFail($saving_id);
+
+        return view('saving::umroh.payments.refund', compact('umroh_saving'));
+    }
+
 
     public function store(Request $request) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
@@ -49,49 +57,60 @@ class SavingPaymentsController extends Controller
 
         DB::transaction(function () use ($request) {
 
-            // SavingPayment::create([
-            //     'date' => $request->date,
-            //     'reference' => $request->reference,
-            //     'amount' => $request->amount,
-            //     'note' => $request->note,
-            //     'saving_id' => $request->saving_id,
-            //     'payment_method' => $request->payment_method
-            // ]);
+            if ($request->trx_type == 'Saving') {
+                $savingPayment = SavingPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $savingPayment = SavingPayment::create([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => 'Approval',
-                'note' => $request->note,
-                'saving_id' => $request->saving_id,
-                'payment_method' => $request->payment_method
-            ]);
-
-            if ($request->has('document')) {
-                foreach ($request->input('document', []) as $file) {
-                    $savingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $savingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
                 }
+
+                $umroh_saving = Saving::findOrFail($request->saving_id);
+                $total_saving = $umroh_saving->total_saving + $request->amount;
+
+                $umroh_saving->update([
+                    'last_amount' => $request->amount,
+                    'total_saving' => $total_saving,
+                    'payment_method' => $request->payment_method
+                ]);
+            } else {
+                $savingPayment = SavingPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $savingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
+                }
+
+                $umroh_saving = Saving::findOrFail($request->saving_id);
+                $total_saving = $umroh_saving->total_saving - $request->refund_amount;
+
+                $umroh_saving->update([
+                    'last_amount' => $request->refund_amount,
+                    'total_saving' => $total_saving,
+                    'payment_method' => $request->payment_method
+                ]);
             }
 
-            $umroh_saving = Saving::findOrFail($request->saving_id);
-
-            // $due_amount = $purchase->due_amount - $request->amount;
-            $total_saving = $umroh_saving->total_saving + $request->amount;
-
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
-
-            $umroh_saving->update([
-                'last_amount' => $request->amount,
-                'total_saving' => $total_saving,
-                'payment_method' => $request->payment_method
-            ]);
         });
 
         toast('Umroh Saving Payment Created!', 'success');
@@ -112,44 +131,53 @@ class SavingPaymentsController extends Controller
     public function update(Request $request, SavingPayment $savingPayment) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        $request->validate([
-            'date' => 'required|date',
-            'reference' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'note' => 'nullable|string|max:1000',
-            'saving_id' => 'required',
-            'payment_method' => 'required|string|max:255'
-        ]);
+        // $request->validate([
+        //     'date' => 'required|date',
+        //     'reference' => 'required|string|max:255',
+        //     'amount' => 'required|numeric',
+        //     'note' => 'nullable|string|max:1000',
+        //     'saving_id' => 'required',
+        //     'payment_method' => 'required|string|max:255'
+        // ]);
 
         DB::transaction(function () use ($request, $savingPayment) {
             $umroh_saving = $savingPayment->savings;
 
-            // $due_amount = ($purchase->due_amount + $purchasePayment->amount) - $request->amount;
-            // $total_saving = ($saving->total_saving - $savingPayment->amount) + $request->amount;
+            if ($savingPayment->trx_type == 'Saving') {
+                $umroh_saving->update([
+                    'total_saving' => ($umroh_saving->total_saving - $savingPayment->amount) + $request->amount,
+                    'last_amount' => $request->amount,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
+                $savingPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'note' => $request->note,
+                    'status' => $request->status,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $umroh_saving->update([
-                'total_saving' => ($umroh_saving->total_saving - $savingPayment->amount) + $request->amount,
-                'last_amount' => $request->amount,
-                'payment_method' => $request->payment_method
-            ]);
+            } else {
+                $umroh_saving->update([
+                    'total_saving' => ($umroh_saving->total_saving + $savingPayment->refund_amount) - $request->refund_amount,
+                    'last_amount' => $request->refund_amount,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $savingPayment->update([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'note' => $request->note,
-                'status' => $request->status,
-                'saving_id' => $request->saving_id,
-                'payment_method' => $request->payment_method
-            ]);
+                $savingPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'note' => $request->note,
+                    'status' => $request->status,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+            }
 
             if ($request->has('document')) {
                 if (count($savingPayment->getMedia('savings')) > 0) {

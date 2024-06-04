@@ -9,9 +9,9 @@
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Umroh Manifest Manages</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Manage Umroh Manifest</a></li>
         {{-- <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-customers.show', $umroh_manifest) }}">{{ $umroh_manifest->reference }}</a></li> --}}
-        <li class="breadcrumb-item active">Umroh Customer Payments</li>
+        <li class="breadcrumb-item active">Customer Payments Umroh</li>
     </ol>
 @endsection
 

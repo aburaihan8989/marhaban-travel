@@ -28,7 +28,7 @@
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
+                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required readonly value="CR/{{ $umroh_saving->reference }}">
                                     </div>
                                 </div>
@@ -52,11 +52,6 @@
                                         <label for="amount">Savings Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') }}">
-                                            {{-- <div class="input-group-append">
-                                                <button id="getTotalAmount" class="btn btn-primary" type="button">
-                                                    <i class="bi bi-check-square"></i>
-                                                </button>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -81,6 +76,8 @@
                             </div>
 
                             <input type="hidden" value="{{ $umroh_saving->id }}" name="saving_id">
+                            <input type="hidden" value="Saving" name="trx_type">
+
                         </div>
                     </div>
                 </div>
@@ -88,7 +85,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 2, Max File Size: 1MB, Image Size: 400x400"></i></label>
                                 <div class="dropzone d-flex flex-wrap align-items-center justify-content-center" id="document-dropzone">
                                     <div class="dz-message" data-dz-message>
                                         <i class="bi bi-cloud-arrow-up"></i>
@@ -115,7 +112,7 @@
             url: '{{ route('dropzone.upload') }}',
             maxFilesize: 1,
             acceptedFiles: '.jpg, .jpeg, .png',
-            maxFiles: 1,
+            maxFiles: 2,
             addRemoveLinks: true,
             dictRemoveFile: "<i class='bi bi-x-circle text-danger'></i> remove",
             headers: {

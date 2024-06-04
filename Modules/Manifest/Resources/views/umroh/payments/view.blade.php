@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Customer Payment Umroh Manifest Details')
+@section('title', 'Details Customer Payment Umroh')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Umroh Manifest Manages</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-payments.index', $umrohManifestPayment->umroh_manifest_customer_id) }}">{{ $umrohManifestPayment->reference }}</a></li>
-        <li class="breadcrumb-item active">Customer Payment Details</li>
+        <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Manage Umroh Manifest</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-payments.index', $umrohManifestPayment->umroh_manifest_customer_id) }}">{{ $umroh_manifest->reference }}</a></li>
+        <li class="breadcrumb-item active">Details Customer Payment Umroh</li>
     </ol>
 @endsection
 
