@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/umroh-manifest-payments/destroy/{umrohManifestPayment}', 'UmrohManifestPaymentsController@destroy')->name('umroh-manifest-payments.destroy');
     Route::get('/umroh-manifest-payments/{umroh_manifest_customer_id}/view/{umrohManifestPayment}', 'UmrohManifestPaymentsController@view')->name('umroh-manifest-payments.view');
 
+    Route::get('/umroh-manifest-payments/{umroh_manifest_customer_id}/refund', 'UmrohManifestPaymentsController@refund')->name('umroh-manifest-payments.refund');
 
     // {{ #Hajj }}
 

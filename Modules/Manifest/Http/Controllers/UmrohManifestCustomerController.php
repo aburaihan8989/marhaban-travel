@@ -92,6 +92,7 @@ class UmrohManifestCustomerController extends Controller
                     'date' => now()->format('Y-m-d'),
                     'reference' => 'INV/'.$umroh_manifest_customer->reference,
                     'amount' => $request->last_amount,
+                    'trx_type' => 'Saving',
                     'status' => 'Approval',
                     'umroh_manifest_customer_id' => $umroh_manifest_customer->id,
                     'payment_method' => $request->payment_method

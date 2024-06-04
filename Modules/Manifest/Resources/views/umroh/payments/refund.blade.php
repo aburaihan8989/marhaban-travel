@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Create Customer Payment Umroh')
+@section('title', 'Create Customer Refund Payment Umroh')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Manage Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Create Customer Payment Umroh</li>
+        <li class="breadcrumb-item active">Create Customer Refund Payment Umroh</li>
     </ol>
 @endsection
 {{-- @dd($umroh_manifest); --}}
@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     @include('utils.alerts')
                     <div class="form-group">
-                        <button class="btn btn-primary">Create Umroh Payment <i class="bi bi-check"></i></button>
+                        <button class="btn btn-primary">Create Refund Payment<i class="bi bi-check"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -29,7 +29,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="INV/CR/{{ $umroh_manifest->reference }}">
+                                        <input type="text" class="form-control" name="reference" required readonly value="INV/DB/{{ $umroh_manifest->reference }}">
                                     </div>
                                 </div>
                             </div>
@@ -58,28 +58,26 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Payment Amount <span class="text-danger">*</span></label>
+                                        <label for="refund_amount">Refund Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') }}">
+                                            <input id="refund_amount" type="text" class="form-control" name="refund_amount" required value="{{ old('refund_amount') }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
+                                            <label for="payment_method">Refund Method <span class="text-danger">*</span></label>
                                             <select class="form-control" name="payment_method" id="payment_method" required>
                                                 <option value="Cash">Cash</option>
                                                 <option value="Transfer">Transfer</option>
-                                                <option value="QRIS">QRIS</option>
-                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="date">Payment Date <span class="text-danger">*</span></label>
+                                        <label for="date">Refund Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="date" required value="{{ now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
@@ -91,7 +89,7 @@
                             </div>
 
                             <input type="hidden" value="{{ $umroh_manifest->id }}" name="umroh_manifest_customer_id">
-                            <input type="hidden" value="Payment" name="trx_type">
+                            <input type="hidden" value="Refund" name="trx_type">
 
                         </div>
                     </div>
@@ -101,7 +99,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="payments">Payment Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 2, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                <label for="payments">Refund Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 2, Max File Size: 1MB, Image Size: 400x400"></i></label>
                                 <div class="dropzone d-flex flex-wrap align-items-center justify-content-center" id="document-dropzone">
                                     <div class="dz-message" data-dz-message>
                                         <i class="bi bi-cloud-arrow-up"></i>
@@ -174,14 +172,14 @@
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('#amount').maskMoney({
+            $('#refund_amount').maskMoney({
                 prefix:'{{ settings()->currency->symbol }}',
                 thousands:'{{ settings()->currency->thousand_separator }}',
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
             $('#umroh-payment-form').submit(function () {
-                var amount = $('#amount').maskMoney('unmasked')[0];
-                $('#amount').val(amount);
+                var refund_amount = $('#refund_amount').maskMoney('unmasked')[0];
+                $('#refund_amount').val(refund_amount);
             });
         });
     </script>

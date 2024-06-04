@@ -46,15 +46,6 @@ class SavingPaymentsController extends Controller
     public function store(Request $request) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'saving_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
-
         DB::transaction(function () use ($request) {
 
             if ($request->trx_type == 'Saving') {
@@ -130,15 +121,6 @@ class SavingPaymentsController extends Controller
 
     public function update(Request $request, SavingPayment $savingPayment) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'saving_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
 
         DB::transaction(function () use ($request, $savingPayment) {
             $umroh_saving = $savingPayment->savings;

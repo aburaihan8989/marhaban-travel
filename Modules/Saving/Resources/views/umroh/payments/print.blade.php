@@ -105,21 +105,21 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                <td class="align-middle" style="font-size: 15px; font-weight: bold;">
                                                     {{ format_currency($umroh_saving_payment->amount) }}
                                                 </td>
                                                 <td class="align-middle">
                                                     @if ($umroh_saving_payment->status == 'Verified')
-                                                        <span class="badge badge-success" style="font-size: 16px;">
+                                                        <span class="badge badge-success" style="font-size: 15px;">
                                                             {{ $umroh_saving_payment->status }}
                                                         </span>
                                                     @else
-                                                        <span class="badge badge-danger" style="font-size: 16px;">
+                                                        <span class="badge badge-danger" style="font-size: 15px;">
                                                             {{ $umroh_saving_payment->status }}
                                                         </span>
                                                     @endif
                                                 </td>
-                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                <td class="align-middle" style="font-size: 15px; font-weight: bold;">
                                                     {{ format_currency($umroh_saving_payment->savings->total_saving) }}
                                                 </td>
                                             </tr>
@@ -177,21 +177,21 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                <td class="align-middle" style="font-size: 15px; font-weight: bold;">
                                                     {{ format_currency($umroh_saving_payment->refund_amount) }}
                                                 </td>
                                                 <td class="align-middle">
                                                     @if ($umroh_saving_payment->status == 'Verified')
-                                                        <span class="badge badge-success" style="font-size: 16px;">
+                                                        <span class="badge badge-success" style="font-size: 15px;">
                                                             {{ $umroh_saving_payment->status }}
                                                         </span>
                                                     @else
-                                                        <span class="badge badge-danger" style="font-size: 16px;">
+                                                        <span class="badge badge-danger" style="font-size: 15px;">
                                                             {{ $umroh_saving_payment->status }}
                                                         </span>
                                                     @endif
                                                 </td>
-                                                <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                <td class="align-middle" style="font-size: 15px; font-weight: bold;">
                                                     {{ format_currency($umroh_saving_payment->savings->total_saving) }}
                                                 </td>
                                             </tr>

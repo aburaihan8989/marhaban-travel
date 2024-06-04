@@ -36,67 +36,94 @@ class UmrohManifestPaymentsController extends Controller
     }
 
 
+    public function refund($umroh_manifest_id) {
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+
+        $umroh_manifest = UmrohManifestCustomer::findOrFail($umroh_manifest_id);
+
+        return view('manifest::umroh.payments.refund', compact('umroh_manifest'));
+    }
+
+
     public function store(Request $request, UmrohManifestCustomer $umroh_manifest_customer_id) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-        // @dd($umroh_manifest_customer_id);
-
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'umroh_manifest_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_customer_id) {
 
-            // UmrohManifestPayment::create([
-            //     'date' => $request->date,
-            //     'reference' => $request->reference,
-            //     'amount' => $request->amount,
-            //     'note' => $request->note,
-            //     'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
-            //     'payment_method' => $request->payment_method
-            // ]);
+            if ($request->trx_type == 'Payment') {
+                $umrohManifestPayment = UmrohManifestPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $umrohManifestPayment = UmrohManifestPayment::create([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => 'Approval',
-                'note' => $request->note,
-                'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
-                'payment_method' => $request->payment_method
-            ]);
-
-            if ($request->has('document')) {
-                foreach ($request->input('document', []) as $file) {
-                    $umrohManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $umrohManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                    }
                 }
-            }
 
-            $umroh_manifest = UmrohManifestCustomer::findOrFail($request->umroh_manifest_customer_id);
+                $umroh_manifest = UmrohManifestCustomer::findOrFail($request->umroh_manifest_customer_id);
 
-            // @dd($umroh_manifest);
+                $total_payment = $umroh_manifest->total_payment + $request->amount;
+                $remaining_payment = $umroh_manifest->total_price - $total_payment;
 
-            // $due_amount = $purchase->due_amount - $request->amount;
-            $total_payment = $umroh_manifest->total_payment + $request->amount;
-            $remaining_payment = $umroh_manifest->total_price - $total_payment;
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
 
-            if ($total_payment >= $umroh_manifest->total_price) {
-                $status = 'Completed';
+                $umroh_manifest->update([
+                    'last_amount' => $request->amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
+                    'remaining_payment' => $remaining_payment,
+                    'payment_method' => $request->payment_method
+                ]);
             } else {
-                $status = 'Waiting';
+                $umrohManifestPayment = UmrohManifestPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $umrohManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                    }
+                }
+
+                $umroh_manifest = UmrohManifestCustomer::findOrFail($request->umroh_manifest_customer_id);
+
+                $total_payment = $umroh_manifest->total_payment - $request->refund_amount;
+                $remaining_payment = $umroh_manifest->total_price - $total_payment;
+
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
+                $umroh_manifest->update([
+                    'last_amount' => $request->refund_amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
+                    'remaining_payment' => $remaining_payment,
+                    'payment_method' => $request->payment_method
+                ]);
             }
 
-            $umroh_manifest->update([
-                'last_amount' => $request->amount,
-                'total_payment' => $total_payment,
-                'status' => $status,
-                'remaining_payment' => $remaining_payment,
-                'payment_method' => $request->payment_method
-            ]);
         });
 
         toast('Umroh Manifest Customer Payment Created!', 'success');
@@ -116,49 +143,65 @@ class UmrohManifestPaymentsController extends Controller
 
     public function update(Request $request, UmrohManifestPayment $umrohManifestPayment) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-    // @dd($request);
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'umroh_manifest_customer_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
 
         DB::transaction(function () use ($request, $umrohManifestPayment) {
             $umroh_manifest = $umrohManifestPayment->umrohManifestCustomers;
 
-            // $due_amount = ($purchase->due_amount + $purchasePayment->amount) - $request->amount;
-            // $total_saving = ($saving->total_saving - $savingPayment->amount) + $request->amount;
+            if ($umrohManifestPayment->trx_type == 'Payment') {
+                $total_payment = ($umroh_manifest->total_payment - $umrohManifestPayment->amount) + $request->amount;
+                $remaining_payment = $umroh_manifest->total_price - $total_payment;
 
-            $total_payment = ($umroh_manifest->total_payment - $umrohManifestPayment->amount) + $request->amount;
-            $remaining_payment = $umroh_manifest->total_price - $total_payment;
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
 
-            if ($total_payment >= $umroh_manifest->total_price) {
-                $status = 'Completed';
+                $umroh_manifest->update([
+                    'total_payment' => $total_payment,
+                    'remaining_payment' => $umroh_manifest->total_price - $total_payment,
+                    'last_amount' => $request->amount,
+                    'status' => $status,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                $umrohManifestPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'status' => $request->status,
+                    'note' => $request->note,
+                    'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
             } else {
-                $status = 'Waiting';
+                $total_payment = ($umroh_manifest->total_payment + $umrohManifestPayment->refund_amount) - $request->refund_amount;
+                $remaining_payment = $umroh_manifest->total_price - $total_payment;
+
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
+                $umroh_manifest->update([
+                    'total_payment' => $total_payment,
+                    'remaining_payment' => $umroh_manifest->total_price - $total_payment,
+                    'last_amount' => $request->refund_amount,
+                    'status' => $status,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                $umrohManifestPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'status' => $request->status,
+                    'note' => $request->note,
+                    'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
             }
-
-            $umroh_manifest->update([
-                'total_payment' => $total_payment,
-                'remaining_payment' => $umroh_manifest->total_price - $total_payment,
-                'last_amount' => $request->amount,
-                'status' => $status,
-                'payment_method' => $request->payment_method
-            ]);
-
-            $umrohManifestPayment->update([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => $request->status,
-                'note' => $request->note,
-                'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
-                'payment_method' => $request->payment_method
-            ]);
-            // $umroh_package->update($request->except('document'));
 
             if ($request->has('document')) {
                 if (count($umrohManifestPayment->getMedia('payments')) > 0) {
