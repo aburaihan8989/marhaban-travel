@@ -55,7 +55,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="gender" id="gender">
+                                        <select class="form-control" name="gender" id="gender" required>
                                             <option value="" selected >Select Gender</option>
                                             <option value="L">Male</option>
                                             <option value="P">Female</option>
@@ -100,10 +100,10 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="referal_id">Referal Name <span class="text-danger"></span></label>
-                                            <select class="form-control" name="referal_id" id="referal_id">
+                                            <select class="form-control" name="referal_id" id="referal_id" required>
                                                 <option value="" selected disabled>Select Referal Name </option>
-                                                @foreach(\Modules\People\Entities\Agent::all() as $agent)
-                                                    <option value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent_referal)
+                                                    <option value="{{ $agent_referal->id }}">{{ $agent_referal->agent_code . ' | ' . $agent_referal->agent_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

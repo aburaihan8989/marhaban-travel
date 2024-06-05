@@ -56,7 +56,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="gender" id="gender">
+                                        <select class="form-control" name="gender" id="gender" required>
                                             <option value="" selected>None</option>
                                             <option {{ $agent->gender == "L" ? 'selected' : '' }} value="L">Male</option>
                                             <option {{ $agent->gender == "P" ? 'selected' : '' }} value="P">Female</option>
@@ -101,10 +101,10 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="referal_id">Referal Name <span class="text-danger"></span></label>
-                                            <select class="form-control" name="referal_id" id="referal_id">
+                                            <select class="form-control" name="referal_id" id="referal_id" required>
                                                 <option value="" selected disabled>Select Referal Name</option>
-                                                @foreach(\Modules\People\Entities\Agent::all() as $referal)
-                                                    <option {{ $agent->referal_id == $referal->id ? 'selected' : '' }} value="{{ $referal->id }}">{{ $referal->agent_code . ' | ' . $referal->agent_name }}</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent_referal)
+                                                    <option {{ $agent->referal_id == $agent_referal->id ? 'selected' : '' }} value="{{ $agent_referal->id }}">{{ $agent_referal->agent_code . ' | ' . $agent_referal->agent_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

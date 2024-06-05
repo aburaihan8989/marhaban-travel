@@ -19,6 +19,12 @@ class AgentsDataTable extends DataTable
             ->addColumn('action', function ($data) {
                 return view('people::agents.partials.actions', compact('data'));
             })
+            ->addColumn('referal_code', function ($data) {
+                return Agent::findOrFail($data->referal_id)->agent_code . ' | ' . Agent::findOrFail($data->referal_id)->agent_name;
+            })
+            ->addColumn('referal_level', function ($data) {
+                return Agent::findOrFail($data->referal_id)->level_agent;
+            })
             ->addColumn('agent_status', function ($data) {
                 return view('people::agents.partials.status', compact('data'));
             });
@@ -81,12 +87,17 @@ class AgentsDataTable extends DataTable
             Column::make('city')
                 ->className('text-center align-middle'),
 
-            Column::make('address')
+            Column::computed('referal_code')
+                ->title('Referal Agent')
                 ->className('text-center align-middle'),
 
-            Column::computed('agent_status')
-                ->title('Status Agent')
+            Column::computed('referal_level')
+                ->title('Referal Level')
                 ->className('text-center align-middle'),
+
+            // Column::computed('agent_status')
+            //     ->title('Status Agent')
+            //     ->className('text-center align-middle'),
 
             Column::computed('action')
                 ->exportable(false)

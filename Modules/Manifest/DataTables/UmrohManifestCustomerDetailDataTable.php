@@ -34,11 +34,17 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
             ->addColumn('paspor_number', function ($data) {
                 return Customer::findOrFail($data->customer_id)->paspor_number;
             })
+            ->addColumn('customer_name', function ($data) {
+                return Customer::findOrFail($data->customer_id)->customer_name;
+            })
+            ->addColumn('customer_phone', function ($data) {
+                return Customer::findOrFail($data->customer_id)->customer_phone;
+            })
             ->editColumn('paspor_date', function($model){
                 $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->paspor_date));
                 return $formatDate; })
             ->editColumn('date_birth', function($model){
-                $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth));
+                $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth)))->age;
                 return $formatDate; })
             ->addColumn('age_group', function ($data) {
                 return Customer::findOrFail($data->customer_id)->age_group == 'A' ? 'Adult' : (Customer::findOrFail($data->customer_id)->age_group == 'K' ? 'Kids' : 'Infant');
@@ -68,7 +74,7 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(2)
+            ->orderBy(11)
             ->buttons(
                 Button::make('excel')
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
@@ -101,7 +107,7 @@ class UmrohManifestCustomerDetailDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('date_birth')
-                ->title('Date of Birth')
+                ->title('Age (Year)')
                 ->className('text-center align-middle'),
 
             Column::computed('gender')

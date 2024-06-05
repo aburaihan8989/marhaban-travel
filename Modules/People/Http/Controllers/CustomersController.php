@@ -32,19 +32,19 @@ class CustomersController extends Controller
         abort_if(Gate::denies('create_customers'), 403);
 
         $request->validate([
-            'nik_number'     => 'required|max:255',
-            'customer_name'  => 'required|string|max:255',
-            // 'date_birth'     => 'required',
-            'customer_phone' => 'required|max:255',
-            'paspor_number'  => 'required|max:255',
-            // 'paspor_date'    => 'required',
-            // 'customer_email' => 'required|email|max:255',
-            'customer_status'=> 'required|string',
-            'gender'         => 'required|string',
-            'age_group'      => 'required|string',
-            'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
-            'address'        => 'required|string|max:500',
+            // 'nik_number'     => 'required|max:255',
+            // 'customer_name'  => 'required|string|max:255',
+            // // 'date_birth'     => 'required',
+            // 'customer_phone' => 'required|max:255',
+            // 'paspor_number'  => 'required|max:255',
+            // // 'paspor_date'    => 'required',
+            // // 'customer_email' => 'required|email|max:255',
+            // 'customer_status'=> 'required|string',
+            // 'gender'         => 'required|string',
+            // 'age_group'      => 'required|string',
+            // 'city'           => 'required|string|max:255',
+            // 'country'        => 'required|string|max:255',
+            // 'address'        => 'required|string|max:500',
         ]);
 
         $customer = Customer::create([
@@ -93,19 +93,19 @@ class CustomersController extends Controller
         abort_if(Gate::denies('update_customers'), 403);
 
         $request->validate([
-            'nik_number'     => 'required|max:255',
-            'customer_name'  => 'required|string|max:255',
-            // 'date_birth'     => 'required',
-            'customer_phone' => 'required|max:255',
-            'paspor_number'  => 'required|max:255',
-            // 'paspor_date'    => 'required',
-            // 'customer_email' => 'required|email|max:255',
-            'customer_status'=> 'required|string',
-            'gender'         => 'required|string',
-            'age_group'      => 'required|string',
-            'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
-            'address'        => 'required|string|max:500',
+            // 'nik_number'     => 'required|max:255',
+            // 'customer_name'  => 'required|string|max:255',
+            // // 'date_birth'     => 'required',
+            // 'customer_phone' => 'required|max:255',
+            // 'paspor_number'  => 'required|max:255',
+            // // 'paspor_date'    => 'required',
+            // // 'customer_email' => 'required|email|max:255',
+            // 'customer_status'=> 'required|string',
+            // 'gender'         => 'required|string',
+            // 'age_group'      => 'required|string',
+            // 'city'           => 'required|string|max:255',
+            // 'country'        => 'required|string|max:255',
+            // 'address'        => 'required|string|max:500',
         ]);
 
         $customer->update([

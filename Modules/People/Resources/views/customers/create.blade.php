@@ -112,7 +112,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="country">Country <span class="text-danger"></span></label>
-                                        <input type="text" class="form-control" name="country" required>
+                                        <input type="text" class="form-control" name="country">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
