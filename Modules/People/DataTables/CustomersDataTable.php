@@ -19,6 +19,9 @@ class CustomersDataTable extends DataTable
             ->addColumn('gender', function ($data) {
                 return $data->gender == 'L' ? 'Male' : 'Female';
             })
+            ->addColumn('customer_age', function($data){
+                $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime($data->date_birth)))->age . ' th';
+                return $formatDate; })
             ->addColumn('action', function ($data) {
                 return view('people::customers.partials.actions', compact('data'));
             });
@@ -79,6 +82,10 @@ class CustomersDataTable extends DataTable
 
             Column::make('date_birth')
                 ->title('Date of Birth')
+                ->className('text-center align-middle'),
+
+            Column::make('customer_age')
+                ->title('Age (Year)')
                 ->className('text-center align-middle'),
 
             Column::make('paspor_number')

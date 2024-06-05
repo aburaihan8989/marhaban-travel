@@ -44,7 +44,7 @@ class UmrohManifestCustomerDataTable extends DataTable
                 $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->paspor_date));
                 return $formatDate; })
             ->editColumn('date_birth', function($model){
-                $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth)))->age;
+                $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth)))->age . ' th';
                 return $formatDate; })
             ->addColumn('age_group', function ($data) {
                 return Customer::findOrFail($data->customer_id)->age_group == 'A' ? 'Adult' : (Customer::findOrFail($data->customer_id)->age_group == 'K' ? 'Kids' : 'Infant');
