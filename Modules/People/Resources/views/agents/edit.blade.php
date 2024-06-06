@@ -74,9 +74,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="level_agent">Level Agent <span class="text-danger">*</span></label>
+                                        <label for="level_agent">Agent Level <span class="text-danger">*</span></label>
                                         <select class="form-control" name="level_agent" id="level_agent" required>
-                                            <option value="" selected>Select Level Agent</option>
+                                            <option value="" selected>Select Agent Level</option>
                                             <option {{ $agent->level_agent == "Bronze" ? 'selected' : '' }} value="Bronze">Bronze</option>
                                             <option {{ $agent->level_agent == "Silver" ? 'selected' : '' }} value="Silver">Silver</option>
                                             <option {{ $agent->level_agent == "Gold" ? 'selected' : '' }} value="Gold">Gold</option>

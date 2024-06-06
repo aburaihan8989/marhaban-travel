@@ -89,7 +89,7 @@ class RewardsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('level_agent')
-                ->title('Level Agent')
+                ->title('Agent Level')
                 ->className('text-center align-middle'),
 
             Column::make('agents_count')

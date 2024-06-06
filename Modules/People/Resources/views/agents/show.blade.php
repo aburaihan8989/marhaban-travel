@@ -53,7 +53,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Level Agent</th>
+                                    <th>Agent Level</th>
                                     <td>{{ $agent->level_agent }}</td>
                                 </tr>
                                 <tr>

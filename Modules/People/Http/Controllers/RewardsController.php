@@ -12,6 +12,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Modules\People\DataTables\AgentsDataTable;
 use Modules\People\DataTables\RewardsDataTable;
 use Modules\People\DataTables\ShowAgentsDataTable;
+use Modules\People\DataTables\ShowCustomersDataTable;
 
 class RewardsController extends Controller
 {
@@ -28,5 +29,12 @@ class RewardsController extends Controller
 
         return $dataTable->render('people::agents.rewards.show-agents');
     }
+
+    public function show_customers(ShowCustomersDataTable $dataTable, $agent_id) {
+        // abort_if(Gate::denies('access_customers'), 403);
+
+        return $dataTable->render('people::agents.rewards.show-customers');
+    }
+
 
 }

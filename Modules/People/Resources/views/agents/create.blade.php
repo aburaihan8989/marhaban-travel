@@ -73,9 +73,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="level_agent">Level Agent <span class="text-danger">*</span></label>
+                                        <label for="level_agent">Agent Level <span class="text-danger">*</span></label>
                                         <select class="form-control" name="level_agent" id="level_agent" required>
-                                            <option value="" selected disabled>Select Level Agent</option>
+                                            <option value="" selected disabled>Select Agent Level</option>
                                             <option value="Bronze">Bronze</option>
                                             <option value="Silver">Silver</option>
                                             <option value="Gold">Gold</option>
