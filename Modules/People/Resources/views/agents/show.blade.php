@@ -90,6 +90,7 @@
                 <div class="card h-75">
                     <div class="card-body">
                         <label for="agents">Photo Agent <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                        <br>
                         @forelse($agent->getMedia('agents') as $media)
                             <img src="{{ $media->getUrl() }}" alt="Photo Agent" class="img-fluid img-thumbnail mb-2">
                         @empty

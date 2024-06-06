@@ -94,6 +94,7 @@
                 <div class="card h-75">
                     <div class="card-body">
                         <label for="photo">Photo Customer <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 1, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                        <br>
                         @forelse($customer->getMedia('photos') as $media)
                             <img src="{{ $media->getUrl() }}" alt="Photo Customer" class="img-fluid img-thumbnail mb-2">
                         @empty

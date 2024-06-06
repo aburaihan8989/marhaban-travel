@@ -40,7 +40,7 @@ class TeamsController extends Controller
             'division'       => 'required|string',
             'gender'         => 'required|string',
             'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
+            // 'country'        => 'required|string|max:255',
             'address'        => 'required|string|max:500',
         ]);
 
@@ -96,7 +96,7 @@ class TeamsController extends Controller
             'division'       => 'required|string',
             'gender'         => 'required|string',
             'city'           => 'required|string|max:255',
-            'country'        => 'required|string|max:255',
+            // 'country'        => 'required|string|max:255',
             'address'        => 'required|string|max:500',
         ]);
 
