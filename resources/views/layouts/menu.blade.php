@@ -46,7 +46,14 @@
                 </a>
             </li>
         {{-- @endcan --}}
-    </ul>
+        {{-- @can('access_customers') --}}
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link {{ request()->routeIs('rewards.*') ? 'c-active' : '' }}" href="{{ route('rewards.index') }}">
+                <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Agents Reward
+            </a>
+        </li>
+    {{-- @endcan --}}
+</ul>
 </li>
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('teams.*') ? 'c-show' : '' }}">
@@ -356,7 +363,7 @@
 @can('access_sales')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('sales.*') || request()->routeIs('sale-payments*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon bi bi-receipt" style="line-height: 1;"></i> Sales
+            <i class="c-sidebar-nav-icon bi bi-receipt" style="line-height: 1;"></i> Sales Store
         </a>
         @can('create_sales')
             <ul class="c-sidebar-nav-dropdown-items">

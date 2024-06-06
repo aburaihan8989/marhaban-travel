@@ -21,4 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('agents', 'AgentsController');
     //Teams
     Route::resource('teams', 'TeamsController');
+
+    //Rewards
+    Route::resource('rewards', 'RewardsController');
+
 });

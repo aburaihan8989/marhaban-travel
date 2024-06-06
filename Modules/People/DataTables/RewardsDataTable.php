@@ -3,33 +3,42 @@
 namespace Modules\People\DataTables;
 
 
-use Modules\People\Entities\Agent;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Modules\People\Entities\Agent;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Manifest\Entities\HajjManifestCustomer;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
-class AgentsDataTable extends DataTable
+class RewardsDataTable extends DataTable
 {
 
     public function dataTable($query) {
         return datatables()
             ->eloquent($query)
+            ->addColumn('total_reward', function ($data) {
+                return format_currency($data->total_reward);
+            })
+            ->addColumn('paid_reward', function ($data) {
+                return format_currency($data->paid_reward);
+            })
+            ->addColumn('agents_count', function ($data) {
+                if ($data->referal_id == $data->id){
+                    $getData = Agent::where('referal_id', $data->id)->count();
+                    return ($getData-1);
+                } else {
+                    return Agent::where('referal_id', $data->id)->count();
+                }
+            })
+            ->addColumn('customer_count', function ($data) {
+                $umroh_customers = UmrohManifestCustomer::where('agent_id', $data->id)->count();
+                $hajj_customers = HajjManifestCustomer::where('agent_id', $data->id)->count();
+                return ($umroh_customers+$hajj_customers);
+            })
             ->addColumn('action', function ($data) {
-                return view('people::agents.partials.actions', compact('data'));
-            })
-            ->addColumn('referal_code', function ($data) {
-                return Agent::findOrFail($data->referal_id)->agent_code . ' | ' . Agent::findOrFail($data->referal_id)->agent_name;
-            })
-            ->addColumn('referal_level', function ($data) {
-                return Agent::findOrFail($data->referal_id)->level_agent;
-            })
-            ->addColumn('gender', function ($data) {
-                return $data->gender == 'L' ? 'Male' : 'Female';
-            })
-            ->addColumn('agent_status', function ($data) {
-                return view('people::agents.partials.status', compact('data'));
+                return view('people::rewards.partials.actions', compact('data'));
             });
     }
 
@@ -72,14 +81,7 @@ class AgentsDataTable extends DataTable
                 ->title('Agent Code')
                 ->className('text-center align-middle'),
 
-            Column::make('nik_number')
-                ->title('NIK Agent')
-                ->className('text-center align-middle'),
-
             Column::make('agent_name')
-                ->className('text-center align-middle'),
-
-            Column::make('gender')
                 ->className('text-center align-middle'),
 
             Column::make('agent_phone')
@@ -90,20 +92,21 @@ class AgentsDataTable extends DataTable
                 ->title('Level Agent')
                 ->className('text-center align-middle'),
 
-            Column::make('city')
+            Column::make('agents_count')
+                ->title('Agents')
                 ->className('text-center align-middle'),
 
-            Column::computed('referal_code')
-                ->title('Referal Agent')
+            Column::make('customer_count')
+                ->title('Customers')
                 ->className('text-center align-middle'),
 
-            Column::computed('referal_level')
-                ->title('Referal Level')
+            Column::computed('total_reward')
+                ->title('Total Rewards')
                 ->className('text-center align-middle'),
 
-            // Column::computed('agent_status')
-            //     ->title('Status Agent')
-            //     ->className('text-center align-middle'),
+            Column::computed('paid_reward')
+                ->title('Paid Rewards')
+                ->className('text-center align-middle'),
 
             Column::computed('action')
                 ->exportable(false)
@@ -116,6 +119,6 @@ class AgentsDataTable extends DataTable
     }
 
     protected function filename(): string {
-        return 'Agents_' . date('YmdHis');
+        return 'Rewards_' . date('YmdHis');
     }
 }
