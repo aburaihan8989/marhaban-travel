@@ -9,33 +9,18 @@ use Modules\People\Entities\Agent;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Modules\Manifest\Entities\HajjManifestCustomer;
-use Modules\Manifest\Entities\UmrohManifestCustomer;
 
-class RewardsDataTable extends DataTable
+class ShowAgentsDataTable extends DataTable
 {
 
     public function dataTable($query) {
         return datatables()
             ->eloquent($query)
-            ->addColumn('total_reward', function ($data) {
-                return format_currency($data->total_reward);
+            ->addColumn('referal_agent', function ($data) {
+                return Agent::findOrFail($data->referal_id)->agent_code . ' | ' . Agent::findOrFail($data->referal_id)->agent_name;
             })
-            ->addColumn('paid_reward', function ($data) {
-                return format_currency($data->paid_reward);
-            })
-            ->addColumn('agents_count', function ($data) {
-                if ($data->referal_id == $data->id){
-                    $getData = Agent::where('referal_id', $data->id)->count();
-                    return ($getData-1);
-                } else {
-                    return Agent::where('referal_id', $data->id)->count();
-                }
-            })
-            ->addColumn('customer_count', function ($data) {
-                $umroh_customers = UmrohManifestCustomer::where('agent_id', $data->id)->count();
-                $hajj_customers = HajjManifestCustomer::where('agent_id', $data->id)->count();
-                return ($umroh_customers+$hajj_customers);
+            ->addColumn('referal_level', function ($data) {
+                return Agent::findOrFail($data->referal_id)->level_agent;
             })
             ->addColumn('action', function ($data) {
                 return view('people::agents.rewards.partials.actions', compact('data'));
@@ -43,7 +28,7 @@ class RewardsDataTable extends DataTable
     }
 
     public function query(Agent $model) {
-        return $model->newQuery();
+        return $model->newQuery()->where('referal_id', request()->route('agent_id'));
     }
 
     public function html() {
@@ -82,6 +67,7 @@ class RewardsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('agent_name')
+                ->title('Agent Name')
                 ->className('text-center align-middle'),
 
             Column::make('agent_phone')
@@ -89,28 +75,18 @@ class RewardsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('level_agent')
-                ->title('Level Agent')
+                ->title('Agent Level')
                 ->className('text-center align-middle'),
 
-            Column::make('agents_count')
-                ->title('Agents')
+            Column::make('city')
                 ->className('text-center align-middle'),
 
-            Column::make('customer_count')
-                ->title('Customers')
+            Column::make('referal_agent')
+                ->title('Referal Agent')
                 ->className('text-center align-middle'),
 
-            Column::computed('total_reward')
-                ->title('Total Rewards')
-                ->className('text-center align-middle'),
-
-            Column::computed('paid_reward')
-                ->title('Paid Rewards')
-                ->className('text-center align-middle'),
-
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
+            Column::make('referal_level')
+                ->title('Referal Level')
                 ->className('text-center align-middle'),
 
             Column::make('created_at')
@@ -119,6 +95,6 @@ class RewardsDataTable extends DataTable
     }
 
     protected function filename(): string {
-        return 'Rewards_' . date('YmdHis');
+        return 'ShowAgents_' . date('YmdHis');
     }
 }

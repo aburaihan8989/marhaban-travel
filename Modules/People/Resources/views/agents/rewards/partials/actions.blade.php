@@ -19,7 +19,7 @@
             </a>
         {{-- @endcan --}}
         {{-- @can('access_purchase_payments') --}}
-            <a href="#" class="dropdown-item">
+            <a href="{{ route('rewards-agents-list.show-agents', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-people-fill mr-2 text-primary" style="line-height: 1;"></i> Show Agents
             </a>
         {{-- @endcan --}}

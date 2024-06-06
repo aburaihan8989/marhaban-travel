@@ -34,7 +34,7 @@
     </li>
 @endcan
 
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('agents.*') ? 'c-show' : '' }}">
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('agents.*') || request()->routeIs('rewards-agents-list.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-person-badge" style="line-height: 1;"></i> Data Agents
     </a>
@@ -48,7 +48,7 @@
         {{-- @endcan --}}
         {{-- @can('access_customers') --}}
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link {{ request()->routeIs('rewards.*') ? 'c-active' : '' }}" href="{{ route('rewards.index') }}">
+            <a class="c-sidebar-nav-link {{ request()->routeIs('rewards.*') || request()->routeIs('rewards-agents-list.*') ? 'c-active' : '' }}" href="{{ route('rewards.index') }}">
                 <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Agents Reward
             </a>
         </li>

@@ -23,6 +23,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('teams', 'TeamsController');
 
     //Rewards
-    Route::resource('rewards', 'RewardsController');
+    // Route::resource('rewards', 'RewardsController');
+    // Route::get('/umroh-manifest-payments/{umroh_manifest_customer_id}', 'UmrohManifestPaymentsController@index')->name('umroh-manifest-payments.index');
+    Route::get('/rewards', 'RewardsController@index')->name('rewards.index');
+    Route::get('/rewards/agents-list/{agent_id}', 'RewardsController@show_agents')->name('rewards-agents-list.show-agents');
+
 
 });
