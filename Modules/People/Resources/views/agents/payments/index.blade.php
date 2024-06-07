@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Hajj Savings Payments')
+@section('title', 'Agent Rewards Payments')
 
 @section('third_party_stylesheets')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
@@ -9,8 +9,8 @@
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('hajj-savings.index') }}">Hajj Savings</a></li>
-        <li class="breadcrumb-item active">Savings Payments</li>
+        <li class="breadcrumb-item"><a href="{{ route('rewards.index') }}">Agents Rewards</a></li>
+        <li class="breadcrumb-item active">Agent Rewards Payments</li>
     </ol>
 @endsection
 

@@ -1,24 +1,26 @@
 @extends('layouts.app')
 
-@section('title', 'Create Umroh Savings Payment')
+@section('title', 'Edit Agent Rewards Payment')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
-        <li class="breadcrumb-item active">Create Umroh Savings Payment</li>
+        <li class="breadcrumb-item"><a href="{{ route('rewards.index') }}">Agents Rewards</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('agent-payments.index', $agentPayment->agent_id) }}">{{ $agent->agent_code }}</a></li>
+        <li class="breadcrumb-item active">Create Agent Rewards Payment</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <form id="payment-form" action="{{ route('umroh-saving-payments.store') }}" method="POST">
+        <form id="payment-form" action="{{ route('agent-payments.update', $agentPayment) }}" method="POST">
             @csrf
+            @method('patch')
             <div class="row">
                 <div class="col-lg-12">
                     @include('utils.alerts')
                     <div class="form-group">
-                        <button class="btn btn-primary">Create Savings Payment <i class="bi bi-check"></i></button>
+                        <button class="btn btn-primary">Update Rewards Payment <i class="bi bi-check"></i></button>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -28,13 +30,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="reference">Reference ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="CR/{{ $umroh_saving->reference }}">
+                                        <input type="text" class="form-control" name="reference" required readonly value="{{ $agentPayment->reference }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="date">Savings Date <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="date" required value="{{ now()->format('Y-m-d') }}">
+                                        <label for="date">Payment Date <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date" required value="{{ $agentPayment->getAttributes()['date'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -42,15 +44,15 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="total_saving">Savings Balance <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="total_saving" required value="{{ format_currency($umroh_saving->total_saving) }}" readonly>
+                                        <label for="total_reward">Rewards Balance <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="total_reward" required value="{{ format_currency($agent->total_reward-$agent->paid_reward) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="amount">Savings Amount <span class="text-danger">*</span></label>
+                                        <label for="amount">Payment Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') }}">
+                                            <input id="amount" type="text" class="form-control" name="amount" required value="{{ old('amount') ?? $agentPayment->amount }}">
                                         </div>
                                     </div>
                                 </div>
@@ -59,32 +61,44 @@
                                         <div class="form-group">
                                             <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
                                             <select class="form-control" name="payment_method" id="payment_method" required>
-                                                <option value="Cash">Cash</option>
-                                                <option value="Transfer">Transfer</option>
-                                                <option value="QRIS">QRIS</option>
-                                                <option value="Other">Other</option>
+                                                <option {{ $agentPayment->payment_method == 'Cash' ? 'selected' : '' }} value="Cash">Cash</option>
+                                                <option {{ $agentPayment->payment_method == 'Transfer' ? 'selected' : '' }} value="Transfer">Transfer</option>
+                                                <option {{ $agentPayment->payment_method == 'QRIS' ? 'selected' : '' }} value="QRIS">QRIS</option>
+                                                <option {{ $agentPayment->payment_method == 'Other' ? 'selected' : '' }} value="Other">Other</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="note">Note</label>
-                                <textarea class="form-control" rows="4" name="note">{{ old('note') }}</textarea>
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="status">Payment Status <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="status" id="status" required>
+                                            <option value="" selected>None</option>
+                                            <option {{ $agentPayment->status == 'Approval' ? 'selected' : '' }} value="Approval">Approval</option>
+                                            <option {{ $agentPayment->status == 'Verified' ? 'selected' : '' }} value="Verified">Verified</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
-                            <input type="hidden" value="{{ $umroh_saving->id }}" name="saving_id">
-                            <input type="hidden" value="Saving" name="trx_type">
+                            <div class="form-group">
+                                <label for="note">Note</label>
+                                <textarea class="form-control" rows="4" name="note">{{ old('note') ?? $agentPayment->note }}</textarea>
+                            </div>
 
+                            <input type="hidden" value="{{ $agent->id }}" name="agent_id">
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="savings">Savings Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 2, Max File Size: 1MB, Image Size: 400x400"></i></label>
+                                <label for="rewards">Payment Receipt <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="Max Files: 2, Max File Size: 1MB, Image Size: 400x400"></i></label>
                                 <div class="dropzone d-flex flex-wrap align-items-center justify-content-center" id="document-dropzone">
                                     <div class="dz-message" data-dz-message>
                                         <i class="bi bi-cloud-arrow-up"></i>
@@ -115,7 +129,7 @@
             addRemoveLinks: true,
             dictRemoveFile: "<i class='bi bi-x-circle text-danger'></i> remove",
             headers: {
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function (file, response) {
                 $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">');
@@ -129,19 +143,11 @@
                 } else {
                     name = uploadedDocumentMap[file.name];
                 }
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('dropzone.delete') }}",
-                    data: {
-                        '_token': "{{ csrf_token() }}",
-                        'file_name': `${name}`
-                    },
-                });
                 $('form').find('input[name="document[]"][value="' + name + '"]').remove();
             },
             init: function () {
-                @if(isset($savingPayment) && $savingPayment->getMedia('savings'))
-                var files = {!! json_encode($savingPayment->getMedia('savings')) !!};
+                @if(isset($agentPayment) && $agentPayment->getMedia('rewards'))
+                var files = {!! json_encode($agentPayment->getMedia('rewards')) !!};
                 for (var i in files) {
                     var file = files[i];
                     this.options.addedfile.call(this, file);
@@ -163,9 +169,7 @@
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
 
-            // $('#getTotalAmount').click(function () {
-            //     $('#amount').maskMoney('mask', {{ $umroh_saving->last_amount }});
-            // });
+            $('#amount').maskMoney('mask');
 
             $('#payment-form').submit(function () {
                 var amount = $('#amount').maskMoney('unmasked')[0];
@@ -174,4 +178,5 @@
         });
     </script>
 @endpush
+
 

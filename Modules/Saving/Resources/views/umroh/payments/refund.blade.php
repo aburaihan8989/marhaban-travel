@@ -6,7 +6,6 @@
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('umroh-savings.show', $umroh_saving) }}">{{ $umroh_saving->reference }}</a></li>
         <li class="breadcrumb-item active">Create Umroh Savings Refund</li>
     </ol>
 @endsection

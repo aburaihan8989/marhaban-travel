@@ -4,6 +4,7 @@ namespace Modules\People\Entities;
 
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Modules\People\Entities\AgentPayment;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,10 @@ class Agent extends Model implements HasMedia
 
     public function umrohManifestCustomers() {
         return $this->hasMany(UmrohManifestCustomer::class, 'id', 'agent_id');
+    }
+
+    public function agentPayments() {
+        return $this->hasMany(AgentPayment::class, 'agent_id', 'id');
     }
 
     public function registerMediaCollections(): void {
