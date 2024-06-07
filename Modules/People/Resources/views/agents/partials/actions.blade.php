@@ -8,8 +8,7 @@
         <i class="bi bi-eye"></i>
     </a>
 {{-- @endcan --}}
-@if ( $data->id == 1)
-{{-- @can('delete_customers') --}}
+{{-- @if ( $data->id == 1) --}}
     <button id="delete" class="btn btn-secondary btn-sm" onclick="
     // event.preventDefault();
     // if (confirm('Are you sure? It will delete the data permanently!')) {
@@ -22,9 +21,7 @@
         @method('delete')
     </form> --}}
     </button>
-{{-- @endcan --}}
-@else
-{{-- @can('delete_customers') --}}
+{{-- @else
     <button id="delete" class="btn btn-danger btn-sm" onclick="
     event.preventDefault();
     if (confirm('Are you sure? It will delete the data permanently!')) {
@@ -37,5 +34,4 @@
         @method('delete')
     </form>
     </button>
-{{-- @endcan --}}
-@endif
+@endif --}}
