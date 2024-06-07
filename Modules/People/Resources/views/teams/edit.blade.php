@@ -62,8 +62,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="team_status">Team Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="team_status" id="team_status">
-                                            <option value="" selected>None</option>
+                                        <select class="form-control" name="team_status" id="team_status" required>
+                                            <option value="" selected>Select Status</option>
                                             <option {{ $team->team_status == "Active" ? 'selected' : '' }} value="Active">Active</option>
                                             <option {{ $team->team_status == "Disable" ? 'selected' : '' }} value="Disable">Disable</option>
                                         </select>
@@ -75,17 +75,25 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="gender" id="gender">
-                                            <option value="" selected>None</option>
+                                        <select class="form-control" name="gender" id="gender" required>
+                                            <option value="" selected>Select Gender</option>
                                             <option {{ $team->gender == "L" ? 'selected' : '' }} value="L">Male</option>
                                             <option {{ $team->gender == "P" ? 'selected' : '' }} value="P">Female</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="division">Division <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="division" required value="{{ $team->division }}">
+                                        <select class="form-control" name="division" id="division" required>
+                                            <option value="" selected>Select Division</option>
+                                            <option {{ $team->division == "DIRECTOR" ? 'selected' : '' }} value="DIRECTOR">DIRECTOR</option>
+                                            <option {{ $team->division == "COMMISSIONER" ? 'selected' : '' }} value="COMMISSIONER">COMMISSIONER</option>
+                                            <option {{ $team->division == "TOUR LEADER" ? 'selected' : '' }} value="TOUR LEADER">TOUR LEADER</option>
+                                            <option {{ $team->division == "MANAGER OPERATIONAL" ? 'selected' : '' }} value="MANAGER OPERATIONAL">MANAGER OPERATIONAL</option>
+                                            <option {{ $team->division == "TEAM OPERATIONAL" ? 'selected' : '' }} value="TEAM OPERATIONAL">TEAM OPERATIONAL</option>
+                                            <option {{ $team->division == "TEAM OFFICE" ? 'selected' : '' }} value="TEAM OFFICE">TEAM OFFICE</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

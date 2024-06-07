@@ -74,17 +74,25 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="gender">Gender <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="gender" id="gender">
+                                        <select class="form-control" name="gender" id="gender" required>
                                             <option value="" selected >Select Gender</option>
                                             <option value="L">Male</option>
                                             <option value="P">Female</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="division">Division <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="division" required>
+                                        <select class="form-control" name="division" id="division" required>
+                                            <option value="" selected disabled>Select Division</option>
+                                            <option value="DIRECTOR">DIRECTOR</option>
+                                            <option value="COMMISSIONER">COMMISSIONER</option>
+                                            <option value="TOUR LEADER">TOUR LEADER</option>
+                                            <option value="MANAGER OPERATIONAL">MANAGER OPERATIONAL</option>
+                                            <option value="TEAM OPERATIONAL">TEAM OPERATIONAL</option>
+                                            <option value="TEAM OFFICE">TEAM OFFICE</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
