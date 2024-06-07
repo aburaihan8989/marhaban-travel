@@ -96,11 +96,11 @@ class RewardsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('agents_count')
-                ->title('Agents')
+                ->title('Agents Count')
                 ->className('text-center align-middle'),
 
             Column::make('customer_count')
-                ->title('Customers')
+                ->title('Customers Count')
                 ->className('text-center align-middle'),
 
             Column::computed('total_reward')
