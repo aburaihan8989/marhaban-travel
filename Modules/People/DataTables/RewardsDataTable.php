@@ -46,7 +46,7 @@ class RewardsDataTable extends DataTable
     }
 
     public function query(Agent $model) {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('total_reward','desc');
     }
 
     public function html() {
@@ -57,7 +57,7 @@ class RewardsDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                        'tr' .
                                  <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(1)
+            ->orderBy(0)
             ->buttons(
                 Button::make('excel')
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),

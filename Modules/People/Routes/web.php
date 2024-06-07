@@ -36,4 +36,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/agent-payments/destroy/{agentPayment}', 'AgentPaymentsController@destroy')->name('agent-payments.destroy');
     Route::get('/agent-payments/{agent_id}/view/{agentPayment}', 'AgentPaymentsController@view')->name('agent-payments.view');
 
+    //Rewards Payment Receipt PDF
+    Route::get('/agent-payments/pdf/{id}', function ($id) {
+        $agent_payment = \Modules\People\Entities\AgentPayment::findOrFail($id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($agent_payment->agent_id);
+
+        $pdf = \PDF::loadView('people::agents.payments.print', [
+            'agent_payment' => $agent_payment,
+            'agent' => $agent,
+        ])->setPaper('a4');
+
+        return $pdf->stream('agent-payments-'. $agent_payment->reference .'.pdf');
+    })->name('agent-payments.pdf');
+
 });

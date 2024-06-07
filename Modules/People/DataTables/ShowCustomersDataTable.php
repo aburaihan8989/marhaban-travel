@@ -37,6 +37,9 @@ class ShowCustomersDataTable extends DataTable
             ->addColumn('agent_name', function ($data) {
                 return Agent::findOrFail($data->agent_id)->agent_name;
             })
+            ->addColumn('agent_reward', function ($data) {
+                return format_currency($data->agent_reward);
+            })
             ->addColumn('action', function ($data) {
                 return view('people::agents.rewards.partials.actions', compact('data'));
             });
@@ -100,6 +103,10 @@ class ShowCustomersDataTable extends DataTable
 
             Column::make('agent_name')
                 ->title('Agent Name')
+                ->className('text-center align-middle'),
+
+            Column::make('agent_reward')
+                ->title('Agent Rewards')
                 ->className('text-center align-middle'),
 
             Column::make('created_at')

@@ -21,6 +21,7 @@ class CreateAgentPaymentsTable extends Migration
             $table->integer('amount');
             $table->string('payment_method');
             $table->string('status');
+            $table->string('trx_type');
             $table->text('note')->nullable();
             $table->foreign('agent_id')->references('id')->on('agents')->cascadeOnDelete();
             $table->timestamps();
