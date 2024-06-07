@@ -173,10 +173,6 @@
 
                 $('#amount').maskMoney('mask');
 
-                // $('#getTotalAmount').click(function () {
-                //     $('#amount').maskMoney('mask', {{ $umroh_saving->total_saving }});
-                // });
-
                 $('#payment-form').submit(function () {
                     var amount = $('#amount').maskMoney('unmasked')[0];
                     $('#amount').val(amount);
@@ -355,10 +351,6 @@
                 });
 
                 $('#refund_amount').maskMoney('mask');
-
-                // $('#getTotalAmount').click(function () {
-                //     $('#amount').maskMoney('mask', {{ $umroh_saving->total_saving }});
-                // });
 
                 $('#payment-form').submit(function () {
                     var refund_amount = $('#refund_amount').maskMoney('unmasked')[0];

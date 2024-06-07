@@ -24,6 +24,32 @@ class SettingController extends Controller
     }
 
 
+    public function reward() {
+        abort_if(Gate::denies('access_settings'), 403);
+
+        $settings = Setting::firstOrFail();
+
+        return view('setting::reward', compact('settings'));
+    }
+
+
+    public function reward_update(Request $request) {
+        Setting::firstOrFail()->update([
+            'referal_rewards' => $request->referal_rewards,
+            'level1_rewards' => $request->level1_rewards,
+            'level2_rewards' => $request->level2_rewards,
+            'level3_rewards' => $request->level3_rewards,
+            'level4_rewards' => $request->level4_rewards,
+        ]);
+
+        cache()->forget('settings');
+
+        toast('Rewards Settings Updated!', 'info');
+
+        return redirect()->route('settings-rewards.index');
+    }
+
+
     public function update(StoreSettingsRequest $request) {
         Setting::firstOrFail()->update([
             'company_name' => $request->company_name,

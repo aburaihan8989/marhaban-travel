@@ -20,4 +20,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/settings', 'SettingController@update')->name('settings.update');
     // Units
     Route::resource('units', 'UnitsController')->except('show');
+
+    //Rewards Settings
+    Route::get('/settings-rewards', 'SettingController@reward')->name('settings-rewards.index');
+    Route::patch('/settings-rewards', 'SettingController@reward_update')->name('settings-rewards.update');
+
 });

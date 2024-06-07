@@ -77,27 +77,42 @@ class UmrohManifestCustomerController extends Controller
                 'room_group' => $request->room_group,
                 'family_group' => $request->family_group,
                 'baggage' => $request->baggage,
+                // 'agent_reward' => $agent_reward,
                 'note' => $request->note
             ]);
-
-            // if ($request->status == 'Completed') {
-            //     $product = Product::findOrFail($cart_item->id);
-            //     $product->update([
-            //         'product_quantity' => $product->product_quantity + $cart_item->qty
-            //     ]);
-            // }
 
             if ($umroh_manifest_customer->last_amount > 0) {
                 UmrohManifestPayment::create([
                     'date' => now()->format('Y-m-d'),
                     'reference' => 'INV/'.$umroh_manifest_customer->reference,
                     'amount' => $request->last_amount,
-                    'trx_type' => 'Saving',
+                    'trx_type' => 'Payment',
                     'status' => 'Approval',
                     'umroh_manifest_customer_id' => $umroh_manifest_customer->id,
                     'payment_method' => $request->payment_method
                 ]);
             }
+
+            $agent = Agent::findOrFail($umroh_manifest_customer->agent_id);
+
+            if ($agent->level_agent == 'Bronze') {
+                $agent_reward = settings()->level1_rewards;
+            } elseif ($agent->level_agent == 'Silver') {
+                $agent_reward = settings()->level2_rewards;
+            } elseif ($agent->level_agent == 'Gold') {
+                $agent_reward = settings()->level3_rewards;
+            } else {
+                $agent_reward = settings()->level4_rewards;
+            }
+
+            $agent->update([
+                'total_reward' => $agent->total_reward+$agent_reward
+            ]);
+
+            $umroh_manifest_customer->update([
+                'agent_reward' => $agent_reward
+            ]);
+
         });
 
         toast('Umroh Manifest Customer Created!', 'success');
@@ -128,12 +143,28 @@ class UmrohManifestCustomerController extends Controller
             // 'total_price' => 'required|numeric',
             // 'total_payment' => 'required|numeric',
             // 'remaining_payment' => 'required|numeric',
-            'note' => 'nullable|string|max:1000'
+            // 'note' => 'nullable|string|max:1000'
         ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_customer_id) {
             // $total_payment = $umroh_manifest_customer_id->total_payment + $request->last_amount;
             $remaining_payment = $request->total_price - $umroh_manifest_customer_id->total_payment;
+
+            // $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
+
+            // if ($agent->level_agent == 'Bronze') {
+            //     $agent_reward = settings()->level1_rewards;
+            // } elseif ($agent->level_agent == 'Silver') {
+            //     $agent_reward = settings()->level2_rewards;
+            // } elseif ($agent->level_agent == 'Gold') {
+            //     $agent_reward = settings()->level3_rewards;
+            // } else {
+            //     $agent_reward = settings()->level4_rewards;
+            // }
+
+            // $agent->update([
+            //     'total_reward' => $agent->total_reward+$agent_reward
+            // ]);
 
             if ($request->total_payment >= $request->total_price) {
                 $status = 'Completed';
@@ -162,6 +193,7 @@ class UmrohManifestCustomerController extends Controller
                 'room_group' => $request->room_group,
                 'family_group' => $request->family_group,
                 'baggage' => $request->baggage,
+                // 'agent_reward' => $agent_reward,
                 'note' => $request->note
             ]);
 
@@ -177,6 +209,12 @@ class UmrohManifestCustomerController extends Controller
         // abort_if(Gate::denies('delete_purchases'), 403);
         // @dd($umroh_manifest_customer_id);
         $umroh_manifest_customer_id->delete();
+
+        $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
+
+        $agent->update([
+            'total_reward' => $agent->total_reward-$umroh_manifest_customer_id->agent_reward
+        ]);
 
         toast('Umroh Manifest Customer Deleted!', 'warning');
 
