@@ -49,7 +49,7 @@
         {{-- @can('access_customers') --}}
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link {{ request()->routeIs('rewards.*') || request()->routeIs('rewards-agents-list.*') ? 'c-active' : '' }}" href="{{ route('rewards.index') }}">
-                <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Agents Reward
+                <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Agents Rewards
             </a>
         </li>
     {{-- @endcan --}}
