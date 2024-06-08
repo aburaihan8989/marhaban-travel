@@ -64,7 +64,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                            <select class="form-control" name="agent_id" id="agent_id" required readonly disabled>
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
                                                     <option {{ $umroh_manifest_customer_id->agent_id == $agent->id ? 'selected' : '' }} value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
