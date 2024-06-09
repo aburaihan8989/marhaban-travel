@@ -151,4 +151,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/hajj-manifest-payments/destroy/{hajjManifestPayment}', 'HajjManifestPaymentsController@destroy')->name('hajj-manifest-payments.destroy');
     Route::get('/hajj-manifest-payments/{hajj_manifest_customer_id}/view/{hajjManifestPayment}', 'HajjManifestPaymentsController@view')->name('hajj-manifest-payments.view');
 
+    Route::get('/hajj-manifest-payments/{hajj_manifest_customer_id}/refund', 'HajjManifestPaymentsController@refund')->name('hajj-manifest-payments.refund');
+
 });

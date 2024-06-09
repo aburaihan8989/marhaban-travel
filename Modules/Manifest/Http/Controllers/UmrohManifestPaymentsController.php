@@ -220,7 +220,6 @@ class UmrohManifestPaymentsController extends Controller
                     }
                 }
             }
-
         });
 
         toast('Umroh Manifest Customer Payment Updated!', 'info');
@@ -244,10 +243,17 @@ class UmrohManifestPaymentsController extends Controller
         DB::transaction(function () use ($umrohManifestPayment) {
             $umroh_manifest = $umrohManifestPayment->umrohManifestCustomers;
 
-            $umroh_manifest->update([
-                'total_payment' => $umroh_manifest->total_payment - $umrohManifestPayment->amount,
-                'remaining_payment' => $umroh_manifest->total_price - ($umroh_manifest->total_payment - $umrohManifestPayment->amount)
-            ]);
+            if ($umrohManifestPayment->trx_type == 'Payment') {
+                $umroh_manifest->update([
+                    'total_payment' => $umroh_manifest->total_payment - $umrohManifestPayment->amount,
+                    'remaining_payment' => $umroh_manifest->total_price - ($umroh_manifest->total_payment - $umrohManifestPayment->amount)
+                ]);
+            } else {
+                $umroh_manifest->update([
+                    'total_payment' => $umroh_manifest->total_payment - $umrohManifestPayment->refund_amount,
+                    'remaining_payment' => $umroh_manifest->total_price - ($umroh_manifest->total_payment - $umrohManifestPayment->refund_amount)
+                ]);
+            }
         });
 
         $umrohManifestPayment->delete();

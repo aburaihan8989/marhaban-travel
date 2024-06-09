@@ -36,67 +36,100 @@ class HajjManifestPaymentsController extends Controller
     }
 
 
+    public function refund($hajj_manifest_id) {
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+
+        $hajj_manifest = HajjManifestCustomer::findOrFail($umroh_manifest_id);
+
+        return view('manifest::hajj.payments.refund', compact('hajj_manifest'));
+    }
+
+
     public function store(Request $request, HajjManifestCustomer $hajj_manifest_customer_id) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-        // @dd($umroh_manifest_customer_id);
-
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'umroh_manifest_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
 
         DB::transaction(function () use ($request, $hajj_manifest_customer_id) {
 
-            // UmrohManifestPayment::create([
-            //     'date' => $request->date,
-            //     'reference' => $request->reference,
-            //     'amount' => $request->amount,
-            //     'note' => $request->note,
-            //     'umroh_manifest_customer_id' => $request->umroh_manifest_customer_id,
-            //     'payment_method' => $request->payment_method
-            // ]);
+            if ($request->trx_type == 'Payment') {
+                $hajjManifestPayment = HajjManifestPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $hajjManifestPayment = HajjManifestPayment::create([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => 'Approval',
-                'note' => $request->note,
-                'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
-                'payment_method' => $request->payment_method
-            ]);
-
-            if ($request->has('document')) {
-                foreach ($request->input('document', []) as $file) {
-                    $hajjManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $hajjManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                    }
                 }
-            }
 
-            $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
+                $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
 
-            // @dd($umroh_manifest);
+                // @dd($umroh_manifest);
 
-            // $due_amount = $purchase->due_amount - $request->amount;
-            $total_payment = $hajj_manifest->total_payment + $request->amount;
-            $remaining_payment = $hajj_manifest->total_price - $total_payment;
+                // $due_amount = $purchase->due_amount - $request->amount;
+                $total_payment = $hajj_manifest->total_payment + $request->amount;
+                $remaining_payment = $hajj_manifest->total_price - $total_payment;
 
-            if ($total_payment >= $hajj_manifest->total_price) {
-                $status = 'Completed';
+                if ($total_payment >= $hajj_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
+                $hajj_manifest->update([
+                    'last_amount' => $request->amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
+                    'remaining_payment' => $remaining_payment,
+                    'payment_method' => $request->payment_method
+                ]);
             } else {
-                $status = 'Waiting';
+                $hajjManifestPayment = HajjManifestPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $hajjManifestPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('payments');
+                    }
+                }
+
+                $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
+
+                // @dd($umroh_manifest);
+
+                // $due_amount = $purchase->due_amount - $request->amount;
+                $total_payment = $hajj_manifest->total_payment - $request->refund_amount;
+                $remaining_payment = $hajj_manifest->total_price - $total_payment;
+
+                if ($total_payment >= $hajj_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
+                $hajj_manifest->update([
+                    'last_amount' => $request->refund_amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
+                    'remaining_payment' => $remaining_payment,
+                    'payment_method' => $request->payment_method
+                ]);
             }
 
-            $hajj_manifest->update([
-                'last_amount' => $request->amount,
-                'total_payment' => $total_payment,
-                'status' => $status,
-                'remaining_payment' => $remaining_payment,
-                'payment_method' => $request->payment_method
-            ]);
         });
 
         toast('Hajj Manifest Customer Payment Created!', 'success');
@@ -115,50 +148,65 @@ class HajjManifestPaymentsController extends Controller
 
 
     public function update(Request $request, HajjManifestPayment $hajjManifestPayment) {
-        // abort_if(Gate::denies('access_purchase_payments'), 403);
-    // @dd($request);
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'umroh_manifest_customer_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
 
         DB::transaction(function () use ($request, $hajjManifestPayment) {
             $hajj_manifest = $hajjManifestPayment->hajjManifestCustomers;
 
-            // $due_amount = ($purchase->due_amount + $purchasePayment->amount) - $request->amount;
-            // $total_saving = ($saving->total_saving - $savingPayment->amount) + $request->amount;
+            if ($umrohManifestPayment->trx_type == 'Payment') {
+                $total_payment = ($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount;
+                $remaining_payment = $hajj_manifest->total_price - $total_payment;
 
-            $total_payment = ($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount;
-            $remaining_payment = $hajj_manifest->total_price - $total_payment;
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
 
-            if ($total_payment >= $umroh_manifest->total_price) {
-                $status = 'Completed';
+                $hajj_manifest->update([
+                    'total_payment' => $total_payment,
+                    'remaining_payment' => $hajj_manifest->total_price - $total_payment,
+                    'last_amount' => $request->amount,
+                    'status' => $status,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                $hajjManifestPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'status' => $request->status,
+                    'note' => $request->note,
+                    'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
             } else {
-                $status = 'Waiting';
+                $total_payment = ($hajj_manifest->total_payment + $hajjManifestPayment->refund_amount) - $request->refund_amount;
+                $remaining_payment = $hajj_manifest->total_price - $total_payment;
+
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
+                $hajj_manifest->update([
+                    'total_payment' => $total_payment,
+                    'remaining_payment' => $hajj_manifest->total_price - $total_payment,
+                    'last_amount' => $request->refund_amount,
+                    'status' => $status,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                $hajjManifestPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'status' => $request->status,
+                    'note' => $request->note,
+                    'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_method' => $request->payment_method
+                ]);
             }
-
-            $hajj_manifest->update([
-                'total_payment' => $total_payment,
-                'remaining_payment' => $hajj_manifest->total_price - $total_payment,
-                'last_amount' => $request->amount,
-                'status' => $status,
-                'payment_method' => $request->payment_method
-            ]);
-
-            $hajjManifestPayment->update([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => $request->status,
-                'note' => $request->note,
-                'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
-                'payment_method' => $request->payment_method
-            ]);
-            // $umroh_package->update($request->except('document'));
 
             if ($request->has('document')) {
                 if (count($hajjManifestPayment->getMedia('payments')) > 0) {
@@ -177,7 +225,6 @@ class HajjManifestPaymentsController extends Controller
                     }
                 }
             }
-
         });
 
         toast('Hajj Manifest Customer Payment Updated!', 'info');
@@ -201,10 +248,17 @@ class HajjManifestPaymentsController extends Controller
         DB::transaction(function () use ($hajjManifestPayment) {
             $hajj_manifest = $hajjManifestPayment->hajjManifestCustomers;
 
-            $hajj_manifest->update([
-                'total_payment' => $hajj_manifest->total_payment - $hajjManifestPayment->amount,
-                'remaining_payment' => $hajj_manifest->total_price - ($hajj_manifest->total_payment - $hajjManifestPayment->amount)
-            ]);
+            if ($hajjManifestPayment->trx_type == 'Payment') {
+                $hajj_manifest->update([
+                    'total_payment' => $hajj_manifest->total_payment - $hajjManifestPayment->amount,
+                    'remaining_payment' => $hajj_manifest->total_price - ($hajj_manifest->total_payment - $hajjManifestPayment->amount)
+                ]);
+            } else {
+                $hajj_manifest->update([
+                    'total_payment' => $hajj_manifest->total_payment - $hajjManifestPayment->refund_amount,
+                    'remaining_payment' => $hajj_manifest->total_price - ($hajj_manifest->total_payment - $hajjManifestPayment->refund_amount)
+                ]);
+            }
         });
 
         $hajjManifestPayment->delete();
