@@ -203,9 +203,15 @@ class SavingPaymentsController extends Controller
         DB::transaction(function () use ($savingPayment) {
             $umroh_saving = $savingPayment->savings;
 
-            $umroh_saving->update([
-                'total_saving' => $umroh_saving->total_saving - $savingPayment->amount
-            ]);
+            if ($savingPayment->trx_type == 'Saving') {
+                $umroh_saving->update([
+                    'total_saving' => $umroh_saving->total_saving - $savingPayment->amount
+                ]);
+            } else {
+                $umroh_saving->update([
+                    'total_saving' => $umroh_saving->total_saving + $savingPayment->refund_amount
+                ]);
+            }
         });
 
         $savingPayment->delete();

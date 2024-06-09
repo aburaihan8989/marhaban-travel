@@ -29,15 +29,16 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
+                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required readonly value="SH">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="customer_id">Customer <span class="text-danger">*</span></label>
+                                            <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
+                                                <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                                 @endforeach
@@ -55,12 +56,10 @@
                                 </div>
                             </div>
 
-                            {{-- <livewire:product-cart :cartInstance="'purchase'"/> --}}
-
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
+                                        <label for="status">Savings Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
                                             <option value="Active">Active</option>
                                             <option value="Cancel">Cancel</option>
@@ -86,11 +85,6 @@
                                         <label for="last_amount">Payment Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input id="last_amount" type="text" class="form-control" name="last_amount" required>
-                                            {{-- <div class="input-group-append">
-                                                <button id="getTotalAmount" class="btn btn-primary" type="button">
-                                                    <i class="bi bi-check-square"></i>
-                                                </button>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +94,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="customer_bank">Bank Name <span class="text-danger">*</span></label>
+                                            <label for="customer_bank">Account Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_bank" id="customer_bank" required>
                                                 <option value="BSI">BSI</option>
                                                 <option value="BRI">BRI</option>
@@ -112,7 +106,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="bank_account">Account Number <span class="text-danger">*</span></label>
+                                        <label for="bank_account">Account Number <span class="text-danger"></span></label>
                                         <input type="text" class="form-control" name="bank_account" value="{{ old('bank_account') }}">
                                     </div>
                                 </div>

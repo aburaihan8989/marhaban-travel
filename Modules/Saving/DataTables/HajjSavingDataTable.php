@@ -89,6 +89,10 @@ class HajjSavingDataTable extends DataTable
                 ->title('Savings Account')
                 ->className('text-center align-middle'),
 
+            Column::computed('bank_account')
+                ->title('Account Number')
+                ->className('text-center align-middle'),
+
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

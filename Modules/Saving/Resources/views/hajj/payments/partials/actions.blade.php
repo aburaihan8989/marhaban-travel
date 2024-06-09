@@ -1,11 +1,11 @@
 {{-- @can('access_sale_payments') --}}
-    <a href="{{ route('hajj-saving-payments.edit', [$data->hajjsavings->id, $data->id]) }}" class="btn btn-info btn-sm">
+    <a href="{{ route('umroh-saving-payments.edit', [$data->savings->id, $data->id]) }}" class="btn btn-info btn-sm">
         <i class="bi bi-pencil"></i>
     </a>
 {{-- @endcan
 {{-- @can('access_sale_payments') --}}
 @if ($data->status == 'Verified')
-    <a href="{{ route('hajj-saving-payments.view', [$data->hajjsavings->id, $data->id]) }}" class="btn btn-primary btn-sm">
+    <a href="{{ route('umroh-saving-payments.view', [$data->savings->id, $data->id]) }}" class="btn btn-primary btn-sm">
         <i class="bi bi-eye"></i>
     </a>
 @else
@@ -22,7 +22,7 @@
         }
         ">
         <i class="bi bi-trash"></i>
-        <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('hajj-saving-payments.destroy', $data->id) }}" method="POST">
+        <form id="destroy{{ $data->id }}" class="d-none" action="{{ route('umroh-saving-payments.destroy', $data->id) }}" method="POST">
             @csrf
             @method('delete')
         </form>

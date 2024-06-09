@@ -2,12 +2,13 @@
 
 namespace Modules\Saving\DataTables;
 
-use Modules\Saving\Entities\HajjSavingPayment;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Modules\Saving\Entities\HajjSaving;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Saving\Entities\HajjSavingPayment;
 
 class HajjSavingPaymentsDataTable extends DataTable
 {
@@ -15,10 +16,20 @@ class HajjSavingPaymentsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('amount', function ($data) {
-                return format_currency($data->amount);
+                return $data->amount == '' ? $data->amount : format_currency($data->amount);
+            })
+            ->addColumn('refund_amount', function ($data) {
+                return $data->refund_amount == '' ? $data->refund_amount : format_currency($data->refund_amount);
             })
             ->addColumn('status', function ($data) {
                 return view('saving::hajj.payments.partials.status', compact('data'));
+            })
+            ->addColumn('trx_type', function ($data) {
+                return view('saving::hajj.payments.partials.type', compact('data'));
+            })
+            ->editColumn('customer_name', function($model){
+                $getData = HajjSaving::findOrFail($model->saving_id)->customer_name;
+                return $getData;
             })
             ->addColumn('action', function ($data) {
                 return view('saving::hajj.payments.partials.actions', compact('data'));
@@ -61,21 +72,35 @@ class HajjSavingPaymentsDataTable extends DataTable
             ->className('text-center align-middle'),
 
             Column::make('date')
-                ->title('Payment Date')
+                ->title('Transaction Date')
                 ->className('align-middle text-center'),
 
             Column::make('reference')
+                ->title('Reference ID')
+                ->className('align-middle text-center'),
+
+            Column::make('customer_name')
+                ->title('Customer Name')
+                ->className('align-middle text-center'),
+
+            Column::computed('trx_type')
+                ->title('Category')
                 ->className('align-middle text-center'),
 
             Column::computed('amount')
-                ->title('Payment Amount')
+                ->title('Savings Amount')
+                ->className('align-middle text-center'),
+
+            Column::computed('refund_amount')
+                ->title('Refund Amount')
                 ->className('align-middle text-center'),
 
             Column::make('payment_method')
+                ->title('Method')
                 ->className('align-middle text-center'),
 
             Column::computed('status')
-                ->title('Payment Status')
+                ->title('Approval Status')
                 ->className('align-middle text-center'),
 
             Column::computed('action')

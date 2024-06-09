@@ -29,7 +29,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
+                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required value="{{ $hajj_saving->reference }}" readonly>
                                     </div>
                                 </div>
@@ -41,6 +41,7 @@
                                         <div class="form-group">
                                             <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
+                                                <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option {{ $hajj_saving->customer_id == $customer->id ? 'selected' : '' }} value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                                 @endforeach
@@ -66,12 +67,10 @@
                                 </div>
                             </div>
 
-                            {{-- <livewire:product-cart :cartInstance="'purchase'" :data="$purchase"/> --}}
-
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
+                                        <label for="status">Savings Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
                                             <option {{ $hajj_saving->status == 'Active' ? 'selected' : '' }} value="Active">Active</option>
                                             <option {{ $hajj_saving->status == 'Cancel' ? 'selected' : '' }} value="Cancel">Cancel</option>
@@ -98,7 +97,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="customer_bank">Bank Name <span class="text-danger">*</span></label>
+                                        <label for="customer_bank">Account Name <span class="text-danger">*</span></label>
                                         <select class="form-control" name="customer_bank" id="customer_bank" required>
                                             <option {{ $hajj_saving->customer_bank == 'BSI' ? 'selected' : '' }} value="BSI">BSI</option>
                                             <option {{ $hajj_saving->customer_bank == 'BRI' ? 'selected' : '' }} value="BRI">BRI</option>
@@ -109,8 +108,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="bank_account">Account Number <span class="text-danger">*</span></label>
-                                        <input id="bank_account" type="text" class="form-control" name="bank_account" required value="{{ $hajj_saving->bank_account }}">
+                                        <label for="bank_account">Account Number <span class="text-danger"></span></label>
+                                        <input id="bank_account" type="text" class="form-control" name="bank_account" value="{{ $hajj_saving->bank_account }}">
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +117,8 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="total_saving">Savings Balance <span class="text-danger">*</span></label>
-                                        <input id="total_saving" type="text" class="form-control" style="font-weight:bold; font-size:20px;" name="total_saving" required value="{{ format_currency($hajj_saving->total_saving) }}" readonly>
+                                        <label for="total_saving">Savings Balance <span class="text-danger"></span></label>
+                                        <input id="total_saving" type="text" class="form-control" style="font-weight:bold; font-size:20px;" name="total_saving" value="{{ format_currency($hajj_saving->total_saving) }}" readonly>
                                     </div>
                                 </div>
                             </div>

@@ -97,7 +97,7 @@ class HajjSavingPaymentsController extends Controller
                 $total_saving = $hajj_saving->total_saving - $request->refund_amount;
 
                 $hajj_saving->update([
-                    'last_amount' => $request->amount,
+                    'last_amount' => $request->refund_amount,
                     'total_saving' => $total_saving,
                     'payment_method' => $request->payment_method
                 ]);
@@ -123,33 +123,43 @@ class HajjSavingPaymentsController extends Controller
     public function update(Request $request, HajjSavingPayment $hajjsavingPayment) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        $request->validate([
-            'date' => 'required|date',
-            'reference' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'note' => 'nullable|string|max:1000',
-            'saving_id' => 'required',
-            'payment_method' => 'required|string|max:255'
-        ]);
-
         DB::transaction(function () use ($request, $hajjsavingPayment) {
             $hajj_saving = $hajjsavingPayment->hajjsavings;
 
-            $hajj_saving->update([
-                'total_saving' => ($hajj_saving->total_saving - $hajjsavingPayment->amount) + $request->amount,
-                'last_amount' => $request->amount,
-                'payment_method' => $request->payment_method
-            ]);
+            if ($hajjsavingPayment->trx_type == 'Saving') {
+                $hajj_saving->update([
+                    'total_saving' => ($hajj_saving->total_saving - $hajjsavingPayment->amount) + $request->amount,
+                    'last_amount' => $request->amount,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $hajjsavingPayment->update([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'note' => $request->note,
-                'status' => $request->status,
-                'saving_id' => $request->saving_id,
-                'payment_method' => $request->payment_method
-            ]);
+                $hajjsavingPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'note' => $request->note,
+                    'status' => $request->status,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+            } else {
+                $hajj_saving->update([
+                    'total_saving' => ($hajj_saving->total_saving + $hajjsavingPayment->refund_amount) - $request->refund_amount,
+                    'last_amount' => $request->refund_amount,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                $hajjsavingPayment->update([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'note' => $request->note,
+                    'status' => $request->status,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
+            }
 
             if ($request->has('document')) {
                 if (count($hajjsavingPayment->getMedia('savings')) > 0) {
@@ -192,9 +202,15 @@ class HajjSavingPaymentsController extends Controller
         DB::transaction(function () use ($hajjsavingPayment) {
             $hajj_saving = $hajjsavingPayment->hajjsavings;
 
-            $hajj_saving->update([
-                'total_saving' => $hajj_saving->total_saving - $hajjsavingPayment->amount
-            ]);
+            if ($hajjsavingPayment->trx_type == 'Saving') {
+                $hajj_saving->update([
+                    'total_saving' => $hajj_saving->total_saving - $hajjsavingPayment->amount
+                ]);
+            } else {
+                $hajj_saving->update([
+                    'total_saving' => $hajj_saving->total_saving + $hajjsavingPayment->refund_amount
+                ]);
+            }
         });
 
         $hajjsavingPayment->delete();
