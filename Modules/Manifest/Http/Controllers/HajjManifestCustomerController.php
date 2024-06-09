@@ -89,6 +89,7 @@ class HajjManifestCustomerController extends Controller
                     'date' => now()->format('Y-m-d'),
                     'reference' => 'INV/'.$hajj_manifest_customer->reference,
                     'amount' => $request->last_amount,
+                    'trx_type' => 'Payment',
                     'status' => 'Approval',
                     'hajj_manifest_customer_id' => $hajj_manifest_customer->id,
                     'payment_method' => $request->payment_method
