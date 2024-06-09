@@ -4,14 +4,11 @@ namespace Modules\Manifest\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use Modules\People\Entities\Agent;
 use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
-// use Modules\Product\Entities\Product;
 use Modules\Manifest\Entities\HajjManifest;
-// use Modules\Purchase\Entities\PurchaseDetail;
 use Modules\Manifest\Entities\HajjManifestPayment;
 use Modules\Manifest\Entities\HajjManifestCustomer;
 use Modules\Manifest\DataTables\HajjManifestCustomerDataTable;
@@ -80,13 +77,6 @@ class HajjManifestCustomerController extends Controller
                 'note' => $request->note
             ]);
 
-            // if ($request->status == 'Completed') {
-            //     $product = Product::findOrFail($cart_item->id);
-            //     $product->update([
-            //         'product_quantity' => $product->product_quantity + $cart_item->qty
-            //     ]);
-            // }
-
             if ($hajj_manifest_customer->last_amount > 0) {
                 HajjManifestPayment::create([
                     'date' => now()->format('Y-m-d'),
@@ -97,6 +87,27 @@ class HajjManifestCustomerController extends Controller
                     'payment_method' => $request->payment_method
                 ]);
             }
+
+            $agent = Agent::findOrFail($hajj_manifest_customer->agent_id);
+
+            if ($agent->level_agent == 'Bronze') {
+                $agent_reward = settings()->level1_rewards;
+            } elseif ($agent->level_agent == 'Silver') {
+                $agent_reward = settings()->level2_rewards;
+            } elseif ($agent->level_agent == 'Gold') {
+                $agent_reward = settings()->level3_rewards;
+            } else {
+                $agent_reward = settings()->level4_rewards;
+            }
+
+            $agent->update([
+                'total_reward' => $agent->total_reward + $agent_reward
+            ]);
+
+            $hajj_manifest_customer->update([
+                'agent_reward' => $agent_reward
+            ]);
+
         });
 
         toast('Hajj Manifest Customer Created!', 'success');
@@ -128,7 +139,7 @@ class HajjManifestCustomerController extends Controller
             // 'total_price' => 'required|numeric',
             // 'total_payment' => 'required|numeric',
             // 'remaining_payment' => 'required|numeric',
-            'note' => 'nullable|string|max:1000'
+            // 'note' => 'nullable|string|max:1000'
         ]);
 
         DB::transaction(function () use ($request, $hajj_manifest_customer_id) {

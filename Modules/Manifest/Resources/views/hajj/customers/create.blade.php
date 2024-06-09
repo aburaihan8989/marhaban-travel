@@ -82,7 +82,7 @@
                                     <div class="form-group">
                                         <label for="family_group">Family Group <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input id="family_group" type="text" class="form-control" name="{{ old('family_group') }}">
+                                            <input id="family_group" type="text" class="form-control" name="family_group" value="{{ old('family_group') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                     <div class="form-group">
                                         <label for="baggage">Baggage <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <input id="baggage" type="text" class="form-control" name="{{ old('baggage') }}">
+                                            <input id="baggage" type="text" class="form-control" name="baggage" value="{{ old('baggage') }}">
                                         </div>
                                     </div>
                                 </div>

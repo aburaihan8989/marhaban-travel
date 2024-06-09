@@ -15,6 +15,13 @@
                 </a>
             {{-- @endif --}}
         {{-- @endcan
+        {{-- @can('access_purchase_payments') --}}
+            {{-- @if($data->due_amount > 0) --}}
+                <a href="{{ route('hajj-saving-payments.refund', $data->id) }}" class="dropdown-item">
+                    <i class="bi bi-dash-circle-dotted mr-2 text-danger" style="line-height: 1;"></i> Add Refund
+                </a>
+            {{-- @endif --}}
+        {{-- @endcan
         @can('edit_purchases') --}}
             <a href="{{ route('hajj-savings.edit', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-pencil mr-2 text-primary" style="line-height: 1;"></i> Edit

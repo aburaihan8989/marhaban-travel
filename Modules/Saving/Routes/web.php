@@ -100,4 +100,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/hajj-saving-payments/destroy/{hajjsavingPayment}', 'HajjSavingPaymentsController@destroy')->name('hajj-saving-payments.destroy');
     Route::get('/hajj-saving-payments/{saving_id}/view/{hajjsavingPayment}', 'HajjSavingPaymentsController@view')->name('hajj-saving-payments.view');
 
+    Route::get('/hajj-saving-payments/{saving_id}/refund', 'HajjSavingPaymentsController@refund')->name('hajj-saving-payments.refund');
+
 });

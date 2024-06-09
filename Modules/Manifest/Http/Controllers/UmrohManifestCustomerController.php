@@ -106,7 +106,7 @@ class UmrohManifestCustomerController extends Controller
             }
 
             $agent->update([
-                'total_reward' => $agent->total_reward+$agent_reward
+                'total_reward' => $agent->total_reward + $agent_reward
             ]);
 
             $umroh_manifest_customer->update([

@@ -35,63 +35,74 @@ class HajjSavingPaymentsController extends Controller
     }
 
 
+    public function refund($saving_id) {
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+
+        $hajj_saving = HajjSaving::findOrFail($saving_id);
+
+        return view('saving::hajj.payments.refund', compact('hajj_saving'));
+    }
+
+
     public function store(Request $request) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        // $request->validate([
-        //     'date' => 'required|date',
-        //     'reference' => 'required|string|max:255',
-        //     'amount' => 'required|numeric',
-        //     'note' => 'nullable|string|max:1000',
-        //     'saving_id' => 'required',
-        //     'payment_method' => 'required|string|max:255'
-        // ]);
-
         DB::transaction(function () use ($request) {
 
-            // HajjSavingPayment::create([
-            //     'date' => $request->date,
-            //     'reference' => $request->reference,
-            //     'amount' => $request->amount,
-            //     'note' => $request->note,
-            //     'saving_id' => $request->saving_id,
-            //     'payment_method' => $request->payment_method
-            // ]);
+            if ($request->trx_type == 'Saving') {
+                $HajjSavingPayment = HajjSavingPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'amount' => $request->amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
 
-            $HajjSavingPayment = HajjSavingPayment::create([
-                'date' => $request->date,
-                'reference' => $request->reference,
-                'amount' => $request->amount,
-                'status' => 'Approval',
-                'note' => $request->note,
-                'saving_id' => $request->saving_id,
-                'payment_method' => $request->payment_method
-            ]);
-
-            if ($request->has('document')) {
-                foreach ($request->input('document', []) as $file) {
-                    $HajjSavingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $HajjSavingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
                 }
+
+                $hajj_saving = HajjSaving::findOrFail($request->saving_id);
+                $total_saving = $hajj_saving->total_saving + $request->amount;
+
+                $hajj_saving->update([
+                    'last_amount' => $request->amount,
+                    'total_saving' => $total_saving,
+                    'payment_method' => $request->payment_method
+                ]);
+            } else {
+                $HajjSavingPayment = HajjSavingPayment::create([
+                    'date' => $request->date,
+                    'reference' => $request->reference,
+                    'refund_amount' => $request->refund_amount,
+                    'trx_type' => $request->trx_type,
+                    'status' => 'Approval',
+                    'note' => $request->note,
+                    'saving_id' => $request->saving_id,
+                    'payment_method' => $request->payment_method
+                ]);
+
+                if ($request->has('document')) {
+                    foreach ($request->input('document', []) as $file) {
+                        $HajjSavingPayment->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('savings');
+                    }
+                }
+
+                $hajj_saving = HajjSaving::findOrFail($request->saving_id);
+                $total_saving = $hajj_saving->total_saving - $request->refund_amount;
+
+                $hajj_saving->update([
+                    'last_amount' => $request->amount,
+                    'total_saving' => $total_saving,
+                    'payment_method' => $request->payment_method
+                ]);
             }
 
-            $hajj_saving = HajjSaving::findOrFail($request->saving_id);
-
-            // $due_amount = $purchase->due_amount - $request->amount;
-            $total_saving = $hajj_saving->total_saving + $request->amount;
-
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
-
-            $hajj_saving->update([
-                'last_amount' => $request->amount,
-                'total_saving' => $total_saving,
-                'payment_method' => $request->payment_method
-            ]);
         });
 
         toast('Hajj Saving Payment Created!', 'success');
@@ -123,17 +134,6 @@ class HajjSavingPaymentsController extends Controller
 
         DB::transaction(function () use ($request, $hajjsavingPayment) {
             $hajj_saving = $hajjsavingPayment->hajjsavings;
-
-            // $due_amount = ($purchase->due_amount + $purchasePayment->amount) - $request->amount;
-            // $total_saving = ($hajjsaving->total_saving - $savingPayment->amount) + $request->amount;
-
-            // if ($due_amount == $purchase->total_amount) {
-            //     $payment_status = 'Unpaid';
-            // } elseif ($due_amount > 0) {
-            //     $payment_status = 'Partial';
-            // } else {
-            //     $payment_status = 'Paid';
-            // }
 
             $hajj_saving->update([
                 'total_saving' => ($hajj_saving->total_saving - $hajjsavingPayment->amount) + $request->amount,

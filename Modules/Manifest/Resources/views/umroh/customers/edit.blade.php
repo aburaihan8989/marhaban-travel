@@ -77,7 +77,11 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_phone">Agent Phone Number <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="agent_phone" required value="{{ $umroh_manifest_customer_id->umrohAgents->agent_phone }}" readonly>
+                                            @if ($umroh_manifest_customer_id->agent_id == '')
+                                                <input type="text" class="form-control" name="agent_phone" value="" readonly>
+                                            @else
+                                                <input type="text" class="form-control" name="agent_phone" value="{{ $umroh_manifest_customer_id->umrohAgents->agent_phone }}" readonly>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
