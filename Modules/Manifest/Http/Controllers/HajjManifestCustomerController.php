@@ -37,6 +37,13 @@ class HajjManifestCustomerController extends Controller
     public function store(Request $request, HajjManifest $hajj_manifest_id) {
         // @dd($umroh_manifest_id);
 
+        $request->validate([
+            // 'total_price' => 'required|numeric',
+            // 'total_payment' => 'required|numeric',
+            // 'remaining_payment' => 'required|numeric',
+            'agent_id' => 'required'
+        ]);
+
         DB::transaction(function () use ($request, $hajj_manifest_id) {
             $total_payment = $request->last_amount;
             $remaining_payment = $request->total_price - $total_payment;
@@ -134,12 +141,13 @@ class HajjManifestCustomerController extends Controller
 
 
     public function update(Request $request, HajjManifestCustomer $hajj_manifest_customer_id) {
-    // @dd($umroh_manifest_customer_id);
+        // @dd($umroh_manifest_customer_id);
+
         $request->validate([
             // 'total_price' => 'required|numeric',
             // 'total_payment' => 'required|numeric',
             // 'remaining_payment' => 'required|numeric',
-            // 'note' => 'nullable|string|max:1000'
+            'agent_id' => 'required'
         ]);
 
         DB::transaction(function () use ($request, $hajj_manifest_customer_id) {

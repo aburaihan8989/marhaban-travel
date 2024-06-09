@@ -29,7 +29,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
+                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required value="{{ $umroh_manifest_customer_id->reference }}" readonly>
                                     </div>
                                 </div>
@@ -52,8 +52,8 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="customer_phone">Customer Phone Number <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="customer_phone" required value="{{ $umroh_manifest_customer_id->customer_phone }}" readonly>
+                                            <label for="customer_phone">Customer Phone Number <span class="text-danger"></span></label>
+                                            <input type="text" class="form-control" name="customer_phone" value="{{ $umroh_manifest_customer_id->customer_phone }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="agent_phone">Agent Phone Number <span class="text-danger">*</span></label>
+                                            <label for="agent_phone">Agent Phone Number <span class="text-danger"></span></label>
                                             @if ($umroh_manifest_customer_id->agent_id == '')
                                                 <input type="text" class="form-control" name="agent_phone" value="" readonly>
                                             @else
@@ -91,7 +91,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="room_group">Room Group <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="room_group" id="room_group">
+                                        <select class="form-control" name="room_group" id="room_group" required>
                                             <option value="" selected>None</option>
                                             <option {{ $umroh_manifest_customer_id->room_group == "Quad" ? 'selected' : '' }} value="Quad">Quad</option>
                                             <option {{ $umroh_manifest_customer_id->room_group == "Triple" ? 'selected' : '' }} value="Triple">Triple</option>
@@ -102,7 +102,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="family_group">Family Group <span class="text-danger">*</span></label>
+                                            <label for="family_group">Family Group <span class="text-danger"></span></label>
                                             <input type="text" class="form-control" name="family_group" value="{{ $umroh_manifest_customer_id->family_group }}">
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="baggage">Baggage <span class="text-danger">*</span></label>
+                                            <label for="baggage">Baggage <span class="text-danger"></span></label>
                                             <input type="text" class="form-control" name="baggage" value="{{ $umroh_manifest_customer_id->baggage }}">
                                         </div>
                                     </div>
@@ -126,14 +126,14 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
-                                        <label for="total_payment">Total Payment <span class="text-danger">*</span></label>
-                                        <input id="total_payment" type="text" class="form-control" style="font-weight:bold;" name="total_payment" required value="{{ format_currency($umroh_manifest_customer_id->total_payment) }}" readonly>
+                                        <label for="total_payment">Total Payment <span class="text-danger"></span></label>
+                                        <input id="total_payment" type="text" class="form-control" style="font-weight:bold;" name="total_payment" value="{{ format_currency($umroh_manifest_customer_id->total_payment) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="remaining_payment">Remaining Payment <span class="text-danger">*</span></label>
-                                        <input id="remaining_payment" type="text" class="form-control" style="font-weight:bold;" name="remaining_payment" required value="{{ format_currency($umroh_manifest_customer_id->remaining_payment) }}" readonly>
+                                        <label for="remaining_payment">Remaining Payment <span class="text-danger"></span></label>
+                                        <input id="remaining_payment" type="text" class="form-control" style="font-weight:bold;" name="remaining_payment" value="{{ format_currency($umroh_manifest_customer_id->remaining_payment) }}" readonly>
                                     </div>
                                 </div>
                             </div>

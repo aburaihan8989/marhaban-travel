@@ -4,14 +4,11 @@ namespace Modules\Manifest\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use Modules\People\Entities\Agent;
 use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
-// use Modules\Product\Entities\Product;
 use Modules\Manifest\Entities\UmrohManifest;
-// use Modules\Purchase\Entities\PurchaseDetail;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
 use Modules\Manifest\DataTables\UmrohManifestCustomerDataTable;
@@ -39,6 +36,13 @@ class UmrohManifestCustomerController extends Controller
 
     public function store(Request $request, UmrohManifest $umroh_manifest_id) {
         // @dd($umroh_manifest_id);
+
+        $request->validate([
+            // 'total_price' => 'required|numeric',
+            // 'total_payment' => 'required|numeric',
+            // 'remaining_payment' => 'required|numeric',
+            'agent_id' => 'required'
+        ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_id) {
             $total_payment = $request->last_amount;
@@ -138,12 +142,13 @@ class UmrohManifestCustomerController extends Controller
 
 
     public function update(Request $request, UmrohManifestCustomer $umroh_manifest_customer_id) {
-    // @dd($umroh_manifest_customer_id);
+        // @dd($umroh_manifest_customer_id);
+
         $request->validate([
             // 'total_price' => 'required|numeric',
             // 'total_payment' => 'required|numeric',
             // 'remaining_payment' => 'required|numeric',
-            // 'note' => 'nullable|string|max:1000'
+            'agent_id' => 'required'
         ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_customer_id) {

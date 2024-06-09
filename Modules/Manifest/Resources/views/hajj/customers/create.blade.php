@@ -30,7 +30,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
+                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required readonly value="CM">
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="agent_id" id="agent_id">
+                                            <select class="form-control" name="agent_id" id="agent_id" required>
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
                                                     <option value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
@@ -70,7 +70,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="room_group">Room Group <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="room_group" id="room_group">
+                                            <select class="form-control" name="room_group" id="room_group" required>
                                                 <option value="Quad">Quad</option>
                                                 <option value="Triple">Triple</option>
                                                 <option value="Double">Double</option>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="family_group">Family Group <span class="text-danger">*</span></label>
+                                        <label for="family_group">Family Group <span class="text-danger"></span></label>
                                         <div class="input-group">
                                             <input id="family_group" type="text" class="form-control" name="family_group" value="{{ old('family_group') }}">
                                         </div>
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="baggage">Baggage <span class="text-danger">*</span></label>
+                                        <label for="baggage">Baggage <span class="text-danger"></span></label>
                                         <div class="input-group">
                                             <input id="baggage" type="text" class="form-control" name="baggage" value="{{ old('baggage') }}">
                                         </div>
