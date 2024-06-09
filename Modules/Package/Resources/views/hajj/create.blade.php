@@ -118,6 +118,7 @@
                                         <label for="package_type">Package Category <span class="text-danger">*</span></label>
                                         <select class="form-control" name="package_type" id="package_type" required>
                                             <option value="" selected disabled>Select Category</option>
+                                            <option value="Haji Domestik">Haji Domestik</option>
                                             <option value="Haji Khusus">Haji Khusus</option>
                                             <option value="ONH Plus">ONH Plus</option>
                                             <option value="Furoda">Furoda</option>
@@ -232,7 +233,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="category_2">Package Category <strong class="text-primary"><i>(Variant*2)</i></strong></label>
-                                        <input type="text" class="form-control" name="category" value="{{ old('category') }}">
+                                        <input type="text" class="form-control" name="category_2" value="{{ old('category_2') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
