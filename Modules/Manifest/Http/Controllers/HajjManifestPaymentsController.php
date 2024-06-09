@@ -39,7 +39,7 @@ class HajjManifestPaymentsController extends Controller
     public function refund($hajj_manifest_id) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
 
-        $hajj_manifest = HajjManifestCustomer::findOrFail($umroh_manifest_id);
+        $hajj_manifest = HajjManifestCustomer::findOrFail($hajj_manifest_id);
 
         return view('manifest::hajj.payments.refund', compact('hajj_manifest'));
     }
