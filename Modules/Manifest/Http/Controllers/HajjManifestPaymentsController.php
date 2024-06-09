@@ -20,7 +20,7 @@ class HajjManifestPaymentsController extends Controller
 
     public function index($hajj_manifest_customer_id, HajjManifestPaymentsDataTable $dataTable) {
         // abort_if(Gate::denies('access_purchase_payments'), 403);
-        // @dd($umroh_manifest_customer_id);
+        // @dd($hajj_manifest_customer_id);
         $hajj_manifest = HajjManifestCustomer::findOrFail($hajj_manifest_customer_id);
 
         return $dataTable->render('manifest::hajj.payments.index', compact('hajj_manifest'));
@@ -70,7 +70,7 @@ class HajjManifestPaymentsController extends Controller
 
                 $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
 
-                // @dd($umroh_manifest);
+                // @dd($hajj_manifest);
 
                 // $due_amount = $purchase->due_amount - $request->amount;
                 $total_payment = $hajj_manifest->total_payment + $request->amount;
@@ -109,7 +109,7 @@ class HajjManifestPaymentsController extends Controller
 
                 $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
 
-                // @dd($umroh_manifest);
+                // @dd($hajj_manifest);
 
                 // $due_amount = $purchase->due_amount - $request->amount;
                 $total_payment = $hajj_manifest->total_payment - $request->refund_amount;
@@ -152,11 +152,11 @@ class HajjManifestPaymentsController extends Controller
         DB::transaction(function () use ($request, $hajjManifestPayment) {
             $hajj_manifest = $hajjManifestPayment->hajjManifestCustomers;
 
-            if ($umrohManifestPayment->trx_type == 'Payment') {
+            if ($hajjManifestPayment->trx_type == 'Payment') {
                 $total_payment = ($hajj_manifest->total_payment - $hajjManifestPayment->amount) + $request->amount;
                 $remaining_payment = $hajj_manifest->total_price - $total_payment;
 
-                if ($total_payment >= $umroh_manifest->total_price) {
+                if ($total_payment >= $hajj_manifest->total_price) {
                     $status = 'Completed';
                 } else {
                     $status = 'Waiting';
@@ -183,7 +183,7 @@ class HajjManifestPaymentsController extends Controller
                 $total_payment = ($hajj_manifest->total_payment + $hajjManifestPayment->refund_amount) - $request->refund_amount;
                 $remaining_payment = $hajj_manifest->total_price - $total_payment;
 
-                if ($total_payment >= $umroh_manifest->total_price) {
+                if ($total_payment >= $hajj_manifest->total_price) {
                     $status = 'Completed';
                 } else {
                     $status = 'Waiting';
