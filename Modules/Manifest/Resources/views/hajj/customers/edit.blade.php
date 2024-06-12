@@ -63,7 +63,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                            <select class="form-control" name="agent_id" id="agent_id" required readonly disabled>
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
                                                     <option {{ $hajj_manifest_customer_id->agent_id == $agent->id ? 'selected' : '' }} value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
@@ -241,6 +241,8 @@
                                 <label for="note">Note (If Needed)</label>
                                 <textarea name="note" id="note" rows="5" class="form-control">{{ $hajj_manifest_customer_id->note }}</textarea>
                             </div>
+
+                            <input type="hidden" value="{{ $hajj_manifest_customer_id->agent_id }}" name="agent_id">
 
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">

@@ -198,6 +198,12 @@ class HajjManifestCustomerController extends Controller
         // @dd($umroh_manifest_customer_id);
         $hajj_manifest_customer_id->delete();
 
+        $agent = Agent::findOrFail($hajj_manifest_customer_id->agent_id);
+
+        $agent->update([
+            'total_reward' => $agent->total_reward-$hajj_manifest_customer_id->agent_reward
+        ]);
+
         toast('Hajj Manifest Customer Deleted!', 'warning');
 
         return redirect()->route('hajj-manage-manifests.manage', $hajj_manifest_customer_id->manifest_id);
