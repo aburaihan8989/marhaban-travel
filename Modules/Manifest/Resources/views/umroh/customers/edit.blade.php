@@ -247,6 +247,8 @@
                                 <textarea name="note" id="note" rows="5" class="form-control">{{ $umroh_manifest_customer_id->note }}</textarea>
                             </div>
 
+                            <input type="hidden" value="{{ $umroh_manifest_customer_id->agent_id }}" name="agent_id">
+
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">
                                     Update Manifest Customer <i class="bi bi-check"></i>
