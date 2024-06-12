@@ -3,12 +3,13 @@
 namespace Modules\People\DataTables;
 
 
-use Modules\People\Entities\Customer;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Modules\People\Entities\Customer;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
 class CustomersDataTable extends DataTable
 {
@@ -21,7 +22,12 @@ class CustomersDataTable extends DataTable
             })
             ->addColumn('customer_age', function($data){
                 $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime($data->date_birth)))->age . ' th';
-                return $formatDate; })
+                return $formatDate;
+            })
+            ->addColumn('manifest_count', function ($data) {
+                $umroh_customers = UmrohManifestCustomer::where('customer_id', $data->id)->count();
+                return ($umroh_customers);
+            })
             ->addColumn('action', function ($data) {
                 return view('people::customers.partials.actions', compact('data'));
             });
@@ -97,6 +103,10 @@ class CustomersDataTable extends DataTable
 
             Column::make('city')
                 ->title('City')
+                ->className('text-center align-middle'),
+
+            Column::make('manifest_count')
+                ->title('Umroh')
                 ->className('text-center align-middle'),
 
             Column::computed('action')
