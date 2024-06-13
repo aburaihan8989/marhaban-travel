@@ -28,7 +28,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="reference">Reference ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="DB/{{ $hajj_saving->reference }}">
+                                        <input type="text" class="form-control" name="reference" required readonly value="INV/DB/{{ $hajj_saving->reference }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

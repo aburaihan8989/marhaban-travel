@@ -71,7 +71,7 @@ class SavingController extends Controller
             if ($umroh_saving->last_amount > 0) {
                 SavingPayment::create([
                     'date' => $request->register_date,
-                    'reference' => 'CR/'.$umroh_saving->reference,
+                    'reference' => 'INV/CR/'.$umroh_saving->reference,
                     'amount' => $request->last_amount,
                     'trx_type' => 'Saving',
                     'status' => 'Approval',

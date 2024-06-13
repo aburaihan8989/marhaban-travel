@@ -20,6 +20,10 @@ class CustomersDataTable extends DataTable
             ->addColumn('gender', function ($data) {
                 return $data->gender == 'L' ? 'Male' : 'Female';
             })
+            ->editColumn('date_birth', function($model){
+                $formatDate = date('d-m-Y',strtotime($model->date_birth));
+                return $formatDate;
+            })
             ->addColumn('customer_age', function($data){
                 $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime($data->date_birth)))->age . ' th';
                 return $formatDate;

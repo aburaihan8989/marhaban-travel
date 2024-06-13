@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/rewards', 'RewardsController@index')->name('rewards.index');
     Route::get('/rewards/agents-list/{agent_id}', 'RewardsController@show_agents')->name('rewards-agents-list.show-agents');
     Route::get('/rewards/customers-list/{agent_id}', 'RewardsController@show_customers')->name('rewards-customers-list.show-customers');
+    Route::get('/rewards/customers-referal-list/{agent_id}', 'RewardsController@show_customers_referal')->name('rewards-customers-referal-list.show-customers');
 
     //Rewards Payment
     Route::get('/agent-payments/{agent_id}', 'AgentPaymentsController@index')->name('agent-payments.index');

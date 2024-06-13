@@ -71,7 +71,7 @@ class HajjSavingController extends Controller
             if ($hajj_saving->last_amount > 0) {
                 HajjSavingPayment::create([
                     'date' => $request->register_date,
-                    'reference' => 'CR/'.$hajj_saving->reference,
+                    'reference' => 'INV/CR/'.$hajj_saving->reference,
                     'amount' => $request->last_amount,
                     'status' => 'Approval',
                     'saving_id' => $hajj_saving->id,

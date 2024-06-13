@@ -88,7 +88,7 @@ class UmrohManifestCustomerController extends Controller
             if ($umroh_manifest_customer->last_amount > 0) {
                 UmrohManifestPayment::create([
                     'date' => now()->format('Y-m-d'),
-                    'reference' => 'INV/'.$umroh_manifest_customer->reference,
+                    'reference' => 'INV/CR/'.$umroh_manifest_customer->reference,
                     'amount' => $request->last_amount,
                     'trx_type' => 'Payment',
                     'status' => 'Approval',
@@ -98,6 +98,7 @@ class UmrohManifestCustomerController extends Controller
             }
 
             $agent = Agent::findOrFail($umroh_manifest_customer->agent_id);
+            $agent_referal = Agent::findOrFail($agent->referal_id);
 
             if ($agent->level_agent == 'Bronze') {
                 $agent_reward = settings()->level1_rewards;
@@ -109,12 +110,33 @@ class UmrohManifestCustomerController extends Controller
                 $agent_reward = settings()->level4_rewards;
             }
 
+            if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
+                $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
+            } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
+                $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
+            } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
+                $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
+            } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
+                $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
+            } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
+                $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
+            } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
+                $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+            } else {
+                $referal_reward = settings()->referal_rewards;
+            }
+
             $agent->update([
                 'total_reward' => $agent->total_reward + $agent_reward
             ]);
 
+            $agent_referal->update([
+                'total_reward' => $agent_referal->total_reward + $referal_reward
+            ]);
+
             $umroh_manifest_customer->update([
-                'agent_reward' => $agent_reward
+                'agent_reward' => $agent_reward,
+                'referal_reward' => $referal_reward
             ]);
 
         });
@@ -156,6 +178,7 @@ class UmrohManifestCustomerController extends Controller
             $remaining_payment = $request->total_price - $umroh_manifest_customer_id->total_payment;
 
             // $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
+            // $agent_referal = Agent::findOrFail($agent->referal_id);
 
             // if ($agent->level_agent == 'Bronze') {
             //     $agent_reward = settings()->level1_rewards;
@@ -167,8 +190,28 @@ class UmrohManifestCustomerController extends Controller
             //     $agent_reward = settings()->level4_rewards;
             // }
 
+            // if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
+            //     $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
+            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
+            //     $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
+            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
+            //     $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
+            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
+            //     $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
+            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
+            //     $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
+            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
+            //     $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+            // } else {
+            //     $referal_reward = settings()->referal_rewards;
+            // }
+
             // $agent->update([
-            //     'total_reward' => $agent->total_reward+$agent_reward
+            //     'total_reward' => $agent->total_reward + $agent_reward
+            // ]);
+
+            // $agent_referal->update([
+            //     'total_reward' => $agent_referal->total_reward + $referal_reward
             // ]);
 
             if ($request->total_payment >= $request->total_price) {
@@ -199,6 +242,7 @@ class UmrohManifestCustomerController extends Controller
                 'family_group' => $request->family_group,
                 'baggage' => $request->baggage,
                 // 'agent_reward' => $agent_reward,
+                // 'referal_reward' => $referal_reward,
                 'note' => $request->note
             ]);
 
@@ -216,10 +260,16 @@ class UmrohManifestCustomerController extends Controller
         $umroh_manifest_customer_id->delete();
 
         $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
+        $agent_referal = Agent::findOrFail($agent->referal_id);
 
         $agent->update([
-            'total_reward' => $agent->total_reward-$umroh_manifest_customer_id->agent_reward
+            'total_reward' => $agent->total_reward - $umroh_manifest_customer_id->agent_reward
         ]);
+
+        $agent_referal->update([
+            'total_reward' => $agent_referal->total_reward - $umroh_manifest_customer_id->referal_reward
+        ]);
+
 
         toast('Umroh Manifest Customer Deleted!', 'warning');
 
