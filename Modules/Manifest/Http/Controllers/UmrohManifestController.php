@@ -83,19 +83,19 @@ class UmrohManifestController extends Controller
     }
 
 
-    public function show(UmrohManifest $umroh_manifest, UmrohManifestCustomerDetailDataTable $dataTable) {
+    public function show(UmrohManifestCustomerDetailDataTable $dataTable, $manifest_id) {
         // abort_if(Gate::denies('show_purchases'), 403);
 
-        // $customer = Customer::findOrFail($umroh_manifest->customer_id);
+        $umroh_manifest = UmrohManifest::findOrFail($manifest_id);
         return $dataTable->render('manifest::umroh.show', compact('umroh_manifest'));
 
         // return view('manifest::umroh.show', compact('umroh_manifest'));
     }
 
-    public function manage(UmrohManifest $umroh_manifest, UmrohManifestCustomerDataTable $dataTable) {
+    public function manage(UmrohManifestCustomerDataTable $dataTable, $manifest_id) {
         // abort_if(Gate::denies('show_purchases'), 403);
 
-        // $umroh_package = UmrohPackage::findOrFail($package_id);
+        $umroh_manifest = UmrohManifest::findOrFail($manifest_id);
         return $dataTable->render('manifest::umroh.manage', compact('umroh_manifest'));
 
         // return view('manifest::umroh.manage', compact('umroh_manifest'));

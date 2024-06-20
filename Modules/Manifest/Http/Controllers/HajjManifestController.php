@@ -83,19 +83,19 @@ class HajjManifestController extends Controller
     }
 
 
-    public function show(HajjManifest $hajj_manifest, HajjManifestCustomerDetailDataTable $dataTable) {
+    public function show(HajjManifestCustomerDetailDataTable $dataTable, $manifest_id) {
         // abort_if(Gate::denies('show_purchases'), 403);
 
-        // $customer = Customer::findOrFail($umroh_manifest->customer_id);
+        $hajj_manifest = HajjManifest::findOrFail($manifest_id);
         return $dataTable->render('manifest::hajj.show', compact('hajj_manifest'));
 
         // return view('manifest::umroh.show', compact('umroh_manifest'));
     }
 
-    public function manage(HajjManifest $hajj_manifest, HajjManifestCustomerDataTable $dataTable) {
+    public function manage(HajjManifestCustomerDataTable $dataTable, $manifest_id) {
         // abort_if(Gate::denies('show_purchases'), 403);
 
-        // $umroh_package = UmrohPackage::findOrFail($package_id);
+        $hajj_manifest = HajjManifest::findOrFail($manifest_id);
         return $dataTable->render('manifest::hajj.manage', compact('hajj_manifest'));
 
         // return view('manifest::umroh.manage', compact('umroh_manifest'));

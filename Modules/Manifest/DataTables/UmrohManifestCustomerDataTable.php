@@ -61,7 +61,7 @@ class UmrohManifestCustomerDataTable extends DataTable
     }
 
     public function query(UmrohManifestCustomer $model) {
-        return $model->newQuery();
+        return $model->newQuery()->where('manifest_id', request()->route('umroh_manifest'));
     }
 
     public function html() {

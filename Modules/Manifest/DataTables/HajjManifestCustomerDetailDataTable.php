@@ -63,7 +63,7 @@ class HajjManifestCustomerDetailDataTable extends DataTable
     }
 
     public function query(HajjManifestCustomer $model) {
-        return $model->newQuery();
+        return $model->newQuery()->where('manifest_id', request()->route('hajj_manifest'));
     }
 
     public function html() {
