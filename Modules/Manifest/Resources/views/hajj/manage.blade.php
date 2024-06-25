@@ -134,7 +134,7 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('hajj-manifest-customers.create', $hajj_manifest) }}" class="btn btn-primary">
-                            Add Customer Manifest<i class="bi bi-plus"></i>
+                            Add Customer to Manifest<i class="bi bi-plus"></i>
                         </a>
 
                         <hr>

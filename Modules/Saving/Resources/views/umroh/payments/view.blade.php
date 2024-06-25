@@ -8,7 +8,7 @@
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-saving-payments.index', $savingPayment->saving_id) }}">{{ $umroh_saving->reference }}</a></li>
-            <li class="breadcrumb-item active">Details Umroh Savings Payment</li>
+            <li class="breadcrumb-item active">Details Umroh Savings Payment Receipt</li>
         </ol>
     @endsection
 
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Register ID : <strong>{{ $savingPayment->reference }}</strong>
+                                ID Register : <strong>{{ $savingPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-saving-payments.pdf', $savingPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -30,7 +30,7 @@
                         </div>
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Category : <strong>Customer Savings Receipt</strong>
+                                Category : <strong>Umroh Savings Payment Receipt</strong>
                             </div>
                         </div>
                         <div class="card-body">
@@ -64,41 +64,41 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Reference ID</th>
+                                            <th class="align-middle">ID Reference</th>
                                             <th class="align-middle">Saving Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>
                                             <th class="align-middle">Category</th>
-                                            <th class="align-middle">Payment Method</th>
+                                            <th class="align-middle">Saving Balance</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $savingPayment->reference }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ date('d-m-Y', strtotime($savingPayment->date)) }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $umroh_saving->customer_name }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $umroh_saving->customer_phone }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($savingPayment->trx_type == 'Saving')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $savingPayment->trx_type }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $savingPayment->trx_type }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $savingPayment->payment_method }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_saving->total_saving) }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -107,29 +107,29 @@
                                 <table class="table table-striped col-lg-6">
                                     <thead>
                                         <tr>
+                                            <th class="align-middle">Saving Method</th>
                                             <th class="align-middle">Saving Amount</th>
-                                            <th class="align-middle">Payment Status</th>
-                                            <th class="align-middle">Saving Balance</th>
+                                            <th class="align-middle">Saving Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                {{ $savingPayment->payment_method }}
+                                            </td>
+                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                                 {{ format_currency($savingPayment->amount) }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($savingPayment->status == 'Verified')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $savingPayment->status }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $savingPayment->status }}
                                                     </span>
                                                 @endif
-                                            </td>
-                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_saving->total_saving) }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -140,30 +140,28 @@
                                 <div class="col-lg-4 col-sm-5 ml-md-auto">
                                     <table class="table">
                                         <tbody>
-                                        <tr>
-                                            <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"><strong>Direktur Utama</strong></td>
-                                            {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
-                                        </tr>
+                                            <tr>
+                                                <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0">
+                                                    <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                                </td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"><strong>{{ settings()->sign_name }}</strong></td>
+                                                {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -196,7 +194,7 @@
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-savings.index') }}">Umroh Savings</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-saving-payments.index', $savingPayment->saving_id) }}">{{ $umroh_saving->reference }}</a></li>
-            <li class="breadcrumb-item active">Details Umroh Savings Refund</li>
+            <li class="breadcrumb-item active">Details Umroh Savings Refund Receipt</li>
         </ol>
     @endsection
 
@@ -207,7 +205,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Register ID : <strong>{{ $savingPayment->reference }}</strong>
+                                ID Register : <strong>{{ $savingPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-saving-payments.pdf', $savingPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -218,7 +216,7 @@
                         </div>
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Category : <strong>Customer Refund Receipt</strong>
+                                Category : <strong>Umroh Savings Refund Receipt</strong>
                             </div>
                         </div>
                         <div class="card-body">
@@ -252,41 +250,42 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Reference ID</th>
+                                            <th class="align-middle">ID Reference</th>
                                             <th class="align-middle">Refund Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>
                                             <th class="align-middle">Category</th>
-                                            <th class="align-middle">Refund Method</th>
+                                            <th class="align-middle">Saving Balance</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $savingPayment->reference }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ date('d-m-Y', strtotime($savingPayment->date)) }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_saving->customer_name }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_name }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_saving->customer_phone }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_phone }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($savingPayment->trx_type == 'Saving')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $savingPayment->trx_type }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $savingPayment->trx_type }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $savingPayment->payment_method }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_saving->total_saving) }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -295,29 +294,29 @@
                                 <table class="table table-striped col-lg-6">
                                     <thead>
                                         <tr>
+                                            <th class="align-middle">Refund Method</th>
                                             <th class="align-middle">Refund Amount</th>
                                             <th class="align-middle">Refund Status</th>
-                                            <th class="align-middle">Saving Balance</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                {{ $savingPayment->payment_method }}
+                                            </td>
+                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                                 {{ format_currency($savingPayment->refund_amount) }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($savingPayment->status == 'Verified')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $savingPayment->status }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $savingPayment->status }}
                                                     </span>
                                                 @endif
-                                            </td>
-                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_saving->total_saving) }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -328,30 +327,28 @@
                                 <div class="col-lg-4 col-sm-5 ml-md-auto">
                                     <table class="table">
                                         <tbody>
-                                        <tr>
-                                            <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"><strong>Direktur Utama</strong></td>
-                                            {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
-                                        </tr>
+                                            <tr>
+                                                <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0">
+                                                    <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                                </td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"><strong>{{ settings()->sign_name }}</strong></td>
+                                                {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

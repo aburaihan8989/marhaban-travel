@@ -124,7 +124,7 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ route('umroh-manifest-customers.create', $umroh_manifest) }}" class="btn btn-primary">
-                            Add Customer Manifest<i class="bi bi-plus"></i>
+                            Add Customer to Manifest<i class="bi bi-plus"></i>
                         </a>
 
                         <hr>

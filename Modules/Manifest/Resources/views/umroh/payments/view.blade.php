@@ -8,7 +8,7 @@
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Manage Umroh Manifest</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-payments.index', $umrohManifestPayment->umroh_manifest_customer_id) }}">{{ $umroh_manifest->reference }}</a></li>
-            <li class="breadcrumb-item active">Details Customer Payment Umroh</li>
+            <li class="breadcrumb-item active">Details Customer Umroh Payment Receipt</li>
         </ol>
     @endsection
 
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Register ID : <strong>{{ $umrohManifestPayment->reference }}</strong>
+                                ID Register : <strong>{{ $umrohManifestPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $umrohManifestPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -30,7 +30,7 @@
                         </div>
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Category : <strong>Customer Payment Receipt</strong>
+                                Category : <strong>Customer Umroh Payment Receipt</strong>
                             </div>
                         </div>
                         <div class="card-body">
@@ -64,50 +64,54 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Reference ID</th>
+                                            <th class="align-middle">ID Reference</th>
                                             <th class="align-middle">Payment Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>
                                             <th class="align-middle">Category</th>
-                                            <th class="align-middle">Payment Method</th>
+                                            <th class="align-middle">Total Price</th>
+                                            <th class="align-middle">Remaining Payment</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $umrohManifestPayment->reference }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ date('d-m-Y', strtotime($umrohManifestPayment->date)) }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_manifest->customer_name }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_name }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_manifest->customer_phone }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_phone }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($umrohManifestPayment->trx_type == 'Payment')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->trx_type }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->trx_type }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umrohManifestPayment->payment_method }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_manifest->total_price) }}
                                             </td>
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_manifest->remaining_payment) }}
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table class="table table-striped col-lg-7">
+                                <table class="table table-striped col-lg-6">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Total Price</th>
-                                            <th class="align-middle">Total Payment</th>
+                                            <th class="align-middle">Payment Method</th>
                                             <th class="align-middle">Payment Amount</th>
                                             <th class="align-middle">Payment Status</th>
                                         </tr>
@@ -115,21 +119,18 @@
                                     <tbody>
                                         <tr>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_manifest->total_price) }}
-                                            </td>
-                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_manifest->total_payment) }}
+                                                {{ $umrohManifestPayment->payment_method }}
                                             </td>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                                 {{ format_currency($umrohManifestPayment->amount) }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($umrohManifestPayment->status == 'Verified')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->status }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->status }}
                                                     </span>
                                                 @endif
@@ -143,30 +144,28 @@
                                 <div class="col-lg-4 col-sm-5 ml-md-auto">
                                     <table class="table">
                                         <tbody>
-                                        <tr>
-                                            <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"><strong>Direktur Utama</strong></td>
-                                            {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
-                                        </tr>
+                                            <tr>
+                                                <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0">
+                                                    <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                                </td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"><strong>{{ settings()->sign_name }}</strong></td>
+                                                {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -199,7 +198,7 @@
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-manage-manifests.manage', $umroh_manifest->manifest_id) }}">Manage Umroh Manifest</a></li>
             <li class="breadcrumb-item"><a href="{{ route('umroh-manifest-payments.index', $umrohManifestPayment->umroh_manifest_customer_id) }}">{{ $umroh_manifest->reference }}</a></li>
-            <li class="breadcrumb-item active">Details Customer Refund Payment Umroh</li>
+            <li class="breadcrumb-item active">Details Customer Umroh Refund Receipt</li>
         </ol>
     @endsection
 
@@ -210,7 +209,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Register ID : <strong>{{ $umrohManifestPayment->reference }}</strong>
+                                ID Register : <strong>{{ $umrohManifestPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-payments.pdf', $umrohManifestPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -221,7 +220,7 @@
                         </div>
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                Category : <strong>Customer Refund Payment Receipt</strong>
+                                Category : <strong>Customer Umroh Refund Receipt</strong>
                             </div>
                         </div>
                         <div class="card-body">
@@ -255,50 +254,53 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Reference ID</th>
+                                            <th class="align-middle">ID Reference</th>
                                             <th class="align-middle">Refund Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>
                                             <th class="align-middle">Category</th>
-                                            <th class="align-middle">Refund Method</th>
+                                            <th class="align-middle">Total Price</th>
+                                            <th class="align-middle">Remaining Payment</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ $umrohManifestPayment->reference }}
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle" style="font-size: 16px;">
                                                 {{ date('d-m-Y', strtotime($umrohManifestPayment->date)) }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_manifest->customer_name }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_name }}
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umroh_manifest->customer_phone }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ $customer->customer_phone }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($umrohManifestPayment->trx_type == 'Payment')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->trx_type }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->trx_type }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle">
-                                                {{ $umrohManifestPayment->payment_method }}
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_manifest->total_price) }}
+                                            </td>
+                                            <td class="align-middle" style="font-size: 16px;">
+                                                {{ format_currency($umroh_manifest->remaining_payment) }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table class="table table-striped col-lg-7">
+                                <table class="table table-striped col-lg-6">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Total Price</th>
-                                            <th class="align-middle">Total Payment</th>
+                                            <th class="align-middle">Refund Method</th>
                                             <th class="align-middle">Refund Amount</th>
                                             <th class="align-middle">Refund Status</th>
                                         </tr>
@@ -306,21 +308,18 @@
                                     <tbody>
                                         <tr>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_manifest->total_price) }}
-                                            </td>
-                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
-                                                {{ format_currency($umroh_manifest->total_payment) }}
+                                                {{ $umrohManifestPayment->payment_method }}
                                             </td>
                                             <td class="align-middle" style="font-size: 16px; font-weight: bold;">
                                                 {{ format_currency($umrohManifestPayment->refund_amount) }}
                                             </td>
                                             <td class="align-middle">
                                                 @if ($umrohManifestPayment->status == 'Verified')
-                                                    <span class="badge badge-success" style="font-size: 13px;">
+                                                    <span class="badge badge-success" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->status }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger" style="font-size: 13px;">
+                                                    <span class="badge badge-danger" style="font-size: 16px;">
                                                         {{ $umrohManifestPayment->status }}
                                                     </span>
                                                 @endif
@@ -334,30 +333,28 @@
                                 <div class="col-lg-4 col-sm-5 ml-md-auto">
                                     <table class="table">
                                         <tbody>
-                                        <tr>
-                                            <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"></td>
-                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="left border-0"><strong>Direktur Utama</strong></td>
-                                            {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
-                                        </tr>
+                                            <tr>
+                                                <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0">
+                                                    <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                                </td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"></td>
+                                                {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                            </tr>
+                                            <tr>
+                                                <td class="left border-0"><strong>{{ settings()->sign_name }}</strong></td>
+                                                {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
