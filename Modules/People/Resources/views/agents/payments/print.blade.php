@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Details Rewards Payment Receipt</title>
+    <title>Details Agent Rewards Payment Receipt</title>
     <link rel="stylesheet" href="{{ public_path('b3/bootstrap.min.css') }}">
 </head>
 <body>
@@ -15,8 +15,8 @@
             <div style="text-align: center;margin-bottom: 25px;">
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
-                    <span>Register ID :</span> <strong>{{ $agent_payment->reference }}</strong></br></br>
-                    <span>Category :</span> <strong>Rewards Payment Receipt</strong>
+                    <span>ID Register :</span> <strong>{{ $agent_payment->reference }}</strong></br></br>
+                    <span>Category :</span> <strong>RAgent ewards Payment Receipt</strong>
                 </h4>
             </div>
             <div class="card">
@@ -52,33 +52,33 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th class="align-middle">Reference ID</th>
+                                    <th class="align-middle">ID Reference</th>
                                     <th class="align-middle">Payment Date</th>
                                     <th class="align-middle">Agent Name</th>
                                     <th class="align-middle">Phone Number</th>
                                     <th class="align-middle">Category</th>
-                                    <th class="align-middle">Payment Method</th>
+                                    <th class="align-middle">Rewards Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="font-size: 15px;">
                                         {{ $agent_payment->reference }}
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="font-size: 15px;">
                                         {{ date('d-m-Y', strtotime($agent_payment->date)) }}
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="font-size: 15px;">
                                         {{ $agent->agent_name }}
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="font-size: 15px;">
                                         {{ $agent->agent_phone }}
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="font-size: 15px;">
                                         {{ $agent_payment->trx_type }}
                                     </td>
-                                    <td class="align-middle">
-                                        {{ $agent_payment->payment_method }}
+                                    <td class="align-middle" style="font-size: 15px;">
+                                        {{ format_currency($agent->total_reward-$agent->paid_reward) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -89,13 +89,16 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th class="align-middle">Payment Method</th>
                                             <th class="align-middle">Payment Amount</th>
                                             <th class="align-middle">Payment Status</th>
-                                            <th class="align-middle">Rewards Balance</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td class="align-middle" style="font-size: 15px; font-weight: bold;">
+                                                {{ $agent_payment->payment_method }}
+                                            </td>
                                             <td class="align-middle" style="font-size: 15px; font-weight: bold;">
                                                 {{ format_currency($agent_payment->amount) }}
                                             </td>
@@ -110,9 +113,6 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle" style="font-size: 15px; font-weight: bold;">
-                                                {{ format_currency($agent->total_reward-$agent->paid_reward) }}
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -125,7 +125,7 @@
                             <table class="table border-0">
                                 <tbody>
                                     <tr>
-                                    <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
+                                        <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
                                         {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
                                     </tr>
                                     <tr>
@@ -133,7 +133,9 @@
                                         {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
                                     </tr>
                                     <tr>
-                                        <td class="left border-0" style="border-top: none;"></td>
+                                        <td class="left border-0" style="border-top: none;">
+                                            <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                        </td>
                                         {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
                                     </tr>
                                     <tr>
@@ -141,11 +143,7 @@
                                         {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
                                     </tr>
                                     <tr>
-                                        <td class="left border-0" style="border-top: none;"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0" style="border-top: none;"><strong>Direktur Utama</strong></td>
+                                        <td class="left border-0" style="border-top: none;"><strong>{{ settings()->sign_name }}</strong></td>
                                         {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
                                     </tr>
                                 </tbody>
@@ -169,7 +167,7 @@
                     <div class="row" style="margin-top: 50px;">
                         <div class="col-xs-12">
                             {{-- <p style="font-style: italic;text-align: center">{{ settings()->company_name }} | &copy; {{ date('Y') }}.</p> --}}
-                            <div style="font-style: italic;text-align: center">Travel Management System ® {{ date('Y') }} || <strong><a target="_blank" href="#"><i>Marhaban Makkah Madinah © Hajj & Umroh Service</i></a></strong></div>
+                            <div style="font-style: italic;text-align: center">Travel Management System ® {{ date('Y') }} || <strong><a target="_blank" href="#"><i>{{ settings()->company_name }} © Hajj & Umroh Service</i></a></strong></div>
                         </div>
                     </div>
                 </div>
