@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Hajj Manifest Details')
+@section('title', 'Details Hajj Manifest')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('hajj-manifests.index') }}">Hajj Manifest</a></li>
-        <li class="breadcrumb-item active">Hajj Manifest Details</li>
+        <li class="breadcrumb-item active">Details Hajj Manifest</li>
     </ol>
 @endsection
 
@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Register ID : <strong>{{ $hajj_manifest->reference }}</strong>
+                            Manifest Code : <strong>{{ $hajj_manifest->reference }}</strong>
                         </div>
                         {{-- <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-view.pdf', $umroh_manifest->id) }}" disabled> --}}
                         <a class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="#" disabled>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Category : <strong>Hajj Manifest Details</strong>
+                            Category : <strong>Details Hajj Manifest</strong>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
-                                    <th>Reference</th>
+                                    <th>Manifest Code</th>
                                     <td>{{ $hajj_manifest->reference }}</td>
                                 </tr>
                                 <tr>
@@ -65,19 +65,19 @@
                                 </tr>
                                 <tr>
                                     <th>Departure Date</th>
-                                    <td>{{ date('d-m-Y', strtotime($hajj_manifest->package_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($hajj_manifest->HajjPackages->package_date)) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Name</th>
-                                    <td>{{ $hajj_manifest->package_name }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Departure</th>
-                                    <td>{{ $hajj_manifest->package_departure }}</td>
+                                    <th>Departure Location</th>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_departure }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Route</th>
-                                    <td>{{ $hajj_manifest->flight_route }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->flight_route }}</td>
                                 </tr>
                                 <tr>
                                     <th>Airline Name</th>
@@ -85,18 +85,18 @@
                                 </tr>
                                 <tr>
                                     <th>Package Days</th>
-                                    <td>{{ $hajj_manifest->package_days . ' Days' }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
                                     <td>
-                                        @if($hajj_manifest->status == 'Active')
-                                            <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $hajj_manifest->status }}
+                                        @if($hajj_manifest->HajjPackages->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 15px;">
+                                                {{ $hajj_manifest->HajjPackages->package_status }}
                                             </span>
                                         @else
-                                            <span class="badge badge-secondary" style="font-size: 13px;">
-                                                {{ $hajj_manifest->status }}
+                                            <span class="badge badge-secondary" style="font-size: 15px;">
+                                                {{ $hajj_manifest->HajjPackages->package_status }}
                                             </span>
                                         @endif
                                     </td>
@@ -149,7 +149,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Tables : <strong>List Manifest Customers</strong>
+                            Tables : <strong>Data List Customers Hajj Manifest</strong>
                         </div>
                     </div>
                     <div class="card-body">

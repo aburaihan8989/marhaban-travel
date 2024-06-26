@@ -2,12 +2,13 @@
 
 namespace Modules\Manifest\DataTables;
 
-use Modules\Manifest\Entities\HajjManifest;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Package\Entities\HajjPackage;
+use Modules\Manifest\Entities\HajjManifest;
 
 class HajjManifestDataTable extends DataTable
 {
@@ -15,9 +16,6 @@ class HajjManifestDataTable extends DataTable
     public function dataTable($query) {
         return datatables()
             ->eloquent($query)
-            ->editColumn('package_date', function($model){
-                $formatDate = date('d-m-Y',strtotime($model->package_date));
-                return $formatDate; })
             ->addColumn('total_price', function ($data) {
                 return format_currency($data->total_price);
             })
@@ -27,9 +25,23 @@ class HajjManifestDataTable extends DataTable
             ->addColumn('remaining_payment', function ($data) {
                 return format_currency($data->remaining_payment);
             })
-            ->editColumn('package_days', function($model){
-                $formatDay = $model->package_days . ' Days';
-                return $formatDay; })
+            ->addColumn('package_date', function ($data) {
+                $formatDate = date('d-m-Y',strtotime(HajjPackage::findOrFail($data->package_id)->package_date));
+                return $formatDate;
+            })
+            ->addColumn('package_name', function ($data) {
+                return HajjPackage::findOrFail($data->package_id)->package_name;
+            })
+            ->addColumn('package_departure', function ($data) {
+                return HajjPackage::findOrFail($data->package_id)->package_departure;
+            })
+            ->addColumn('flight_route', function ($data) {
+                return HajjPackage::findOrFail($data->package_id)->flight_route;
+            })
+            ->editColumn('package_days', function($data){
+                $formatDay = HajjPackage::findOrFail($data->package_id)->package_days . ' Days';
+                return $formatDay;
+            })
             ->addColumn('status', function ($data) {
                 return view('manifest::hajj.partials.status', compact('data'));
             })
@@ -74,6 +86,7 @@ class HajjManifestDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('reference')
+                ->title('Manifest Code')
                 ->className('text-center align-middle'),
 
             Column::make('package_code')

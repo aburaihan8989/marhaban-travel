@@ -41,7 +41,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
-                                    <th>Reference</th>
+                                    <th>Manifest Code</th>
                                     <td>{{ $umroh_manifest->reference }}</td>
                                 </tr>
                                 <tr>
@@ -50,19 +50,19 @@
                                 </tr>
                                 <tr>
                                     <th>Departure Date</th>
-                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest->package_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest->umrohPackages->package_date)) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Name</th>
-                                    <td>{{ $umroh_manifest->package_name }}</td>
+                                    <td>{{ $umroh_manifest->umrohPackages->package_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Departure</th>
-                                    <td>{{ $umroh_manifest->package_departure }}</td>
+                                    <th>Departure Location</th>
+                                    <td>{{ $umroh_manifest->umrohPackages->package_departure }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Route</th>
-                                    <td>{{ $umroh_manifest->flight_route }}</td>
+                                    <td>{{ $umroh_manifest->umrohPackages->flight_route }}</td>
                                 </tr>
                                 <tr>
                                     <th>Airline Name</th>
@@ -70,18 +70,18 @@
                                 </tr>
                                 <tr>
                                     <th>Package Days</th>
-                                    <td>{{ $umroh_manifest->package_days . ' Days' }}</td>
+                                    <td>{{ $umroh_manifest->umrohPackages->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
                                     <td>
-                                        @if($umroh_manifest->status == 'Active')
-                                            <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                        @if($umroh_manifest->umrohPackages->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 15px;">
+                                                {{ $umroh_manifest->umrohPackages->package_status }}
                                             </span>
                                         @else
-                                            <span class="badge badge-secondary" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                            <span class="badge badge-secondary" style="font-size: 15px;">
+                                                {{ $umroh_manifest->umrohPackages->package_status }}
                                             </span>
                                         @endif
                                     </td>

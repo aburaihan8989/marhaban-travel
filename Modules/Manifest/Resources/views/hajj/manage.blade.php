@@ -41,7 +41,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
-                                    <th>Reference</th>
+                                    <th>Manifest Code</th>
                                     <td>{{ $hajj_manifest->reference }}</td>
                                 </tr>
                                 <tr>
@@ -50,19 +50,19 @@
                                 </tr>
                                 <tr>
                                     <th>Departure Date</th>
-                                    <td>{{ date('d-m-Y', strtotime($hajj_manifest->package_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($hajj_manifest->HajjPackages->package_date)) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Name</th>
-                                    <td>{{ $hajj_manifest->package_name }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Departure</th>
-                                    <td>{{ $hajj_manifest->package_departure }}</td>
+                                    <th>Departure Location</th>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_departure }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Route</th>
-                                    <td>{{ $hajj_manifest->flight_route }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->flight_route }}</td>
                                 </tr>
                                 <tr>
                                     <th>Airline Name</th>
@@ -70,18 +70,18 @@
                                 </tr>
                                 <tr>
                                     <th>Package Days</th>
-                                    <td>{{ $hajj_manifest->package_days . ' Days' }}</td>
+                                    <td>{{ $hajj_manifest->HajjPackages->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
                                     <td>
-                                        @if($hajj_manifest->status == 'Active')
-                                            <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $hajj_manifest->status }}
+                                        @if($hajj_manifest->HajjPackages->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 15px;">
+                                                {{ $hajj_manifest->HajjPackages->package_status }}
                                             </span>
                                         @else
-                                            <span class="badge badge-secondary" style="font-size: 13px;">
-                                                {{ $hajj_manifest->status }}
+                                            <span class="badge badge-secondary" style="font-size: 15px;">
+                                                {{ $hajj_manifest->HajjPackages->package_status }}
                                             </span>
                                         @endif
                                     </td>

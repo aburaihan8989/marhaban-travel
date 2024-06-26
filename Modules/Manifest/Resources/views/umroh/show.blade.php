@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Umroh Manifest Details')
+@section('title', 'Details Umroh Manifest')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('umroh-manifests.index') }}">Umroh Manifest</a></li>
-        <li class="breadcrumb-item active">Umroh Manifest Details</li>
+        <li class="breadcrumb-item active">Details Umroh Manifest</li>
     </ol>
 @endsection
 
@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Register ID : <strong>{{ $umroh_manifest->reference }}</strong>
+                            Manifest Code : <strong>{{ $umroh_manifest->reference }}</strong>
                         </div>
                         {{-- <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('umroh-manifest-view.pdf', $umroh_manifest->id) }}" disabled> --}}
                         <a class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="#" disabled>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Category : <strong>Umroh Manifest Details</strong>
+                            Category : <strong>Details Umroh Manifest</strong>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
                                 <tr>
-                                    <th>Reference</th>
+                                    <th>Manifest Code</th>
                                     <td>{{ $umroh_manifest->reference }}</td>
                                 </tr>
                                 <tr>
@@ -65,19 +65,19 @@
                                 </tr>
                                 <tr>
                                     <th>Departure Date</th>
-                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest->package_date)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($umroh_manifest->UmrohPackages->package_date)) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Name</th>
-                                    <td>{{ $umroh_manifest->package_name }}</td>
+                                    <td>{{ $umroh_manifest->UmrohPackages->package_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Departure</th>
-                                    <td>{{ $umroh_manifest->package_departure }}</td>
+                                    <th>Departure Location</th>
+                                    <td>{{ $umroh_manifest->UmrohPackages->package_departure }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Route</th>
-                                    <td>{{ $umroh_manifest->flight_route }}</td>
+                                    <td>{{ $umroh_manifest->UmrohPackages->flight_route }}</td>
                                 </tr>
                                 <tr>
                                     <th>Airline Name</th>
@@ -85,18 +85,18 @@
                                 </tr>
                                 <tr>
                                     <th>Package Days</th>
-                                    <td>{{ $umroh_manifest->package_days . ' Days' }}</td>
+                                    <td>{{ $umroh_manifest->UmrohPackages->package_days . ' Days' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Package Status</th>
                                     <td>
-                                        @if($umroh_manifest->status == 'Active')
-                                            <span class="badge badge-success" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                        @if($umroh_manifest->UmrohPackages->package_status == 'Active')
+                                            <span class="badge badge-success" style="font-size: 15px;">
+                                                {{ $umroh_manifest->UmrohPackages->package_status }}
                                             </span>
                                         @else
-                                            <span class="badge badge-secondary" style="font-size: 13px;">
-                                                {{ $umroh_manifest->status }}
+                                            <span class="badge badge-secondary" style="font-size: 15px;">
+                                                {{ $umroh_manifest->UmrohPackages->package_status }}
                                             </span>
                                         @endif
                                     </td>
@@ -139,7 +139,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Tables : <strong>List Manifest Customers</strong>
+                            Tables : <strong>Data List Customers Umroh Manifest</strong>
                         </div>
                     </div>
                     <div class="card-body">
