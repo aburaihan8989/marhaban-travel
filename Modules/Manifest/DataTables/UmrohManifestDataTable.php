@@ -9,6 +9,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Modules\Package\Entities\UmrohPackage;
 use Modules\Manifest\Entities\UmrohManifest;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
 class UmrohManifestDataTable extends DataTable
 {
@@ -26,8 +27,8 @@ class UmrohManifestDataTable extends DataTable
                 return format_currency($data->remaining_payment);
             })
             ->addColumn('package_date', function ($data) {
-                $formatDate = date('d-m-Y',strtotime(UmrohPackage::findOrFail($data->package_id)->package_date));
-                return $formatDate;
+                $formatData = date('d-m-Y',strtotime(UmrohPackage::findOrFail($data->package_id)->package_date));
+                return $formatData;
             })
             ->addColumn('package_name', function ($data) {
                 return UmrohPackage::findOrFail($data->package_id)->package_name;
@@ -39,8 +40,16 @@ class UmrohManifestDataTable extends DataTable
                 return UmrohPackage::findOrFail($data->package_id)->flight_route;
             })
             ->editColumn('package_days', function($data){
-                $formatDay = UmrohPackage::findOrFail($data->package_id)->package_days . ' Days';
-                return $formatDay;
+                $formatData = UmrohPackage::findOrFail($data->package_id)->package_days . ' Days';
+                return $formatData;
+            })
+            ->editColumn('package_capacity', function($data){
+                $formatData = UmrohPackage::findOrFail($data->package_id)->package_capacity . ' Pax';
+                return $formatData;
+            })
+            ->editColumn('package_booked', function($data){
+                $formatData = UmrohManifestCustomer::where('manifest_id', $data->id)->count() . ' Pax';
+                return $formatData;
             })
             ->addColumn('status', function ($data) {
                 return view('manifest::umroh.partials.status', compact('data'));
@@ -106,6 +115,15 @@ class UmrohManifestDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('package_days')
+                ->title('Days')
+                ->className('text-center align-middle'),
+
+            Column::make('package_capacity')
+                ->title('Seat')
+                ->className('text-center align-middle'),
+
+            Column::make('package_booked')
+                ->title('Booked')
                 ->className('text-center align-middle'),
 
             Column::make('status')
