@@ -80,7 +80,7 @@ class HomeUmrohPackageDataTable extends DataTable
             Column::make('row_number')
                 ->title('No')
                 ->render('meta.row + meta.settings._iDisplayStart + 1;')
-                ->width(35)
+                ->width(30)
                 ->orderable(false)
                 ->searchable(false)
                 ->className('text-center align-middle'),
@@ -99,18 +99,22 @@ class HomeUmrohPackageDataTable extends DataTable
 
             Column::computed('package_days')
                 ->title('Days')
+                ->width(40)
                 ->className('text-center align-middle'),
 
                 Column::computed('package_capacity')
                 ->title('Seat')
+                ->width(50)
                 ->className('text-center align-middle'),
 
             Column::computed('package_booked')
                 ->title('Booked')
+                ->width(50)
                 ->className('text-center align-middle'),
 
             Column::computed('package_available')
                 ->title('Available')
+                ->width(50)
                 ->className('text-center align-middle')
         ];
     }

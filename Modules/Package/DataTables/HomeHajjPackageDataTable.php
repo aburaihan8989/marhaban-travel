@@ -99,18 +99,22 @@ class HomeHajjPackageDataTable extends DataTable
 
             Column::computed('package_days')
                 ->title('Days')
+                ->width(40)
                 ->className('text-center align-middle'),
 
-                Column::computed('package_capacity')
+            Column::computed('package_capacity')
                 ->title('Seat')
+                ->width(50)
                 ->className('text-center align-middle'),
 
             Column::computed('package_capacity')
                 ->title('Booked')
+                ->width(50)
                 ->className('text-center align-middle'),
 
             Column::computed('package_capacity')
                 ->title('Available')
+                ->width(50)
                 ->className('text-center align-middle')
         ];
     }
