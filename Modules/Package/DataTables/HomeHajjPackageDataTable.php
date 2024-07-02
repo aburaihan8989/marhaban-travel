@@ -2,12 +2,13 @@
 
 namespace Modules\Package\DataTables;
 
-use Modules\Package\Entities\HajjPackage;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Package\Entities\HajjPackage;
+use Modules\Manifest\Entities\HajjManifestCustomer;
 
 class HomeHajjPackageDataTable extends DataTable
 {
@@ -20,13 +21,26 @@ class HomeHajjPackageDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('package_date', function($model){
                 $formatDate = date('d-m-Y',strtotime($model->package_date));
-                return $formatDate; })
+                return $formatDate;
+            })
             ->editColumn('package_capacity', function($model){
                 $formatData = $model->package_capacity . ' Pax';
-                return $formatData; })
+                return $formatData;
+            })
+            ->editColumn('package_booked', function($model){
+                $formatData = HajjManifestCustomer::where('package_id', $model->id)->count() . ' Pax';
+                return $formatData;
+            })
+            ->editColumn('package_available', function($model){
+                $formatData1 = $model->package_capacity;
+                $formatData2 = HajjManifestCustomer::where('package_id', $model->id)->count();
+                $formatData = $formatData1 - $formatData2 . ' Pax';
+                return $formatData;
+            })
             ->editColumn('package_days', function($model){
                 $formatDay = $model->package_days . ' Days';
-                return $formatDay; });
+                return $formatDay;
+            });
             // ->addColumn('action', function ($data) {
             //     return view('package::umroh.partials.actions', compact('data'));
             // });
@@ -66,7 +80,7 @@ class HomeHajjPackageDataTable extends DataTable
             Column::make('row_number')
                 ->title('No')
                 ->render('meta.row + meta.settings._iDisplayStart + 1;')
-                ->width(50)
+                ->width(35)
                 ->orderable(false)
                 ->searchable(false)
                 ->className('text-center align-middle'),

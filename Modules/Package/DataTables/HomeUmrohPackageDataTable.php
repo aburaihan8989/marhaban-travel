@@ -21,13 +21,12 @@ class HomeUmrohPackageDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('package_date', function($model){
                 $formatDate = date('d-m-Y',strtotime($model->package_date));
-                return $formatDate; })
+                return $formatDate;
+            })
             ->editColumn('package_capacity', function($model){
                 $formatData = $model->package_capacity . ' Pax';
-                return $formatData; })
-            // ->editColumn('package_booked', function($model){
-            //     $formatData = '0 Pax';
-            //     return $formatData; })
+                return $formatData;
+            })
             ->editColumn('package_booked', function($model){
                 $formatData = UmrohManifestCustomer::where('package_id', $model->id)->count() . ' Pax';
                 return $formatData;
@@ -36,10 +35,12 @@ class HomeUmrohPackageDataTable extends DataTable
                 $formatData1 = $model->package_capacity;
                 $formatData2 = UmrohManifestCustomer::where('package_id', $model->id)->count();
                 $formatData = $formatData1 - $formatData2 . ' Pax';
-                return $formatData; })
+                return $formatData;
+            })
             ->editColumn('package_days', function($model){
                 $formatDay = $model->package_days . ' Days';
-                return $formatDay; });
+                return $formatDay;
+            });
             // ->addColumn('action', function ($data) {
             //     return view('package::umroh.partials.actions', compact('data'));
             // });
@@ -79,7 +80,7 @@ class HomeUmrohPackageDataTable extends DataTable
             Column::make('row_number')
                 ->title('No')
                 ->render('meta.row + meta.settings._iDisplayStart + 1;')
-                ->width(50)
+                ->width(35)
                 ->orderable(false)
                 ->searchable(false)
                 ->className('text-center align-middle'),
