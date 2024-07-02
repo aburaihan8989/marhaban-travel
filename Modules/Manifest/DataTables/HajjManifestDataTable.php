@@ -9,6 +9,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Modules\Package\Entities\HajjPackage;
 use Modules\Manifest\Entities\HajjManifest;
+use Modules\Manifest\Entities\HajjManifestCustomer;
 
 class HajjManifestDataTable extends DataTable
 {
@@ -39,8 +40,16 @@ class HajjManifestDataTable extends DataTable
                 return HajjPackage::findOrFail($data->package_id)->flight_route;
             })
             ->editColumn('package_days', function($data){
-                $formatDay = HajjPackage::findOrFail($data->package_id)->package_days . ' Days';
-                return $formatDay;
+                $formatData = HajjPackage::findOrFail($data->package_id)->package_days . ' Days';
+                return $formatData;
+            })
+            ->editColumn('package_capacity', function($data){
+                $formatData = HajjPackage::findOrFail($data->package_id)->package_capacity . ' Pax';
+                return $formatData;
+            })
+            ->editColumn('package_booked', function($data){
+                $formatData = HajjManifestCustomer::where('manifest_id', $data->id)->count() . ' Pax';
+                return $formatData;
             })
             ->addColumn('status', function ($data) {
                 return view('manifest::hajj.partials.status', compact('data'));
@@ -85,7 +94,7 @@ class HajjManifestDataTable extends DataTable
                 ->searchable(false)
                 ->className('text-center align-middle'),
 
-            Column::make('reference')
+                Column::make('reference')
                 ->title('Manifest Code')
                 ->className('text-center align-middle'),
 
@@ -106,6 +115,15 @@ class HajjManifestDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('package_days')
+                ->title('Days')
+                ->className('text-center align-middle'),
+
+            Column::make('package_capacity')
+                ->title('Seat')
+                ->className('text-center align-middle'),
+
+            Column::make('package_booked')
+                ->title('Booked')
                 ->className('text-center align-middle'),
 
             Column::make('status')

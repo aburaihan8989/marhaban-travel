@@ -2,12 +2,13 @@
 
 namespace Modules\Package\DataTables;
 
-use Modules\Package\Entities\UmrohPackage;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Modules\Package\Entities\UmrohPackage;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
 class HomeUmrohPackageDataTable extends DataTable
 {
@@ -24,11 +25,17 @@ class HomeUmrohPackageDataTable extends DataTable
             ->editColumn('package_capacity', function($model){
                 $formatData = $model->package_capacity . ' Pax';
                 return $formatData; })
+            // ->editColumn('package_booked', function($model){
+            //     $formatData = '0 Pax';
+            //     return $formatData; })
             ->editColumn('package_booked', function($model){
-                $formatData = '0 Pax';
-                return $formatData; })
+                $formatData = UmrohManifestCustomer::where('package_id', $model->id)->count() . ' Pax';
+                return $formatData;
+            })
             ->editColumn('package_available', function($model){
-                $formatData = '0 Pax';
+                $formatData1 = $model->package_capacity;
+                $formatData2 = UmrohManifestCustomer::where('package_id', $model->id)->count();
+                $formatData = $formatData1 - $formatData2 . ' Pax';
                 return $formatData; })
             ->editColumn('package_days', function($model){
                 $formatDay = $model->package_days . ' Days';
