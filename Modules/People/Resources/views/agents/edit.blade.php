@@ -101,7 +101,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="referal_id">Referal Name <span class="text-danger"></span></label>
-                                            <select class="form-control" name="referal_id" id="referal_id" required>
+                                            <select class="select2 form-control" name="referal_id" id="referal_id" required>
                                                 <option value="" selected disabled>Select Referal Name</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent_referal)
                                                     <option {{ $agent->referal_id == $agent_referal->id ? 'selected' : '' }} value="{{ $agent_referal->id }}">{{ $agent_referal->agent_code . ' | ' . $agent_referal->agent_name }}</option>
@@ -214,4 +214,10 @@
             }
         }
     </script>
+    <script>
+        $(document).ready(function() {
+        console.log('');
+        $('.select2').select2();
+        });
+   </script>
 @endpush

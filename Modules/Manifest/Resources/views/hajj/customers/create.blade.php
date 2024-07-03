@@ -41,7 +41,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="customer_id" id="customer_id" required>
+                                            <select class="select2 form-control" name="customer_id" id="customer_id" required>
                                                 <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
@@ -54,7 +54,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                            <select class="select2 form-control" name="agent_id" id="agent_id" required>
                                                 <option value="" selected disabled>Select Agent / Sponsor</option>
                                                 @foreach(\Modules\People\Entities\Agent::all() as $agent)
                                                     <option value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
@@ -276,4 +276,10 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+        console.log('');
+        $('.select2').select2();
+        });
+   </script>
 @endpush

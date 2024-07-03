@@ -40,7 +40,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
-                                            <select class="form-control" name="customer_id" id="customer_id" required>
+                                            <select class="select2 form-control" name="customer_id" id="customer_id" required>
                                                 <option value="" selected disabled>Select Customer</option>
                                                 @foreach(\Modules\People\Entities\Customer::all() as $customer)
                                                     <option {{ $hajj_saving->customer_id == $customer->id ? 'selected' : '' }} value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
@@ -160,4 +160,10 @@
             // });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+        console.log('');
+        $('.select2').select2();
+        });
+   </script>
 @endpush
