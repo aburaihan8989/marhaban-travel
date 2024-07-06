@@ -2,17 +2,18 @@
 
 namespace Modules\Saving\Http\Controllers;
 
-use Modules\Saving\DataTables\HajjSavingDataTable;
 use Illuminate\Http\Request;
-// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Routing\Controller;
+// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Modules\People\Entities\Agent;
 use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
 // use Modules\Product\Entities\Product;
 use Modules\Saving\Entities\HajjSaving;
 // use Modules\Purchase\Entities\PurchaseDetail;
 use Modules\Saving\Entities\HajjSavingPayment;
+use Modules\Saving\DataTables\HajjSavingDataTable;
 // use Modules\Saving\Http\Requests\StoreHajjSavingRequest;
 // use Modules\Saving\Http\Requests\UpdateHajjSavingRequest;
 
@@ -49,6 +50,7 @@ class HajjSavingController extends Controller
             $hajj_saving = HajjSaving::create([
                 'register_date' => $request->register_date,
                 'customer_id' => $request->customer_id,
+                'agent_id' => $request->agent_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
                 'status' => $request->status,
@@ -88,10 +90,10 @@ class HajjSavingController extends Controller
 
     public function show(HajjSaving $hajj_saving) {
         // abort_if(Gate::denies('show_purchases'), 403);
-
         $customer = Customer::findOrFail($hajj_saving->customer_id);
+        $agent = Agent::findOrFail($hajj_saving->agent_id);
 
-        return view('saving::hajj.show', compact('hajj_saving', 'customer'));
+        return view('saving::hajj.show', compact('hajj_saving', 'customer', 'agent'));
     }
 
 
@@ -109,6 +111,7 @@ class HajjSavingController extends Controller
                 'register_date' => $request->register_date,
                 'reference' => $hajj_saving->reference,
                 'customer_id' => $request->customer_id,
+                'agent_id' => $request->agent_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
                 'status' => $request->status,

@@ -16,7 +16,7 @@
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
                     <span>ID Register :</span> <strong>{{ $agent_payment->reference }}</strong></br></br>
-                    <span>Category :</span> <strong>RAgent ewards Payment Receipt</strong>
+                    <span>Category :</span> <strong>Agent Rewards Payment Receipt</strong>
                 </h4>
             </div>
             <div class="card">

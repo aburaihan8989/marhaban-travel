@@ -5,13 +5,14 @@ namespace Modules\Saving\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Agent;
 use Modules\Upload\Entities\Upload;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
+use Illuminate\Support\Facades\Storage;
 use Modules\Saving\Entities\HajjSaving;
-use Modules\Saving\Entities\HajjSavingPayment;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Saving\Entities\HajjSavingPayment;
 use Modules\Saving\DataTables\HajjSavingPaymentsDataTable;
 
 class HajjSavingPaymentsController extends Controller
@@ -191,8 +192,9 @@ class HajjSavingPaymentsController extends Controller
         // abort_if(Gate::denies('show_products'), 403);
         $hajj_saving = HajjSaving::findOrFail($saving_id);
         $customer = Customer::findOrFail($hajj_saving->customer_id);
+        $agent = Agent::findOrFail($hajj_saving->agent_id);
 
-        return view('saving::hajj.payments.view', compact('hajjsavingPayment', 'hajj_saving', 'customer'));
+        return view('saving::hajj.payments.view', compact('hajjsavingPayment', 'hajj_saving', 'customer', 'agent'));
     }
 
 

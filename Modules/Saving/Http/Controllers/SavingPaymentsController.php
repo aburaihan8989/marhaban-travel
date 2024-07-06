@@ -5,11 +5,12 @@ namespace Modules\Saving\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Modules\Upload\Entities\Upload;
-use Illuminate\Support\Facades\Storage;
-use Modules\People\Entities\Customer;
+use Modules\People\Entities\Agent;
 use Modules\Saving\Entities\Saving;
+use Modules\Upload\Entities\Upload;
+use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Customer;
+use Illuminate\Support\Facades\Storage;
 use Modules\Saving\Entities\SavingPayment;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Saving\DataTables\SavingPaymentsDataTable;
@@ -192,8 +193,9 @@ class SavingPaymentsController extends Controller
         // abort_if(Gate::denies('show_products'), 403);
         $umroh_saving = Saving::findOrFail($saving_id);
         $customer = Customer::findOrFail($umroh_saving->customer_id);
+        $agent = Agent::findOrFail($umroh_saving->agent_id);
 
-        return view('saving::umroh.payments.view', compact('savingPayment', 'umroh_saving', 'customer'));
+        return view('saving::umroh.payments.view', compact('savingPayment', 'umroh_saving', 'customer', 'agent'));
     }
 
 

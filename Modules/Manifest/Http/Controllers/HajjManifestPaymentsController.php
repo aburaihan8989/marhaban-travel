@@ -5,12 +5,13 @@ namespace Modules\Manifest\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Agent;
 use Modules\Upload\Entities\Upload;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Gate;
 use Modules\People\Entities\Customer;
+use Illuminate\Support\Facades\Storage;
 use Modules\Manifest\Entities\HajjManifest;
+use Illuminate\Contracts\Support\Renderable;
 use Modules\Manifest\Entities\HajjManifestPayment;
 use Modules\Manifest\Entities\HajjManifestCustomer;
 use Modules\Manifest\DataTables\HajjManifestPaymentsDataTable;
@@ -237,8 +238,9 @@ class HajjManifestPaymentsController extends Controller
         // abort_if(Gate::denies('show_products'), 403);
         $hajj_manifest = HajjManifestCustomer::findOrFail($hajj_manifest_customer_id);
         $customer = Customer::findOrFail($hajj_manifest->customer_id);
+        $agent = Agent::findOrFail($hajj_manifest->agent_id);
 
-        return view('manifest::hajj.payments.view', compact('hajjManifestPayment', 'hajj_manifest', 'customer'));
+        return view('manifest::hajj.payments.view', compact('hajjManifestPayment', 'hajj_manifest', 'customer', 'agent'));
     }
 
 

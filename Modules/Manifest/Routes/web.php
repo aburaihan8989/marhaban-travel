@@ -50,10 +50,12 @@ Route::group(['middleware' => 'auth'], function () {
         $umroh_manifest_payment = \Modules\Manifest\Entities\UmrohManifestPayment::findOrFail($id);
         $umroh_manifest_customer = \Modules\Manifest\Entities\UmrohManifestCustomer::findOrFail($umroh_manifest_payment->umroh_manifest_customer_id);
         $customer = \Modules\People\Entities\Customer::findOrFail($umroh_manifest_customer->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($umroh_manifest_customer->agent_id);
 
         $pdf = \PDF::loadView('manifest::umroh.payments.print', [
             'umroh_manifest_payment' => $umroh_manifest_payment,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('umroh_manifest-payments-'. $umroh_manifest_payment->reference .'.pdf');
@@ -120,10 +122,12 @@ Route::group(['middleware' => 'auth'], function () {
         $hajj_manifest_payment = \Modules\Manifest\Entities\HajjManifestPayment::findOrFail($id);
         $hajj_manifest_customer = \Modules\Manifest\Entities\HajjManifestCustomer::findOrFail($hajj_manifest_payment->hajj_manifest_customer_id);
         $customer = \Modules\People\Entities\Customer::findOrFail($hajj_manifest_customer->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($hajj_manifest_customer->agent_id);
 
         $pdf = \PDF::loadView('manifest::hajj.payments.print', [
             'hajj_manifest_payment' => $hajj_manifest_payment,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('hajj_manifest-payments-'. $hajj_manifest_payment->reference .'.pdf');

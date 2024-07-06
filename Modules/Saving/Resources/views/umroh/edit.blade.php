@@ -29,7 +29,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="reference">Reference ID <span class="text-danger">*</span></label>
+                                        <label for="reference">ID Reference <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required value="{{ $umroh_saving->reference }}" readonly>
                                     </div>
                                 </div>
@@ -62,6 +62,34 @@
                                         <div class="form-group">
                                             <label for="register_date">Register Date <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control" name="register_date" required value="{{ $umroh_saving->register_date }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="agent_id">Agent / Sponsor <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="agent_id" id="agent_id" required>
+                                                <option value="" selected disabled>Select Agent / Sponsor</option>
+                                                @foreach(\Modules\People\Entities\Agent::all() as $agent)
+                                                    <option {{ $umroh_saving->agent_id == $agent->id ? 'selected' : '' }} value="{{ $agent->id }}">{{ $agent->agent_code . ' | ' . $agent->agent_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="agent_phone">Agent Phone Number <span class="text-danger"></span></label>
+                                            @if ($umroh_saving->agent_id == '')
+                                                <input type="text" class="form-control" name="agent_phone" value="" readonly>
+                                            @else
+                                                <input type="text" class="form-control" name="agent_phone" value="{{ $umroh_saving->umrohAgents->agent_phone }}" readonly>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

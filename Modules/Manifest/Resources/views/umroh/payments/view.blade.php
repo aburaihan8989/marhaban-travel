@@ -52,11 +52,11 @@
                                 </div>
 
                                 <div class="col-sm-4 mb-3 mb-md-0">
-                                    <h5 class="mb-2 border-bottom pb-2">Agent Info:</h5>
-                                    {{-- <div><strong>{{ $customer->customer_name }}</strong></div>
-                                    <div>{{ $customer->address }}</div>
-                                    <div>Phone: {{ $customer->customer_phone }}</div>
-                                    <div>Email: {{ $customer->customer_email }}</div> --}}
+                                    <h5 class="mb-2 border-bottom pb-2">Agent / Sponsor Info:</h5>
+                                    <div><strong>{{ $agent->agent_code . ' | ' . $agent->agent_name }}</strong></div>
+                                    <div>{{ $agent->address }}</div>
+                                    <div>Phone: {{ $agent->agent_phone }}</div>
+                                    <div>Email: {{ $agent->agent_email }}</div>
                                 </div>
                             </div>
 
@@ -242,11 +242,11 @@
                                 </div>
 
                                 <div class="col-sm-4 mb-3 mb-md-0">
-                                    <h5 class="mb-2 border-bottom pb-2">Agent Info:</h5>
-                                    {{-- <div><strong>{{ $customer->customer_name }}</strong></div>
-                                    <div>{{ $customer->address }}</div>
-                                    <div>Phone: {{ $customer->customer_phone }}</div>
-                                    <div>Email: {{ $customer->customer_email }}</div> --}}
+                                    <h5 class="mb-2 border-bottom pb-2">Agent / Sponsor Info:</h5>
+                                    <div><strong>{{ $agent->agent_code . ' | ' . $agent->agent_name }}</strong></div>
+                                    <div>{{ $agent->address }}</div>
+                                    <div>Phone: {{ $agent->agent_phone }}</div>
+                                    <div>Email: {{ $agent->agent_email }}</div>
                                 </div>
                             </div>
 

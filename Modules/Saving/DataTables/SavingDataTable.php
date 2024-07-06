@@ -2,9 +2,10 @@
 
 namespace Modules\Saving\DataTables;
 
-use Modules\Saving\Entities\Saving;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Modules\People\Entities\Agent;
+use Modules\Saving\Entities\Saving;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
@@ -17,7 +18,11 @@ class SavingDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('register_date', function($model){
                 $formatDate = date('d-m-Y',strtotime($model->register_date));
-                return $formatDate; })
+                return $formatDate;
+            })
+            ->addColumn('referal_code', function ($data) {
+                return Agent::findOrFail($data->agent_id)->agent_code . ' | ' . Agent::findOrFail($data->agent_id)->agent_name;
+            })
             ->addColumn('total_saving', function ($data) {
                 return format_currency($data->total_saving);
             })
@@ -91,6 +96,10 @@ class SavingDataTable extends DataTable
 
             Column::computed('bank_account')
                 ->title('Account Number')
+                ->className('text-center align-middle'),
+
+            Column::computed('referal_code')
+                ->title('Referal Agent')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

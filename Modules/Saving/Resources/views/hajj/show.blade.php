@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Register ID : <strong>{{ $hajj_saving->reference }}</strong>
+                            ID Register : <strong>{{ $hajj_saving->reference }}</strong>
                         </div>
                         <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-savings.pdf', $hajj_saving->id) }}">
                             <i class="bi bi-printer"></i> Print
@@ -50,11 +50,11 @@
                             </div>
 
                             <div class="col-sm-4 mb-3 mb-md-0">
-                                <h5 class="mb-2 border-bottom pb-2">Agent Info:</h5>
-                                {{-- <div><strong>{{ $customer->customer_name }}</strong></div>
-                                <div>{{ $customer->address }}</div>
-                                <div>Phone: {{ $customer->customer_phone }}</div>
-                                <div>Email: {{ $customer->customer_email }}</div> --}}
+                                <h5 class="mb-2 border-bottom pb-2">Agent / Sponsor Info:</h5>
+                                <div><strong>{{ $agent->agent_code . ' | ' . $agent->agent_name }}</strong></div>
+                                <div>{{ $agent->address }}</div>
+                                <div>Phone: {{ $agent->agent_phone }}</div>
+                                <div>Email: {{ $agent->agent_email }}</div>
                             </div>
 
                             {{-- <div class="col-sm-4 mb-3 mb-md-0">
@@ -75,7 +75,7 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="align-middle">Reference</th>
+                                    <th class="align-middle">ID Reference</th>
                                     <th class="align-middle">Register Date</th>
                                     <th class="align-middle">Customer Name</th>
                                     <th class="align-middle">Phone Number</th>
@@ -85,22 +85,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ $hajj_saving->reference }}
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ date('d-m-Y', strtotime($hajj_saving->register_date)) }}
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ $hajj_saving->customer_name }}
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ $hajj_saving->customer_phone }}
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ $hajj_saving->customer_bank }}
                                         </td>
-                                        <td class="align-middle">
+                                        <td class="align-middle" style="font-size: 16px;">
                                             {{ $hajj_saving->bank_account }}
                                         </td>
                                     </tr>
@@ -114,7 +114,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="align-middle">
-                                            <span class="badge badge-success" style="font-size: 13px;">
+                                            <span class="badge badge-success" style="font-size: 16px;">
                                                 {{ $hajj_saving->status }}
                                             </span>
                                         </td>
@@ -129,30 +129,28 @@
                             <div class="col-lg-4 col-sm-5 ml-md-auto">
                                 <table class="table">
                                     <tbody>
-                                    <tr>
-                                        <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0"><strong>Direktur Utama</strong></td>
-                                        {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
-                                    </tr>
+                                        <tr>
+                                            <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                            {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td class="left border-0"></td>
+                                            {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td class="left border-0">
+                                                <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                            </td>
+                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td class="left border-0"></td>
+                                            {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td class="left border-0"><strong>{{ settings()->sign_name }}</strong></td>
+                                            {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

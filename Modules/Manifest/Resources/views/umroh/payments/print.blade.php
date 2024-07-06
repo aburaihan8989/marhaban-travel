@@ -48,11 +48,11 @@
                         </div>
 
                         <div class="col-xs-4 mb-3 mb-md-0">
-                            <h4 class="mb-2" style="border-bottom: 1px solid #dddddd;padding-bottom: 10px;">Agent Info:</h4>
-                            {{-- <div><strong>{{ $customer->customer_name }}</strong></div>
-                            <div>{{ $customer->address }}</div>
-                            <div>Phone: {{ $customer->customer_phone }}</div>
-                            <div>Email: {{ $customer->customer_email }}</div> --}}
+                            <h4 class="mb-2" style="border-bottom: 1px solid #dddddd;padding-bottom: 10px;">Agent / Sponsor Info:</h5>
+                            <div><strong>{{ $agent->agent_code . ' | ' . $agent->agent_name }}</strong></div>
+                            <div>{{ $agent->address }}</div>
+                            <div>Phone: {{ $agent->agent_phone }}</div>
+                            <div>Email: {{ $agent->agent_email }}</div>
                         </div>
                     </div>
 
@@ -213,7 +213,7 @@
                             <table class="table border-0">
                                 <tbody>
                                     <tr>
-                                    <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
+                                        <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
                                         {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
                                     </tr>
                                     <tr>

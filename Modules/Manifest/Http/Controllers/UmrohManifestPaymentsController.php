@@ -5,11 +5,12 @@ namespace Modules\Manifest\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Agent;
 use Modules\Upload\Entities\Upload;
+use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Customer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\People\Entities\Customer;
 use Modules\Manifest\Entities\UmrohManifest;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
@@ -232,8 +233,9 @@ class UmrohManifestPaymentsController extends Controller
         // abort_if(Gate::denies('show_products'), 403);
         $umroh_manifest = UmrohManifestCustomer::findOrFail($umroh_manifest_customer_id);
         $customer = Customer::findOrFail($umroh_manifest->customer_id);
+        $agent = Agent::findOrFail($umroh_manifest->agent_id);
 
-        return view('manifest::umroh.payments.view', compact('umrohManifestPayment', 'umroh_manifest', 'customer'));
+        return view('manifest::umroh.payments.view', compact('umrohManifestPayment', 'umroh_manifest', 'customer', 'agent'));
     }
 
 

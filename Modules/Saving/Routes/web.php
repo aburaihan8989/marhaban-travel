@@ -19,10 +19,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/umroh-savings/pdf/{id}', function ($id) {
         $umroh_saving = \Modules\Saving\Entities\Saving::findOrFail($id);
         $customer = \Modules\People\Entities\Customer::findOrFail($umroh_saving->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($umroh_saving->agent_id);
 
         $pdf = \PDF::loadView('saving::umroh.print', [
             'umroh_saving' => $umroh_saving,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('umroh_saving-'. $umroh_saving->reference .'.pdf');
@@ -32,10 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
         $umroh_saving_payment = \Modules\Saving\Entities\SavingPayment::findOrFail($id);
         $umroh_saving = \Modules\Saving\Entities\Saving::findOrFail($umroh_saving_payment->saving_id);
         $customer = \Modules\People\Entities\Customer::findOrFail($umroh_saving->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($umroh_saving->agent_id);
 
         $pdf = \PDF::loadView('saving::umroh.payments.print', [
             'umroh_saving_payment' => $umroh_saving_payment,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('umroh_saving-payments-'. $umroh_saving_payment->reference .'.pdf');
@@ -46,10 +50,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/hajj-savings/pdf/{id}', function ($id) {
         $hajj_saving = \Modules\Saving\Entities\HajjSaving::findOrFail($id);
         $customer = \Modules\People\Entities\Customer::findOrFail($hajj_saving->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($hajj_saving->agent_id);
 
         $pdf = \PDF::loadView('saving::hajj.print', [
             'hajj_saving' => $hajj_saving,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('hajj_saving-'. $hajj_saving->reference .'.pdf');
@@ -59,10 +65,12 @@ Route::group(['middleware' => 'auth'], function () {
         $hajj_saving_payment = \Modules\Saving\Entities\HajjSavingPayment::findOrFail($id);
         $hajj_saving = \Modules\Saving\Entities\HajjSaving::findOrFail($hajj_saving_payment->saving_id);
         $customer = \Modules\People\Entities\Customer::findOrFail($hajj_saving->customer_id);
+        $agent = \Modules\People\Entities\Agent::findOrFail($hajj_saving->agent_id);
 
         $pdf = \PDF::loadView('saving::hajj.payments.print', [
             'hajj_saving_payment' => $hajj_saving_payment,
             'customer' => $customer,
+            'agent' => $agent,
         ])->setPaper('a4');
 
         return $pdf->stream('umroh_hajj-payments-'. $hajj_saving_payment->reference .'.pdf');

@@ -17,7 +17,7 @@
             <div style="text-align: center;margin-bottom: 25px;">
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
-                    <span>Register ID :</span> <strong>{{ $umroh_manifest_customer->reference }}</strong></br></br>
+                    <span>ID Register :</span> <strong>{{ $umroh_manifest_customer->reference }}</strong></br></br>
                     <span>Category :</span> <strong>Details Customer Manifest Umroh</strong>
                 </h4>
             </div>
@@ -54,7 +54,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th class="align-middle">Register ID</th>
+                                    <th class="align-middle">ID Register</th>
                                     <th class="align-middle">Register Date</th>
                                     <th class="align-middle">Customer Name</th>
                                     <th class="align-middle">Phone Number</th>
@@ -155,7 +155,7 @@
                             <table class="table border-0">
                                 <tbody>
                                     <tr>
-                                    <td class="left"><strong>PT Marhaban Makkah Madinah</strong></td>
+                                        <td class="left"><strong>PT {{ settings()->company_name }}</strong></td>
                                         {{-- <td class="right">{{ format_currency($purchase->discount_amount) }}</td> --}}
                                     </tr>
                                     <tr>
@@ -163,7 +163,9 @@
                                         {{-- <td class="right">{{ format_currency($purchase->tax_amount) }}</td> --}}
                                     </tr>
                                     <tr>
-                                        <td class="left border-0" style="border-top: none;"></td>
+                                        <td class="left border-0" style="border-top: none;">
+                                            <img width="180" src="{{ asset('images/sign.png') }}" alt="Sign">
+                                        </td>
                                         {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
                                     </tr>
                                     <tr>
@@ -171,11 +173,7 @@
                                         {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
                                     </tr>
                                     <tr>
-                                        <td class="left border-0" style="border-top: none;"></td>
-                                        {{-- <td class="right">{{ format_currency($purchase->shipping_amount) }}</td> --}}
-                                    </tr>
-                                    <tr>
-                                        <td class="left border-0" style="border-top: none;"><strong>Direktur Utama</strong></td>
+                                        <td class="left border-0" style="border-top: none;"><strong>{{ settings()->sign_name }}</strong></td>
                                         {{-- <td class="right"><strong>{{ format_currency($purchase->total_amount) }}</strong></td> --}}
                                     </tr>
                                 </tbody>

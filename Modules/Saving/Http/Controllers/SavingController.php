@@ -2,17 +2,18 @@
 
 namespace Modules\Saving\Http\Controllers;
 
-use Modules\Saving\DataTables\SavingDataTable;
 use Illuminate\Http\Request;
-// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Routing\Controller;
+// use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Modules\People\Entities\Customer;
-// use Modules\Product\Entities\Product;
+use Modules\People\Entities\Agent;
 use Modules\Saving\Entities\Saving;
+use Illuminate\Support\Facades\Gate;
+// use Modules\Product\Entities\Product;
+use Modules\People\Entities\Customer;
 // use Modules\Purchase\Entities\PurchaseDetail;
 use Modules\Saving\Entities\SavingPayment;
+use Modules\Saving\DataTables\SavingDataTable;
 // use Modules\Saving\Http\Requests\StoreSavingRequest;
 // use Modules\Saving\Http\Requests\UpdateSavingRequest;
 
@@ -49,6 +50,7 @@ class SavingController extends Controller
             $umroh_saving = Saving::create([
                 'register_date' => $request->register_date,
                 'customer_id' => $request->customer_id,
+                'agent_id' => $request->agent_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
                 'status' => $request->status,
@@ -89,10 +91,10 @@ class SavingController extends Controller
 
     public function show(Saving $umroh_saving) {
         // abort_if(Gate::denies('show_purchases'), 403);
-
         $customer = Customer::findOrFail($umroh_saving->customer_id);
+        $agent = Agent::findOrFail($umroh_saving->agent_id);
 
-        return view('saving::umroh.show', compact('umroh_saving', 'customer'));
+        return view('saving::umroh.show', compact('umroh_saving', 'customer', 'agent'));
     }
 
 
@@ -118,6 +120,7 @@ class SavingController extends Controller
                 'register_date' => $request->register_date,
                 'reference' => $umroh_saving->reference,
                 'customer_id' => $request->customer_id,
+                'agent_id' => $request->agent_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
                 'status' => $request->status,

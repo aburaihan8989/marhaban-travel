@@ -2,6 +2,7 @@
 
 namespace Modules\Saving\Entities;
 
+use Modules\People\Entities\Agent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,6 +14,10 @@ class HajjSaving extends Model
 
     public function hajjsavingPayments() {
         return $this->hasMany(HajjSavingPayment::class, 'saving_id', 'id');
+    }
+
+    public function umrohAgents() {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
     }
 
     public static function boot() {
