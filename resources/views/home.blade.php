@@ -32,7 +32,7 @@
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
                             <div class="bg-warning p-3 mfe-3 rounded">
-                                <i class="bi bi-wallet2 font-2xl"></i>
+                                <i class="bi bi-cash font-2xl"></i>
                             </div>
                             <div>
                                 <div class="text-value text-primary">{{ format_currency($umroh_expense) }}</div>
@@ -74,7 +74,7 @@
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-3 d-flex align-items-center">
                             <div class="bg-warning p-3 mfe-3 rounded">
-                                <i class="bi bi-wallet2 font-2xl"></i>
+                                <i class="bi bi-cash font-2xl"></i>
                             </div>
                             <div>
                                 <div class="text-value text-primary">{{ format_currency($hajj_expense) }}</div>
