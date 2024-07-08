@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/people', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/agent/{agent_id}', 'AgentsController@getAgent');
+Route::get('/count-agent-network/{agent_id}', 'AgentsController@getCountAgentNetwork');
+Route::get('/count-customer-network/{agent_id}', 'AgentsController@getCountCustomerNetwork');
+Route::get('/agent-network/{agent_id}', 'AgentsController@getAgentNetwork');
+Route::get('/customer-network/{agent_id}', 'AgentsController@getCustomerNetwork');
+
+Route::get('/agent-payment/{agent_id}', 'AgentPaymentsController@getAgentPayment');

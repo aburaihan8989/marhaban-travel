@@ -73,7 +73,7 @@ class AgentPaymentsDataTable extends DataTable
                 ->className('align-middle text-center'),
 
             Column::make('reference')
-                ->title('Reference ID')
+                ->title('ID Reference')
                 ->className('align-middle text-center'),
 
             Column::make('agent_name')

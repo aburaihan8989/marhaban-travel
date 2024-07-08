@@ -2,14 +2,17 @@
 
 namespace Modules\People\Http\Controllers;
 
-use Modules\People\DataTables\AgentsDataTable;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use Modules\People\Entities\Agent;
-use Illuminate\Support\Facades\Storage;
 use Modules\Upload\Entities\Upload;
+use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Customer;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\People\DataTables\AgentsDataTable;
+use Modules\Manifest\Entities\UmrohManifestCustomer;
 
 class AgentsController extends Controller
 {
@@ -149,4 +152,65 @@ class AgentsController extends Controller
 
         return redirect()->route('agents.index');
     }
+
+
+    // API Handling
+
+    public function getAgent($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = Agent::findOrFail($agent_id);
+        $referal = Agent::findOrFail($data->referal_id);
+        $data['referal_code'] = $referal->agent_code;
+        $data['referal_name'] = $referal->agent_name;
+
+        return $data;
+    }
+
+
+    public function getAgentNetwork($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = Agent::where('referal_id', $agent_id)
+                ->withCount('umrohCustomers')
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getCustomerNetwork($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('umroh_manifest_customers')->where('agent_id', $agent_id)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
+                ->select('umroh_manifest_customers.reference',
+                         'umroh_manifest_customers.agent_reward',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_name',
+                         'agents.agent_phone',
+                         'umroh_packages.package_name'
+                         )
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getCountAgentNetwork($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = Agent::where('referal_id', $agent_id)->count();
+
+        return $data;
+    }
+
+
+    public function getCountCustomerNetwork($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = UmrohManifestCustomer::where('agent_id', $agent_id)->count();
+
+        return $data;
+    }
+
 }

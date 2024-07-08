@@ -152,4 +152,17 @@ class AgentPaymentsController extends Controller
 
         return redirect()->route('agent-payments.index', $agentPayment->agent_id);
     }
+
+    // API Handling
+
+    public function getAgentPayment($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('agent_payments')->where('agent_id', $agent_id)
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->get();
+
+        return $data;
+    }
+
+
 }

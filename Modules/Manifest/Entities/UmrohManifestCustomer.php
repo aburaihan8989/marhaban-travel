@@ -30,6 +30,14 @@ class UmrohManifestCustomer extends Model
         return $this->hasOne(UmrohPackage::class, 'id', 'package_id');
     }
 
+    public function packages() {
+        return $this->belongsTo(UmrohPackage::class, 'package_id', 'id');
+    }
+
+    public function agents() {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
+    }
+
     public static function boot() {
         parent::boot();
 

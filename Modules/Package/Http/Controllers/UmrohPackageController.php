@@ -95,4 +95,15 @@ class UmrohPackageController extends Controller
 
         return redirect()->route('umroh-packages.index');
     }
+
+
+    // API Handling
+
+    public function getUmrohPackage() {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = UmrohPackage::withCount('umrohCustomer')->get();
+
+        return $data;
+    }
+
 }

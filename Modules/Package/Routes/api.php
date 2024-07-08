@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/package', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/umroh-package', 'UmrohPackageController@getUmrohPackage');
