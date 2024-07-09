@@ -192,13 +192,13 @@ class AgentsController extends Controller
                          'agents.agent_phone',
                          'agents.city',
                          'agents.level_agent',
-                        //  'agents.level_agent as customer_count',
-                        //  'agents.total_reward as total_reward',
-                         DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
-                         DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
+                         'agents.level_agent as customer_count',
+                         'agents.total_reward as total_reward',
+                        //  DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
+                        //  DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
                         )
                 ->where('referal_id', '=', $agent_id)
-                ->groupBy('agents.id')
+                // ->groupBy('agents.id')
                 ->get();
 
         return $data;
