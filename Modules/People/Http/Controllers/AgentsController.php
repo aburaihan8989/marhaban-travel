@@ -172,34 +172,33 @@ class AgentsController extends Controller
         // $data = Agent::where('referal_id', $agent_id)
         //         ->withCount('umrohCustomers')
         //         ->get();
-        // $data = DB::table('agents')
-        //         ->select(DB::raw('count(*) as agent_count, id'))
-        //         ->select('agents.agent_code',
-        //                 'agents.agent_name',
-        //                 'agents.agent_phone',
-        //                 'agents.city',
-        //                 'agents.level_agent',
-        //                 'agents.level_agent as customer_count',
-        //                 'agents.total_reward as total_reward'
-        //                 )
-        //         ->where('referal_id', '=', $agent_id)
-        //         ->get();
-
         $data = DB::table('agents')
-                ->join('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
-                ->select('agents.id',
-                         'agents.agent_code',
-                         'agents.agent_name',
-                         'agents.agent_phone',
-                         'agents.level_agent',
-                         'agents.city',
-                         DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
-                         DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
+                ->select(DB::raw('count(*) as agent_count, id'))
+                ->select('agents.agent_code',
+                        'agents.agent_name',
+                        'agents.agent_phone',
+                        'agents.city',
+                        'agents.level_agent',
+                        'agents.level_agent as customer_count',
+                        'agents.total_reward as total_reward'
                         )
                 ->where('referal_id', '=', $agent_id)
-                ->groupBy('id')
                 ->get();
 
+        // $data = DB::table('agents')
+        //         ->leftjoin('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
+        //         ->select('agents.id',
+        //                  'agents.agent_code',
+        //                  'agents.agent_name',
+        //                  'agents.agent_phone',
+        //                  'agents.level_agent',
+        //                  'agents.city',
+        //                  DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
+        //                  DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
+        //                 )
+        //         ->where('referal_id', '=', $agent_id)
+        //         ->groupBy('id')
+        //         ->get();
 
         return $data;
     }
