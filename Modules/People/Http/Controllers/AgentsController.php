@@ -186,7 +186,7 @@ class AgentsController extends Controller
         //         ->get();
 
         $data = DB::table('agents')
-                ->leftjoin('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
+                ->join('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
                 ->select('agents.id',
                          'agents.agent_code',
                          'agents.agent_name',
