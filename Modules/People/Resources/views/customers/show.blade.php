@@ -39,7 +39,7 @@
                                     <td>{{ $customer->paspor_number }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Paspor Active</th>
+                                    <th>Paspor Expired</th>
                                     <td>{{ date('d-m-Y', strtotime($customer->paspor_date)) }}</td>
                                 </tr>
                                 <tr>

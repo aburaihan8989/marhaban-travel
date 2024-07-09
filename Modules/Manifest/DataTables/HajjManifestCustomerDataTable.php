@@ -18,7 +18,8 @@ class HajjManifestCustomerDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('register_date', function($model){
                 $formatDate = date('d-m-Y',strtotime($model->register_date));
-                return $formatDate; })
+                return $formatDate;
+            })
             ->addColumn('total_price', function ($data) {
                 return format_currency($data->total_price);
             })
@@ -34,18 +35,24 @@ class HajjManifestCustomerDataTable extends DataTable
             ->addColumn('paspor_number', function ($data) {
                 return Customer::findOrFail($data->customer_id)->paspor_number;
             })
-            ->addColumn('customer_name', function ($data) {
-                return Customer::findOrFail($data->customer_id)->customer_name;
-            })
+            // ->addColumn('customer_name', function ($data) {
+            //     return Customer::findOrFail($data->customer_id)->customer_name;
+            // })
             ->addColumn('customer_phone', function ($data) {
                 return Customer::findOrFail($data->customer_id)->customer_phone;
             })
             ->editColumn('paspor_date', function($model){
                 $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->paspor_date));
-                return $formatDate; })
+                return $formatDate;
+            })
             ->editColumn('date_birth', function($model){
                 $formatDate = \Carbon\Carbon::parse(date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth)))->age . ' th';
-                return $formatDate; })
+                return $formatDate;
+            })
+            ->editColumn('customer_birth', function($model){
+                $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->date_birth));
+                return $formatDate;
+            })
             ->addColumn('age_group', function ($data) {
                 return Customer::findOrFail($data->customer_id)->age_group == 'A' ? 'Adult' : (Customer::findOrFail($data->customer_id)->age_group == 'K' ? 'Kids' : 'Infant');
             })
@@ -102,7 +109,11 @@ class HajjManifestCustomerDataTable extends DataTable
             Column::computed('register_date')
                 ->className('text-center align-middle'),
 
-                Column::make('customer_name')
+            Column::make('customer_name')
+                ->className('text-center align-middle'),
+
+            Column::computed('customer_birth')
+                ->title('Date of Birth')
                 ->className('text-center align-middle'),
 
             Column::computed('date_birth')
@@ -126,7 +137,7 @@ class HajjManifestCustomerDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('paspor_date')
-                ->title('Paspor Active')
+                ->title('Paspor Expired')
                 ->className('text-center align-middle'),
 
             Column::computed('room_group')

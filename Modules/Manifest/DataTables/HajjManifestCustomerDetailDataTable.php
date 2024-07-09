@@ -128,7 +128,7 @@ class HajjManifestCustomerDetailDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('paspor_date')
-                ->title('Paspor Active')
+                ->title('Paspor Expired')
                 ->className('text-center align-middle'),
 
             Column::computed('room_group')

@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="paspor_date">Paspor Active <span class="text-danger"></span></label>
+                                        <label for="paspor_date">Paspor Expired <span class="text-danger"></span></label>
                                         <input type="date" class="form-control" name="paspor_date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
