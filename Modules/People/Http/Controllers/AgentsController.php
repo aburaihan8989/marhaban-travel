@@ -168,7 +168,7 @@ class AgentsController extends Controller
 
 
     public function getAgentNetwork($agent_id) {
-        // abort_if(Gate::denies('show_customers'), 403);
+
         $data = DB::table('agents')
                 ->leftjoin('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
                 ->select('agents.id',
