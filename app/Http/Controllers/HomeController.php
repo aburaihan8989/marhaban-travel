@@ -43,17 +43,21 @@ class HomeController extends Controller
         $payment_hajj_packages = HajjManifestPayment::where('status','Approval')->count();
         $payment_packages = $payment_umroh_packages + $payment_hajj_packages;
 
-        $umroh_payment = UmrohManifestPayment::where('status','Verified')->sum('amount');
+        // $umroh_payment = UmrohManifestPayment::where('status','Verified')->sum('amount');
+        $umroh_payment = UmrohManifestPayment::sum('amount');
         $umroh_expense = UmrohExpense::sum('amount');
         $umroh_profit = $umroh_payment - $umroh_expense;
 
-        $hajj_payment = HajjManifestPayment::where('status','Verified')->sum('amount');
+        // $hajj_payment = HajjManifestPayment::where('status','Verified')->sum('amount');
+        $hajj_payment = HajjManifestPayment::sum('amount');
         $hajj_expense = HajjExpense::sum('amount');
         $hajj_profit = $hajj_payment - $hajj_expense;
 
-        $umroh_savings = SavingPayment::where('status','Verified')->sum('amount');
-        $hajj_savings = HajjSavingPayment::where('status','Verified')->sum('amount');
+        // $umroh_savings = SavingPayment::where('status','Verified')->sum('amount');
+        $umroh_savings = SavingPayment::sum('amount');
 
+        // $hajj_savings = HajjSavingPayment::where('status','Verified')->sum('amount');
+        $hajj_savings = HajjSavingPayment::sum('amount');
 
         return $dataTable->render('home', compact(
             'customers',
