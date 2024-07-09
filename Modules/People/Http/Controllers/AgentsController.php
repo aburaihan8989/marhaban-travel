@@ -169,20 +169,20 @@ class AgentsController extends Controller
 
     public function getAgentNetwork($agent_id) {
         // abort_if(Gate::denies('show_customers'), 403);
-        $data = Agent::where('referal_id', $agent_id)
-                ->withCount('umrohCustomers')
+        $data = DB::table('agents')
+                ->leftjoin('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
+                ->select('agents.id',
+                        'agents.agent_code',
+                        'agents.agent_name',
+                        'agents.agent_phone',
+                        'agents.level_agent',
+                        'agents.city',
+                        DB::raw("count(umroh_manifest_customers.agent_id) as customer_count"),
+                        DB::raw("sum(umroh_manifest_customers.referal_reward) as total_reward")
+                        )
+                ->where('agents.referal_id', '=', $agent_id)
+                ->groupBy('id')
                 ->get();
-        // $data = DB::table('umroh_manifest_customers')
-        //         ->select(DB::raw('count(*) as customer_count'))
-        //         // ->select('agents.agent_code',
-        //         //         'agents.agent_name',
-        //         //         'agents.agent_phone',
-        //         //         'agents.level_agent',
-        //         //         'agents.city'
-        //         //         )
-        //         ->where('agent_id', '=', $agent_id)
-        //         ->groupBy('agent_id')
-        //         ->get();
 
         return $data;
     }
