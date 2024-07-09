@@ -172,6 +172,17 @@ class AgentsController extends Controller
         $data = Agent::where('referal_id', $agent_id)
                 ->withCount('umrohCustomers')
                 ->get();
+        // $data = DB::table('umroh_manifest_customers')
+        //         ->select(DB::raw('count(*) as customer_count'))
+        //         // ->select('agents.agent_code',
+        //         //         'agents.agent_name',
+        //         //         'agents.agent_phone',
+        //         //         'agents.level_agent',
+        //         //         'agents.city'
+        //         //         )
+        //         ->where('agent_id', '=', $agent_id)
+        //         ->groupBy('agent_id')
+        //         ->get();
 
         return $data;
     }

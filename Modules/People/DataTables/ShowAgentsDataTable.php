@@ -29,6 +29,10 @@ class ShowAgentsDataTable extends DataTable
                 $hajj_customers = HajjManifestCustomer::where('agent_id', $data->id)->count();
                 return ($umroh_customers + $hajj_customers);
             })
+            ->addColumn('referal_reward', function ($data) {
+                $data = UmrohManifestCustomer::where('agent_id', $data->id)->sum('referal_reward');
+                return format_currency($data);
+            })
             ->addColumn('action', function ($data) {
                 return view('people::agents.rewards.partials.actions-referal', compact('data'));
             });
@@ -98,6 +102,10 @@ class ShowAgentsDataTable extends DataTable
 
             Column::make('referal_level')
                 ->title('Referal Level')
+                ->className('text-center align-middle'),
+
+            Column::make('referal_reward')
+                ->title('Referal Rewards')
                 ->className('text-center align-middle'),
 
             Column::computed('action')
