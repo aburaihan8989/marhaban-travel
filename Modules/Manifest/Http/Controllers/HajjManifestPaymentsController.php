@@ -90,6 +90,63 @@ class HajjManifestPaymentsController extends Controller
                     'remaining_payment' => $remaining_payment,
                     'payment_method' => $request->payment_method
                 ]);
+
+
+                $hajj_manifest = UmrohManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
+
+                $agent = Agent::findOrFail($hajj_manifest->agent_id);
+                $agent_referal = Agent::findOrFail($agent->referal_id);
+
+                if ($agent->level_agent == 'Bronze') {
+                    $agent_reward = settings()->level1_rewards;
+                } elseif ($agent->level_agent == 'Silver') {
+                    $agent_reward = settings()->level2_rewards;
+                } elseif ($agent->level_agent == 'Gold') {
+                    $agent_reward = settings()->level3_rewards;
+                } else {
+                    $agent_reward = settings()->level4_rewards;
+                }
+
+                if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
+                    $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
+                    $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
+                    $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+                } else {
+                    $referal_reward = settings()->referal_rewards;
+                }
+
+                if (!$hajj_manifest->promo == 1) {
+                    if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {
+                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1) {
+                            $agent->update([
+                                'total_reward' => $agent->total_reward + $agent_reward
+                            ]);
+
+                            $agent_referal->update([
+                                'total_reward' => $agent_referal->total_reward + $referal_reward
+                            ]);
+
+                            $hajj_manifest->update([
+                                'agent_reward' => $agent_reward,
+                                'referal_reward' => $referal_reward
+                            ]);
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                } else {
+
+                }
             } else {
                 $hajjManifestPayment = HajjManifestPayment::create([
                     'date' => $request->date,
@@ -251,8 +308,16 @@ class HajjManifestPaymentsController extends Controller
             $hajj_manifest = $hajjManifestPayment->hajjManifestCustomers;
 
             if ($hajjManifestPayment->trx_type == 'Payment') {
+                $total_payment = $hajj_manifest->total_payment - $hajjManifestPayment->amount;
+                if ($total_payment >= $hajj_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
                 $hajj_manifest->update([
-                    'total_payment' => $hajj_manifest->total_payment - $hajjManifestPayment->amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
                     'remaining_payment' => $hajj_manifest->total_price - ($hajj_manifest->total_payment - $hajjManifestPayment->amount)
                 ]);
             } else {

@@ -87,6 +87,62 @@ class UmrohManifestPaymentsController extends Controller
                     'remaining_payment' => $remaining_payment,
                     'payment_method' => $request->payment_method
                 ]);
+
+                $umroh_manifest = UmrohManifestCustomer::findOrFail($request->umroh_manifest_customer_id);
+
+                $agent = Agent::findOrFail($umroh_manifest->agent_id);
+                $agent_referal = Agent::findOrFail($agent->referal_id);
+
+                if ($agent->level_agent == 'Bronze') {
+                    $agent_reward = settings()->level1_rewards;
+                } elseif ($agent->level_agent == 'Silver') {
+                    $agent_reward = settings()->level2_rewards;
+                } elseif ($agent->level_agent == 'Gold') {
+                    $agent_reward = settings()->level3_rewards;
+                } else {
+                    $agent_reward = settings()->level4_rewards;
+                }
+
+                if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
+                    $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
+                    $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
+                    $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
+                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
+                    $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+                } else {
+                    $referal_reward = settings()->referal_rewards;
+                }
+
+                if (!$umroh_manifest->promo == 1) {
+                    if (!$umroh_manifest->agent_reward OR !$umroh_manifest->referal_reward) {
+                        if ($umroh_manifest->status == 'Completed' AND $umroh_manifest->visa == 1) {
+                            $agent->update([
+                                'total_reward' => $agent->total_reward + $agent_reward
+                            ]);
+
+                            $agent_referal->update([
+                                'total_reward' => $agent_referal->total_reward + $referal_reward
+                            ]);
+
+                            $umroh_manifest->update([
+                                'agent_reward' => $agent_reward,
+                                'referal_reward' => $referal_reward
+                            ]);
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                } else {
+
+                }
             } else {
                 $umrohManifestPayment = UmrohManifestPayment::create([
                     'date' => $request->date,
@@ -246,8 +302,16 @@ class UmrohManifestPaymentsController extends Controller
             $umroh_manifest = $umrohManifestPayment->umrohManifestCustomers;
 
             if ($umrohManifestPayment->trx_type == 'Payment') {
+                $total_payment = $umroh_manifest->total_payment - $umrohManifestPayment->amount;
+                if ($total_payment >= $umroh_manifest->total_price) {
+                    $status = 'Completed';
+                } else {
+                    $status = 'Waiting';
+                }
+
                 $umroh_manifest->update([
-                    'total_payment' => $umroh_manifest->total_payment - $umrohManifestPayment->amount,
+                    'total_payment' => $total_payment,
+                    'status' => $status,
                     'remaining_payment' => $umroh_manifest->total_price - ($umroh_manifest->total_payment - $umrohManifestPayment->amount)
                 ]);
             } else {

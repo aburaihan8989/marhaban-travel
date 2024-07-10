@@ -128,6 +128,18 @@
                                 </div>
                             </div>
                             <hr>
+
+                            <div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0">Special Program</legend>
+                                <div class="col-lg-6">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" id="promo" name="promo" value="1">
+                                      <label class="form-check-label" for="promo"><strong class="text-danger"><i>Promo Price</i></strong></label><span><i> ( If Selected, Reward Program Not Active)</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
                             <br>
 
                             <div class="form-row">
