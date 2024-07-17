@@ -176,7 +176,7 @@ class AgentsController extends Controller
                          'agents.agent_phone',
                          'agents.city',
                          'agents.level_agent',
-                         'agents.referal_id',
+                         'agents.id as referal_id',
                         //  'agents.total_reward as total_reward',
                          DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
                          DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
