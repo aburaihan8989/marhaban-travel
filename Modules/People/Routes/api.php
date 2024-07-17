@@ -22,5 +22,6 @@ Route::get('/count-agent-network/{agent_id}', 'AgentsController@getCountAgentNet
 Route::get('/count-customer-network/{agent_id}', 'AgentsController@getCountCustomerNetwork');
 Route::get('/agent-network/{agent_id}', 'AgentsController@getAgentNetwork');
 Route::get('/customer-network/{agent_id}', 'AgentsController@getCustomerNetwork');
+Route::get('/customer-referal-network/{agent_id}', 'AgentsController@getCustomerReferalNetwork');
 
 Route::get('/agent-payment/{agent_id}', 'AgentPaymentsController@getAgentPayment');

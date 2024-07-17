@@ -169,22 +169,6 @@ class AgentsController extends Controller
 
     public function getAgentNetwork($agent_id) {
         // abort_if(Gate::denies('show_customers'), 403);
-        // $data = Agent::where('referal_id', $agent_id)
-        //         ->withCount('umrohCustomers')
-        //         ->get();
-        // $data = DB::table('agents')
-        //         ->select(DB::raw('count(*) as agent_count, id'))
-        //         ->select('agents.agent_code',
-        //                 'agents.agent_name',
-        //                 'agents.agent_phone',
-        //                 'agents.city',
-        //                 'agents.level_agent',
-        //                 'agents.level_agent as customer_count',
-        //                 'agents.total_reward as total_reward'
-        //                 )
-        //         ->where('referal_id', '=', $agent_id)
-        //         ->get();
-
         $data = DB::table('agents')
                 ->leftjoin('umroh_manifest_customers', 'agents.id', '=', 'umroh_manifest_customers.agent_id')
                 ->select('agents.agent_code',
@@ -192,7 +176,7 @@ class AgentsController extends Controller
                          'agents.agent_phone',
                          'agents.city',
                          'agents.level_agent',
-                        //  'agents.level_agent as customer_count',
+                         'agents.referal_id',
                         //  'agents.total_reward as total_reward',
                          DB::raw('count(umroh_manifest_customers.agent_id) as customer_count'),
                          DB::raw('sum(umroh_manifest_customers.referal_reward) as total_reward')
@@ -213,6 +197,27 @@ class AgentsController extends Controller
                 ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
                 ->select('umroh_manifest_customers.reference',
                          'umroh_manifest_customers.agent_reward',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_name',
+                         'agents.agent_phone',
+                         'umroh_packages.package_name'
+                         )
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getCustomerReferalNetwork($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('umroh_manifest_customers')->where('agent_id', $agent_id)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
+                ->select('umroh_manifest_customers.reference',
+                         'umroh_manifest_customers.referal_reward',
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',
