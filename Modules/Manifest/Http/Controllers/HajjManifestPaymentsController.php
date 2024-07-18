@@ -98,30 +98,30 @@ class HajjManifestPaymentsController extends Controller
                 $agent_referal = Agent::findOrFail($agent->referal_id);
 
                 if ($agent->level_agent == 'Bronze') {
-                    $agent_reward = settings()->level1_rewards;
+                    $agent_reward = settings()->level11_rewards;
                 } elseif ($agent->level_agent == 'Silver') {
-                    $agent_reward = settings()->level2_rewards;
+                    $agent_reward = settings()->level22_rewards;
                 } elseif ($agent->level_agent == 'Gold') {
-                    $agent_reward = settings()->level3_rewards;
+                    $agent_reward = settings()->level33_rewards;
                 } else {
-                    $agent_reward = settings()->level4_rewards;
+                    $agent_reward = settings()->level44_rewards;
                 }
 
-                if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
-                    $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
-                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
-                    $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
-                } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
-                    $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
-                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
-                    $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
-                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
-                    $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
-                } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
-                    $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
-                } else {
-                    $referal_reward = settings()->referal_rewards;
-                }
+                // if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
+                //     $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
+                // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
+                //     $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
+                // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
+                //     $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
+                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
+                //     $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
+                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
+                //     $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
+                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
+                //     $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+                // } else {
+                    $referal_reward = settings()->referal11_rewards;
+                // }
 
                 if (!$hajj_manifest->promo == 1) {
                     if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {

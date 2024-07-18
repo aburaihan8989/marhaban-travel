@@ -24,5 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Rewards Settings
     Route::get('/settings-rewards', 'SettingController@reward')->name('settings-rewards.index');
     Route::patch('/settings-rewards', 'SettingController@reward_update')->name('settings-rewards.update');
+    Route::patch('/settings-rewards-hajj', 'SettingController@reward_hajj_update')->name('settings-rewards-hajj.update');
 
 });

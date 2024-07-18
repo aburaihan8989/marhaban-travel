@@ -123,8 +123,14 @@ class UmrohManifestCustomerController extends Controller
                 $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
             } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
                 $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+            } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Platinum') {
+                $referal_reward = settings()->referal4_rewards;
+            } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Gold') {
+                $referal_reward = settings()->referal3_rewards;
+            } elseif ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Silver') {
+                $referal_reward = settings()->referal2_rewards;
             } else {
-                $referal_reward = settings()->referal_rewards;
+                $referal_reward = settings()->referal1_rewards;
             }
 
             if (!$umroh_manifest_customer->promo == 1) {
@@ -280,8 +286,14 @@ class UmrohManifestCustomerController extends Controller
                 $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
             } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
                 $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
+            } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Platinum') {
+                $referal_reward = settings()->referal4_rewards;
+            } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Gold') {
+                $referal_reward = settings()->referal3_rewards;
+            } elseif ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Silver') {
+                $referal_reward = settings()->referal2_rewards;
             } else {
-                $referal_reward = settings()->referal_rewards;
+                $referal_reward = settings()->referal1_rewards;
             }
 
             if (!$umroh_manifest_customer_id->promo == 1) {

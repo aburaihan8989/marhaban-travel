@@ -24,9 +24,9 @@
             </a> --}}
         {{-- @endcan --}}
         {{-- @can('show_purchases') text-info--}}
-            <a href="#" class="dropdown-item text-secondary">
+            {{-- <a href="#" class="dropdown-item text-secondary">
                 <i class="bi bi-eye mr-2 text-secondary" style="line-height: 1;"></i> Details
-            </a>
+            </a> --}}
         {{-- @endcan --}}
 
     </div>

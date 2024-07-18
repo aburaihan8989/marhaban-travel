@@ -11,7 +11,7 @@
 @section('content')
     <div class="container-fluid">
         @can('show_total_stats')
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item active">Home Dashboard</li>
             <hr>
 
             <div class="row">
@@ -128,7 +128,7 @@
             </div>
             <br>
 
-            <li class="breadcrumb-item active">Administration</li>
+            <li class="breadcrumb-item active">Database Management</li>
             <hr>
 
             <div class="row">
@@ -216,7 +216,7 @@
             </div>
             <br>
 
-            <li class="breadcrumb-item active">Management</li>
+            <li class="breadcrumb-item active">Package Management</li>
             <hr>
 
             <div class="row">

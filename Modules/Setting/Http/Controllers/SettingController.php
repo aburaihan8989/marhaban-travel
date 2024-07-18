@@ -35,11 +35,36 @@ class SettingController extends Controller
 
     public function reward_update(Request $request) {
         Setting::firstOrFail()->update([
-            'referal_rewards' => $request->referal_rewards,
             'level1_rewards' => $request->level1_rewards,
             'level2_rewards' => $request->level2_rewards,
             'level3_rewards' => $request->level3_rewards,
             'level4_rewards' => $request->level4_rewards,
+
+            'referal1_rewards' => $request->referal1_rewards,
+            'referal2_rewards' => $request->referal2_rewards,
+            'referal3_rewards' => $request->referal3_rewards,
+            'referal4_rewards' => $request->referal4_rewards,
+        ]);
+
+        cache()->forget('settings');
+
+        toast('Rewards Settings Updated!', 'info');
+
+        return redirect()->route('settings-rewards.index');
+    }
+
+
+    public function reward_hajj_update(Request $request) {
+        Setting::firstOrFail()->update([
+            'level11_rewards' => $request->level11_rewards,
+            'level22_rewards' => $request->level22_rewards,
+            'level33_rewards' => $request->level33_rewards,
+            'level44_rewards' => $request->level44_rewards,
+
+            'referal11_rewards' => $request->referal11_rewards,
+            // 'referal22_rewards' => $request->referal22_rewards,
+            // 'referal33_rewards' => $request->referal33_rewards,
+            // 'referal44_rewards' => $request->referal44_rewards,
         ]);
 
         cache()->forget('settings');
