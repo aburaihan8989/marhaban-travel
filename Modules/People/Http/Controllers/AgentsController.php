@@ -197,6 +197,7 @@ class AgentsController extends Controller
                 ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
                 ->select('umroh_manifest_customers.reference',
                          'umroh_manifest_customers.agent_reward',
+                         'umroh_manifest_customers.promo',
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',
@@ -218,6 +219,7 @@ class AgentsController extends Controller
                 ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
                 ->select('umroh_manifest_customers.reference',
                          'umroh_manifest_customers.referal_reward',
+                         'umroh_manifest_customers.promo',
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',

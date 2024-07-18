@@ -279,6 +279,7 @@
                                             <th>Seat</th>
                                             <th>Booked</th>
                                             <th>Available</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -295,6 +296,17 @@
                                                 <td>{{ $umroh_package['package_capacity'] }} Pax</td>
                                                 <td>{{ $umroh_package['umroh_customer_count'] }} Pax</td>
                                                 <td>{{ $umroh_package['package_capacity'] - $umroh_package['umroh_customer_count'] }} Pax</td>
+                                                <td>
+                                                    @if ($umroh_package['package_capacity'] - $umroh_package['umroh_customer_count'] == 0)
+                                                        <span class="badge badge-danger" style="font-size: 14px;">
+                                                            Full Booked
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-success" style="font-size: 14px;">
+                                                            Available
+                                                        </span>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -344,6 +356,7 @@
                                             <th>Seat</th>
                                             <th>Booked</th>
                                             <th>Available</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -360,6 +373,17 @@
                                                 <td>{{ $hajj_package['package_capacity'] }} Pax</td>
                                                 <td>{{ $hajj_package['hajj_customer_count'] }} Pax</td>
                                                 <td>{{ $hajj_package['package_capacity'] - $hajj_package['hajj_customer_count'] }} Pax</td>
+                                                <td>
+                                                    @if ($hajj_package['package_capacity'] - $hajj_package['hajj_customer_count'] == 0)
+                                                        <span class="badge badge-danger" style="font-size: 14px;">
+                                                            Full Booked
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-success" style="font-size: 14px;">
+                                                            Available
+                                                        </span>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>

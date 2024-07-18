@@ -40,6 +40,9 @@ class ShowCustomersReferalDataTable extends DataTable
             ->addColumn('referal_reward', function ($data) {
                 return format_currency($data->referal_reward);
             })
+            ->addColumn('promo', function ($data) {
+                return $data->promo == 1 ? 'Promo' : 'Reguler';
+            })
             ->addColumn('action', function ($data) {
                 return view('people::agents.rewards.partials.actions', compact('data'));
             });
@@ -107,6 +110,10 @@ class ShowCustomersReferalDataTable extends DataTable
 
             Column::make('referal_reward')
                 ->title('Referal Rewards')
+                ->className('text-center align-middle'),
+
+            Column::computed('promo')
+                ->title('Group')
                 ->className('text-center align-middle'),
 
             Column::make('created_at')
