@@ -378,6 +378,7 @@
                     </div>
                 </div>
             </div>
+            <br>
 
         @endcan
 
