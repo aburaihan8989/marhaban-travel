@@ -30,6 +30,10 @@ class HajjManifestCustomer extends Model
         return $this->hasOne(HajjPackage::class, 'id', 'package_id');
     }
 
+    public function packages() {
+        return $this->belongsTo(HajjPackage::class, 'package_id', 'id');
+    }
+
     public static function boot() {
         parent::boot();
 

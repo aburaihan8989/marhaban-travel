@@ -2,11 +2,12 @@
 
 namespace Modules\Package\Entities;
 
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Modules\Manifest\Entities\HajjManifestCustomer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Product\Notifications\NotifyQuantityAlert;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class HajjPackage extends Model implements HasMedia
@@ -17,6 +18,10 @@ class HajjPackage extends Model implements HasMedia
     protected $guarded = [];
 
     protected $with = ['media'];
+
+    public function hajjCustomer() {
+        return $this->hasMany(HajjManifestCustomer::class, 'package_id', 'id');
+    }
 
     // public function category() {
     //     return $this->belongsTo(Category::class, 'category_id', 'id');

@@ -25,7 +25,9 @@ use Modules\Package\DataTables\HajjPackageDataTable;
 use Modules\PurchasesReturn\Entities\PurchaseReturn;
 use Modules\Package\DataTables\HomeHajjPackageDataTable;
 use Modules\Package\DataTables\HomeUmrohPackageDataTable;
+use Modules\Package\Http\Controllers\HajjPackageController;
 use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
+use Modules\Package\Http\Controllers\UmrohPackageController;
 
 class HomeController extends Controller
 {
@@ -58,6 +60,8 @@ class HomeController extends Controller
 
         // $hajj_savings = HajjSavingPayment::where('status','Verified')->sum('amount');
         $hajj_savings = HajjSavingPayment::sum('amount');
+        $umroh_package = app(UmrohPackageController::class)->getUmrohPackage();
+        $hajj_package = app(HajjPackageController::class)->getHajjPackage();
 
         return $dataTable->render('home', compact(
             'customers',
@@ -72,6 +76,8 @@ class HomeController extends Controller
             'hajj_expense',
             'hajj_profit',
             'umroh_savings',
+            'umroh_package',
+            'hajj_package',
             'hajj_savings',
             'agents'));
         // return view('home', compact('customers', 'umroh_savings', 'hajj_savings', 'agents', 'payment_savings', 'payment_packages'));

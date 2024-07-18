@@ -95,4 +95,14 @@ class HajjPackageController extends Controller
 
         return redirect()->route('hajj-packages.index');
     }
+
+
+    // API Handling
+
+    public function getHajjPackage() {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = HajjPackage::withCount('hajjCustomer')->get();
+
+        return $data;
+    }
 }

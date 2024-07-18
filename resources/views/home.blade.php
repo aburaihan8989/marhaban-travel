@@ -219,7 +219,7 @@
             <li class="breadcrumb-item active">Package Management</li>
             <hr>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
@@ -248,54 +248,138 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        @endcan
+            </div> --}}
 
-        {{-- @can('show_weekly_sales_purchases|show_month_overview')
-        <div class="row mb-4">
-            @can('show_weekly_sales_purchases')
-            <div class="col-lg-7">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header">
-                        Revenue & Expenses of Last 7 Days
-                    </div>
-                    <div class="card-body">
-                        <canvas id="salesPurchasesChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            @endcan
-            @can('show_month_overview')
-            <div class="col-lg-5">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header">
-                        Overview of {{ now()->format('F, Y') }}
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <div class="chart-container" style="position: relative; height:auto; width:280px">
-                            <canvas id="currentMonthChart"></canvas>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header d-flex flex-wrap align-items-center">
+                            <div>
+                                Tabel : <strong>Data List Umroh Package Active </i></strong>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center mb-0">
+                                    <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center" style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Package Code</th>
+                                            <th>Package Name</th>
+                                            <th>Departure Date</th>
+                                            <th>Departure Location</th>
+                                            <th>Flight Route</th>
+                                            <th>Days</th>
+                                            <th>Seat</th>
+                                            <th>Booked</th>
+                                            <th>Available</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($umroh_package as $umroh_package)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+
+                                                <td>{{ $umroh_package['package_code'] }}</td>
+                                                <td>{{ $umroh_package['package_name'] }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($umroh_package['package_date'])->format('d-m-Y') }}</td>
+                                                <td>{{ $umroh_package['package_departure'] }}</td>
+                                                <td>{{ $umroh_package['flight_route'] }}</td>
+                                                <td>{{ $umroh_package['package_days'] }} Days</td>
+                                                <td>{{ $umroh_package['package_capacity'] }} Pax</td>
+                                                <td>{{ $umroh_package['umroh_customer_count'] }} Pax</td>
+                                                <td>{{ $umroh_package['package_capacity'] - $umroh_package['umroh_customer_count'] }} Pax</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="10">
+                                                    <span class="text-danger">No Data Available!</span>
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{-- <div @class(['mt-3' => $umroh_package->hasPages()])>
+                                {{ $umroh_package->links() }}
+                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
-            @endcan
-        </div>
-        @endcan
+            <br>
 
-        @can('show_monthly_cashflow')
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header">
-                        Monthly Cash Flow (Cash Sent & Received)
-                    </div>
-                    <div class="card-body">
-                        <canvas id="paymentChart"></canvas>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header d-flex flex-wrap align-items-center">
+                            <div>
+                                Tabel : <strong>Data List Hajj Package Active </i></strong>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center mb-0">
+                                    <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center" style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Package Code</th>
+                                            <th>Package Name</th>
+                                            <th>Departure Date</th>
+                                            <th>Departure Location</th>
+                                            <th>Flight Route</th>
+                                            <th>Days</th>
+                                            <th>Seat</th>
+                                            <th>Booked</th>
+                                            <th>Available</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($hajj_package as $hajj_package)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+
+                                                <td>{{ $hajj_package['package_code'] }}</td>
+                                                <td>{{ $hajj_package['package_name'] }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($hajj_package['package_date'])->format('d-m-Y') }}</td>
+                                                <td>{{ $hajj_package['package_departure'] }}</td>
+                                                <td>{{ $hajj_package['flight_route'] }}</td>
+                                                <td>{{ $hajj_package['package_days'] }} Days</td>
+                                                <td>{{ $hajj_package['package_capacity'] }} Pax</td>
+                                                <td>{{ $hajj_package['hajj_customer_count'] }} Pax</td>
+                                                <td>{{ $hajj_package['package_capacity'] - $hajj_package['hajj_customer_count'] }} Pax</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="10">
+                                                    <span class="text-danger">No Data Available!</span>
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{-- <div @class(['mt-3' => $umroh_package->hasPages()])>
+                                {{ $umroh_package->links() }}
+                            </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @endcan --}}
+
+        @endcan
 
     </div>
 @endsection

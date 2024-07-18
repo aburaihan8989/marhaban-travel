@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/package', function (Request $request) {
 });
 
 Route::get('/umroh-package', 'UmrohPackageController@getUmrohPackage');
+Route::get('/hajj-package', 'HajjPackageController@getHajjPackage');
+
