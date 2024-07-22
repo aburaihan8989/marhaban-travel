@@ -86,7 +86,7 @@
                 <i>Travel Management System ® {{ date('Y') }}</i>
             </p>
             <p class="text-center mt-2 lead">
-                <a href="#" class="font-weight-bold text-primary"><i>Marhaban Makkah Madinah © Hajj & Umroh Service</i></a>
+                <a href="#" class="font-weight-bold text-primary"><i>{{ settings()->company_name }} © Hajj & Umroh Service</i></a>
             </p>
         </div>
     </div>
