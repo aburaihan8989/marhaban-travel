@@ -198,7 +198,7 @@
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" style="color:grey;" href="#">
-        <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1; color:grey;"></i> Finance Report
+        <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1; color:grey;"></i> Accounting
     </a>
     <ul class="c-sidebar-nav-dropdown-items">
         {{-- @can('access_customers') --}}
