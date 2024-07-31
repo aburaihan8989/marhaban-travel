@@ -35,7 +35,7 @@ class HajjManifestCustomerController extends Controller
 
 
     public function store(Request $request, HajjManifest $hajj_manifest_id) {
-        // @dd($umroh_manifest_id);
+        // @dd($hajj_manifest_id);
 
         $request->validate([
             // 'total_price' => 'required|numeric',
@@ -126,8 +126,8 @@ class HajjManifestCustomerController extends Controller
                 $referal_reward = settings()->referal11_rewards;
             // }
 
-            if (!$umroh_manifest_customer->promo == 1) {
-                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1) {
+            if (!$hajj_manifest_customer->promo == 1) {
+                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $agent_reward
                     ]);
@@ -173,7 +173,7 @@ class HajjManifestCustomerController extends Controller
 
 
     public function update(Request $request, HajjManifestCustomer $hajj_manifest_customer_id) {
-        // @dd($umroh_manifest_customer_id);
+        // @dd($hajj_manifest_customer_id);
 
         $request->validate([
             // 'total_price' => 'required|numeric',
@@ -183,7 +183,7 @@ class HajjManifestCustomerController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $hajj_manifest_customer_id) {
-            // $total_payment = $umroh_manifest_customer_id->total_payment + $request->last_amount;
+            // $total_payment = $hajj_manifest_customer_id->total_payment + $request->last_amount;
             $remaining_payment = $request->total_price - $hajj_manifest_customer_id->total_payment;
 
             if ($request->total_payment >= $request->total_price) {
@@ -280,7 +280,7 @@ class HajjManifestCustomerController extends Controller
 
     public function destroy(HajjManifestCustomer $hajj_manifest_customer_id) {
         // abort_if(Gate::denies('delete_purchases'), 403);
-        // @dd($umroh_manifest_customer_id);
+        // @dd($hajj_manifest_customer_id);
         $hajj_manifest_customer_id->delete();
 
         $agent = Agent::findOrFail($hajj_manifest_customer_id->agent_id);
