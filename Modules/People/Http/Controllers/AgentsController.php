@@ -201,6 +201,7 @@ class AgentsController extends Controller
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',
+                         'agents.agent_code',
                          'agents.agent_name',
                          'agents.agent_phone',
                          'umroh_packages.package_name'
@@ -223,6 +224,7 @@ class AgentsController extends Controller
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',
+                         'agents.agent_code',
                          'agents.agent_name',
                          'agents.agent_phone',
                          'umroh_packages.package_name'
