@@ -156,6 +156,32 @@ class AgentsController extends Controller
 
     // API Handling
 
+    public function getCustomer($customer_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        // $data = UmrohManifestCustomer::findOrFail($customer_id);
+        $data = DB::table('umroh_manifest_customers')
+                ->where('umroh_manifest_customers.id', $customer_id)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
+                ->select('umroh_manifest_customers.id',
+                         'umroh_manifest_customers.reference',
+                         'umroh_manifest_customers.rating',
+                         'umroh_manifest_customers.fu_notes',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_code',
+                         'agents.agent_name',
+                         'agents.agent_phone',
+                         'umroh_packages.package_name'
+                         )
+                ->first();
+
+        return $data;
+    }
+
+
     public function getAgent($agent_id) {
         // abort_if(Gate::denies('show_customers'), 403);
         $data = Agent::findOrFail($agent_id);
@@ -191,13 +217,16 @@ class AgentsController extends Controller
 
     public function getCustomerNetwork($agent_id) {
         // abort_if(Gate::denies('show_customers'), 403);
-        $data = DB::table('umroh_manifest_customers')->where('agent_id', $agent_id)
+        $data = DB::table('umroh_manifest_customers')
+                ->where('agent_id', $agent_id)
                 ->join('customers', 'customer_id', '=','customers.id')
                 ->join('agents', 'agent_id', '=','agents.id')
                 ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
-                ->select('umroh_manifest_customers.reference',
+                ->select('umroh_manifest_customers.id',
+                         'umroh_manifest_customers.reference',
                          'umroh_manifest_customers.agent_reward',
                          'umroh_manifest_customers.promo',
+                         'umroh_manifest_customers.mark',
                          'customers.customer_name',
                          'customers.customer_phone',
                          'customers.city',
@@ -214,7 +243,8 @@ class AgentsController extends Controller
 
     public function getCustomerReferalNetwork($agent_id) {
         // abort_if(Gate::denies('show_customers'), 403);
-        $data = DB::table('umroh_manifest_customers')->where('agent_id', $agent_id)
+        $data = DB::table('umroh_manifest_customers')
+                ->where('agent_id', $agent_id)
                 ->join('customers', 'customer_id', '=','customers.id')
                 ->join('agents', 'agent_id', '=','agents.id')
                 ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
@@ -249,5 +279,53 @@ class AgentsController extends Controller
 
         return $data;
     }
+
+
+    public function getPotentialCustomer($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('umroh_manifest_customers')
+                ->where('agent_id', $agent_id)
+                ->where('mark', 1)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->join('umroh_packages', 'package_id', '=','umroh_packages.id')
+                ->select('umroh_manifest_customers.id',
+                         'umroh_manifest_customers.reference',
+                         'umroh_manifest_customers.agent_reward',
+                         'umroh_manifest_customers.promo',
+                         'umroh_manifest_customers.rating',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_code',
+                         'agents.agent_name',
+                         'agents.agent_phone',
+                         'umroh_packages.package_name'
+                         )
+                ->get();
+
+        return $data;
+    }
+
+
+    public function markPotentialCustomer($customer_id) {
+        // abort_if(Gate::denies('update_customers'), 403);
+
+        $data = DB::table('umroh_manifest_customers')
+                ->where('id', $customer_id)
+                ->update(['mark' => 1]);
+
+    }
+
+
+    public function postPotentialPoin($customer_id, $customer_poin, $notes) {
+        // abort_if(Gate::denies('update_customers'), 403);
+
+        $data = DB::table('umroh_manifest_customers')
+                ->where('id', $customer_id)
+                ->update(['rating' => $customer_poin, 'fu_notes' => $notes]);
+
+    }
+
 
 }
