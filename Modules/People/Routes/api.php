@@ -31,3 +31,5 @@ Route::get('/potential-customer/{agent_id}', 'AgentsController@getPotentialCusto
 
 Route::post('/mark-customers/{customer_id}', 'AgentsController@markPotentialCustomer');
 Route::post('/poin-customers/{customer_id}/{customer_poin}/{notes}', 'AgentsController@postPotentialPoin');
+Route::get('/count-potential-customer/{agent_id}', 'AgentsController@getCountPotentialCustomer');
+

@@ -328,4 +328,11 @@ class AgentsController extends Controller
     }
 
 
+    public function getCountPotentialCustomer($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = UmrohManifestCustomer::where([['agent_id', $agent_id],['mark', 1]])->count();
+
+        return $data;
+    }
+
 }
