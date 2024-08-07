@@ -318,12 +318,12 @@ class AgentsController extends Controller
     }
 
 
-    public function postPotentialPoin($customer_id, $customer_poin, $notes) {
+    public function postPotentialPoin($customer_id, Request $request) {
         // abort_if(Gate::denies('update_customers'), 403);
-
+        // @dd($request);
         $data = DB::table('umroh_manifest_customers')
                 ->where('id', $customer_id)
-                ->update(['rating' => $customer_poin, 'fu_notes' => $notes]);
+                ->update(['rating' => $request->rating, 'fu_notes' => $request->fu_notes]);
 
     }
 
