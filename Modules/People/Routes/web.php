@@ -50,4 +50,14 @@ Route::group(['middleware' => 'auth'], function () {
         return $pdf->stream('agent-payments-'. $agent_payment->reference .'.pdf');
     })->name('agent-payments.pdf');
 
+    // Potential Customer
+    Route::get('/customers-potential', 'CustomersController@getCustomerPotential')->name('customers-potential.data');
+    Route::get('/customers-potential/{customer_id}/edit', 'CustomersController@editCustomerPotential')->name('customers-potential.edit');
+    Route::post('/customers-potential/{customer_id}', 'CustomersController@updateCustomerPotential')->name('customers-potential.update');
+
+    // Prospek Customer
+    Route::get('/customers-prospek', 'CustomersController@getCustomerProspek')->name('customers-prospek.data');
+    Route::get('/customers-prospek/{customer_id}/edit', 'CustomersController@editCustomerProspek')->name('customers-prospek.edit');
+    Route::post('/customers-prospek/{customer_id}', 'CustomersController@updateCustomerProspek')->name('customers-prospek.update');
+
 });

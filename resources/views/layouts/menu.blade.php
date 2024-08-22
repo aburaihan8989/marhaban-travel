@@ -34,6 +34,31 @@
     </li>
 @endcan
 
+<li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers-potential..*') || request()->routeIs('customers-prospek.*') ? 'c-show' : '' }} ">
+    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="c-sidebar-nav-icon bi bi-person-video2" style="line-height: 1;"></i> Data Marketing
+    </a>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('customers-potential.*') ? 'c-active' : '' }}" href="{{ route('customers-potential.data') }}">
+                    <i class="c-sidebar-nav-icon bi bi-person-check" style="line-height: 1;"></i> Potential Customers
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+    <ul class="c-sidebar-nav-dropdown-items">
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('customers-prospek.*') ? 'c-active' : '' }}" href="{{ route('customers-prospek.data') }}">
+                    <i class="c-sidebar-nav-icon bi bi-person-bounding-box" style="line-height: 1;"></i> Prospek Customers
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
+</li>
+
+
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('agents.*') || request()->routeIs('rewards-agents-list.*') ? 'c-show' : '' }}">
     <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
         <i class="c-sidebar-nav-icon bi bi-person-badge" style="line-height: 1;"></i> Data Agents
