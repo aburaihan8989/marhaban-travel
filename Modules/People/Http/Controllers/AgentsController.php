@@ -244,6 +244,58 @@ class AgentsController extends Controller
     }
 
 
+    public function getUmrohSavingCustomers($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('savings')
+                ->where('agent_id', $agent_id)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->select('savings.id',
+                         'savings.register_date',
+                         'savings.reference',
+                         'savings.customer_bank',
+                         'savings.bank_account',
+                         'savings.total_saving',
+                         'savings.status',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_code',
+                         'agents.agent_name',
+                         'agents.agent_phone'
+                         )
+                ->get();
+
+        return $data;
+    }
+
+
+    public function getHajjSavingCustomers($agent_id) {
+        // abort_if(Gate::denies('show_customers'), 403);
+        $data = DB::table('hajj_savings')
+                ->where('agent_id', $agent_id)
+                ->join('customers', 'customer_id', '=','customers.id')
+                ->join('agents', 'agent_id', '=','agents.id')
+                ->select('hajj_savings.id',
+                         'hajj_savings.register_date',
+                         'hajj_savings.reference',
+                         'hajj_savings.customer_bank',
+                         'hajj_savings.bank_account',
+                         'hajj_savings.total_saving',
+                         'hajj_savings.status',
+                         'customers.customer_name',
+                         'customers.customer_phone',
+                         'customers.city',
+                         'agents.agent_code',
+                         'agents.agent_name',
+                         'agents.agent_phone'
+                         )
+                ->get();
+
+        return $data;
+    }
+
+
     public function markUmrohCustomer($customer_id) {
         // abort_if(Gate::denies('update_customers'), 403);
 
