@@ -77,8 +77,15 @@
                 <i class="c-sidebar-nav-icon bi bi-wallet2" style="line-height: 1;"></i> Agents Rewards
             </a>
         </li>
-    {{-- @endcan --}}
-</ul>
+        {{-- @endcan --}}
+        {{-- @can('access_customers') --}}
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('activity-agent.*') ? 'c-active' : '' }}" href="{{ route('activity-agent.data') }}">
+                    <i class="c-sidebar-nav-icon bi bi-journal-bookmark" style="line-height: 1;"></i> Agents Activity
+                </a>
+            </li>
+        {{-- @endcan --}}
+    </ul>
 </li>
 
 <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('teams.*') ? 'c-show' : '' }}">

@@ -99,7 +99,7 @@ class HajjSavingDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('referal_code')
-                ->title('Referal Agent')
+                ->title('Agent Name')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

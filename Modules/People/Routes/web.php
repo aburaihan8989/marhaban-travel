@@ -60,4 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers-prospek/{customer_id}/edit', 'CustomersController@editCustomerProspek')->name('customers-prospek.edit');
     Route::post('/customers-prospek/{customer_id}', 'CustomersController@updateCustomerProspek')->name('customers-prospek.update');
 
+    // Activity Agents
+    Route::get('/activity-agent', 'AgentsController@getActivityAgent')->name('activity-agent.data');
+    Route::get('/activity-agent/{activity_id}/edit', 'AgentsController@editActivityAgent')->name('activity-agent.edit');
+    Route::post('/activity-agent/{activity_id}', 'AgentsController@updateActivityAgent')->name('activity-agent.update');
+
 });
