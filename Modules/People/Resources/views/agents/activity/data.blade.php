@@ -39,7 +39,7 @@
                                         <th>ID Reference</th>
                                         <th>Activity Date</th>
                                         <th>Agent Name</th>
-                                        <th>Activity Detail</th>
+                                        <th style="width:40rem;">Activity Detail</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
