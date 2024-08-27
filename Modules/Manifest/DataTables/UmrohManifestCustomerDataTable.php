@@ -35,11 +35,18 @@ class UmrohManifestCustomerDataTable extends DataTable
             ->addColumn('paspor_number', function ($data) {
                 return Customer::findOrFail($data->customer_id)->paspor_number;
             })
-            // ->addColumn('customer_name', function ($data) {
-            //     return Customer::findOrFail($data->customer_id)->customer_name;
-            // })
+            ->addColumn('place_birth', function ($data) {
+                return Customer::findOrFail($data->customer_id)->place_birth;
+            })
             ->addColumn('customer_phone', function ($data) {
                 return Customer::findOrFail($data->customer_id)->customer_phone;
+            })
+            ->addColumn('paspor_issued', function ($data) {
+                return Customer::findOrFail($data->customer_id)->paspor_issued;
+            })
+            ->editColumn('paspor_active', function($model){
+                $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->paspor_active));
+                return $formatDate;
             })
             ->editColumn('paspor_date', function($model){
                 $formatDate = date('d-m-Y',strtotime(Customer::findOrFail($model->customer_id)->paspor_date));
@@ -120,6 +127,10 @@ class UmrohManifestCustomerDataTable extends DataTable
                 ->title('Age (Year)')
                 ->className('text-center align-middle'),
 
+            Column::computed('place_birth')
+                ->title('Place of Birth')
+                ->className('text-center align-middle'),
+
             Column::computed('gender')
                 ->title('Gender')
                 ->className('text-center align-middle'),
@@ -136,10 +147,17 @@ class UmrohManifestCustomerDataTable extends DataTable
                 ->title('Paspor Number')
                 ->className('text-center align-middle'),
 
+            Column::computed('paspor_active')
+                ->title('Paspor Active')
+                ->className('text-center align-middle'),
+
             Column::computed('paspor_date')
                 ->title('Paspor Expired')
                 ->className('text-center align-middle'),
 
+            Column::computed('paspor_issued')
+                ->title('Paspor Issued')
+                ->className('text-center align-middle'),
 
             Column::computed('room_group')
                 ->title('Room')

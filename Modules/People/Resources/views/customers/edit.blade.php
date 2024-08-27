@@ -40,8 +40,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="date_birth">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="date_birth" required value="{{ $customer->date_birth }}">
+                                        <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="customer_phone" required value="{{ $customer->customer_phone }}">
                                     </div>
                                 </div>
                             </div>
@@ -49,10 +49,19 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="customer_phone" required value="{{ $customer->customer_phone }}">
+                                        <label for="date_birth">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date_birth" required value="{{ $customer->date_birth }}">
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="place_birth">Place of Birth <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="place_birth" required value="{{ $customer->place_birth }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_number">Paspor Number <span class="text-danger"></span></label>
@@ -61,8 +70,23 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
+                                        <label for="paspor_active">Paspor Active <span class="text-danger"></span></label>
+                                        <input type="date" class="form-control" name="paspor_active" value="{{ $customer->paspor_active }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
                                         <label for="paspor_date">Paspor Expired <span class="text-danger"></span></label>
                                         <input type="date" class="form-control" name="paspor_date" value="{{ $customer->paspor_date }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="paspor_issued">Paspor Issued <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="paspor_issued" value="{{ $customer->paspor_issued }}">
                                     </div>
                                 </div>
                             </div>

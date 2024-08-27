@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="date_birth">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="date_birth" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                        <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="customer_phone" required>
                                     </div>
                                 </div>
                             </div>
@@ -48,10 +48,19 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="customer_phone" required>
+                                        <label for="date_birth">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date_birth" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="place_birth">Place of Birth <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="place_birth" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paspor_number">Paspor Number <span class="text-danger"></span></label>
@@ -60,8 +69,23 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
+                                        <label for="paspor_active">Paspor Active <span class="text-danger"></span></label>
+                                        <input type="date" class="form-control" name="paspor_active" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
                                         <label for="paspor_date">Paspor Expired <span class="text-danger"></span></label>
                                         <input type="date" class="form-control" name="paspor_date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="paspor_issued">Paspor Issued <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="paspor_issued">
                                     </div>
                                 </div>
                             </div>

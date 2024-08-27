@@ -31,6 +31,10 @@
                                     <td>{{ date('d-m-Y', strtotime($customer->date_birth)) }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Place of Birth</th>
+                                    <td>{{ $customer->place_birth }}</td>
+                                </tr>
+                                <tr>
                                     <th>Phone Number</th>
                                     <td>{{ $customer->customer_phone }}</td>
                                 </tr>
@@ -39,8 +43,16 @@
                                     <td>{{ $customer->paspor_number }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Paspor Active</th>
+                                    <td>{{ date('d-m-Y', strtotime($customer->paspor_active)) }}</td>
+                                </tr>
+                                <tr>
                                     <th>Paspor Expired</th>
                                     <td>{{ date('d-m-Y', strtotime($customer->paspor_date)) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Paspor Issued</th>
+                                    <td>{{ $customer->paspor_issued }}</td>
                                 </tr>
                                 <tr>
                                     <th>Customer Email</th>
