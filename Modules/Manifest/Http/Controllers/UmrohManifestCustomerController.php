@@ -12,8 +12,6 @@ use Modules\Manifest\Entities\UmrohManifest;
 use Modules\Manifest\Entities\UmrohManifestPayment;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
 use Modules\Manifest\DataTables\UmrohManifestCustomerDataTable;
-// use Modules\Saving\Http\Requests\StoreSavingRequest;
-// use Modules\Saving\Http\Requests\UpdateSavingRequest;
 
 class UmrohManifestCustomerController extends Controller
 {
@@ -150,13 +148,17 @@ class UmrohManifestCustomerController extends Controller
 
                 }
             } elseif ($umroh_manifest_customer->promo2 == 1) {
-                $agent->update([
-                    'total_reward' => $agent->total_reward + $promo_umroh
-                ]);
+                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1) {
+                    $agent->update([
+                        'total_reward' => $agent->total_reward + $promo_umroh
+                    ]);
 
-                $umroh_manifest_customer->update([
-                    'agent_reward' => $promo_umroh
-                ]);
+                    $umroh_manifest_customer->update([
+                        'agent_reward' => $promo_umroh
+                    ]);
+                } else {
+
+                }
             } else {
 
             }
@@ -185,55 +187,14 @@ class UmrohManifestCustomerController extends Controller
 
 
     public function update(Request $request, UmrohManifestCustomer $umroh_manifest_customer_id) {
-        // @dd($umroh_manifest_customer_id);
+        // abort_if(Gate::denies('edit_purchases'), 403);
 
         $request->validate([
-            // 'total_price' => 'required|numeric',
-            // 'total_payment' => 'required|numeric',
-            // 'remaining_payment' => 'required|numeric',
             'agent_id' => 'required'
         ]);
 
         DB::transaction(function () use ($request, $umroh_manifest_customer_id) {
-            // $total_payment = $umroh_manifest_customer_id->total_payment + $request->last_amount;
             $remaining_payment = $request->total_price - $umroh_manifest_customer_id->total_payment;
-
-            // $agent = Agent::findOrFail($umroh_manifest_customer_id->agent_id);
-            // $agent_referal = Agent::findOrFail($agent->referal_id);
-
-            // if ($agent->level_agent == 'Bronze') {
-            //     $agent_reward = settings()->level1_rewards;
-            // } elseif ($agent->level_agent == 'Silver') {
-            //     $agent_reward = settings()->level2_rewards;
-            // } elseif ($agent->level_agent == 'Gold') {
-            //     $agent_reward = settings()->level3_rewards;
-            // } else {
-            //     $agent_reward = settings()->level4_rewards;
-            // }
-
-            // if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
-            //     $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
-            // } else {
-            //     $referal_reward = settings()->referal_rewards;
-            // }
-
-            // $agent->update([
-            //     'total_reward' => $agent->total_reward + $agent_reward
-            // ]);
-
-            // $agent_referal->update([
-            //     'total_reward' => $agent_referal->total_reward + $referal_reward
-            // ]);
 
             if ($request->total_payment >= $request->total_price) {
                 $status = 'Completed';
@@ -303,7 +264,9 @@ class UmrohManifestCustomerController extends Controller
                 $referal_reward = settings()->referal1_rewards;
             }
 
-            if (!$umroh_manifest_customer_id->promo == 1) {
+            $promo_umroh = settings()->promo_umroh;
+
+            if (!$umroh_manifest_customer_id->promo == 1 AND !$umroh_manifest_customer_id->promo2 == 1) {
                 if (!$umroh_manifest_customer_id->agent_reward OR !$umroh_manifest_customer_id->referal_reward) {
                     if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1) {
                         $agent->update([
@@ -324,7 +287,24 @@ class UmrohManifestCustomerController extends Controller
                 } else {
 
                 }
+            } elseif ($umroh_manifest_customer_id->promo2 == 1) {
+                if (!$umroh_manifest_customer_id->agent_reward) {
+                    if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1) {
+                        $agent->update([
+                            'total_reward' => $agent->total_reward + $promo_umroh
+                        ]);
+
+                        $umroh_manifest_customer_id->update([
+                            'agent_reward' => $promo_umroh
+                        ]);
+                    } else {
+
+                    }
+                } else {
+
+                }
             } else {
+
 
             }
 

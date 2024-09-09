@@ -107,23 +107,11 @@ class HajjManifestPaymentsController extends Controller
                     $agent_reward = settings()->level44_rewards;
                 }
 
-                // if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
-                //     $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
-                // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
-                //     $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
-                // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
-                //     $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
-                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
-                //     $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
-                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
-                //     $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
-                // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
-                //     $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
-                // } else {
-                    $referal_reward = settings()->referal11_rewards;
-                // }
+                $referal_reward = settings()->referal11_rewards;
 
-                if (!$hajj_manifest->promo == 1) {
+                $promo_haji = settings()->promo_haji;
+
+                if (!$hajj_manifest->promo == 1 AND !$hajj_manifest->promo2 == 1) {
                     if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {
                         if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1) {
                             $agent->update([
@@ -137,6 +125,22 @@ class HajjManifestPaymentsController extends Controller
                             $hajj_manifest->update([
                                 'agent_reward' => $agent_reward,
                                 'referal_reward' => $referal_reward
+                            ]);
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                } elseif ($hajj_manifest->promo2 == 1) {
+                    if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {
+                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1) {
+                            $agent->update([
+                                'total_reward' => $agent->total_reward + $promo_haji
+                            ]);
+
+                            $hajj_manifest->update([
+                                'agent_reward' => $promo_haji
                             ]);
                         } else {
 

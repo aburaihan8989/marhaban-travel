@@ -125,7 +125,9 @@ class UmrohManifestPaymentsController extends Controller
                     $referal_reward = settings()->referal1_rewards;
                 }
 
-                if (!$umroh_manifest->promo == 1) {
+                $promo_umroh = settings()->promo_umroh;
+
+                if (!$umroh_manifest->promo == 1 AND !$umroh_manifest->promo2 == 1) {
                     if (!$umroh_manifest->agent_reward OR !$umroh_manifest->referal_reward) {
                         if ($umroh_manifest->status == 'Completed' AND $umroh_manifest->visa == 1) {
                             $agent->update([
@@ -139,6 +141,22 @@ class UmrohManifestPaymentsController extends Controller
                             $umroh_manifest->update([
                                 'agent_reward' => $agent_reward,
                                 'referal_reward' => $referal_reward
+                            ]);
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                } elseif ($umroh_manifest->promo2 == 1) {
+                    if (!$umroh_manifest->agent_reward OR !$umroh_manifest->referal_reward) {
+                        if ($umroh_manifest->status == 'Completed' AND $umroh_manifest->visa == 1) {
+                            $agent->update([
+                                'total_reward' => $agent->total_reward + $promo_umroh
+                            ]);
+
+                            $umroh_manifest->update([
+                                'agent_reward' => $promo_umroh
                             ]);
                         } else {
 

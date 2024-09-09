@@ -132,13 +132,17 @@ class HajjManifestCustomerController extends Controller
 
                 }
             } elseif ($hajj_manifest_customer->promo2 == 1) {
-                $agent->update([
-                    'total_reward' => $agent->total_reward + $promo_haji
-                ]);
+                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1) {
+                    $agent->update([
+                        'total_reward' => $agent->total_reward + $promo_haji
+                    ]);
 
-                $hajj_manifest_customer->update([
-                    'agent_reward' => $promo_haji
-                ]);
+                    $hajj_manifest_customer->update([
+                        'agent_reward' => $promo_haji
+                    ]);
+                } else {
+
+                }
             } else {
 
             }
@@ -169,12 +173,9 @@ class HajjManifestCustomerController extends Controller
 
 
     public function update(Request $request, HajjManifestCustomer $hajj_manifest_customer_id) {
-        // @dd($hajj_manifest_customer_id);
+        // abort_if(Gate::denies('edit_purchases'), 403);
 
         $request->validate([
-            // 'total_price' => 'required|numeric',
-            // 'total_payment' => 'required|numeric',
-            // 'remaining_payment' => 'required|numeric',
             'agent_id' => 'required'
         ]);
 
@@ -225,23 +226,11 @@ class HajjManifestCustomerController extends Controller
                 $agent_reward = settings()->level44_rewards;
             }
 
-            // if ($agent_referal->level_agent == 'Silver' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level2_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level3_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Gold' AND $agent->level_agent == 'Silver') {
-            //     $referal_reward = settings()->level3_rewards - settings()->level2_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Bronze') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level1_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Silver') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level2_rewards;
-            // } elseif ($agent_referal->level_agent == 'Platinum' AND $agent->level_agent == 'Gold') {
-            //     $referal_reward = settings()->level4_rewards - settings()->level3_rewards;
-            // } else {
-                $referal_reward = settings()->referal11_rewards;
-            // }
+            $referal_reward = settings()->referal11_rewards;
 
-            if (!$hajj_manifest_customer_id->promo == 1) {
+            $promo_haji = settings()->promo_haji;
+
+            if (!$hajj_manifest_customer_id->promo == 1 AND !$hajj_manifest_customer_id->promo2 == 1) {
                 if (!$hajj_manifest_customer_id->agent_reward OR !$hajj_manifest_customer_id->referal_reward) {
                     if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1) {
                         $agent->update([
@@ -255,6 +244,22 @@ class HajjManifestCustomerController extends Controller
                         $hajj_manifest_customer_id->update([
                             'agent_reward' => $agent_reward,
                             'referal_reward' => $referal_reward
+                        ]);
+                    } else {
+
+                    }
+                } else {
+
+                }
+            } elseif ($hajj_manifest_customer_id->promo2 == 1) {
+                if (!$hajj_manifest_customer_id->agent_reward) {
+                    if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1) {
+                        $agent->update([
+                            'total_reward' => $agent->total_reward + $promo_haji
+                        ]);
+
+                        $hajj_manifest_customer_id->update([
+                            'agent_reward' => $promo_haji
                         ]);
                     } else {
 
