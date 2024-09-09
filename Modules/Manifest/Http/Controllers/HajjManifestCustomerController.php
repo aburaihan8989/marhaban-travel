@@ -79,6 +79,7 @@ class HajjManifestCustomerController extends Controller
                 'small_pillow' => $request->small_pillow,
                 'scraf' => $request->scraf,
                 'promo' => $request->promo,
+                'promo2' => $request->promo2,
                 'room_group' => $request->room_group,
                 'family_group' => $request->family_group,
                 'baggage' => $request->baggage,
