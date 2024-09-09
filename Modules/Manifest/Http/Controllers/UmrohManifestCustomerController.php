@@ -35,12 +35,9 @@ class UmrohManifestCustomerController extends Controller
 
 
     public function store(Request $request, UmrohManifest $umroh_manifest_id) {
-        // @dd($umroh_manifest_id);
+        // abort_if(Gate::denies('create_purchases'), 403);
 
         $request->validate([
-            // 'total_price' => 'required|numeric',
-            // 'total_payment' => 'required|numeric',
-            // 'remaining_payment' => 'required|numeric',
             'agent_id' => 'required'
         ]);
 
@@ -133,7 +130,9 @@ class UmrohManifestCustomerController extends Controller
                 $referal_reward = settings()->referal1_rewards;
             }
 
-            if (!$umroh_manifest_customer->promo == 1) {
+            $promo_umroh = settings()->promo_umroh;
+
+            if (!$umroh_manifest_customer->promo == 1 AND !$umroh_manifest_customer->promo2 == 1) {
                 if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $agent_reward
@@ -150,6 +149,14 @@ class UmrohManifestCustomerController extends Controller
                 } else {
 
                 }
+            } elseif ($umroh_manifest_customer->promo2 == 1) {
+                $agent->update([
+                    'total_reward' => $agent->total_reward + $promo_umroh
+                ]);
+
+                $umroh_manifest_customer->update([
+                    'agent_reward' => $promo_umroh
+                ]);
             } else {
 
             }

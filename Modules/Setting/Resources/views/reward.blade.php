@@ -35,6 +35,12 @@
                                         <input id="referal1_rewards" type="text" class="form-control" name="referal1_rewards" value="{{ $settings->referal1_rewards }}" required>
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="promo_umroh">Referal Promo Umroh <span class="text-danger">*</span></label>
+                                        <input id="promo_umroh" type="text" class="form-control" name="promo_umroh" value="{{ $settings->promo_umroh }}" required>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -109,6 +115,12 @@
                                     <div class="form-group">
                                         <label for="referal11_rewards">Referal Rewards <span class="text-danger">*</span></label>
                                         <input id="referal11_rewards" type="text" class="form-control" name="referal11_rewards" value="{{ $settings->referal11_rewards }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="promo_haji">Referal Promo Haji <span class="text-danger">*</span></label>
+                                        <input id="promo_haji" type="text" class="form-control" name="promo_haji" value="{{ $settings->promo_haji }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -221,16 +233,16 @@
                 thousands:'{{ settings()->currency->thousand_separator }}',
                 decimal:'{{ settings()->currency->decimal_separator }}',
             });
-            // $('#referal22_rewards').maskMoney({
-            //     prefix:'{{ settings()->currency->symbol }}',
-            //     thousands:'{{ settings()->currency->thousand_separator }}',
-            //     decimal:'{{ settings()->currency->decimal_separator }}',
-            // });
-            // $('#referal33_rewards').maskMoney({
-            //     prefix:'{{ settings()->currency->symbol }}',
-            //     thousands:'{{ settings()->currency->thousand_separator }}',
-            //     decimal:'{{ settings()->currency->decimal_separator }}',
-            // });
+            $('#promo_umroh').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
+            $('#promo_haji').maskMoney({
+                prefix:'{{ settings()->currency->symbol }}',
+                thousands:'{{ settings()->currency->thousand_separator }}',
+                decimal:'{{ settings()->currency->decimal_separator }}',
+            });
             // $('#referal44_rewards').maskMoney({
             //     prefix:'{{ settings()->currency->symbol }}',
             //     thousands:'{{ settings()->currency->thousand_separator }}',
@@ -269,8 +281,8 @@
             $('#level4_rewards').maskMoney('mask');
 
             $('#referal11_rewards').maskMoney('mask');
-            // $('#referal2_rewards').maskMoney('mask');
-            // $('#referal3_rewards').maskMoney('mask');
+            $('#promo_umroh').maskMoney('mask');
+            $('#promo_haji').maskMoney('mask');
             // $('#referal4_rewards').maskMoney('mask');
 
             $('#level11_rewards').maskMoney('mask');
@@ -296,13 +308,16 @@
                 $('#level3_rewards').val(level3_rewards);
                 var level4_rewards = $('#level4_rewards').maskMoney('unmasked')[0];
                 $('#level4_rewards').val(level4_rewards);
+
+                var promo_umroh = $('#promo_umroh').maskMoney('unmasked')[0];
+                $('#promo_umroh').val(promo_umroh);
             });
 
             $('#rewards-hajj-setting-form').submit(function () {
                 var referal11_rewards = $('#referal11_rewards').maskMoney('unmasked')[0];
                 $('#referal11_rewards').val(referal11_rewards);
-                // var referal22_rewards = $('#referal22_rewards').maskMoney('unmasked')[0];
-                // $('#referal22_rewards').val(referal22_rewards);
+                var promo_haji = $('#promo_haji').maskMoney('unmasked')[0];
+                $('#promo_haji').val(promo_haji);
                 // var referal33_rewards = $('#referal33_rewards').maskMoney('unmasked')[0];
                 // $('#referal33_rewards').val(referal33_rewards);
                 // var referal44_rewards = $('#referal44_rewards').maskMoney('unmasked')[0];

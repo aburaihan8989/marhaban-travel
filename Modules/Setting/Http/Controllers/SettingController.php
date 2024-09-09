@@ -44,6 +44,9 @@ class SettingController extends Controller
             'referal2_rewards' => $request->referal2_rewards,
             'referal3_rewards' => $request->referal3_rewards,
             'referal4_rewards' => $request->referal4_rewards,
+
+            'promo_umroh' => $request->promo_umroh,
+
         ]);
 
         cache()->forget('settings');
@@ -62,9 +65,9 @@ class SettingController extends Controller
             'level44_rewards' => $request->level44_rewards,
 
             'referal11_rewards' => $request->referal11_rewards,
-            // 'referal22_rewards' => $request->referal22_rewards,
-            // 'referal33_rewards' => $request->referal33_rewards,
-            // 'referal44_rewards' => $request->referal44_rewards,
+
+            'promo_haji' => $request->promo_haji,
+
         ]);
 
         cache()->forget('settings');
