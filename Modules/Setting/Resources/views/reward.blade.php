@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="promo_umroh">Referal Promo Umroh <span class="text-danger">*</span></label>
+                                        <label for="promo_umroh">Fee Limited Promo Umroh <span class="text-danger">*</span></label>
                                         <input id="promo_umroh" type="text" class="form-control" name="promo_umroh" value="{{ $settings->promo_umroh }}" required>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="promo_haji">Referal Promo Haji <span class="text-danger">*</span></label>
+                                        <label for="promo_haji">Fee Limited Promo Haji <span class="text-danger">*</span></label>
                                         <input id="promo_haji" type="text" class="form-control" name="promo_haji" value="{{ $settings->promo_haji }}" required>
                                     </div>
                                 </div>
