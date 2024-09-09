@@ -41,7 +41,7 @@ class ShowCustomersDataTable extends DataTable
                 return format_currency($data->agent_reward);
             })
             ->addColumn('promo', function ($data) {
-                return $data->promo == 1 ? 'Promo' : 'Reguler';
+                return $data->promo == 1 ? 'Full Promo' : ($data->promo2 == 1 ? 'Limited Promo' : 'Reguler');
             })
             ->addColumn('action', function ($data) {
                 return view('people::agents.rewards.partials.actions', compact('data'));
