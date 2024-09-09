@@ -179,6 +179,7 @@ class CustomersController extends Controller
                          'umroh_manifest_customers.reference',
                          'umroh_manifest_customers.agent_reward',
                          'umroh_manifest_customers.promo',
+                         'umroh_manifest_customers.promo2',
                          'umroh_manifest_customers.rating',
                          'customers.customer_name',
                          'customers.customer_phone',
