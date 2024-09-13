@@ -92,7 +92,7 @@ class HajjManifestPaymentsController extends Controller
                 ]);
 
 
-                $hajj_manifest = UmrohManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
+                $hajj_manifest = HajjManifestCustomer::findOrFail($request->hajj_manifest_customer_id);
 
                 $agent = Agent::findOrFail($hajj_manifest->agent_id);
                 $agent_referal = Agent::findOrFail($agent->referal_id);
