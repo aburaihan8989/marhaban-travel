@@ -26,6 +26,9 @@
                     </div>
 
                     <div class="card-body">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                        <br>
+
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped text-center mb-0">
                                 <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center" style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
@@ -46,7 +49,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myTable">
                                     @forelse($data as $customer_network)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
@@ -93,6 +96,15 @@
     </div>
 @endsection
 
-{{-- @push('page_scripts')
-    {!! $dataTable->scripts() !!}
-@endpush --}}
+@push('page_scripts')
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+    </script>
+@endpush
