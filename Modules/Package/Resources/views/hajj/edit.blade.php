@@ -121,6 +121,7 @@
                                             <option value="" selected>None</option>
                                             <option {{ $hajj_package->package_type == 'Haji Domestik' ? 'selected' : '' }} value="Haji Domestik">Haji Domestik</option>
                                             <option {{ $hajj_package->package_type == 'Haji Khusus' ? 'selected' : '' }} value="Haji Khusus">Haji Khusus</option>
+                                            <option {{ $hajj_package->package_type == 'ONH Plus Percepatan' ? 'selected' : '' }} value="ONH Plus Percepatan">ONH Plus Percepatan</option>
                                             <option {{ $hajj_package->package_type == 'ONH Plus' ? 'selected' : '' }} value="ONH Plus">ONH Plus</option>
                                             <option {{ $hajj_package->package_type == 'Furoda' ? 'selected' : '' }} value="Furoda">Furoda</option>
                                         </select>

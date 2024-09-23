@@ -120,6 +120,7 @@
                                             <option value="" selected disabled>Select Category</option>
                                             <option value="Haji Domestik">Haji Domestik</option>
                                             <option value="Haji Khusus">Haji Khusus</option>
+                                            <option value="ONH Plus Percepatan">ONH Plus Percepatan</option>
                                             <option value="ONH Plus">ONH Plus</option>
                                             <option value="Furoda">Furoda</option>
                                         </select>

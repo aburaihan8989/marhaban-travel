@@ -21,6 +21,9 @@ class UmrohManifestCustomerDataTable extends DataTable
                 $formatDate = date('d-m-Y',strtotime($model->register_date));
                 return $formatDate;
             })
+            ->addColumn('visa', function ($data) {
+                return view('manifest::umroh.partials.status-visa', compact('data'));
+            })
             ->addColumn('total_price', function ($data) {
                 return format_currency($data->total_price);
             })
@@ -178,6 +181,10 @@ class UmrohManifestCustomerDataTable extends DataTable
             Column::computed('city')
                 ->title('City')
                 ->className('text-center align-middle'),
+
+            Column::computed('visa')
+                ->title('Visa Status')
+                ->className('text-center'),
 
             Column::computed('status')
                 ->title('Payment Status')

@@ -114,7 +114,7 @@ class HajjPackageDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('package_type')
-                ->title('Package Type')
+                ->title('Package Category')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

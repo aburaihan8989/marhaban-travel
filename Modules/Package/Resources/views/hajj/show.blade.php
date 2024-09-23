@@ -70,7 +70,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Package Type</th>
+                                    <th>Package Category</th>
                                     <td>{{ $hajj_package->package_type }}</td>
                                 </tr>
                                 <tr>
