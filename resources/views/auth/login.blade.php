@@ -83,7 +83,7 @@
             </div>
 
             <p class="text-center font-weight-bold mt-5 lead" style="font-size: 15px;color:#3f3f3f">
-                <i>Travel Management System ® {{ date('Y') }}</i>
+                <i>Website Travel Management System ® {{ date('Y') }}</i>
             </p>
             <p class="text-center mt-2 lead">
                 <a href="#" class="font-weight-bold text-primary"><i>{{ settings()->company_name }} © Hajj & Umroh Service</i></a>
