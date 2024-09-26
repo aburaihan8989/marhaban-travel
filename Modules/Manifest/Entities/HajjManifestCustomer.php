@@ -34,6 +34,10 @@ class HajjManifestCustomer extends Model
         return $this->belongsTo(HajjPackage::class, 'package_id', 'id');
     }
 
+    public function agents() {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
+    }
+
     public static function boot() {
         parent::boot();
 

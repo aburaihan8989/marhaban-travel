@@ -30,9 +30,9 @@ class HajjManifestDataTable extends DataTable
                 $formatDate = date('d-m-Y',strtotime(HajjPackage::findOrFail($data->package_id)->package_date));
                 return $formatDate;
             })
-            ->addColumn('package_name', function ($data) {
-                return HajjPackage::findOrFail($data->package_id)->package_name;
-            })
+            // ->addColumn('package_name', function ($data) {
+            //     return HajjPackage::findOrFail($data->package_id)->package_name;
+            // })
             ->addColumn('package_departure', function ($data) {
                 return HajjPackage::findOrFail($data->package_id)->package_departure;
             })
@@ -99,9 +99,11 @@ class HajjManifestDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('package_code')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('package_date')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('package_name')
@@ -109,21 +111,26 @@ class HajjManifestDataTable extends DataTable
 
             Column::make('package_departure')
                 ->title('Departure')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('flight_route')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('package_days')
                 ->title('Days')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('package_capacity')
                 ->title('Seat')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('package_booked')
                 ->title('Booked')
+                ->searchable(false)
                 ->className('text-center align-middle'),
 
             Column::make('status')

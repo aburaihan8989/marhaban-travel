@@ -70,9 +70,9 @@ class UmrohManifestCustomerDataTable extends DataTable
             ->addColumn('city', function ($data) {
                 return Customer::findOrFail($data->customer_id)->city;
             })
-            ->addColumn('agent_name', function ($model) {
-                return Agent::findOrFail($model->agent_id)->agent_code . ' | ' . Agent::findOrFail($model->agent_id)->agent_name;
-            })
+            // ->addColumn('agent_name', function ($model) {
+            //     return Agent::findOrFail($model->agent_id)->agent_code . ' | ' . Agent::findOrFail($model->agent_id)->agent_name;
+            // })
             ->addColumn('status', function ($data) {
                 return view('manifest::umroh.partials.status-customer', compact('data'));
             })
@@ -82,7 +82,7 @@ class UmrohManifestCustomerDataTable extends DataTable
     }
 
     public function query(UmrohManifestCustomer $model) {
-        return $model->newQuery()->where('manifest_id', request()->route('umroh_manifest'));
+        return $model->newQuery()->with('agents')->where('manifest_id', request()->route('umroh_manifest'));
     }
 
     public function html() {
@@ -196,7 +196,11 @@ class UmrohManifestCustomerDataTable extends DataTable
             Column::computed('remaining_payment')
                 ->className('text-center align-middle'),
 
-            Column::computed('agent_name')
+            Column::make('agents.agent_code')
+                ->title('Agent Code')
+                ->className('text-center align-middle'),
+
+            Column::make('agents.agent_name')
                 ->title('Agent Name')
                 ->className('text-center align-middle'),
 

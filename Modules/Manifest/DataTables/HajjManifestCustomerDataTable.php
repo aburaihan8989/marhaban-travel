@@ -67,9 +67,9 @@ class HajjManifestCustomerDataTable extends DataTable
             ->addColumn('city', function ($data) {
                 return Customer::findOrFail($data->customer_id)->city;
             })
-            ->addColumn('agent_name', function ($model) {
-                return Agent::findOrFail($model->agent_id)->agent_code . ' | ' . Agent::findOrFail($model->agent_id)->agent_name;
-            })
+            // ->addColumn('agent_name', function ($model) {
+            //     return Agent::findOrFail($model->agent_id)->agent_code . ' | ' . Agent::findOrFail($model->agent_id)->agent_name;
+            // })
             ->addColumn('status', function ($data) {
                 return view('manifest::hajj.partials.status-customer', compact('data'));
             })
@@ -79,7 +79,7 @@ class HajjManifestCustomerDataTable extends DataTable
     }
 
     public function query(HajjManifestCustomer $model) {
-        return $model->newQuery()->where('manifest_id', request()->route('hajj_manifest'));
+        return $model->newQuery()->with('agents')->where('manifest_id', request()->route('hajj_manifest'));
     }
 
     public function html() {
@@ -189,7 +189,11 @@ class HajjManifestCustomerDataTable extends DataTable
             Column::computed('remaining_payment')
                 ->className('text-center align-middle'),
 
-            Column::computed('agent_name')
+            Column::make('agents.agent_code')
+                ->title('Agent Code')
+                ->className('text-center align-middle'),
+
+            Column::make('agents.agent_name')
                 ->title('Agent Name')
                 ->className('text-center align-middle'),
 

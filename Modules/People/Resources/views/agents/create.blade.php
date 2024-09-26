@@ -99,6 +99,32 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
+                                            <label for="bank_name">Account Name <span class="text-danger"></span></label>
+                                            <select class="form-control" name="bank_name" id="bank_name">
+                                                <option value="BSI">BSI</option>
+                                                <option value="Muamalat">Muamalat</option>
+                                                <option value="BRI">BRI</option>
+                                                <option value="Mandiri">Mandiri</option>
+                                                <option value="BCA">BCA</option>
+                                                <option value="BNI">BNI</option>
+                                                <option value="BTN">BTN</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="bank_account">Account Number <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="bank_account" value="{{ old('bank_account') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
                                             <label for="referal_id">Referal Name <span class="text-danger"></span></label>
                                             <select class="select2 form-control" name="referal_id" id="referal_id" required>
                                                 <option value="" selected disabled>Select Referal Name </option>

@@ -24,6 +24,10 @@ class Agent extends Model implements HasMedia
         return $this->hasMany(UmrohManifestCustomer::class, 'id', 'agent_id');
     }
 
+    public function hajjManifestCustomers() {
+        return $this->hasMany(HajjManifestCustomer::class, 'id', 'agent_id');
+    }
+
     public function umrohCustomers() {
         return $this->hasMany(UmrohManifestCustomer::class, 'agent_id', 'id');
     }

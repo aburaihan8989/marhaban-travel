@@ -27,6 +27,9 @@ class RewardsDataTable extends DataTable
             ->addColumn('balance', function ($data) {
                 return format_currency($data->total_reward-$data->paid_reward);
             })
+            ->addColumn('account_number', function ($data) {
+                return $data->bank_name == '' ? '' : ($data->bank_name . ' | ' . $data->bank_account);
+            })
             ->addColumn('agents_count', function ($data) {
                 if ($data->referal_id == $data->id){
                     $getData = Agent::where('referal_id', $data->id)->count();
@@ -112,6 +115,10 @@ class RewardsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('balance')
+                ->className('text-center align-middle'),
+
+            Column::computed('account_number')
+                ->title('Account Number')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

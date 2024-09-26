@@ -92,7 +92,7 @@ class HajjSavingDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('customer_bank')
-                ->title('Savings Account')
+                ->title('Account Name')
                 ->className('text-center align-middle'),
 
             Column::computed('bank_account')

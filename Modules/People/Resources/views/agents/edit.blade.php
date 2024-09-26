@@ -98,6 +98,30 @@
 
                             <div class="form-row">
                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="bank_name">Account Name <span class="text-danger"></span></label>
+                                        <select class="form-control" name="bank_name" id="bank_name">
+                                            <option {{ $agent->bank_name == 'BSI' ? 'selected' : '' }} value="BSI">BSI</option>
+                                            <option {{ $agent->bank_name == 'Muamalat' ? 'selected' : '' }} value="Muamalat">Muamalat</option>
+                                            <option {{ $agent->bank_name == 'BRI' ? 'selected' : '' }} value="BRI">BRI</option>
+                                            <option {{ $agent->bank_name == 'Mandiri' ? 'selected' : '' }} value="Mandiri">Mandiri</option>
+                                            <option {{ $agent->bank_name == 'BCA' ? 'selected' : '' }} value="BCA">BCA</option>
+                                            <option {{ $agent->bank_name == 'BNI' ? 'selected' : '' }} value="BNI">BNI</option>
+                                            <option {{ $agent->bank_name == 'BTN' ? 'selected' : '' }} value="BTN">BTN</option>
+                                            <option {{ $agent->bank_name == 'Other' ? 'selected' : '' }} value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="bank_account">Account Number <span class="text-danger"></span></label>
+                                        <input id="bank_account" type="text" class="form-control" name="bank_account" value="{{ $agent->bank_account }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="referal_id">Referal Name <span class="text-danger"></span></label>

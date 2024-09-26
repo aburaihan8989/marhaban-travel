@@ -39,6 +39,14 @@
                                     <td>{{ $agent->agent_phone }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Account Name</th>
+                                    <td>{{ $agent->bank_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Account Number</th>
+                                    <td>{{ $agent->bank_account }}</td>
+                                </tr>
+                                <tr>
                                     <th>Email</th>
                                     <td>{{ $agent->agent_email }}</td>
                                 </tr>

@@ -79,7 +79,7 @@
                                     <th class="align-middle">Register Date</th>
                                     <th class="align-middle">Customer Name</th>
                                     <th class="align-middle">Phone Number</th>
-                                    <th class="align-middle">Bank Name</th>
+                                    <th class="align-middle">Account Name</th>
                                     <th class="align-middle">Account Number</th>
                             </tr>
                                 </thead>
