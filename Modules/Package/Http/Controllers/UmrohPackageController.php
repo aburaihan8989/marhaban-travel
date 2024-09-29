@@ -101,7 +101,7 @@ class UmrohPackageController extends Controller
 
     public function getUmrohPackage() {
         // abort_if(Gate::denies('show_customers'), 403);
-        $data = UmrohPackage::withCount('umrohCustomer')->get();
+        $data = UmrohPackage::withCount('umrohCustomer')->where('package_status', 'Active')->get();
 
         return $data;
     }

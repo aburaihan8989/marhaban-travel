@@ -101,7 +101,7 @@ class HajjPackageController extends Controller
 
     public function getHajjPackage() {
         // abort_if(Gate::denies('show_customers'), 403);
-        $data = HajjPackage::withCount('hajjCustomer')->get();
+        $data = HajjPackage::withCount('hajjCustomer')->where('package_status', 'Active')->get();
 
         return $data;
     }
