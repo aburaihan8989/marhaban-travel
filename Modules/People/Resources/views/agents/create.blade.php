@@ -99,8 +99,8 @@
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="bank_name">Account Name <span class="text-danger"></span></label>
-                                            <select class="form-control" name="bank_name" id="bank_name">
+                                            <label for="bank_account">Bank Account <span class="text-danger"></span></label>
+                                            <select class="form-control" name="bank_account" id="bank_account">
                                                 <option value="BSI">BSI</option>
                                                 <option value="Muamalat">Muamalat</option>
                                                 <option value="BRI">BRI</option>
@@ -115,8 +115,14 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="bank_account">Account Number <span class="text-danger"></span></label>
-                                        <input type="text" class="form-control" name="bank_account" value="{{ old('bank_account') }}">
+                                        <label for="account_number">Account Number <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="account_number" value="{{ old('account_number') }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="account_name">Account Name <span class="text-danger"></span></label>
+                                        <input type="text" class="form-control" name="account_name" value="{{ old('account_name') }}">
                                     </div>
                                 </div>
                             </div>

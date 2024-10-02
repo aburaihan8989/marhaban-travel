@@ -28,7 +28,7 @@ class RewardsDataTable extends DataTable
                 return format_currency($data->total_reward-$data->paid_reward);
             })
             ->addColumn('account_number', function ($data) {
-                return $data->bank_name == '' ? '' : ($data->bank_name . ' | ' . $data->bank_account);
+                return $data->bank_account == '' ? '' : ($data->bank_account . ' | ' . $data->account_number . ' | ' . $data->account_name);
             })
             ->addColumn('agents_count', function ($data) {
                 if ($data->referal_id == $data->id){

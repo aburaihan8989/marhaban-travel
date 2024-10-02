@@ -39,12 +39,16 @@
                                     <td>{{ $agent->agent_phone }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Name</th>
-                                    <td>{{ $agent->bank_name }}</td>
+                                    <th>Bank Account</th>
+                                    <td>{{ $agent->bank_account }}</td>
                                 </tr>
                                 <tr>
                                     <th>Account Number</th>
-                                    <td>{{ $agent->bank_account }}</td>
+                                    <td>{{ $agent->account_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Account Name</th>
+                                    <td>{{ $agent->account_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Email</th>
