@@ -295,6 +295,17 @@
                                     </div>
                                 </div>
 
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="payment_reference">Transaction Reference <span class="text-danger"></span></label>
+                                            <div class="input-group">
+                                                <input id="payment_reference" type="text" class="form-control" name="payment_reference" value="{{ $hajjManifestPayment->payment_reference }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="note">Note</label>
                                     <textarea class="form-control" rows="4" name="note">{{ old('note') ?? $hajjManifestPayment->note }}</textarea>

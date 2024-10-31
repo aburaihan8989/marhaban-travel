@@ -102,7 +102,7 @@
                                         <div class="form-group">
                                             <label for="payment_reference">Transaction Reference <span class="text-danger"></span></label>
                                             <div class="input-group">
-                                                <input id="payment_reference" type="text" class="form-control" name="payment_reference" value="{{ $umroh_manifest->payment_reference }}">
+                                                <input id="payment_reference" type="text" class="form-control" name="payment_reference" value="{{ $umrohManifestPayment->payment_reference }}">
                                             </div>
                                         </div>
                                     </div>

@@ -48,7 +48,7 @@ class HajjSavingPaymentsDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(1)
+            ->orderBy(1, 'ASC')
             ->buttons(
                 Button::make('excel')
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
@@ -93,6 +93,10 @@ class HajjSavingPaymentsDataTable extends DataTable
 
             Column::computed('refund_amount')
                 ->title('Refund Amount')
+                ->className('align-middle text-center'),
+
+            Column::make('payment_reference')
+                ->title('Transaction Ref.')
                 ->className('align-middle text-center'),
 
             Column::make('payment_method')
