@@ -117,7 +117,7 @@ class UmrohManifestCustomerDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('reference')
-                ->title('Reference ID')
+                ->title('ID Register')
                 ->className('text-center align-middle'),
 
             Column::computed('register_date')

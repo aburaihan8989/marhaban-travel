@@ -60,6 +60,7 @@ class HajjManifestPaymentsController extends Controller
                     'status' => 'Approval',
                     'note' => $request->note,
                     'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -88,6 +89,7 @@ class HajjManifestPaymentsController extends Controller
                     'total_payment' => $total_payment,
                     'status' => $status,
                     'remaining_payment' => $remaining_payment,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -160,6 +162,7 @@ class HajjManifestPaymentsController extends Controller
                     'status' => 'Approval',
                     'note' => $request->note,
                     'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -188,6 +191,7 @@ class HajjManifestPaymentsController extends Controller
                     'total_payment' => $total_payment,
                     'status' => $status,
                     'remaining_payment' => $remaining_payment,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             }
@@ -229,6 +233,7 @@ class HajjManifestPaymentsController extends Controller
                     'remaining_payment' => $hajj_manifest->total_price - $total_payment,
                     'last_amount' => $request->amount,
                     'status' => $status,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -239,6 +244,7 @@ class HajjManifestPaymentsController extends Controller
                     'status' => $request->status,
                     'note' => $request->note,
                     'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             } else {
@@ -256,6 +262,7 @@ class HajjManifestPaymentsController extends Controller
                     'remaining_payment' => $hajj_manifest->total_price - $total_payment,
                     'last_amount' => $request->refund_amount,
                     'status' => $status,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -266,6 +273,7 @@ class HajjManifestPaymentsController extends Controller
                     'status' => $request->status,
                     'note' => $request->note,
                     'hajj_manifest_customer_id' => $request->hajj_manifest_customer_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             }

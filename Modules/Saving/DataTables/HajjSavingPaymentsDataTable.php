@@ -76,7 +76,7 @@ class HajjSavingPaymentsDataTable extends DataTable
                 ->className('align-middle text-center'),
 
             Column::make('reference')
-                ->title('Reference ID')
+                ->title('ID Transaction')
                 ->className('align-middle text-center'),
 
             Column::make('customer_name')

@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                ID Register : <strong>{{ $hajjsavingPayment->reference }}</strong>
+                                ID Transaction : <strong>{{ $hajjsavingPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-saving-payments.pdf', $hajjsavingPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -64,7 +64,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">ID Reference</th>
+                                            <th class="align-middle">ID Transaction</th>
                                             <th class="align-middle">Saving Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>
@@ -110,6 +110,7 @@
                                             <th class="align-middle">Saving Method</th>
                                             <th class="align-middle">Saving Amount</th>
                                             <th class="align-middle">Saving Status</th>
+                                            <th class="align-middle">Transaction Ref.</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,6 +131,9 @@
                                                         {{ $hajjsavingPayment->status }}
                                                     </span>
                                                 @endif
+                                            </td>
+                                            <td class="align-middle" style="font-size: 16px; font-weight: bold;">
+                                                {{ $hajjsavingPayment->payment_reference }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -205,7 +209,7 @@
                     <div class="card">
                         <div class="card-header d-flex flex-wrap align-items-center">
                             <div>
-                                ID Register : <strong>{{ $hajjsavingPayment->reference }}</strong>
+                                ID Transaction : <strong>{{ $hajjsavingPayment->reference }}</strong>
                             </div>
                             <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none" href="{{ route('hajj-saving-payments.pdf', $hajjsavingPayment->id) }}">
                                 <i class="bi bi-printer"></i> Print
@@ -250,7 +254,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">ID Reference</th>
+                                            <th class="align-middle">ID Transaction</th>
                                             <th class="align-middle">Refund Date</th>
                                             <th class="align-middle">Customer Name</th>
                                             <th class="align-middle">Phone Number</th>

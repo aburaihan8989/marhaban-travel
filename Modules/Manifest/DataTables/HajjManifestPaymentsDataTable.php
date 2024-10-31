@@ -70,10 +70,11 @@ class HajjManifestPaymentsDataTable extends DataTable
             ->className('text-center align-middle'),
 
             Column::make('date')
-                ->title('Payment Date')
+                ->title('Transaction Date')
                 ->className('align-middle text-center'),
 
             Column::make('reference')
+                ->title('ID Transaction')
                 ->className('align-middle text-center'),
 
             Column::make('customer_name')
@@ -89,10 +90,11 @@ class HajjManifestPaymentsDataTable extends DataTable
                 ->className('align-middle text-center'),
 
             Column::make('payment_method')
+                ->title('Method')
                 ->className('align-middle text-center'),
 
             Column::computed('status')
-                ->title('Payment Status')
+                ->title('Approval Status')
                 ->className('align-middle text-center'),
 
             Column::computed('action')

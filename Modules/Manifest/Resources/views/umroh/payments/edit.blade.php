@@ -30,7 +30,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="reference">Reference ID <span class="text-danger">*</span></label>
+                                            <label for="reference">ID Transaction <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="reference" required readonly value="{{ $umrohManifestPayment->reference }}">
                                         </div>
                                     </div>
@@ -93,6 +93,17 @@
                                         <div class="form-group">
                                             <label for="date">Payment Date <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control" name="date" required value="{{ $umrohManifestPayment->getAttributes()['date'] }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="payment_reference">Transaction Reference <span class="text-danger"></span></label>
+                                            <div class="input-group">
+                                                <input id="payment_reference" type="text" class="form-control" name="payment_reference" value="{{ $umroh_manifest->payment_reference }}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -219,7 +230,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="reference">Reference ID <span class="text-danger">*</span></label>
+                                            <label for="reference">ID Transaction <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="reference" required readonly value="{{ $umrohManifestPayment->reference }}">
                                         </div>
                                     </div>

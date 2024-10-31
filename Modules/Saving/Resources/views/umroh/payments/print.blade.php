@@ -19,7 +19,7 @@
             <div style="text-align: center;margin-bottom: 25px;">
                 <img width="600" src="{{ public_path('images/logo-header_1.png') }}" alt="Logo">
                 <h4 style="margin-bottom: 20px; font-size:17px;">
-                    <span>ID Register :</span> <strong>{{ $umroh_saving_payment->reference }}</strong></br></br>
+                    <span>ID Transaction :</span> <strong>{{ $umroh_saving_payment->reference }}</strong></br></br>
                     @if ( $umroh_saving_payment->trx_type == 'Saving')
                         <span>Category :</span> <strong>Umroh Savings Payment Receipt</strong>
                     @else
@@ -61,7 +61,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="align-middle">ID Reference</th>
+                                        <th class="align-middle">ID Transaction</th>
                                         <th class="align-middle">Saving Date</th>
                                         <th class="align-middle">Customer Name</th>
                                         <th class="align-middle">Phone Number</th>
@@ -101,6 +101,7 @@
                                                 <th class="align-middle">Saving Method</th>
                                                 <th class="align-middle">Saving Amount</th>
                                                 <th class="align-middle">Saving Status</th>
+                                                <th class="align-middle">Transaction Ref.</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -122,6 +123,9 @@
                                                         </span>
                                                     @endif
                                                 </td>
+                                                <td class="align-middle" style="font-size: 15px; font-weight: bold;">
+                                                    {{ $umroh_saving_payment->payment_reference }}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -133,7 +137,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="align-middle">ID Reference</th>
+                                        <th class="align-middle">ID Transaction</th>
                                         <th class="align-middle">Refund Date</th>
                                         <th class="align-middle">Customer Name</th>
                                         <th class="align-middle">Phone Number</th>

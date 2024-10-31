@@ -59,6 +59,7 @@ class HajjSavingPaymentsController extends Controller
                     'status' => 'Approval',
                     'note' => $request->note,
                     'saving_id' => $request->saving_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -74,6 +75,7 @@ class HajjSavingPaymentsController extends Controller
                 $hajj_saving->update([
                     'last_amount' => $request->amount,
                     'total_saving' => $total_saving,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             } else {
@@ -85,6 +87,7 @@ class HajjSavingPaymentsController extends Controller
                     'status' => 'Approval',
                     'note' => $request->note,
                     'saving_id' => $request->saving_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -100,6 +103,7 @@ class HajjSavingPaymentsController extends Controller
                 $hajj_saving->update([
                     'last_amount' => $request->refund_amount,
                     'total_saving' => $total_saving,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             }
@@ -131,6 +135,7 @@ class HajjSavingPaymentsController extends Controller
                 $hajj_saving->update([
                     'total_saving' => ($hajj_saving->total_saving - $hajjsavingPayment->amount) + $request->amount,
                     'last_amount' => $request->amount,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -141,6 +146,7 @@ class HajjSavingPaymentsController extends Controller
                     'note' => $request->note,
                     'status' => $request->status,
                     'saving_id' => $request->saving_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -148,6 +154,7 @@ class HajjSavingPaymentsController extends Controller
                 $hajj_saving->update([
                     'total_saving' => ($hajj_saving->total_saving + $hajjsavingPayment->refund_amount) - $request->refund_amount,
                     'last_amount' => $request->refund_amount,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
 
@@ -158,6 +165,7 @@ class HajjSavingPaymentsController extends Controller
                     'note' => $request->note,
                     'status' => $request->status,
                     'saving_id' => $request->saving_id,
+                    'payment_reference' => $request->payment_reference,
                     'payment_method' => $request->payment_method
                 ]);
             }

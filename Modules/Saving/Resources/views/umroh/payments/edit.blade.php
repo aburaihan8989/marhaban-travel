@@ -31,7 +31,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="reference">Reference ID <span class="text-danger">*</span></label>
+                                            <label for="reference">ID Transaction <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="reference" required readonly value="{{ $savingPayment->reference }}">
                                         </div>
                                     </div>
@@ -82,6 +82,17 @@
                                                 <option {{ $savingPayment->status == 'Approval' ? 'selected' : '' }} value="Approval">Approval</option>
                                                 <option {{ $savingPayment->status == 'Verified' ? 'selected' : '' }} value="Verified">Verified</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="payment_reference">Transaction Reference <span class="text-danger"></span></label>
+                                            <div class="input-group">
+                                                <input id="payment_reference" type="text" class="form-control" name="payment_reference" value="{{ $savingPayment->payment_reference }}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +223,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="reference">Reference ID <span class="text-danger">*</span></label>
+                                            <label for="reference">ID Transaction <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="reference" required readonly value="{{ $savingPayment->reference }}">
                                         </div>
                                     </div>
