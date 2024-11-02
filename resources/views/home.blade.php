@@ -22,7 +22,7 @@
                                 <i class="bi bi-cash-stack font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($umroh_payment) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($umroh_payment) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Umroh Transactions</div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <i class="bi bi-cash font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($umroh_expense) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($umroh_expense) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Umroh Expenses</div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 <i class="bi bi-trophy font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($umroh_profit) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($umroh_profit) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Umroh Margin</div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <i class="bi bi-cash-stack font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($hajj_payment) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($hajj_payment) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Hajj Transactions</div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <i class="bi bi-cash font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($hajj_expense) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($hajj_expense) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Hajj Expenses</div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                 <i class="bi bi-trophy font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($hajj_profit) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($hajj_profit) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Hajj Margin</div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                 <i class="bi bi-cash-stack font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($umroh_savings) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($umroh_savings) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Umroh Savings</div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                 <i class="bi bi-cash-stack font-2xl"></i>
                             </div>
                             <div>
-                                <div class="text-value text-primary">{{ format_currency($hajj_savings) }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ format_currency($hajj_savings) }}</div>
                                 <div class="text-uppercase font-weight-bold small">Hajj Savings</div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Registered Customers</div>
-                                <div class="text-value text-primary">{{ $customers . ' Customers' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $customers . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Registered Agents</div>
-                                <div class="text-value text-primary">{{ $agents . ' Agents' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $agents . ' Agents' }}</div>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Umroh Savings Customers</div>
-                                <div class="text-value text-primary">{{ $customers_umroh_savings . ' Customers' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $customers_umroh_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Hajj Savings Customers</div>
-                                <div class="text-value text-primary">{{ $customers_hajj_savings . ' Customers' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $customers_hajj_savings . ' Customers' }}</div>
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Approval Savings</div>
-                                <div class="text-value text-primary">{{ $payment_savings . ' Transactions' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $payment_savings . ' Transactions' }}</div>
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             </div>
                             <div>
                                 <div class="text-muted text-uppercase font-weight-bold small">Approval Payments</div>
-                                <div class="text-value text-primary">{{ $payment_packages . ' Transactions' }}</div>
+                                <div class="text-value text-primary" style="font-size: 20px">{{ $payment_packages . ' Transactions' }}</div>
                             </div>
                         </div>
                     </div>
@@ -218,37 +218,6 @@
 
             <li class="breadcrumb-item active">Package Management</li>
             <hr>
-
-            {{-- <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex flex-wrap align-items-center">
-                            <div>
-                                Umroh Package : <strong>List Active Umroh Package</strong>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                           <div class="table-responsive">
-                                {!! $dataTable->table() !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex flex-wrap align-items-center">
-                            <div>
-                                Hajj Package : <strong>List Active Hajj Package</strong>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                {!! $dataTable->table() !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="row">
                 <div class="col-12">
@@ -409,13 +378,13 @@
     </div>
 @endsection
 
-@section('third_party_scripts')
+{{-- @section('third_party_scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
             integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@endsection
+@endsection --}}
 
 @push('page_scripts')
-    @vite('resources/js/chart-config.js')
+    {{-- @vite('resources/js/chart-config.js') --}}
     {!! $dataTable->scripts() !!}
 @endpush
