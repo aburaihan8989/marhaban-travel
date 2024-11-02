@@ -3,7 +3,9 @@
 namespace Modules\People\Entities;
 
 use Spatie\MediaLibrary\HasMedia;
+use Modules\Saving\Entities\Saving;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Saving\Entities\HajjSaving;
 use Modules\People\Entities\AgentPayment;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Modules\Manifest\Entities\UmrohManifestCustomer;
@@ -34,6 +36,14 @@ class Agent extends Model implements HasMedia
 
     public function agentPayments() {
         return $this->hasMany(AgentPayment::class, 'agent_id', 'id');
+    }
+
+    public function umrohSaving() {
+        return $this->hasMany(Saving::class, 'id', 'agent_id');
+    }
+
+    public function hajjSaving() {
+        return $this->hasMany(HajjSaving::class, 'id', 'agent_id');
     }
 
     public function registerMediaCollections(): void {

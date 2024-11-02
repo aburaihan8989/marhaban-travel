@@ -16,7 +16,7 @@ class HajjSaving extends Model
         return $this->hasMany(HajjSavingPayment::class, 'saving_id', 'id');
     }
 
-    public function umrohAgents() {
+    public function agents() {
         return $this->belongsTo(Agent::class, 'agent_id', 'id');
     }
 

@@ -20,9 +20,9 @@ class HajjSavingDataTable extends DataTable
                 $formatDate = date('d-m-Y',strtotime($model->register_date));
                 return $formatDate;
             })
-            ->addColumn('referal_code', function ($data) {
-                return Agent::findOrFail($data->agent_id)->agent_code . ' | ' . Agent::findOrFail($data->agent_id)->agent_name;
-            })
+            // ->addColumn('referal_code', function ($data) {
+            //     return Agent::findOrFail($data->agent_id)->agent_code . ' | ' . Agent::findOrFail($data->agent_id)->agent_name;
+            // })
             ->addColumn('total_saving', function ($data) {
                 return format_currency($data->total_saving);
             })
@@ -35,7 +35,7 @@ class HajjSavingDataTable extends DataTable
     }
 
     public function query(HajjSaving $model) {
-        return $model->newQuery();
+        return $model->newQuery()->with('agents');
     }
 
     public function html() {
@@ -99,7 +99,11 @@ class HajjSavingDataTable extends DataTable
                 ->title('Account Number')
                 ->className('text-center align-middle'),
 
-            Column::computed('referal_code')
+            Column::make('agents.agent_code')
+                ->title('Agent Code')
+                ->className('text-center align-middle'),
+
+            Column::make('agents.agent_name')
                 ->title('Agent Name')
                 ->className('text-center align-middle'),
 

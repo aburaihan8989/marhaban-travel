@@ -16,7 +16,7 @@ class Saving extends Model
         return $this->hasMany(SavingPayment::class, 'saving_id', 'id');
     }
 
-    public function umrohAgents() {
+    public function agents() {
         return $this->belongsTo(Agent::class, 'agent_id', 'id');
     }
 
