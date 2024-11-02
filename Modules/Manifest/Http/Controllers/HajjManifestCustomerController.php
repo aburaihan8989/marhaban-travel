@@ -116,7 +116,7 @@ class HajjManifestCustomerController extends Controller
             $promo_haji = settings()->promo_haji;
 
             if (!$hajj_manifest_customer->promo == 1 AND !$hajj_manifest_customer->promo2 == 1) {
-                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1) {
+                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1 AND $hajj_manifest_customer->ticket == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $agent_reward
                     ]);
@@ -133,7 +133,7 @@ class HajjManifestCustomerController extends Controller
 
                 }
             } elseif ($hajj_manifest_customer->promo2 == 1) {
-                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1) {
+                if ($hajj_manifest_customer->status == 'Completed' AND $hajj_manifest_customer->visa == 1 AND $hajj_manifest_customer->ticket == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $promo_haji
                     ]);
@@ -233,7 +233,7 @@ class HajjManifestCustomerController extends Controller
 
             if (!$hajj_manifest_customer_id->promo == 1 AND !$hajj_manifest_customer_id->promo2 == 1) {
                 if (!$hajj_manifest_customer_id->agent_reward OR !$hajj_manifest_customer_id->referal_reward) {
-                    if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1) {
+                    if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1 AND $hajj_manifest_customer_id->ticket == 1) {
                         $agent->update([
                             'total_reward' => $agent->total_reward + $agent_reward
                         ]);
@@ -254,7 +254,7 @@ class HajjManifestCustomerController extends Controller
                 }
             } elseif ($hajj_manifest_customer_id->promo2 == 1) {
                 if (!$hajj_manifest_customer_id->agent_reward) {
-                    if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1) {
+                    if ($hajj_manifest_customer_id->status == 'Completed' AND $hajj_manifest_customer_id->visa == 1 AND $hajj_manifest_customer_id->ticket == 1) {
                         $agent->update([
                             'total_reward' => $agent->total_reward + $promo_haji
                         ]);

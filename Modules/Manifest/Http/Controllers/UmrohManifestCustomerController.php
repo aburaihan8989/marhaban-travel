@@ -132,7 +132,7 @@ class UmrohManifestCustomerController extends Controller
             $promo_umroh = settings()->promo_umroh;
 
             if (!$umroh_manifest_customer->promo == 1 AND !$umroh_manifest_customer->promo2 == 1) {
-                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1) {
+                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1 AND $umroh_manifest_customer->ticket == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $agent_reward
                     ]);
@@ -149,7 +149,7 @@ class UmrohManifestCustomerController extends Controller
 
                 }
             } elseif ($umroh_manifest_customer->promo2 == 1) {
-                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1) {
+                if ($umroh_manifest_customer->status == 'Completed' AND $umroh_manifest_customer->visa == 1 AND $umroh_manifest_customer->ticket == 1) {
                     $agent->update([
                         'total_reward' => $agent->total_reward + $promo_umroh
                     ]);
@@ -269,7 +269,7 @@ class UmrohManifestCustomerController extends Controller
 
             if (!$umroh_manifest_customer_id->promo == 1 AND !$umroh_manifest_customer_id->promo2 == 1) {
                 if (!$umroh_manifest_customer_id->agent_reward OR !$umroh_manifest_customer_id->referal_reward) {
-                    if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1) {
+                    if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1 AND $umroh_manifest_customer_id->ticket == 1) {
                         $agent->update([
                             'total_reward' => $agent->total_reward + $agent_reward
                         ]);
@@ -290,7 +290,7 @@ class UmrohManifestCustomerController extends Controller
                 }
             } elseif ($umroh_manifest_customer_id->promo2 == 1) {
                 if (!$umroh_manifest_customer_id->agent_reward) {
-                    if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1) {
+                    if ($umroh_manifest_customer_id->status == 'Completed' AND $umroh_manifest_customer_id->visa == 1 AND $umroh_manifest_customer_id->ticket == 1) {
                         $agent->update([
                             'total_reward' => $agent->total_reward + $promo_umroh
                         ]);

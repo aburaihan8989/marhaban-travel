@@ -115,7 +115,7 @@ class HajjManifestPaymentsController extends Controller
 
                 if (!$hajj_manifest->promo == 1 AND !$hajj_manifest->promo2 == 1) {
                     if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {
-                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1) {
+                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1 AND $hajj_manifest->ticket == 1) {
                             $agent->update([
                                 'total_reward' => $agent->total_reward + $agent_reward
                             ]);
@@ -136,7 +136,7 @@ class HajjManifestPaymentsController extends Controller
                     }
                 } elseif ($hajj_manifest->promo2 == 1) {
                     if (!$hajj_manifest->agent_reward OR !$hajj_manifest->referal_reward) {
-                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1) {
+                        if ($hajj_manifest->status == 'Completed' AND $hajj_manifest->visa == 1 AND $hajj_manifest->ticket == 1) {
                             $agent->update([
                                 'total_reward' => $agent->total_reward + $promo_haji
                             ]);
