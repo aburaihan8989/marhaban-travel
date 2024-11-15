@@ -145,14 +145,22 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-check">
+                                    @if (!$umroh_manifest_customer_id->agent_reward OR !$umroh_manifest_customer_id->referal_reward)
                                       <input class="form-check-input" type="checkbox" id="promo" name="promo" value="1" {{ $umroh_manifest_customer_id->promo == '1' ? 'checked' : '' }}>
+                                    @else
+                                      <input class="form-check-input" type="checkbox" id="promo" name="promo" value="1" {{ $umroh_manifest_customer_id->promo == '1' ? 'checked' : '' }} disabled>
+                                    @endif
                                       <label class="form-check-label" for="promo"><strong class="text-danger"><i>Full Promo</i></strong></label><span><i> ( If Selected, Fee and Referal Not Active)</i></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-check">
+                                    @if (!$umroh_manifest_customer_id->agent_reward OR !$umroh_manifest_customer_id->referal_reward)
                                       <input class="form-check-input" type="checkbox" id="promo2" name="promo2" value="1" {{ $umroh_manifest_customer_id->promo2 == '1' ? 'checked' : '' }}>
-                                      <label class="form-check-label" for="promo2"><strong class="text-danger"><i>Limited Promo</i></strong></label><span><i> ( If Selected, Fee Limited and Referal Not Active )</i></span>
+                                    @else
+                                      <input class="form-check-input" type="checkbox" id="promo2" name="promo2" value="1" {{ $umroh_manifest_customer_id->promo2 == '1' ? 'checked' : '' }} disabled>
+                                    @endif
+                                    <label class="form-check-label" for="promo2"><strong class="text-danger"><i>Limited Promo</i></strong></label><span><i> ( If Selected, Fee Limited and Referal Not Active )</i></span>
                                     </div>
                                 </div>
                             </div>
