@@ -209,6 +209,8 @@ class UmrohManifestCustomerController extends Controller
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 'customer_phone' => Customer::findOrFail($request->customer_id)->customer_phone,
                 'agent_id' => $request->agent_id,
+                'manifest_id' => $request->manifest_id,
+                'package_id' => UmrohManifest::findOrFail($request->manifest_id)->package_id,
                 'status' => $status,
                 'total_price' => $request->total_price,
                 'total_payment' => $umroh_manifest_customer_id->total_payment,

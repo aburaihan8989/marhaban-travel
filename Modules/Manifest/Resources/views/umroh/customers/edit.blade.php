@@ -33,6 +33,19 @@
                                         <input type="text" class="form-control" name="reference" required value="{{ $umroh_manifest_customer_id->reference }}" readonly>
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="manifest_id">Manifest Name <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="manifest_id" id="manifest_id">
+                                                <option value="" selected disabled>Select Manifest</option>
+                                                @foreach(\Modules\Manifest\Entities\UmrohManifest::all() as $umroh_manifest)
+                                                    <option {{ $umroh_manifest_customer_id->manifest_id == $umroh_manifest->id ? 'selected' : '' }} value="{{ $umroh_manifest->id }}">{{ $umroh_manifest->reference . " | " . $umroh_manifest->package_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-row">
