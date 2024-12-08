@@ -26,9 +26,10 @@ class UmrohManifestDataTable extends DataTable
             ->addColumn('remaining_payment', function ($data) {
                 return format_currency($data->remaining_payment);
             })
-            ->addColumn('package_date', function ($data) {
-                $formatData = date('d-m-Y',strtotime(UmrohPackage::findOrFail($data->package_id)->package_date));
-                return $formatData;
+            ->editColumn('package_date', function ($data) {
+                // $formatData = date('d-m-Y',strtotime(UmrohPackage::findOrFail($data->package_id)->package_date));
+                // return $formatData;
+                return date('d-m-Y',strtotime($data->package_date));
             })
             // ->addColumn('package_name', function ($data) {
             //     return UmrohPackage::findOrFail($data->package_id)->package_name;
@@ -71,7 +72,7 @@ class UmrohManifestDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(1)
+            ->orderBy(3)
             ->buttons(
                 Button::make('excel')
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
