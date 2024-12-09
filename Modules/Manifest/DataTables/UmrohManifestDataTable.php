@@ -104,6 +104,7 @@ class UmrohManifestDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('package_date')
+                ->title('Departure Date')
                 ->searchable(false)
                 ->className('text-center align-middle'),
 
